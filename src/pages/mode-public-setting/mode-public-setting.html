@@ -1,0 +1,47 @@
+<!--
+  Generated template for the ModePublicSettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <ion-title>模式公共设置</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list class="my-list">
+    <ion-item (click)="goCurtain()">
+      <div item-start class="start c1">
+        <img src='../../assets/home/timer.png'>
+      </div>
+      窗帘定时
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="goLight()">
+      <div item-start class="start c1">
+        <img src='../../assets/home/timer.png'>
+      </div>
+      客厅主灯/书房灯定时
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="goAirSeason()">
+      <div item-start class="start c2">
+        <img src='../../assets/home/season.png'>
+      </div>
+      空调季节设置
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="goLightJW()">
+      <div item-start class="start c3">
+        <img src='../../assets/home/jw.png'>
+      </div>
+      室外灯经纬度控设置
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

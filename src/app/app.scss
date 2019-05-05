@@ -1,0 +1,221 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.user-profile {
+  .user-avatar {
+    width: 68px;
+    height: 68px;
+    display: inline-block;
+    border-radius: 50%;
+    box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.25), 0 0 4rem rgba(255, 255, 255, 0.45);
+    img {
+      border-radius: 50%;
+    }
+  }
+  .toolbar-background {
+    background-image: linear-gradient(135deg, color($colors, dark), color($colors, primary));
+  }
+
+  .other-data {
+    .column {
+      &:first-child {
+        border-right: 1px solid rgba(36, 50, 157, 0.25);
+      }
+    }
+  }
+}
+
+// .profile-bg {
+//   background-image: linear-gradient(135deg, color($colors, dark), color($colors, primary), color($colors, light));
+//   }
+.user-list {
+  .item {
+    &:last-child {
+      border-bottom: 0;
+    }
+    .item-inner {
+      border-color: rgba(86, 61, 124, 0.1);
+    }
+  }
+}
+.text-white {
+  color: #fff;
+}
+.unopen {
+  background-color: #eee !important;
+}
+.c1 {
+  background-color: #e0bfc8;
+}
+.c2 {
+  background-color: #8b7991;
+}
+.c3 {
+  background-color: #4d669e;
+}
+.c4 {
+  background-color: #88b7c9;
+}
+.c5 {
+  background-color: #c9deef;
+}
+.c6 {
+  background-color: #6699cc;
+}
+.c7 {
+  background-color: #66acfd;
+}
+.c8 {
+  background: linear-gradient(45deg, #e44248 0%, #eb777b 100%) !important;
+}
+.c9 {
+  background-color: #3f3e3c;
+}
+.c10 {
+  background-color: #86d3bf;
+}
+.c11 {
+  color: #beeed8;
+}
+.c12 {
+  color: #f2f2ea;
+}
+.color1 {
+  background-image: linear-gradient(-152deg, #b8da5a 7%, #acd944 96%);
+}
+
+.color2 {
+  background-image: linear-gradient(45deg, #f37089 2%, #ea899b 98%);
+}
+
+.color3 {
+  background-image: linear-gradient(-139deg, #5ab5f7 3%, #51aff4 91%);
+}
+
+.color4 {
+  background-image: linear-gradient(-137deg, #fdac5e 6%, #fb9330 93%);
+}
+
+.color5 {
+  background-image: linear-gradient(-152deg, #f7c83d 7%, #f0c233 96%);
+}
+
+.color6 {
+  background-image: linear-gradient(45deg, #49dfc3 2%, #64dfc0 96%);
+}
+
+.color7 {
+  background-image: linear-gradient(45deg, #06d2ff 2%, #06d2ff 98%);
+}
+.color8 {
+  background-image: linear-gradient(45deg, #ff0000c0 2%, #dd370ddc 98%);
+}
+.cate_right {
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+  ion-label {
+    font-size: 1.4rem;
+  }
+
+  ion-col {
+    border: 0.05rem solid #eee;
+    margin-left: -0.05rem;
+    margin-top: -0.05rem;
+    p {
+      text-align: center;
+      color: #666;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 90%;
+    }
+  }
+  ion-col:nth-child(3n) {
+    border-right: 0px;
+  }
+}
+.device-list {
+  .label {
+    display: flex;
+    width: 100%;
+    .label-right {
+      width: 100%;
+      button {
+        padding: 0;
+      }
+    }
+  }
+}
+.biaoqian {
+  min-width: 50px;
+  height: 18px;
+  border-radius: 4px;
+  text-align: center;
+  display: inline-block;
+  padding: 0 3px;
+  color: white;
+  line-height: 18px;
+}
+.setting-page {
+  ion-list {
+    margin-bottom: 0 !important;
+    border-top: 8px solid #eee;
+  }
+  ion-list:first-child {
+    border-top: 0 !important;
+  }
+  ion-list-header {
+    color: color($colors, primary);
+    margin-top: 0 !important;
+  }
+}
+.alarm {
+  // color: red !important;
+  .alert-head {
+    // background-color: red !important;
+    background-image: linear-gradient(45deg, #e44248 0%, #eb777b 100%) !important;
+    color: #fff;
+    .alert-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .message {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  img {
+    content: url(../assets/img/home/icon-alert-message.png);
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+}
+.device-open {
+  background-color: rgba($color: #52a1f3, $alpha: 0.1);
+}
+.state {
+  font-size: 1.6rem !important;
+  margin: 8px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  // span{
+  //   color: color($colors,primary);
+  // }
+}

@@ -1,0 +1,136 @@
+<ion-header no-border>
+  <ion-toolbar transparent>
+    <button ion-button icon-only menuToggle>
+      <ion-icon class="user"></ion-icon>
+
+    </button>
+    <ion-title>家居智慧能源管理</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="scan()" tappable end style="color:white">
+        <ion-icon name="barcode-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content (ionScroll)="scrollEvent($event)">
+
+  <div class="home-header">
+    <div #homeHeaderContent class="home-header-content">
+      <ion-row>
+        <ion-col col-6 text-left class="col-left">
+          <div class="city">{{weatherinfo.location}}</div>
+          <p no-margin>{{weatherinfo.temperature}}°C | {{weatherinfo.cond_txt}}</p>
+
+        </ion-col>
+        <!-- <ion-col col-6 text-right class='col-right'> -->
+        <!-- <div class="header-right" float-right>111</div> -->
+        <!-- 功率:0.026kW
+              <p no-margin>日:0.6度</p>
+              <p no-margin>月:58.7度</p>
+              <p no-margin>年:145.4度</p> -->
+
+        <!-- </ion-col> -->
+      </ion-row>
+      <ion-row>
+        <ion-col class='col-right'>
+          <img src="../../assets/home/power.png" />功率:{{power}}kW &nbsp; <img src="../../assets/home/energy.png " />
+          日/月/年:{{oneData.ud+" / "+oneData.um+" / "+oneData.uy+""}}
+
+        </ion-col>
+        <!-- <p></p> -->
+      </ion-row>
+
+
+
+    </div>
+    <!-- <div class="weather">
+      <p><span class="degree">{{weatherinfo.temperature}}°</span>{{weatherinfo.cond_txt}}</p>
+      <span class="city">{{weatherinfo.location}}</span>
+    </div>
+    <div class="weather-bottom ion-grid">
+      <ion-row>
+        <ion-col col-6>湿度：<span class="">{{weatherinfo.humidity}}%</span></ion-col>
+        <ion-col col-6>风速：<span class="">{{weatherinfo.wind_dir}}{{weatherinfo.wind_sc}}</span></ion-col>
+      </ion-row>
+    </div> -->
+  </div>
+  <ion-list no-padding no-margin>
+    <!-- <ion-item-group> -->
+    <ion-item-divider sticky no-padding style="background:white">
+      <ion-segment [(ngModel)]="homeType">
+        <ion-segment-button value="mode">
+          模式
+        </ion-segment-button>
+        <ion-segment-button value="setting">
+          设置
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item-divider>
+
+    <ion-item-sliding no-padding no-margin>
+      <ion-item no-padding no-margin style="background-color:#f7f7f7">
+        <!-- {{homeType}} -->
+
+        <div [ngSwitch]="homeType">
+          <div *ngSwitchCase="'mode'">
+            <div class="home-main">
+
+              <ion-grid>
+
+                <ion-row>
+                  <ion-col col-6 *ngFor="let mode of modeDataList">
+                    <ion-card class="mode-card" [ngClass]="{'mode-card-selected': modeID==mode.F_AgreementID}">
+                      <ion-card-header no-padding>
+                        <div style="width: 25%;float: left;" *ngIf="modeID==mode.F_AgreementID">
+                          <div class="now">
+                            当前
+                          </div>
+                        </div>
+                        <button ion-button clear small float-right (click)="goModeSetting(mode)">
+                          <ion-icon name='settings'></ion-icon>
+                        </button>
+                      </ion-card-header>
+                      <ion-card-content (click)="setMode(mode.F_AgreementID,mode.F_Name)">
+                        <img src="../assets/img/home/icon-mode/{{mode.F_Img}}">
+                        <h3 ion-text style="font-size: 1.6rem;">{{mode.F_Name}} </h3>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+
+                </ion-row>
+              </ion-grid>
+
+
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'setting'" class="my-list">
+            <!-- <ion-list class="my-list"> -->
+            <ion-item (click)="goModePublicSetting()" no-padding>
+              <div item-start class="start c5">
+                <img src='../../assets/home/publicsetting.png'>
+              </div>
+              模式公共设置
+              <ion-icon name="arrow-forward" item-end></ion-icon>
+            </ion-item>
+
+            <!-- </ion-list> -->
+          </div>
+
+
+
+        </div>
+
+      </ion-item>
+    </ion-item-sliding>
+
+    <!-- </ion-item-group> -->
+  </ion-list>
+
+  <!-- <ion-item>
+    <ion-label>Sam</ion-label>
+    <ion-toggle [(ngModel)]="deviceData['35']"></ion-toggle>
+  </ion-item> -->
+</ion-content>

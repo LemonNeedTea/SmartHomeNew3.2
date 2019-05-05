@@ -1,0 +1,49 @@
+<!--
+  Generated template for the ModeCurtainTimerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>定时</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon ios="md-close" md="md-close"></ion-icon>
+      </button>
+
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="complate()">
+        <ion-icon ios="md-checkmark" md="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="setting-page">
+  <!-- <ion-item>
+    <ion-label>自动控制</ion-label>
+    <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
+  </ion-item> -->
+  <ion-list>
+    <ion-list-header>
+      空调季节
+    </ion-list-header>
+
+    <my-loop [(myModel)]="loop" name='月份' type='month' isTrans='0'></my-loop>
+
+    <my-time name='开启时间' [(myModel)]="startDate"></my-time>
+    <my-time name='关闭时间' [(myModel)]="stopDate"></my-time>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      非空调季节
+    </ion-list-header>
+    <my-time name='开启时间' [(myModel)]="startDate1"></my-time>
+    <my-time name='关闭时间' [(myModel)]="stopDate1"></my-time>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,7 @@
+<!-- Generated template for the MyTimeComponent component -->
+<ion-item>
+  <ion-label>{{name}}</ion-label>
+  <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="model" cancelText='取消' doneText='确定'
+    (ngModelChange)="change()">
+  </ion-datetime>
+</ion-item>

@@ -1,0 +1,26 @@
+<!--
+  Generated template for the MessageHistoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of messagelists">
+      <div>
+        <span class="biaoqian color8" margin-right>报警</span>{{item.F_AlarmText}}
+        <p class="p">{{item.F_AlarmTimeStr}}</p>
+      </div>
+      <!-- <button ion-button clear small item-end (click)="setState(item.F_ID)" [disabled]="item.F_CheckState">已阅</button> -->
+    </ion-item>
+  </ion-list>
+</ion-content>

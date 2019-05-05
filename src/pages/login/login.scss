@@ -1,0 +1,66 @@
+page-login{
+
+  .scroll-content{
+    padding-left: 50px !important;
+    padding-right: 50px!important;;
+  }
+    .button-inner{
+        display:flex;    
+        justify-content: space-between;
+    }
+    
+    .list-form {
+        padding: 0;
+        margin-bottom: 0;
+
+        ion-item {
+          background: none;
+          padding: 0;
+
+          &:first-child {
+            border-top: none;
+          }
+
+          &:after {
+            display: none;
+          }
+
+          ion-label {
+            font-size: 1em;
+            color: color($colors, primary) !important;
+          }
+
+          input {
+            // color: color($colors, primary);
+          }
+        }
+      }
+    ion-content {
+        background-color: #fff;
+  &::after {
+    content: "";
+    background-color: black;
+    // background: url("../../assets/imgs/bg.jpg") no-repeat;
+    // // background-position: center;
+    // background-size: cover;
+    // top: 0;
+    // left: 0;
+    // bottom: 0;
+    // right: 0;
+    // position: absolute;
+    // z-index: 0;
+  }
+      }
+      .logo{
+        margin-top: 4em;
+        img{
+          width: 70px;
+          height: 66px;
+        }
+        p{
+          font-size: 1.5em;
+          margin-top: 12px;
+        }
+      }
+
+}

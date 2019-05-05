@@ -1,0 +1,57 @@
+<!--
+  Generated template for the EnergyQueryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+    <my-title [name]="name"></my-title>
+
+      <ion-item >
+          <ion-label>时间段</ion-label>
+          <!-- <ion-grid item-end>  -->
+            <ion-row item-end>
+              <ion-col >
+              <button ion-button outline  (click)="timeRange('yearall')">历 年</button>
+              </ion-col>
+              <ion-col >
+                  <button ion-button outline (click)="timeRange('year')" >本 年</button>
+                  </ion-col>
+                  <ion-col >
+                      <button ion-button outline (click)="timeRange('month')" >本 月</button>
+                      </ion-col>
+            </ion-row>
+          <!-- </ion-grid> -->
+          
+      </ion-item>
+      <ion-item >
+          <ion-label>数据类型</ion-label>
+          <ion-select [(ngModel)]="dateType" (ionChange)="dateTypeChange()" cancelText='取消' okText='确定'>
+              <ion-option value="year">按年</ion-option>
+              <ion-option value="month">按月</ion-option>
+              <ion-option value="day">按日</ion-option>
+            </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>开始日期</ion-label>
+        <ion-datetime displayFormat="{{displayFormat}}"  [(ngModel)]="startDate" cancelText='取消' doneText='确定'></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>结束日期</ion-label>
+        <ion-datetime displayFormat="{{displayFormat}}"   [(ngModel)]="stopDate"  cancelText='取消' doneText='确定'></ion-datetime>
+      </ion-item>
+      <div padding>
+          <button ion-button round block (click)="goBarChartPage()" >查询</button>
+      </div>
+        
+      
+</ion-content>

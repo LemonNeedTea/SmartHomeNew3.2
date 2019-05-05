@@ -1,0 +1,19 @@
+page-door-setting {
+    .selected{
+        background-color: color($colors,primary) !important;
+        color: #ffff !important;
+    }
+    .curtain-img{
+        // padding: 
+        background: rgba(16, 142, 233, 0.10);
+        div{
+            width: 100%;
+            height: 140px;
+            background: rgba(16, 142, 233, 0.2);
+        }
+    }
+    img{
+        width: 120px;
+        // height: 180px;;
+    }
+}

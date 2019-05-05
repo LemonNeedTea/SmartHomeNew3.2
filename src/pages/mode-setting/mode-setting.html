@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ModeSettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentShowModal()">
+        <ion-icon name='list'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!-- <ion-list> -->
+  <ion-item>
+    <ion-label>报警系统</ion-label>
+    <ion-toggle [(ngModel)]="alarm"></ion-toggle>
+  </ion-item>
+  <!-- </ion-list> -->
+  <ion-list>
+    <ion-item-group *ngFor="let item of dataList">
+      <ion-item-divider sticky>
+        <ion-label>
+          {{item.name}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let device of item.data">
+        <!-- <ng-container > -->
+        <ion-item *ngIf="device.Control">
+          <ion-label>
+            <div class="label">
+              <div>
+                {{device.DeviceName}}
+                <p><span class="biaoqian" [ngClass]="device.Color">{{device.FloorName+'/'+device.RoomName}}</span></p>
+              </div>
+            </div>
+
+          </ion-label>
+          <ion-toggle [(ngModel)]="device.Open"></ion-toggle>
+          {{device.DeviceName}}
+        </ion-item>
+
+        <!-- </ng-container> -->
+      </ion-item-sliding>
+
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>
+<ion-footer>
+  <button ion-button block color='primary' no-margin (click)="saveMode()">保 存</button>
+</ion-footer>

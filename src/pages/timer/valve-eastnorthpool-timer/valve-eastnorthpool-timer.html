@@ -1,0 +1,30 @@
+<!--
+  Generated template for the ValveEastnorthpoolTimerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>定时</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon ios="md-close" md="md-close"></ion-icon>
+      </button>
+
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="complate()">
+        <ion-icon ios="md-checkmark" md="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="setting-page">
+  <ion-list>
+    <my-runtime [(myModel)]="runtime1"></my-runtime>
+  </ion-list>
+</ion-content>

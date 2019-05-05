@@ -1,0 +1,54 @@
+<!--
+  Generated template for the RoomPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <ion-title>房间</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-slides pager>
+
+    <ion-slide>
+      <img src="../../assets/room1.png" />
+    </ion-slide>
+
+    <ion-slide>
+      <h2>Slide 2</h2>
+    </ion-slide>
+
+    <ion-slide>
+      <h2>Slide 3</h2>
+    </ion-slide>
+
+  </ion-slides>
+  <ion-list>
+      <ion-item-group *ngFor="let floor of floors"> 
+        <ion-item-divider sticky >
+         {{floor.F_Name}}
+    <p float-right class="state">{{roomResultData[floor.F_ID]}}/{{floor.F_DeviceNum}}</p>
+
+        </ion-item-divider>
+  
+        <ion-item-sliding *ngFor="let room of rooms" (click)="goRoomDevice(room.F_ID,floor.F_Name+room.F_Name)">
+          <button ion-item *ngIf="room.F_FloorID==floor.F_ID"> 
+            <div item-start class="start" [ngClass]="room.F_Color">
+              <img src="../../assets/room/{{room.F_Img}}">
+            </div>
+            
+           {{room.F_Name}}
+           <p item-end  class="state"><span>{{roomResultData[room.F_ID]}}</span>/{{room.F_DeviceNum}}</p>
+          </button>
+        </ion-item-sliding>
+  
+      </ion-item-group>
+    </ion-list>
+  
+</ion-content>

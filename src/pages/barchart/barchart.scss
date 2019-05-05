@@ -1,0 +1,51 @@
+page-barchart {
+    ion-card-header:before
+    { 
+    content:".";
+    width: 2px;
+    height: 100%;
+    background-color:color($colors,primary);
+    border-radius: 5px;
+    color: color($colors,primary)
+    }
+    .self-list{
+        padding: 0;
+    }
+    .item {
+        padding: 0;
+        color: #666666 !important;
+    }
+
+    .li-header {
+        background: #f1f1f1;
+    }
+
+     .li1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        line-height: 30px
+    }
+
+    .li1 span {
+        width: 50%;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+    .li1 span:first-of-type {
+        border-right: 1px solid #ddd;
+        
+    }
+
+     .ul .detail {
+        padding: 15px;
+        background: #ddd;
+    }
+
+     .li-detail {
+        background: #ddd;
+    }
+
+
+}

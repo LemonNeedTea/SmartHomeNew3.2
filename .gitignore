@@ -1,0 +1,4 @@
+platforms
+www
+plugins/cordova-plugin-baiduasrtts/src/ios/BDSClientLib/TTS/libBaiduSpeech_TTS_SDK.a
+plugins/cordova-plugin-baiduasrtts/src/ios/BDSClientLib/ASR/libBaiduSpeechSDK.a
