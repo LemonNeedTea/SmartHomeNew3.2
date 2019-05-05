@@ -30,6 +30,7 @@ export class DevicePage {
   deviceDataListShow: any;
   typeID: string;
   stateData: any = {};
+  stateData1: any ={};
   auto: boolean;
   sumNumOPen: number = 0;
   sumNum: number = 0;
@@ -37,15 +38,30 @@ export class DevicePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private device: DeviceRequestsProvider,
     private events: Events) {
     this.getIsAuto();
-    this.device.getDeviceTypeDataList().then((res: any) => {
+    // this.device.getDeviceTypeDataList().then((res: any) => {
+    //   this.typeDataList = res;
+    //   res.forEach(element => {
+    //     this.openStateNumArr[element.F_ID] = 0;
+    //     this.sumNum += element.F_DeviceNum;
+    //   });
+    
+      this.device.getDeviceIDtoTypeID().then((ress: any) => {
+        this.deviceDataList = ress;
+
+      });
+    // });
+    this.device.getDeviceTypeDataList().then((res:any) => {
       this.typeDataList = res;
-      res.forEach(element => {
+            res.forEach(element => {
         this.openStateNumArr[element.F_ID] = 0;
         this.sumNum += element.F_DeviceNum;
       });
-      this.device.getDeviceIDtoTypeID().then((ress: any) => {
-        this.deviceDataList = ress;
-        this.getFn51Data();
+      this.getFn51Data();
+
+      this.typeID = res[0]['F_ID'];
+      this.device.getDeviceDataList().then(res => {
+        this.deviceDataList = res;
+        this.getRightCateData(this.typeID);
 
       });
     });
@@ -66,9 +82,10 @@ export class DevicePage {
     });
   }
   getFn51Data() {
-    let data = Variable.GetFnData('51');
+    let data = Variable.GetFnData('51');this.stateData1=data;
     this.getTypeDeviceNum(data);
     this.events.subscribe("FnData:51", (res) => {
+      this.stateData1=res;
       this.getTypeDeviceNum(res);
     });
   }
@@ -81,6 +98,8 @@ export class DevicePage {
     this.sumNumOPen = 0;
     let sumNumOPen = 0;
     let result = JSON.parse(JSON.stringify(this.openStateNumArr));
+    console.log(result);
+
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
         const state = data[key];

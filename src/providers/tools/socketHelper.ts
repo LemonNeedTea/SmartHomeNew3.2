@@ -46,7 +46,7 @@ export class SocketHelpProvider {
     closeSocket() {
         this.socket.ws.close();
         clearInterval(this.interval);
-        this.events["_channels"]=[];
+        this.events["_channels"] = [];
         // this.events.unsubscribe("FnData:51", null);
         // this.events.unsubscribe("FnData:50", null);
         // this.events.unsubscribe("FnData:52", null);
@@ -195,6 +195,7 @@ export class SocketHelpProvider {
                     let dealData = data.Data;
                     if (data.FnID == '51') {
                         this.getAuto(data.Data);//获取手自动状态
+                        this.getDeviceOpenNum(data.Data);
                         dealData = this.checkDeviceComplateState(dealData);
                         // this.getDeviceOpenNum(dealData);
 
@@ -270,6 +271,21 @@ export class SocketHelpProvider {
         // if(auto){
         //     this.tools.presentToast("当前位手动模式，设备不可控");
         // }
+    }
+    private getDeviceOpenNum(data: any) {
+        let sum = 0;
+        for (const key in data) {
+            if (data.hasOwnProperty(key) && Number(key) > 0) {
+                let element = data[key];
+                if (Boolean(element)) {
+                    sum++;
+
+                }
+            }
+
+        };
+        this.events.publish("FnData:DeviceOpenNum", sum);
+        Variable.deviceNum = sum;
     }
     private checkDeviceComplateState(dealData: any) {
         let controlData = Variable.controlDevice;

@@ -1,35 +1,24 @@
 <ion-header>
 
-  <ion-navbar color='primary'>
+  <ion-navbar >
     <ion-title>设备 ({{sumNumOPen}}/{{sumNum}})</ion-title>
   </ion-navbar>
 
 </ion-header>
-
 <ion-content>
-  <ion-list class="my-list">
-    <button ion-item *ngFor="let item of typeDataList" (tap)="goRoomDevice(item['F_ID'],item.F_Name)">
-      <div item-start class="start" [ngClass]="item['F_Color']"><img
-          src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'></div>
 
-      <h2>{{item.F_Name}}
-        <p float-right class="state">{{stateData[item['F_ID']]}}/{{item.F_DeviceNum}}</p>
-
-      </h2>
-
-
-      <!-- <ion-icon name="arrow-forward" item-end></ion-icon> -->
-
-    </button>
-  </ion-list>
-  <!-- 
   <div class="cate_content">
     <div class="cate_left">
-      <ion-list>
-        <ion-item *ngFor="let item of typeDataList" (tap)="getRightCateData(item['F_ID'])"
-          [ngClass]="{'item-selected': item['F_ID']==typeID}">
-          <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'>
-          <p>{{item.F_Name}}</p>
+      <ion-list class="my-list">
+        <ion-item *ngFor="let item of typeDataList" (tap)="getRightCateData(item['F_ID'])" 
+          [ngClass]="{'item-selected': item['F_ID']==typeID}" >
+          <ion-badge color='danger' *ngIf="stateData[item['F_ID']]">{{stateData[item['F_ID']]}}</ion-badge>
+
+          <div class="start"  [ngClass]="item['F_Color']"  >
+            <img
+            src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'></div>
+          <!-- <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'> -->
+          <h3>{{item.F_Name}}</h3>
 
         </ion-item>
       </ion-list>
@@ -37,12 +26,12 @@
 
     <div class="cate_right">
       <ion-list class="device-list">
-        <ion-item *ngFor="let item of deviceDataListShow" [ngClass]="{'device-open': stateData[item.F_ID]==1}">
+        <ion-item *ngFor="let item of deviceDataListShow">
           <ion-label>
             <div class="label">
               <div>
                 {{item.F_Name}}
-                <p><span class="biaoqian" [ngClass]="item.F_Color">{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
+                <p><span class="biaoqian" >{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
               </div>
               <div class="label-right">
                 <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
@@ -51,12 +40,12 @@
             </div>
 
           </ion-label>
-          <ion-toggle [(ngModel)]="stateData[item.F_ID]" *ngIf="item.F_ShowButton" [disabled]="auto"
+          <ion-toggle [(ngModel)]="stateData1[item.F_ID]" *ngIf="item.F_ShowButton" [disabled]="auto"
             (ngModelChange)="setDeviceState(item.F_ID,item.F_Name,stateData[item.F_ID])"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
 
 
-  </div> -->
+  </div>
 </ion-content>

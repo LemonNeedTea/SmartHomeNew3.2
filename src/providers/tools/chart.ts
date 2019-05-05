@@ -3,10 +3,10 @@ import F2 from '@antv/f2';
 
 @Injectable()
 export class chartToolsProvider {
-    private chartObj: any;
+    private chartObj: any = {};
 
     constructor() {
-
+        this.chartObj={};
     }
     getLineChart(id: string, data: any, config: any) {
         return this.getChart(id, 'line', data, config);
@@ -15,8 +15,9 @@ export class chartToolsProvider {
         return this.getChart(id, 'bar', data, config);
     }
     getChart(id: string, type: string, data: any, config: any) {
-        if (this.chartObj) {
-            this.chartObj.clear();
+        if (this.chartObj[id]) {
+            this.chartObj[id].clear();
+            this.chartObj[id] = null;
         }
         const chart = new F2.Chart({
             id: id,
@@ -95,8 +96,9 @@ export class chartToolsProvider {
         }
         chart.source(data);
         chart.render();
-        // return chart;
-        this.chartObj = chart;
+        this.chartObj[id] = chart;
+        return chart;
+
     }
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Events } from 'ionic-angular'
 
 import { MessagePage } from '../message/message';
 import { HomePage } from '../home/home';
@@ -6,6 +7,7 @@ import { RoomPage } from '../room/room';
 import { DevicePage } from '../device/device';
 import { EnergyPage } from '../energy/energy';
 import { DeviceRequestsProvider } from "../../providers/tools/requests";
+import { Variable } from '../../providers/model/variable';
 
 @Component({
   templateUrl: 'tabs.html',
@@ -15,7 +17,8 @@ export class TabsPage {
   tabRoots: any;
   interval: any;
 
-  constructor(private device: DeviceRequestsProvider) {
+  constructor(private device: DeviceRequestsProvider,
+    private events: Events) {
     this.tabRoots = [
       {
         root: HomePage,
@@ -30,7 +33,9 @@ export class TabsPage {
       , {
         root: DevicePage,
         tabTitle: '设备',
-        tabIcon: 'options'
+        tabIcon: 'options',
+        tabBadge: 0,
+        tabBadgeStyle: 'danger'
       }
       , {
         root: EnergyPage,
@@ -45,6 +50,7 @@ export class TabsPage {
       }
     ];
     this.getMessageNum();
+    this.getDeviceOpenNum();
   }
   ionViewDidLoad() {
     this.interval = setInterval(() => {
@@ -62,5 +68,11 @@ export class TabsPage {
     //   let data=res['MainData'];
     //   this.tabRoots[2].tabBadge = data.length;
     // });
+  }
+  private getDeviceOpenNum() {
+    this.tabRoots[2].tabBadge = Variable.deviceNum;
+    this.events.subscribe("FnData:DeviceOpenNum", (res: any) => {
+      this.tabRoots[2].tabBadge = res;
+    });
   }
 }
