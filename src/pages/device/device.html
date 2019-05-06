@@ -41,7 +41,7 @@
 
           </ion-label>
           <ion-toggle [(ngModel)]="stateData1[item.F_ID]" *ngIf="item.F_ShowButton" [disabled]="auto"
-            (ngModelChange)="setDeviceState(item.F_ID,item.F_Name,stateData[item.F_ID])"></ion-toggle>
+            (ngModelChange)="setDeviceState(item.F_ID,item.F_Name,stateData1[item.F_ID])"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>

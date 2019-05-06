@@ -27,6 +27,7 @@ import { Variable } from '../../providers/model/variable';
 export class DevicePage {
   typeDataList: any;
   deviceDataList: any;
+  deviceTypeDataList: any;
   deviceDataListShow: any;
   typeID: string;
   stateData: any = {};
@@ -46,7 +47,7 @@ export class DevicePage {
     //   });
     
       this.device.getDeviceIDtoTypeID().then((ress: any) => {
-        this.deviceDataList = ress;
+        this.deviceTypeDataList = ress;
 
       });
     // });
@@ -56,12 +57,13 @@ export class DevicePage {
         this.openStateNumArr[element.F_ID] = 0;
         this.sumNum += element.F_DeviceNum;
       });
-      this.getFn51Data();
 
       this.typeID = res[0]['F_ID'];
       this.device.getDeviceDataList().then(res => {
         this.deviceDataList = res;
         this.getRightCateData(this.typeID);
+      this.getFn51Data();
+
 
       });
     });
@@ -103,13 +105,15 @@ export class DevicePage {
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
         const state = data[key];
-        let typeID = this.deviceDataList[key];
+        let typeID = this.deviceTypeDataList[key];
         let element = data[key];
         if (Boolean(element)) {
           sumNumOPen++;
           result[typeID]++;
         }
       }
+    // console.log(result);
+
     };
     this.sumNumOPen = sumNumOPen;
     this.stateData = result;
