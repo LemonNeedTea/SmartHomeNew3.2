@@ -35,13 +35,13 @@
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
     },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+    },
     "cordova-plugin-baiduasrtts": {
       "APIKEY": "BHwjzIOUXHfX0C5jhlfmAdzU",
       "SECRETKEY": "Qn3w4MKwcDGcdNUOTrjQ2s8axGDKDqER",
       "APPID": "15934786",
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-vibration": {
       "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
     }
   },

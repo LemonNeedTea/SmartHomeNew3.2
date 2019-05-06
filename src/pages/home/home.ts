@@ -157,15 +157,15 @@ export class HomePage {
 
   }
   scrollEvent(e) {
-    if (e.scrollTop <= 200) {
-      this.header._elementRef.nativeElement.style.backgroundColor = `rgba(71,105,163,0)`;;
-      let opacity = e.scrollTop / 200;//设置滚动距离300的时候导航栏消失
+    if (e.scrollTop <= 100) {
+      this.header._elementRef.nativeElement.style.backgroundColor = `rgba(82,161,243,0)`;;
+      let opacity = e.scrollTop / 100;//设置滚动距离300的时候导航栏消失
 
-      let color = `rgba(71,105,163,${opacity})`;
+      let color = `rgba(82,161,243,${opacity})`;
       this.homeHeaderContent.nativeElement.style.backgroundColor = color;
 
     } else {
-      this.header._elementRef.nativeElement.style.backgroundColor = `rgba(71,105,163,1)`;;
+      this.header._elementRef.nativeElement.style.backgroundColor = `rgba(82,161,243,1)`;;
 
     }
 

@@ -46,23 +46,14 @@ export class SocketHelpProvider {
     closeSocket() {
         this.socket.ws.close();
         clearInterval(this.interval);
-        // this.events["_channels"] = [];
         for (const key in this.events["_channels"]) {
             if (this.events["_channels"].hasOwnProperty(key)) {
-                // const element = this.events["_channels"][key];
                 if (key !== 'user:created' && key !== 'vibrate') {
                     delete this.events["_channels"][key];
                 }
 
             }
         }
-        console.log(this.events);
-        // this.events.unsubscribe("FnData:51", null);
-        // this.events.unsubscribe("FnData:50", null);
-        // this.events.unsubscribe("FnData:52", null);
-        // this.events.unsubscribe("FnData:53", null);
-        // this.events.unsubscribe("FnData:54", null);
-        // this.events.unsubscribe("FnData:isAuto", nuldel);
     }
     setDeviceState(id: string, name: string, state: string, speech: false) {
         var param = {
