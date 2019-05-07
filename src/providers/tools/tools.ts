@@ -225,6 +225,47 @@ export class ToolsProvider {
     }
     return result;
   }
+  getArrayByOneFnData(fnData: any, fnID: string, startID: number): Array<any> {
+    let result = [];
+    let data: number = fnData[`F${fnID}${startID}`];
+    if (data) {
+      let temp = this.convertToBinary(data);
+      result[0] = temp[0];
+      result[1] = temp[6];
+      result[2] = temp[5];
+      result[3] = temp[4];
+      result[4] = temp[3];
+      result[5] = temp[2];
+      result[6] = temp[1];
+    }
+    result.push(data);
+
+    return result;
+  }
+  getNumberByArr(data: any) {
+    let result: number = 0;
+    let length = data.length;
+    for (let index = 0; index < length; index++) {
+      const element = data[index];
+      if (element >= 1) {
+        result += Math.pow(2, length - 1 - index);
+      }
+
+    }
+    return result;
+  }
+  private convertToBinary(num) {
+    var result = []
+    while (num != 0) {
+      result.push(num % 2)
+      num = Math.floor(num / 2)
+    }
+    result.reverse()
+    while (result.length < 7) {
+      result.unshift(0)
+    }
+    return result;
+  }
   presentAlarmAlert(data: string, title?: string) {
     let alert = this.alertCtrl.create({
       title: title ? title : `报警信息<img />`,

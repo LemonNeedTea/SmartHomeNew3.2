@@ -16,14 +16,27 @@ export class EastnorthpoolPumpParams {
     public runtime: number;
 }
 export class NorthCourtPumpParams {
-    public code: number = 7;
-    public loop: Array<any>;
+    public code: number = 12;
+    public loop: number;
     public timerOpen: number;
     public starDate: Array<any>;
     public runtime: number;
-    public timerOpen1: boolean;
-    public runtime1: number;
 
+}
+export class EastPoolValveParams {
+    public code: number = 11;
+    public loop: number;
+    public timerOpen: number;
+    public starDate: Array<any>;
+    public runtime: number;
+
+}
+export class NorthPoolValveParams {
+    public code: number = 10;
+    public loop: number;
+    public timerOpen: number;
+    public starDate: Array<any>;
+    public runtime: number;
 }
 export class EastnortcCourtValveParams {
     public code: number = 8;

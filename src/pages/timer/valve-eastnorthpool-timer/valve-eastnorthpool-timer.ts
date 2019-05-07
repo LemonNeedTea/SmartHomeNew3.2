@@ -20,8 +20,6 @@ export class ValveEastnorthpoolTimerPage {
   timerOpen: any;
   runtime: number;
   loop: any;
-  timerOpen1: any;
-  runtime1: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private viewCtrl: ViewController,
@@ -41,12 +39,10 @@ export class ValveEastnorthpoolTimerPage {
   }
   getParams() {
     let params = new NorthCourtPumpParams();//注意组装顺序
-    params.loop = this.loop;
+    params.loop = this.tools.getNumberByArr(this.loop);
     params.timerOpen = Number(this.timerOpen);
     params.starDate = this.startDate;
     params.runtime = this.runtime;
-    params.timerOpen1 = this.timerOpen1;
-    params.runtime1 = this.runtime1;
     return params;
   }
   checkParam(): boolean {
@@ -54,12 +50,10 @@ export class ValveEastnorthpoolTimerPage {
   }
   getData() {
     let fnData = Variable.GetFnData('55');
-    this.loop = this.tools.getArrayByFnData(fnData, '55', 48, 7);
-    this.timerOpen = Number(fnData.F5555);
-    this.startDate = [fnData.F5556, fnData.F5557];
-    this.runtime = fnData.F5558;
-    this.timerOpen1 = Number(fnData.F5559);
-    this.runtime1 = fnData.F5560;
+    this.tools.getArrayByOneFnData(fnData, '55', 91);
+    this.timerOpen = Number(fnData.F5592);
+    this.startDate = [fnData.F5593, fnData.F5594];
+    this.runtime = fnData.F5595;
 
 
   }

@@ -25,6 +25,12 @@
 
 <ion-content class="setting-page">
   <ion-list>
-    <my-runtime [(myModel)]="runtime1"></my-runtime>
+    <ion-item>
+      <ion-label>定时开启</ion-label>
+      <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
+    </ion-item>
+    <my-time name='开启时间' [(myModel)]="startDate"></my-time>
+    <my-loop [(myModel)]="loop"></my-loop>
+    <my-runtime [(myModel)]="runtime"></my-runtime>
   </ion-list>
 </ion-content>
