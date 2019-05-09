@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
 import { ToolsProvider } from '../../../providers/tools/tools';
-import { EastnortcCourtValveParams, NorthPoolValveParams } from '../../../providers/model/model';
+import { NorthPoolValveParams } from '../../../providers/model/model';
 /**
  * Generated class for the ValveNorthpoolTimerPage page.
  *
@@ -50,7 +50,7 @@ export class ValveNorthpoolTimerPage {
   }
   getData() {
     let fnData = Variable.GetFnData('55');
-    this.tools.getArrayByOneFnData(fnData, '55', 81);
+    this.loop = this.tools.getArrayByOneFnData(fnData, '55', 81);
     this.timerOpen = Number(fnData.F5582);
     this.startDate = [fnData.F5583, fnData.F5584];
     this.runtime = fnData.F5585;

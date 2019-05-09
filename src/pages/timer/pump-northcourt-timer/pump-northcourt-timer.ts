@@ -45,8 +45,6 @@ export class PumpNorthcourtTimerPage {
     params.timerOpen = Number(this.timerOpen);
     params.starDate = this.startDate;
     params.runtime = this.runtime;
-    params.timerOpen1 = this.timerOpen1;
-    params.runtime1 = this.runtime1;
     return params;
   }
   checkParam(): boolean {
@@ -58,8 +56,8 @@ export class PumpNorthcourtTimerPage {
     this.timerOpen = Number(fnData.F5555);
     this.startDate = [fnData.F5556, fnData.F5557];
     this.runtime = fnData.F5558;
-    this.timerOpen1 = Number(fnData.F5559);
-    this.runtime1 = fnData.F5560;
+    // this.timerOpen1 = Number(fnData.F5559);
+    // this.runtime1 = fnData.F5560;
 
 
   }

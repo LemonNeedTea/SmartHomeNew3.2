@@ -87,42 +87,44 @@ export class RoomdevicePage {
 
   }
   goSetting(data: any) {
-    let page: any;
-    switch (data['F_SettingRouter']) {
-      case "setting_pump": {
-        page = 'WellpumpPage'; break;
+    if (data.F_ShowSetting) {
+      let page: any;
+      switch (data['F_SettingRouter']) {
+        case "setting_pump": {
+          page = 'WellpumpPage'; break;
+        }
+        case "setting_curtain": {
+          page = 'CurtainSettingPage'; break
+        }
+        case "setting_smartdoor": {
+          page = 'DoorSettingPage'; break
+        }
+        case "setting-northPump": {
+          page = 'PumpEastnorthpoolSettingPage'; break
+        }
+        case "setting_pg": {
+          page = 'PumpNorthcourtSettingPage'; break
+        }
+        case "setting_dcf": {
+          page = 'ValveEastcourtSettingPage'; break
+        }
+        case "setting-eastNorthDCF": {
+          page = 'ValveEastnorthpoolSettingPage'; break
+        }
+        case "setting_lift": {
+          page = 'LiftSettingPage'; break
+        }
+        default: {
+          page = data['F_SettingRouter']; break;
+        }
       }
-      case "setting_curtain": {
-        page = 'CurtainSettingPage'; break
+      if (page) {
+        let params = {
+          id: data["F_ID"],
+          name: data["F_Name"]
+        };
+        this.navCtrl.push(page, params);
       }
-      case "setting_smartdoor": {
-        page = 'DoorSettingPage'; break
-      }
-      case "setting-northPump": {
-        page = 'PumpEastnorthpoolSettingPage'; break
-      }
-      case "setting_pg": {
-        page = 'PumpNorthcourtSettingPage'; break
-      }
-      case "setting_dcf": {
-        page = 'ValveEastcourtSettingPage'; break
-      }
-      case "setting-eastNorthDCF": {
-        page = 'ValveEastnorthpoolSettingPage'; break
-      }
-      case "setting_lift": {
-        page = 'LiftSettingPage'; break
-      }
-      default: {
-        page = data['F_SettingRouter']; break;
-      }
-    }
-    if (page) {
-      let params = {
-        id: data["F_ID"],
-        name: data["F_Name"]
-      };
-      this.navCtrl.push(page, params);
     }
   }
   setDeviceState(id, name, state) {

@@ -33,12 +33,12 @@ export class SocketHelpProvider {
 
             setTimeout(() => {
                 this.startSocket();
-            }, 2000);
+            }, 1000);
 
         }, () => {
             setTimeout(() => {
                 this.startSocket();
-            }, 2000);
+            }, 1000);
         });
         // Variable.socketObject = this.socket;
     }
@@ -226,6 +226,8 @@ export class SocketHelpProvider {
                                         } else {
                                             this.dismissLoading();
                                         }
+                                    } else {
+                                        this.dismissLoading();
                                     }
                                 }
 

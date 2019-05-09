@@ -230,23 +230,32 @@ export class ToolsProvider {
     let data: number = fnData[`F${fnID}${startID}`];
     if (data) {
       let temp = this.convertToBinary(data);
-      result[0] = temp[0];
-      result[1] = temp[6];
-      result[2] = temp[5];
-      result[3] = temp[4];
-      result[4] = temp[3];
-      result[5] = temp[2];
-      result[6] = temp[1];
+      result[0] = temp[0].toString();
+      result[1] = temp[6].toString();
+      result[2] = temp[5].toString();
+      result[3] = temp[4].toString();
+      result[4] = temp[3].toString();
+      result[5] = temp[2].toString();
+      result[6] = temp[1].toString();
     }
-    result.push(data);
+    // result.push(data);
 
     return result;
   }
   getNumberByArr(data: any) {
     let result: number = 0;
-    let length = data.length;
+    if (!data) return result;
+    let temp = [];
+    temp[0] = data[0];
+    temp[1] = data[6];
+    temp[2] = data[5];
+    temp[3] = data[4];
+    temp[4] = data[3];
+    temp[5] = data[2];
+    temp[6] = data[1];
+    let length = temp.length;
     for (let index = 0; index < length; index++) {
-      const element = data[index];
+      const element = temp[index];
       if (element >= 1) {
         result += Math.pow(2, length - 1 - index);
       }

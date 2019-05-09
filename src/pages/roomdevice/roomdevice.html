@@ -7,7 +7,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{roomName}}<span *ngIf="!auto">{{"("+sumNumOpen+"/"+deviceDataListShow.length+")"}}</span><span *ngIf="auto" style="color:red;">(手动模式-不可控)</span></ion-title>
+    <ion-title>{{roomName}}<span *ngIf="!auto">{{"("+sumNumOpen+"/"+deviceDataListShow.length+")"}}</span><span
+        *ngIf="auto" style="color:red;">(手动模式-不可控)</span></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +17,9 @@
 <ion-content>
   <div class="cate_right">
     <ion-list class="device-list">
-      <ion-item *ngFor="let item of deviceDataListShow">
+      <button ion-item *ngFor="let item of deviceDataListShow"
+        [ngClass]="{true:'show-setting',false:'show-button'}[item.F_ShowSetting]" 
+        (click)="goSetting(item)">
         <div item-start class="start" [ngClass]="{true:item['F_TypeColor'],false:'unopen'}[stateData[item.F_ID]==1]">
           <img src='../assets/img/home/icon-devicesetting/{{item.F_TypeImg}}'></div>
         <ion-label>
@@ -28,14 +31,14 @@
 
             <div class="label-right">
               <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
-                (click)="goSetting(item)">{{item.F_SettingName}}</button>
+                >{{item.F_SettingName}}</button>
             </div>
           </div>
 
         </ion-label>
         <ion-toggle [(ngModel)]="stateData[item.F_ID]" *ngIf="item.F_ShowButton"
           (ngModelChange)="setDeviceState(item.F_ID,item.F_Name,stateData[item.F_ID])" [disabled]="auto"></ion-toggle>
-      </ion-item>
+      </button>
     </ion-list>
   </div>
 

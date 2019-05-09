@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
 import { ToolsProvider } from '../../../providers/tools/tools';
-import { EastnorthpoolPumpParams } from '../../../providers/model/model';
+// import { EastnorthpoolPumpParams } from '../../../providers/model/model';
 
 /**
  * Generated class for the PumpEastnorthpoolTimerPage page.
@@ -38,12 +38,12 @@ export class PumpEastnorthpoolTimerPage {
     this.dismiss();
   }
   getParams() {
-    let params = new EastnorthpoolPumpParams();//注意组装顺序
-    params.loop = this.loop;
-    params.timerOpen = Number(this.timerOpen);
-    params.starDate = this.startDate;
-    params.runtime = this.runtime;
-    return params;
+    // let params = new EastnorthpoolPumpParams();//注意组装顺序
+    // params.loop = this.loop;
+    // params.timerOpen = Number(this.timerOpen);
+    // params.starDate = this.startDate;
+    // params.runtime = this.runtime;
+    // return params;
   }
   checkParam(): boolean {
     return true;

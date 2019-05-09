@@ -49,7 +49,7 @@ export class ValveEastpoolTimerPage {
   }
   getData() {
     let fnData = Variable.GetFnData('55');
-    this.tools.getArrayByOneFnData(fnData, '55', 86);
+    this.loop=this.tools.getArrayByOneFnData(fnData, '55', 86);
     // this.loop = this.tools.getArrayByFnData(fnData, '55', 81);
     this.timerOpen = Number(fnData.F5587);
     this.startDate = [fnData.F5588, fnData.F5589];

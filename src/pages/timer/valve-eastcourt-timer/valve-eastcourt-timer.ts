@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
 import { ToolsProvider } from '../../../providers/tools/tools';
-import { EastnortcCourtValveParams } from '../../../providers/model/model';
+import { EastCourtValveParams } from '../../../providers/model/model';
 /**
  * Generated class for the ValveEastcourtTimerPage page.
  *
@@ -37,7 +37,7 @@ export class ValveEastcourtTimerPage {
     this.dismiss();
   }
   getParams() {
-    let params = new EastnortcCourtValveParams();//注意组装顺序
+    let params = new EastCourtValveParams();//注意组装顺序
     params.loop = this.loop;
     params.timerOpen = Number(this.timerOpen);
     params.starDate = this.startDate;
