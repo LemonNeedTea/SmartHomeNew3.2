@@ -1,5 +1,6 @@
 #import "IONAssetHandler.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "CDVWKWebViewEngine.h"
 
 @implementation IONAssetHandler
 
@@ -7,25 +8,35 @@
     self.basePath = assetPath;
 }
 
+- (instancetype)initWithBasePath:(NSString *)basePath andScheme:(NSString *)scheme {
+    self = [super init];
+    if (self) {
+        _basePath = basePath;
+        _scheme = scheme;
+    }
+    return self;
+}
+
 - (void)webView:(WKWebView *)webView startURLSchemeTask:(id <WKURLSchemeTask>)urlSchemeTask
-API_AVAILABLE(ios(11.0)){
+{
     NSString * startPath = @"";
     NSURL * url = urlSchemeTask.request.URL;
     NSString * stringToLoad = url.path;
     NSString * scheme = url.scheme;
-    if ([scheme isEqualToString:@"ionic"]) {
-        startPath = self.basePath;
-        if ([stringToLoad isEqualToString:@""] || !url.pathExtension) {
-            startPath = [startPath stringByAppendingString:@"/index.html"];
+
+    if ([scheme isEqualToString:self.scheme]) {
+        if ([stringToLoad hasPrefix:@"/_app_file_"]) {
+            startPath = [stringToLoad stringByReplacingOccurrencesOfString:@"/_app_file_" withString:@""];
         } else {
-            startPath = [startPath stringByAppendingString:stringToLoad];
-        }
-    } else {
-        if (![stringToLoad isEqualToString:@""]) {
-            startPath = stringToLoad;
+            startPath = self.basePath;
+            if ([stringToLoad isEqualToString:@""] || [url.pathExtension isEqualToString:@""]) {
+                startPath = [startPath stringByAppendingString:@"/index.html"];
+            } else {
+                startPath = [startPath stringByAppendingString:stringToLoad];
+            }
         }
     }
-    
+
     NSData * data = [[NSData alloc] initWithContentsOfFile:startPath];
     NSInteger statusCode = 200;
     if (!data) {
@@ -47,7 +58,8 @@ API_AVAILABLE(ios(11.0)){
 
 }
 
-- (void)webView:(nonnull WKWebView *)webView stopURLSchemeTask:(nonnull id<WKURLSchemeTask>)urlSchemeTask  API_AVAILABLE(ios(11.0)){
+- (void)webView:(nonnull WKWebView *)webView stopURLSchemeTask:(nonnull id<WKURLSchemeTask>)urlSchemeTask
+{
     NSLog(@"stop");
 }
 
@@ -64,7 +76,7 @@ API_AVAILABLE(ios(11.0)){
 -(BOOL) isMediaExtension:(NSString *) pathExtension {
     NSArray * mediaExtensions = @[@"m4v", @"mov", @"mp4",
                            @"aac", @"ac3", @"aiff", @"au", @"flac", @"m4a", @"mp3", @"wav"];
-    if ([mediaExtensions containsObject:pathExtension]) {
+    if ([mediaExtensions containsObject:pathExtension.lowercaseString]) {
         return YES;
     }
     return NO;

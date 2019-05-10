@@ -31,7 +31,7 @@ export class DevicePage {
   deviceDataListShow: any;
   typeID: string;
   stateData: any = {};
-  stateData1: any ={};
+  stateData1: any = {};
   auto: boolean;
   sumNumOPen: number = 0;
   sumNum: number = 0;
@@ -45,15 +45,15 @@ export class DevicePage {
     //     this.openStateNumArr[element.F_ID] = 0;
     //     this.sumNum += element.F_DeviceNum;
     //   });
-    
-      this.device.getDeviceIDtoTypeID().then((ress: any) => {
-        this.deviceTypeDataList = ress;
 
-      });
+    this.device.getDeviceIDtoTypeID().then((ress: any) => {
+      this.deviceTypeDataList = ress;
+
+    });
     // });
-    this.device.getDeviceTypeDataList().then((res:any) => {
+    this.device.getDeviceTypeDataList().then((res: any) => {
       this.typeDataList = res;
-            res.forEach(element => {
+      res.forEach(element => {
         this.openStateNumArr[element.F_ID] = 0;
         this.sumNum += element.F_DeviceNum;
       });
@@ -62,7 +62,7 @@ export class DevicePage {
       this.device.getDeviceDataList().then(res => {
         this.deviceDataList = res;
         this.getRightCateData(this.typeID);
-      this.getFn51Data();
+        this.getFn51Data();
 
 
       });
@@ -84,10 +84,10 @@ export class DevicePage {
     });
   }
   getFn51Data() {
-    let data = Variable.GetFnData('51');this.stateData1=data;
+    let data = Variable.GetFnData('51'); this.stateData1 = data;
     this.getTypeDeviceNum(data);
     this.events.subscribe("FnData:51", (res) => {
-      this.stateData1=res;
+      this.stateData1 = res;
       this.getTypeDeviceNum(res);
     });
   }
@@ -112,7 +112,7 @@ export class DevicePage {
           result[typeID]++;
         }
       }
-    // console.log(result);
+      // console.log(result);
 
     };
     this.sumNumOPen = sumNumOPen;
@@ -131,39 +131,44 @@ export class DevicePage {
     Variable.socketObject.setDeviceState(id, name, state);
   }
   goSetting(data: any) {
-    let page: any;
-    switch (data['F_SettingRouter']) {
-      case "setting_pump": {
-        page = 'WellpumpPage'; break;
+    if (data.F_ShowSetting) {
+      let page: any;
+      switch (data['F_SettingRouter']) {
+        case "setting_pump": {
+          page = 'WellpumpPage'; break;
+        }
+        case "setting_curtain": {
+          page = 'CurtainSettingPage'; break
+        }
+        case "setting_smartdoor": {
+          page = 'DoorSettingPage'; break
+        }
+        case "setting-northPump": {
+          page = 'PumpEastnorthpoolSettingPage'; break
+        }
+        case "setting_pg": {
+          page = 'PumpNorthcourtSettingPage'; break
+        }
+        case "setting_dcf": {
+          page = 'ValveEastcourtSettingPage'; break
+        }
+        case "setting-eastNorthDCF": {
+          page = 'ValveEastnorthpoolSettingPage'; break
+        }
+        case "setting_lift": {
+          page = 'LiftSettingPage'; break
+        }
+        default: {
+          page = data['F_SettingRouter']; break;
+        }
       }
-      case "setting_curtain": {
-        page = 'CurtainSettingPage'; break
+      if (page) {
+        let params = {
+          id: data["F_ID"],
+          name: data["F_Name"]
+        };
+        this.navCtrl.push(page, params);
       }
-      case "setting_smartdoor": {
-        page = 'DoorSettingPage'; break
-      }
-      case "setting-northPump": {
-        page = 'PumpEastnorthpoolSettingPage'; break
-      }
-      case "setting_pg": {
-        page = 'PumpNorthcourtSettingPage'; break
-      }
-      case "setting_dcf": {
-        page = 'ValveEastcourtSettingPage'; break
-      }
-      case "setting-eastNorthDCF": {
-        page = 'ValveEastnorthpoolSettingPage'; break
-      }
-      case "setting_lift": {
-        page = 'LiftSettingPage'; break
-      }
-    }
-    if (page) {
-      let params = {
-        id: data["F_ID"],
-        name: data["F_Name"]
-      };
-      this.navCtrl.push(page, params);
     }
   }
   goRoomDevice(id: string, name: string) {
