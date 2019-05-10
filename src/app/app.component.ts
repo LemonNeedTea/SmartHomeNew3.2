@@ -34,7 +34,10 @@ export class MyApp {
       statusBar.styleDefault();
       // splashScreen.hide();
       //开启网络状态监测
-      this.startNetDetect();
+      if (platform.is('cordova')) {
+        this.startNetDetect();
+
+      }
       //接受订阅用户名称
       events.subscribe('user:created', (user, time) => {
         this.username = user;
