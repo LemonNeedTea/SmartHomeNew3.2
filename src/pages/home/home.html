@@ -58,7 +58,7 @@
   </div>
   <ion-list no-padding no-margin>
     <!-- <ion-item-group> -->
-    <ion-item-divider sticky no-padding style="background:white">
+    <ion-item-divider sticky no-padding style="background:white;height: 40px;">
       <ion-segment [(ngModel)]="homeType">
         <ion-segment-button value="mode">
           模式
@@ -89,7 +89,7 @@
                           </div>
                         </div>
                         <button ion-button clear small float-right (click)="goModeSetting(mode)">
-                          <ion-icon name='settings'></ion-icon>
+                          <ion-icon name='settings' style="font-size:18px;"> </ion-icon>
                         </button>
                       </ion-card-header>
                       <ion-card-content (click)="setMode(mode.F_AgreementID,mode.F_Name)">
