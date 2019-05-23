@@ -32,7 +32,7 @@ export class MyApp {
     private toastCtrl: ToastController) {
     platform.ready().then(() => {//app启动成功执行
       statusBar.styleDefault();
-      // splashScreen.hide();
+      splashScreen.hide();
       //开启网络状态监测
       if (platform.is('cordova')) {
         this.startNetDetect();
