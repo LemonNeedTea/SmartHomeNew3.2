@@ -43,6 +43,11 @@
     "cordova-plugin-ionic-webview": {
       "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
       "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+    },
+    "jpush-phonegap-plugin": {
+      "APP_KEY": "0fe661ea30498c2cb8aadebd",
+      "CHANNEL": "developer-default",
+      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
     }
   },
   "dependent_plugins": {
@@ -50,6 +55,9 @@
       "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
     },
     "es6-promise-plugin": {
+      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+    },
+    "cordova-plugin-jcore": {
       "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
     }
   }

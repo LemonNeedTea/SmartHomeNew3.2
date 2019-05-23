@@ -17,6 +17,8 @@ import { QRScanner } from '@ionic-native/qr-scanner';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Network } from '@ionic-native/network';
 import { Vibration } from '@ionic-native/vibration';
+import { JPush } from '@jiguang-ionic/jpush';
+import { Device } from '@ionic-native/device';
 
 //自定义工厂
 import { WebSocketProvider } from "../providers/ws";
@@ -100,7 +102,9 @@ import { ComponentsModule } from '../components/components.module'
     WebSocketService,
     ServerSocket,
     SpeechHelperProvider,
-    Vibration
+    Vibration,
+    JPush,
+    Device,
   ]
 })
 export class AppModule { }

@@ -42,10 +42,18 @@
     },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "jpush-phonegap-plugin": {
+      "APP_KEY": "0fe661ea30498c2cb8aadebd",
+      "CHANNEL": "developer-default",
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-jcore": {
       "PACKAGE_NAME": "nla.com.cn.smartHome"
     },
     "es6-promise-plugin": {

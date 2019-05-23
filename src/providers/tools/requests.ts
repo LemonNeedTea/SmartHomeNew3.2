@@ -9,7 +9,7 @@ import { EnumChartType } from '../model/enumdata';
 import { SocketHelpProvider } from './socketHelper';
 import { Variable } from '../../providers/model/variable';
 import { resolve } from 'url';
-
+import { Http } from '@angular/http'
 
 @Injectable()
 export class LoginRequestsProvider {
@@ -25,7 +25,8 @@ export class LoginRequestsProvider {
     private config: ConfigProvider,
     private toastCtrl: ToastController,
     private socket: SocketHelpProvider,
-    // private device:DeviceRequestsProvider
+    // private device:DeviceRequestsProvider,
+    private http1: Http
 
 
   ) {
@@ -38,38 +39,45 @@ export class LoginRequestsProvider {
   login(username: string, password: string) {
 
     return new Promise((resolve, reject) => {
-      let params = {
-        'txtUser': username,
-        'txtPwd': password
-      };
-      this.http.post("/EnergyAppLogin/LoginCheck", params).then(res => {
-        if (res["State"] == true) {
-          let userInfo = res["UserInfo"];
-          userInfo['txtUser'] = username;
-          userInfo['txtPwd'] = password;
-          this.tools.setUserInfo(userInfo);
-          this.events.publish('user:created', userInfo['username'], Date.now());
-          this.socket.startSocket();//启动websocket
-          Variable.socketObject = this.socket;
-          this.getTipAlarmList();
-          //获取震动状态
 
-          let vibrateState = this.tools.getVibrate();
-          this.events.publish("vibrate", vibrateState);
-          resolve(true);
+      this.tools.getRegistrationID().then(res => {
+        let params = {
+          'txtUser': username,
+          'txtPwd': password,
+          'AppKey': '0fe661ea30498c2cb8aadebd',
+          'RegistrationId': res,
+        };
 
-        } else {
-          let toast = this.toastCtrl.create({
-            message: res["Msg"],
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
-          reject(false);
-        }
-      }, err => {
-        reject(err);
-      });
+        this.http.post("/EnergyAppLogin/LoginCheck", params).then(res => {
+          if (res["State"] == true) {
+            let userInfo = res["UserInfo"];
+            userInfo['txtUser'] = username;
+            userInfo['txtPwd'] = password;
+            this.tools.setUserInfo(userInfo);
+            this.events.publish('user:created', userInfo['username'], Date.now());
+            this.socket.startSocket();//启动websocket
+            Variable.socketObject = this.socket;
+            this.getTipAlarmList();
+            //获取震动状态
+
+            let vibrateState = this.tools.getVibrate();
+            this.events.publish("vibrate", vibrateState);
+            resolve(true);
+
+          } else {
+            let toast = this.toastCtrl.create({
+              message: res["Msg"],
+              duration: 3000,
+              position: 'top'
+            });
+            toast.present();
+            reject(false);
+          }
+        }, err => {
+          reject(err);
+        });
+      })
+
     });
 
   }
@@ -92,6 +100,13 @@ export class LoginRequestsProvider {
 
   }
   removeUserInfo() {
+    this.tools.getRegistrationID().then(res => {
+      let params = {
+        'RegistrationId': res,
+      };
+      this.http.post("/EnergyAppLogin/RemoveLogin", params).then(res => { });
+    })
+
     this.storage.remove(this.config.userInfoSotrageName);//
     //移除FnData
     Variable.ClearAll();

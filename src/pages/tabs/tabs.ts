@@ -8,6 +8,7 @@ import { DevicePage } from '../device/device';
 import { EnergyPage } from '../energy/energy';
 import { DeviceRequestsProvider } from "../../providers/tools/requests";
 import { Variable } from '../../providers/model/variable';
+import { JPush } from '@jiguang-ionic/jpush';
 
 @Component({
   templateUrl: 'tabs.html',
@@ -18,7 +19,8 @@ export class TabsPage {
   interval: any;
 
   constructor(private device: DeviceRequestsProvider,
-    private events: Events) {
+    private events: Events,
+    private jpush:JPush) {
     this.tabRoots = [
       {
         root: HomePage,
@@ -63,6 +65,7 @@ export class TabsPage {
   getMessageNum() {
     this.device.getAlarmDataList(false).then((res: any) => {
       this.tabRoots[4].tabBadge = res.length;
+      this.jpush.setApplicationIconBadgeNumber(Number(res.length));
     })
     // this.http.post('EnergyAppData/GetMessageData',null,false).then(res=>{
     //   let data=res['MainData'];
