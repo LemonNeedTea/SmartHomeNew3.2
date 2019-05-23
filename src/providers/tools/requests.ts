@@ -101,11 +101,11 @@ export class LoginRequestsProvider {
   }
   private getTipAlarmList() {
     this.http.postMain("/EnergyAppData/GetAlarmDataList", {}, false).then((res: any) => {
-      res.forEach(element => {
-        if (element.F_LastState == 1 && element.F_IsTip == true) {
-          this.tools.presentAlarmAlert(element.F_AlarmText);
-        }
-      });
+      // res.forEach(element => {
+      //   if (element.F_LastState == 1 && element.F_IsTip == true) {
+      //     this.tools.presentAlarmAlert(element.F_AlarmText);
+      //   }
+      // });
     });
   }
 }

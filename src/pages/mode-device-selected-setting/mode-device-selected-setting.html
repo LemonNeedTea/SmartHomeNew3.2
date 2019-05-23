@@ -25,7 +25,7 @@
 
 
 <ion-content>
-  <ion-list>
+  <ion-list class="device-list">
     <ion-item-group *ngFor="let item of dataList">
       <ion-item-divider sticky>
         <ion-label>
@@ -35,11 +35,14 @@
 
       <ion-item-sliding *ngFor="let device of item.data">
         <ion-item>
+
           <ion-label>
+            <div item-start class="start" [ngClass]="device.DeviceColor">
+              <img src='../assets/img/home/icon-devicesetting/{{device.Img}}'></div>
             <div class="label">
               <div>
                 {{device.DeviceName}}
-                <p><span class="biaoqian" [ngClass]="device.Color">{{device.FloorName+'/'+device.RoomName}}</span></p>
+                <p><span>{{device.FloorName+'/'+device.RoomName}}</span></p>
               </div>
             </div>
 

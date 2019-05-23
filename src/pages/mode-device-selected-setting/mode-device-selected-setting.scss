@@ -1,5 +1,11 @@
 page-mode-device-selected-setting {
-    ion-item-divider{
-        color: color($colors,primary) !important;
-    }
+  ion-item-divider {
+    color: color($colors, primary) !important;
+  }
+  .start {
+    border-radius: 50%;
+    width: 52px !important;
+    height: 45px;
+    padding: 8px;
+  }
 }

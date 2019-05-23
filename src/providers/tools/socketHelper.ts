@@ -247,7 +247,7 @@ export class SocketHelpProvider {
                 }
             case 'alarm':
                 {
-                    this.popupAlarmMessage(data.Data.F_AlarmText);
+                    // this.popupAlarmMessage(data.Data.F_AlarmText);
                     break;
                 }
             case "setmode": {
@@ -302,9 +302,9 @@ export class SocketHelpProvider {
         }
         return dealData;
     }
-    private popupAlarmMessage(data: string) {
-        this.tools.presentAlarmAlert(data);
-    }
+    // private popupAlarmMessage(data: string) {
+    //     this.tools.presentAlarmAlert(data);
+    // }
     // private getDeviceOpenNum(data: any) {
     //     let num: number = 0;
     //     data.forEach(element => {

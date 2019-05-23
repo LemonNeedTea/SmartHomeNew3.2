@@ -46,27 +46,28 @@ export class DevicePage {
     //     this.sumNum += element.F_DeviceNum;
     //   });
 
+
+    // });
     this.device.getDeviceIDtoTypeID().then((ress: any) => {
       this.deviceTypeDataList = ress;
+      this.device.getDeviceTypeDataList().then((res: any) => {
+        this.typeDataList = res;
+        res.forEach(element => {
+          this.openStateNumArr[element.F_ID] = 0;
+          this.sumNum += element.F_DeviceNum;
+        });
 
-    });
-    // });
-    this.device.getDeviceTypeDataList().then((res: any) => {
-      this.typeDataList = res;
-      res.forEach(element => {
-        this.openStateNumArr[element.F_ID] = 0;
-        this.sumNum += element.F_DeviceNum;
-      });
-
-      this.typeID = res[0]['F_ID'];
-      this.device.getDeviceDataList().then(res => {
-        this.deviceDataList = res;
-        this.getRightCateData(this.typeID);
-        this.getFn51Data();
+        this.typeID = res[0]['F_ID'];
+        this.device.getDeviceDataList().then(res => {
+          this.deviceDataList = res;
+          this.getRightCateData(this.typeID);
+          this.getFn51Data();
 
 
+        });
       });
     });
+
   }
 
   ionViewDidEnter() {
