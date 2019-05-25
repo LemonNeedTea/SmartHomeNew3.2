@@ -55,13 +55,13 @@ export class SocketHelpProvider {
             }
         }
     }
-    setDeviceState(id: string, name: string, state: string, speech: false) {
+    setDeviceState(id: string, name: string, state: number, speech: false) {
         var param = {
             Type: 'set',
             UserName: this.tools.getUserName(), //用户名
             MonitorID: 1, //设备ID
             DeviceID: id,
-            SetState: state
+            SetState: Number(state)
         };
         this.socket.sendMessage(param);
         this.tools.vibrate();
