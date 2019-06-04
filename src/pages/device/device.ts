@@ -135,7 +135,7 @@ export class DevicePage {
   }
   setDeviceState(id, name, state) {
     // this.tools.showAnimatePulse(`device${id}`);
-    this.tools.showAnimatePulse(this.el, `device${id}`,true);
+    this.tools.showAnimatePulse(this.el, `device${id}`, true);
     Variable.socketObject.setDeviceState(id, name, state);
   }
   goSetting(data: any) {

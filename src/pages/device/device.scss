@@ -5,13 +5,13 @@ page-device {
     display: flex;
 
     .cate_left {
-      width: 100px;
+      width: 95px;
       height: 100%;
-      border-right: 1rem solid #eee;
+      border-right: 10px solid #eee;
       overflow-y: auto;
       color: #666;
       .item-selected {
-        border-left: 5px;
+        border-left: 3px;
         border-left-style: solid;
         border-color: color($colors, primary);
         background-color: #eee;
@@ -55,5 +55,10 @@ page-device {
   }
   .biaoqian{
     color: #8e9093;
+  }
+  .device-list{
+    .item-inner{
+      padding-right: 8px !important;
+    }
   }
 }
