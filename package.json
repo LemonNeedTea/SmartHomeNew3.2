@@ -33,6 +33,7 @@
     "@jiguang-ionic/jpush": "^1.0.2",
     "@types/ws": "^6.0.1",
     "angular2-websocket-service": "^0.5.3",
+    "animate.css": "^3.7.1",
     "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.2",

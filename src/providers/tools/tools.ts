@@ -8,7 +8,6 @@ import Moment, { now } from 'moment';
 import { EnumEnergyType, EnumDateType, EnumChartType } from '../../providers/model/enumdata';
 import { Vibration } from '@ionic-native/vibration';
 import { JPush } from '@jiguang-ionic/jpush';
-import { resolve } from 'url';
 
 
 @Injectable()
@@ -21,7 +20,7 @@ export class ToolsProvider {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private vibration: Vibration,
-    private jpush:JPush,
+    private jpush: JPush,
   ) {
   }
   //获取用户信息
@@ -36,16 +35,16 @@ export class ToolsProvider {
   setUserInfo(data) {
     this.storage.set(this.config.userInfoSotrageName, data);
   }
-  getRegistrationID(){
-    return new Promise((resolve)=>{
+  getRegistrationID() {
+    return new Promise((resolve) => {
       var registrationid = this.storage.get("smarthomenew-registrationid");
-      if(registrationid){
+      if (registrationid) {
         resolve(registrationid);
-      }else{
-        this.jpush.getRegistrationID().then(res=>{
-          this.storage.set("smarthomenew-registrationid",res);
+      } else {
+        this.jpush.getRegistrationID().then(res => {
+          this.storage.set("smarthomenew-registrationid", res);
           resolve(res);
-        },err=>{
+        }, err => {
           resolve("");
         });
       }
@@ -321,6 +320,33 @@ export class ToolsProvider {
       return data;
     }
   }
+  showAnimatePulse(el: any, eleName: string, showbc: boolean=false) {
+    return new Promise((resolve) => {
+      let temp = el.nativeElement.querySelector(`.${eleName}`);
+      console.log(temp);
+      if (showbc) {
+        temp.style.background = "#eee";
+      }
+      temp.classList.add('animated', 'pulse');
+      temp.addEventListener('animationend', () => {
+        temp.classList.remove('animated', 'pulse');
+        if (showbc) {
+          temp.style.background = "";
+        }
+
+        resolve(true);
+      });
+    });
+
+  }
+  showAnimate(el: any, eleName: string,animateName:string) {
+    let temp = el.nativeElement.querySelector(`.${eleName}`);
+    temp.classList.add('animated', animateName);
+    temp.addEventListener('animationend', () => {
+      temp.classList.remove('animated', animateName);
+    });
+  }
+  
 
 
 

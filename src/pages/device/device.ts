@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
+import { ToolsProvider } from '../../providers/tools/tools';
 import { Variable } from '../../providers/model/variable';
 // import { WellpumpPage } from '../wellpump/wellpump';
 // import { CurtainSettingPage } from '../device-setting/curtain-setting/curtain-setting';
@@ -37,7 +38,9 @@ export class DevicePage {
   sumNum: number = 0;
   private openStateNumArr: any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, private device: DeviceRequestsProvider,
-    private events: Events) {
+    private events: Events,
+    private tools: ToolsProvider,
+    private el: ElementRef) {
     this.getIsAuto();
     // this.device.getDeviceTypeDataList().then((res: any) => {
     //   this.typeDataList = res;
@@ -120,15 +123,19 @@ export class DevicePage {
     this.stateData = result;
   }
   getRightCateData(typeID: string) {
+    // this.tools.showAnimatePulse(this.el,`type${typeID}`)
     this.typeID = typeID;
     this.deviceDataListShow = new Array<any>();
     this.deviceDataList.forEach(item => {
       if (item['F_TypeID'] == typeID) {
+        item["class"] = "device" + item["F_ID"];
         this.deviceDataListShow.push(item);
       }
     });
   }
   setDeviceState(id, name, state) {
+    // this.tools.showAnimatePulse(`device${id}`);
+    this.tools.showAnimatePulse(this.el, `device${id}`,true);
     Variable.socketObject.setDeviceState(id, name, state);
   }
   goSetting(data: any) {
