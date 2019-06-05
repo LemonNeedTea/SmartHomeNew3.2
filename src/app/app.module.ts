@@ -7,7 +7,8 @@ import { HttpModule } from "@angular/http";
 import { IonicStorageModule } from '@ionic/storage';
 import { DatePipe } from '@angular/common';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
-import { WebSocketService } from 'angular2-websocket-service'
+import { WebSocketService } from 'angular2-websocket-service';
+import { MultiPickerModule } from 'ion-multi-picker';
 
 
 //原生native
@@ -44,7 +45,7 @@ import { DevicePage } from '../pages/device/device';
 import { EnergyPage } from '../pages/energy/energy';
 
 //组件
-import { ComponentsModule } from '../components/components.module'
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -70,6 +71,7 @@ import { ComponentsModule } from '../components/components.module'
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     ComponentsModule,
+    MultiPickerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

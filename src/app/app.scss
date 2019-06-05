@@ -219,3 +219,13 @@
   //   color: color($colors,primary);
   // }
 }
+.border-dividing{
+  border-bottom: 8px solid #f8f8f8 !important;
+  .item-inner{
+    border:0;
+  }
+}
+
+ .picker-toolbar-multi-picker-cancel{
+  text-align: start !important;
+}
