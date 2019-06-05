@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LiftSettingPage } from './lift-setting';
+import { AirSettingPage } from './air-setting';
 import { ComponentsModule } from '../../../components/components.module';
 
 @NgModule({
   declarations: [
-    LiftSettingPage,
+    AirSettingPage,
   ],
   imports: [
-    IonicPageModule.forChild(LiftSettingPage),
+    IonicPageModule.forChild(AirSettingPage),
     ComponentsModule
   ],
 })
-export class LiftSettingPageModule {}
+export class AirSettingPageModule {}

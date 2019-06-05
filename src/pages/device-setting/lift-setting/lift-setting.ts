@@ -20,12 +20,14 @@ export class LiftSettingPage {
   state: boolean;
   f50Data: any;
   auto: boolean;
-
+  paramData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private events: Events,
   ) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
+    this.paramData = this.navParams.get("data");
+
     let fn51Data = Variable.GetFnData('51');
     this.getDeviceState(fn51Data);
     this.events.subscribe("FnData:51", this.eventsFn51Handler);

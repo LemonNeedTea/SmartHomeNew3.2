@@ -1,0 +1,26 @@
+<!-- Generated template for the MyDeviceInfoComponent component -->
+<ion-grid class="build-info">
+    <ion-row style="height: 100%;"> 
+      <!-- <ion-col > -->
+        <div style="height: 100%;width:140px;display: flex;justify-content: center; align-items: center">
+            <img src="../../../assets/img/home/icon-devicesetting/{{data?data.F_TypeImg:''}}" />
+        </div>
+      <!-- </ion-col> -->
+      <ion-col >
+        <ul class="build-right-ul">
+          <li>
+  <span>名称</span>
+  <span>{{data?data.F_Name:''}}</span>
+          </li>
+          <li>
+              <span>楼层</span>
+              <span>{{data?data.F_FloorName:''}}</span>
+          </li>
+          <li>
+              <span>房间</span>
+              <span>{{data?data.F_RoomName:''}}</span>
+          </li>
+        </ul>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
