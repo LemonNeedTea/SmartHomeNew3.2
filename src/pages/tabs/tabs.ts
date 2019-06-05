@@ -20,7 +20,7 @@ export class TabsPage {
 
   constructor(private device: DeviceRequestsProvider,
     private events: Events,
-    private jpush:JPush) {
+    private jpush: JPush) {
     this.tabRoots = [
       {
         root: HomePage,
@@ -66,6 +66,7 @@ export class TabsPage {
     this.device.getAlarmDataList(false).then((res: any) => {
       this.tabRoots[4].tabBadge = res.length;
       this.jpush.setApplicationIconBadgeNumber(Number(res.length));
+      this.events.publish("data:messageList", res);
     })
     // this.http.post('EnergyAppData/GetMessageData',null,false).then(res=>{
     //   let data=res['MainData'];

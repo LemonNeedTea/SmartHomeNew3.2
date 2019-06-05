@@ -225,7 +225,8 @@ export class DeviceRequestsProvider {
     return this.http.postMain("/EnergyAppData/GetAlarmHistoryDataList", params);
   }
   setAlarmState(id: string) {
-    this.http.postMain("/EnergyAppData/SetAlarmState", { ID: id });
+    let result=this.http.postMain("/EnergyAppData/SetAlarmState", { ID: id },false);
+    return result;
   }
   getAlarmTypeDataList() {
     return this.http.postMain("/EnergyAppData/GetAlarmType");

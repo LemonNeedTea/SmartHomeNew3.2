@@ -103,7 +103,7 @@ export class HttpServicesProvider {
             if (username) {
                 params['UserName'] = username;
                 this.post(url, params, isLoading).then(res => {
-                    if (res["MainData"]) {
+                    if (res["MainData"]!=null) {
                         resolve(res["MainData"]);
                     }
                 }, err => { });

@@ -20,7 +20,7 @@
     <button ion-item>
       <ion-label>热泵模式</ion-label>
       <ion-multi-picker item-content [multiPickerColumns]="hotPumpModeColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="hotPumpModel"> </ion-multi-picker>
+        [(ngModel)]="hotPumpModel" (ioniChange)=> </ion-multi-picker>
     </button>
     <button ion-item>
       <ion-label>制热方式</ion-label>

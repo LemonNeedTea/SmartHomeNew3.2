@@ -121,7 +121,8 @@ export class RoomdevicePage {
       if (page) {
         let params = {
           id: data["F_ID"],
-          name: data["F_Name"]
+          name: data["F_Name"],
+          data:data
         };
         this.navCtrl.push(page, params);
       }
