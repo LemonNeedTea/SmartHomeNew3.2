@@ -7,58 +7,58 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-screen-orientation": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
     "cordova-plugin-baiduasrtts": {
       "APIKEY": "BHwjzIOUXHfX0C5jhlfmAdzU",
       "SECRETKEY": "Qn3w4MKwcDGcdNUOTrjQ2s8axGDKDqER",
       "APPID": "15934786",
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
     },
     "cordova-plugin-ionic-webview": {
       "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
     },
     "jpush-phonegap-plugin": {
       "APP_KEY": "0fe661ea30498c2cb8aadebd",
       "CHANNEL": "developer-default",
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-add-swift-support": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
-    },
-    "es6-promise-plugin": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
     },
     "cordova-plugin-jcore": {
-      "PACKAGE_NAME": "nla.com.cn.smarthomenew3"
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "nla.com.cn.smartHome"
     }
   }
 }

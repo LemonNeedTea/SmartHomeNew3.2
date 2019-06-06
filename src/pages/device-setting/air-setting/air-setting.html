@@ -29,20 +29,23 @@
       <div class="room-temp">室温&nbsp;&nbsp;28°C</div>
     </ion-row>
     <ion-row>
-      <ion-col class="temp-add">
+      <ion-col class="temp-add" col-2>
         <button ion-button icon-only (click)="tempAdd()">
           <ion-icon name="add"></ion-icon>
         </button>
       </ion-col>
-      <div id="container" class="container">
-        <div class="temp-show">
-          <p><span>{{temp}}</span>°C</p>
-          <p>{{speedKV[speedModel]}} &nbsp;&nbsp;{{modeKV[modeModel]}}</p>
+      <ion-col col-8 style="display: flex;justify-content: center;align-items: center;">
+        <div id="container" class="container">
+          <div class="temp-show">
+            <p><span>{{temp}}</span>°C</p>
+            <p>{{speedKV[speedModel]}} &nbsp;&nbsp;{{modeKV[modeModel]}}</p>
 
+          </div>
         </div>
-      </div>
+      </ion-col>
 
-      <ion-col class="temp-sub">
+
+      <ion-col class="temp-sub" col-2>
         <button ion-button icon-only (click)="tempSub()">
           <ion-icon name="remove"></ion-icon>
         </button>
@@ -53,21 +56,21 @@
 
 </ion-content>
 <ion-footer>
-  <ion-list no-margin>
+  <ion-list>
     <button ion-item>
       <ion-label>模式选择</ion-label>
       <ion-multi-picker item-content [multiPickerColumns]="modeColumns" cancelText="取消" doneText="确定"
-     [(ngModel)]="modeModel" (ngModelChange)="modeChange()"> </ion-multi-picker>
+        [(ngModel)]="modeModel" (ngModelChange)="modeChange()"> </ion-multi-picker>
     </button>
     <button ion-item>
       <ion-label>风速选择</ion-label>
       <ion-multi-picker item-content [multiPickerColumns]="speedColumns" cancelText="取消" doneText="确定"
-       [(ngModel)]="speedModel"> </ion-multi-picker>
+        [(ngModel)]="speedModel"> </ion-multi-picker>
     </button>
     <button ion-item>
       <ion-label>睡眠选择</ion-label>
       <ion-multi-picker item-content [multiPickerColumns]="sleepColumns" cancelText="取消" doneText="确定"
-         [(ngModel)]="sleepModel"> </ion-multi-picker>
+        [(ngModel)]="sleepModel"> </ion-multi-picker>
     </button>
   </ion-list>
 

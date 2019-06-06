@@ -323,7 +323,6 @@ export class ToolsProvider {
   showAnimatePulse(el: any, eleName: string, showbc: boolean=false) {
     return new Promise((resolve) => {
       let temp = el.nativeElement.querySelector(`.${eleName}`);
-      console.log(temp);
       if (showbc) {
         temp.style.background = "#eee";
       }

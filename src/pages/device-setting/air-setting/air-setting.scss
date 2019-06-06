@@ -33,8 +33,8 @@ page-air-setting {
   // //     filter: blur(20px);
   // }
   .container {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
   }
   .room-temp-row {
     padding: 10px;
@@ -49,7 +49,7 @@ page-air-setting {
     .button {
       background-color: #fff !important;
       color: color($colors, primary) !important;
-      font-size: 25px;
+      font-size: 30px;
       font-weight: bold;
     }
   }
@@ -65,8 +65,8 @@ page-air-setting {
     line-height: 28px;
   }
   .temp-show {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     position: absolute;
     color: rgba(0, 0, 0, 0.65);
   }
@@ -76,16 +76,21 @@ page-air-setting {
     padding-top: 35px;
     padding-left: 20px;
     span:first-child {
-      font-size: 50px;
+      font-size: 75px;
     }
   }
   .temp-show p:last-child {
     margin: 0;
-    font-size: 10px;
+    font-size: 18px;
     text-align: center;
   }
   .multi-picker-text {
     // font-size: 14px;
     color: rgba(0, 0, 0, 0.45);
+  }
+  .border-dividing{
+     .item-inner{
+       border-bottom: none !important;
+     }
   }
 }

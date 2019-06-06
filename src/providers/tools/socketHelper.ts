@@ -189,7 +189,7 @@ export class SocketHelpProvider {
         }
     }
     socketMessageHandle(data: any) {
-        // console.log(data);
+        console.log(data);
         switch (data.Type) {
             case 'get':
                 {

@@ -77,7 +77,6 @@ export class HomePage {
     });
     this.getEnergyDataFn50(Variable.GetFnData('50'));
     this.events.subscribe("FnData:50", (res) => {
-      console.log("home-fn50");
       this.getEnergyDataFn50(res);
     });
     this.getEnergyDataFn50(Variable.GetFnData('54'));
