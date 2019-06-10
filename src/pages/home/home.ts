@@ -27,7 +27,7 @@ export class HomePage {
   homeType: string = 'mode';
   power: string;
   oneData: any = { ud: 0, um: 0, uy: 0 };
-  oldPowser:string;
+  oldPowser: string;
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController, private modalCtrl: ModalController, private events: Events,
@@ -49,9 +49,9 @@ export class HomePage {
   getEnergyDataFn50(data: any) {
     if (data && data.F504) {
       this.power = data.F504;
-      if(this.power!=this.oldPowser){
-        this.oldPowser=this.power;
-        this.tools.showAnimatePulse(this.el,'power')
+      if (this.power != this.oldPowser) {
+        this.oldPowser = this.power;
+        this.tools.showAnimatePulse(this.el, 'power')
       }
     }
   }
@@ -105,13 +105,20 @@ export class HomePage {
     this.el.nativeElement.querySelector('.scroll-content').style.paddingTop = `${height}px`;
 
     // this.scan();
-    this.deviceRequest.getWeatherInfo().then(res => {
-      this.weatherinfo = res;
+    this.loadListData().then(res => {
+      this.fnDataSubscribe();
     });
-    this.deviceRequest.getDeviceMode().then(res => {
-      this.modeDataList = res;
-    }, err => { });
-    this.fnDataSubscribe();
+  }
+  loadListData() {
+    return new Promise(reject => {
+      this.deviceRequest.getWeatherInfo().then(res => {
+        this.weatherinfo = res;
+      });
+      this.deviceRequest.getDeviceMode().then(res => {
+        this.modeDataList = res;
+        reject(true);
+      }, err => { });
+    })
   }
   goModePublicSetting() {
     this.navCtrl.push('ModePublicSettingPage');
@@ -120,7 +127,7 @@ export class HomePage {
     this.navCtrl.push('ModeSettingPage', { mode: mode });
   }
   setMode(id: string, name: string) {
-    this.tools.showAnimatePulse(this.el,`mode${id}`);
+    this.tools.showAnimatePulse(this.el, `mode${id}`);
     // this.tools.showAnimatePulse(`mode${id}`);
 
     let auto = Variable.isAuto;
@@ -176,6 +183,14 @@ export class HomePage {
 
     // }
 
+  }
+  doRefresh(refresher) {
+    this.loadListData().then(res => {
+      refresher.complete();
+    });
+    setTimeout(() => {
+      refresher.complete();
+    }, 10000);
   }
 
 }

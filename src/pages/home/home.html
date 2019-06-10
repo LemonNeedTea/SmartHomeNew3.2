@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content (ionScroll)="scrollEvent($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
 
   <div class="home-header">
     <div #homeHeaderContent class="home-header-content">

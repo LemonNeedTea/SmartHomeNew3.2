@@ -47,7 +47,7 @@ export class MessagePage {
   }
   getAlarmTypeDataList() {
     this.device.getAlarmTypeDataList().then(res => {
-      this.typeDataList = res; console.log(res);
+      this.typeDataList = res; 
     });
   }
   showPopover(myEvent) {

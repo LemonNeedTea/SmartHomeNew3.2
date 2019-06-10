@@ -1,22 +1,23 @@
 <ion-header>
 
-  <ion-navbar >
+  <ion-navbar>
     <ion-title>设备 ({{sumNumOPen}}/{{sumNum}})</ion-title>
   </ion-navbar>
 
 </ion-header>
 <ion-content>
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="cate_content">
     <div class="cate_left">
       <ion-list class="my-list">
-        <ion-item *ngFor="let item of typeDataList" (tap)="getRightCateData(item['F_ID'])" 
-          [ngClass]="{'item-selected': item['F_ID']==typeID}" >
+        <ion-item *ngFor="let item of typeDataList" (tap)="getRightCateData(item['F_ID'])"
+          [ngClass]="{'item-selected': item['F_ID']==typeID}">
           <ion-badge color='danger' *ngIf="stateData[item['F_ID']]">{{stateData[item['F_ID']]}}</ion-badge>
 
-          <div class="start"  [ngClass]="item['F_Color']"  >
-            <img
-            src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'></div>
+          <div class="start" [ngClass]="item['F_Color']">
+            <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'></div>
           <!-- <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'> -->
           <h3 style="font-size: 15px">{{item.F_Name}}</h3>
 
@@ -31,11 +32,11 @@
             <div class="label">
               <div>
                 {{item.F_Name}}
-                <p><span class="biaoqian" >{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
+                <p><span class="biaoqian">{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
               </div>
               <div class="label-right">
                 <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
-                   style="font-size: 15px;">{{item.F_SettingName}}</button>
+                  style="font-size: 15px;">{{item.F_SettingName}}</button>
               </div>
             </div>
 

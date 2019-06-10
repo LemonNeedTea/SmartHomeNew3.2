@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color='primary'>
     <ion-title>{{name}}</ion-title>
   </ion-navbar>
 
@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <my-device-info [data]="paramData"></my-device-info>
+  <!-- <my-device-info [data]="paramData"></my-device-info> -->
   <ion-list>
     <ion-item>
       <ion-label> <span *ngIf="!state">已关闭</span>

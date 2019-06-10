@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
 import { Variable } from '../../providers/model/variable';
+import { rejects } from 'assert';
 // import { WellpumpPage } from '../wellpump/wellpump';
 // import { CurtainSettingPage } from '../device-setting/curtain-setting/curtain-setting';
 // import { DoorSettingPage } from '../device-setting/door-setting/door-setting';
@@ -51,26 +52,36 @@ export class DevicePage {
 
 
     // });
-    this.device.getDeviceIDtoTypeID().then((ress: any) => {
-      this.deviceTypeDataList = ress;
-      this.device.getDeviceTypeDataList().then((res: any) => {
-        this.typeDataList = res;
-        res.forEach(element => {
-          this.openStateNumArr[element.F_ID] = 0;
-          this.sumNum += element.F_DeviceNum;
-        });
-
-        this.typeID = res[0]['F_ID'];
-        this.device.getDeviceDataList().then(res => {
-          this.deviceDataList = res;
-          this.getRightCateData(this.typeID);
-          this.getFn51Data();
+    this.loadListData().then(res => {
+      this.getFn51Data();
+    })
 
 
+  }
+
+  loadListData() {
+    return new Promise(reject => {
+      this.device.getDeviceIDtoTypeID().then((ress: any) => {
+        this.deviceTypeDataList = ress;
+        this.device.getDeviceTypeDataList().then((res: any) => {
+          this.typeDataList = res;
+          res.forEach(element => {
+            this.openStateNumArr[element.F_ID] = 0;
+            this.sumNum += element.F_DeviceNum;
+          });
+
+          this.typeID = res[0]['F_ID'];
+          this.device.getDeviceDataList().then(res => {
+            this.deviceDataList = res; console.log(res);
+            this.getRightCateData(this.typeID);
+            // this.getFn51Data();
+            reject(true);
+
+
+          });
         });
       });
-    });
-
+    })
   }
 
   ionViewDidEnter() {
@@ -104,7 +115,7 @@ export class DevicePage {
     this.sumNumOPen = 0;
     let sumNumOPen = 0;
     let result = JSON.parse(JSON.stringify(this.openStateNumArr));
-    console.log(result);
+    // console.log(result);
 
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
@@ -174,7 +185,7 @@ export class DevicePage {
         let params = {
           id: data["F_ID"],
           name: data["F_Name"],
-          data:data
+          data: data
         };
         this.navCtrl.push(page, params);
       }
@@ -182,5 +193,13 @@ export class DevicePage {
   }
   goRoomDevice(id: string, name: string) {
     this.navCtrl.push('RoomdevicePage', { id: id, name: name, isType: true });
+  }
+  doRefresh(refresher) {
+    this.loadListData().then(res => {
+      refresher.complete();
+    });
+    setTimeout(() => {
+      refresher.complete();
+    }, 10000);
   }
 }

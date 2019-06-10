@@ -14,6 +14,9 @@
 
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
   <ion-slides pager>
 
     <ion-slide>
