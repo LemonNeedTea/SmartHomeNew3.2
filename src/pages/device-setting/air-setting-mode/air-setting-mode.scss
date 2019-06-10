@@ -1,0 +1,60 @@
+page-air-setting-mode {
+  .toolbar-title {
+    color: #fff;
+  }
+  .back-button {
+    color: #fff !important;
+  }
+  .scroll-content {
+    background-color: transparent;
+  }
+  .fixed-content {
+    // background-color: transparent;
+    background-image: url(../../../assets/bg2.png);
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -ms-filter: blur(20px);
+    -o-filter: blur(20px);
+    filter: blur(20px);
+  }
+  ion-content {
+    background: gray !important;
+  }
+  ion-footer {
+    // border-top: 1px solid white;
+    // border: 1 0;
+    // border-left: none;
+    // border-right: none;
+  }
+  .mode {
+    text-align: center;
+    height: 200px;
+    // border-top: 1px dashed white;
+    color: white;
+    img {
+      height: 48px;
+      width: 48px;
+      border: 1px solid #fff;
+      border-radius: 100%;
+      padding: 5px;
+    }
+    ion-row {
+      height: 100%;
+    }
+    ion-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100% !important;
+    }
+  }
+  .dismiss {
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+  }
+}

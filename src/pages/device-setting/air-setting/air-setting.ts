@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import * as ProgressBar from "progressbar.js";
 
 /**
@@ -25,24 +25,30 @@ export class AirSettingPage {
   modeColumns: any;
   speedColumns: any;
   sleepColumns: any;
-  modeModel: number;
-  speedModel: number;
+  modeModel: number = 1;
+  speedModel: number = 1;
   sleepModel: number;
   modeKV: any = {};
   speedKV: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  open: boolean;
+  sleep: number;
+  // speed: number;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private modalCtrl: ModalController) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
     this.paramData = this.navParams.get("data");
     this.tempMax = 28;
     this.tempMin = 16;
     this.modeKV = {
-      0: '冷风模式',
-      1: '暖风模式',
-      2: '暖风+地暖',
-      3: '除湿模式',
-      4: '通风模式',
+      0: { name: '冷风模式', url: "cool.png", class: 'selected' },
+      1: { name: '暖风模式', url: "nuanfeng.png", class: 'hot' },
+      2: { name: '地暖模式', url: "dinuan.png", class: 'hot' },
+      3: { name: '暖风&地暖', url: "nuanfeng1.png", class: 'hot' },
+      4: { name: '除湿模式', url: "chushi.png", class: 'selected' },
+      5: { name: '通风模式', url: "songfeng.png", class: 'selected' },
     };
     this.speedKV = {
       0: '自动',
@@ -119,8 +125,34 @@ export class AirSettingPage {
   goMorePage() {
     this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name });
   }
-  modeChange(){
-  console.log("modechange");
+  modeChange() {
+    console.log("modechange");
+  }
+
+  setOpen() {
+    this.open = !this.open;
+  }
+  setSpeed(data: number) {
+    // this.speed = data;
+    this.speedModel = data;
+  }
+  setSleep() {
+    if (this.sleep > 0) {
+      this.sleep = 0;
+    } else {
+      this.sleep = 1;
+    }
+  }
+  setMode() {
+    let modalObj = this.modalCtrl.create('AirSettingModePage');
+    modalObj.onDidDismiss(res => {
+      if (res != null) {
+        this.modeModel = res;
+      }
+    });
+    modalObj.present();
+
+
   }
 
 }
