@@ -55,7 +55,7 @@ export class SocketHelpProvider {
             }
         }
     }
-    setDeviceState(id: string, name: string, state: number, speech: false) {
+    setDeviceState(id: string, name: string, state: number, speech: boolean = false) {
         var param = {
             Type: 'set',
             UserName: this.tools.getUserName(), //用户名
@@ -110,6 +110,20 @@ export class SocketHelpProvider {
             MonitorID: 1,
             FnID: 41,
             controlData: controlData
+        };
+        console.log(param);
+        this.socket.sendMessage(param);
+    }
+    setAir(data: any, deviceID: number,MonitorID:number) {
+        // this.presentLoading(name);
+        // let controlData = this.tools.getSendControl(data);
+        var param = {
+            Type: 'set',
+            UserName: this.tools.getUserName(), //用户名
+            DeviceID: deviceID,
+            FnID: 60,
+            MonitorID: MonitorID,
+            controlData: data
         };
         console.log(param);
         this.socket.sendMessage(param);
@@ -169,15 +183,30 @@ export class SocketHelpProvider {
         }, 30000);
 
     }
-    getFnData(fnID: string) {
+    getFnData(fnID: string, MonitorID: number = 1) {
         let param = {
             Type: 'get',
             UserName: this.tools.getUserName(), //用户名
-            MonitorID: 1,
+            MonitorID: MonitorID,
             FnID: fnID
         };
+        console.log(param);
         this.socket.sendMessage(param);
+
     }
+    getAirData(MonitorID: number = 1) {
+        let param = {
+            Type: 'get',
+            UserName: this.tools.getUserName(), //用户名
+            MonitorID: MonitorID,
+            FnID: 60
+        };
+        console.log(param);
+        this.socket.sendMessage(param);
+        this.presentLoading("");
+
+    }
+
     dismissLoading() {
         if (this.loading) {
             this.loading.dismiss();
@@ -201,8 +230,16 @@ export class SocketHelpProvider {
                         // this.getDeviceOpenNum(dealData);
 
                     }
-                    Variable.SetFnData(data.FnID, dealData);
-                    this.events.publish("FnData:" + data.FnID, dealData);
+                    if (data.FnID == '60') {
+                        this.dismissLoading();
+                        Variable.SetAirData(data.MonitorID, dealData);
+                        this.events.publish("AirData:" + data.MonitorID, dealData);
+
+                    } else {
+                        Variable.SetFnData(data.FnID, dealData);
+                        this.events.publish("FnData:" + data.FnID, dealData);
+                    }
+
                     break;
                 }
             case 'set':

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import * as ProgressBar from "progressbar.js";
+import { Variable } from '../../../providers/model/variable';
 
 /**
  * Generated class for the AirSettingPage page.
@@ -26,22 +27,34 @@ export class AirSettingPage {
   speedColumns: any;
   sleepColumns: any;
   modeModel: number = 1;
-  speedModel: number = 1;
+  speedModel: number;
   sleepModel: number;
   modeKV: any = {};
   speedKV: any = {};
+  spaceTemp: number;
 
   open: boolean;
   sleep: number;
   // speed: number;
+  airData: any = {};
+  private monitorID: number;
+  private deviceID: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private events: Events) {
+
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
     this.paramData = this.navParams.get("data");
-    this.tempMax = 28;
-    this.tempMin = 16;
+    this.monitorID = this.paramData.F_MonitorID;
+    this.deviceID = this.paramData.F_ID;
+
+
+
+
+    // this.tempMax = 28;
+    // this.tempMin = 16;
     this.modeKV = {
       0: { name: '冷风模式', url: "cool.png", class: 'selected' },
       1: { name: '暖风模式', url: "nuanfeng.png", class: 'hot' },
@@ -57,39 +70,43 @@ export class AirSettingPage {
       3: '高速'
     };
 
-    this.modeColumns = [
-      {
-        options: [
-          { text: '冷风', value: 0 },
-          { text: '暖风', value: 1 },
-          { text: '暖风+地暖', value: 2 },
-          { text: '除湿', value: 3 },
-          { text: '通风', value: 4 }
-        ]
-      }];
-    this.speedColumns = [
-      {
-        options: [
-          { text: '自动', value: 0 },
-          { text: '低速', value: 1 },
-          { text: '中速', value: 2 },
-          { text: '高速', value: 3 }
-        ]
-      }];
-    this.sleepColumns = [
-      {
-        options: [
-          { text: '无睡眠', value: 0 },
-          { text: '晚睡', value: 1 },
-          { text: '午睡', value: 2 }
-        ]
-      }];
+
+  }
+  ionViewDidLeave() {
+    this.events.unsubscribe(`AirData:${this.monitorID}`, this.eventsAirHandler);
   }
 
   ionViewDidLoad() {
 
     this.setCircle();
+    this.airData = Variable.GetAirData(this.monitorID + "");
+    this.setDetailData();
+    this.events.subscribe(`AirData:${this.monitorID}`, this.eventsAirHandler);
 
+    Variable.socketObject.getAirData(this.monitorID);
+
+  }
+  setDetailData() {
+    let data = this.airData;
+    if (data.F6010) {
+
+      this.tempMin = this.getTempNum(data.F6010) / 10;
+      this.tempMax = this.getTempNum(data.F6011) / 10;
+      this.temp = this.getTempNum(data.F602) / 10;
+      this.spaceTemp = this.getTempNum(data.F6013);
+      this.open = Boolean(Number(data.F601));
+      this.modeModel = Number(data.F603);
+      this.sleepModel = Number(data.F607);
+      this.speedModel = Number(data.F608);
+      this.setCircleNum();
+
+
+      // this.setCircle(data.F6010, data.F6011);
+    }
+  }
+  private getTempNum(data: string) {
+    let num: number = Number(data);
+    return num;
   }
   setCircle() {
     this.barCircleObj = new ProgressBar.Circle(document.getElementById("container"), {
@@ -98,27 +115,28 @@ export class AirSettingPage {
       duration: 500,
       color: '#52A1F3',
       trailColor: '#eee',
-      trailWidth: 3,
+      trailWidth: 2,
       svgStyle: null,
-      boxShadow: '0 2px 6px 0 #4D95DF'
+      // boxShadow: '0 2px 6px 0 #4D95DF',
     });
-
-    this.setCircleNum();
   }
   setCircleNum() {
+    // console.log('max:' + this.tempMax + "min:" + this.tempMin);
     let num = (this.temp - this.tempMin) / (this.tempMax - this.tempMin);
     this.barCircleObj.animate(num);
+    // Variable.socketObject.setAir(`1,${Number(this.temp)}`, this.deviceID, this.monitorID);
+
   }
   tempAdd() {
     if (this.temp < this.tempMax) {
-      this.temp++;
+      this.temp += 0.5;
       this.setCircleNum();
     }
 
   }
   tempSub() {
     if (this.temp > this.tempMin) {
-      this.temp--;
+      this.temp -= 0.5;
       this.setCircleNum();
     }
   }
@@ -131,10 +149,13 @@ export class AirSettingPage {
 
   setOpen() {
     this.open = !this.open;
+    Variable.socketObject.setAir(`0,${Number(this.open)}`, this.deviceID, this.monitorID);
   }
   setSpeed(data: number) {
     // this.speed = data;
     this.speedModel = data;
+    Variable.socketObject.setAir(`7,${Number(this.speedModel)}`, this.deviceID, this.monitorID);
+
   }
   setSleep() {
     if (this.sleep > 0) {
@@ -148,11 +169,18 @@ export class AirSettingPage {
     modalObj.onDidDismiss(res => {
       if (res != null) {
         this.modeModel = res;
+        Variable.socketObject.setAir(`2,${Number(this.modeModel)}`, this.deviceID, this.monitorID);
+
       }
     });
     modalObj.present();
 
 
+  }
+  private eventsAirHandler = (data: any) => {
+    this.airData = data;
+    this.setDetailData();
+    console.log(this.airData);
   }
 
 }

@@ -18,7 +18,13 @@
 <ion-content>
   <ion-list style="    width: 100%;position: absolute;top: 0;">
     <ion-row class="room-temp-row">
-      <div class="room-temp">室温&nbsp;&nbsp;28°C</div>
+      <div class="room-temp">室温&nbsp;&nbsp;{{spaceTemp}}°C</div>
+    </ion-row>
+    <ion-row>
+      <ion-col class="shidu">
+      湿度&nbsp;&nbsp;{{airData.F6014}}%
+        
+      </ion-col>
     </ion-row>
   </ion-list>
 
@@ -43,7 +49,7 @@
       <ion-col col-8 style="display: flex;justify-content: center;align-items: center;">
         <div id="container" class="container">
           <div class="temp-show">
-            <p><span>{{temp}}</span>°C</p>
+            <p><span>{{temp | number:'1.1-1'}}</span>°C</p>
             <p>{{speedKV[speedModel]}} &nbsp;&nbsp;{{modeKV[modeModel].name}}</p>
 
           </div>
@@ -91,7 +97,7 @@
             开关
           </ion-col>
           <ion-col>
-            <img src="../../../assets/sleep.png" [ngClass]="{'selected': sleep>0}" (click)="setSleep()" />
+            <img src="../../../assets/sleep.png" [ngClass]="{'selected': sleepModel>0}" (click)="setSleep()" />
 
 
             睡眠

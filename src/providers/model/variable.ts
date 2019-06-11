@@ -1,31 +1,43 @@
 
-export class Variable{
-    private static FnData:any={};
-    public static GetFnData(id:string,key?:string):any{
+export class Variable {
+    private static FnData: any = {};
+    private static AirData: any = {};
+    public static GetFnData(id: string, key?: string): any {
 
-        if(this.FnData[id]!=null){
-            if(key){
+        if (this.FnData[id] != null) {
+            if (key) {
                 return this.FnData[id][key];
-            }else{
+            } else {
                 return this.FnData[id];
             }
-        }else{
-            if(key){
+        } else {
+            if (key) {
                 return '';
-            }else{
+            } else {
                 return {};
             }
         }
     }
-    public static SetFnData(id:string,data:any):void{
-        this.FnData[id]=data;
+    public static GetAirData(id: string): any {
+
+        if (this.AirData[id] != null) {
+            return this.AirData[id];
+        } else {
+            return {};
+        }
     }
-    public static ClearAll():void{
-        this.FnData={};
+    public static SetFnData(id: string, data: any): void {
+        this.FnData[id] = data;
     }
-    public static socketObject:any;
-    public static controlDevice:any;
-    public static isAuto:boolean;
-    public static deviceNum:number;
+    public static SetAirData(id: string, data: any): void {
+        this.AirData[id] = data;
+    }
+    public static ClearAll(): void {
+        this.FnData = {};
+    }
+    public static socketObject: any;
+    public static controlDevice: any;
+    public static isAuto: boolean;
+    public static deviceNum: number;
 
 }
