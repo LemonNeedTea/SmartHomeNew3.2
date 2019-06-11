@@ -22,8 +22,8 @@
     </ion-row>
     <ion-row>
       <ion-col class="shidu">
-      湿度&nbsp;&nbsp;{{airData.F6014}}%
-        
+        湿度&nbsp;&nbsp;{{airData.F6014}}%
+
       </ion-col>
     </ion-row>
   </ion-list>
@@ -49,7 +49,12 @@
       <ion-col col-8 style="display: flex;justify-content: center;align-items: center;">
         <div id="container" class="container">
           <div class="temp-show">
-            <p><span>{{temp | number:'1.1-1'}}</span>°C</p>
+            <p><span>
+                <!-- {{temp | number:'1.1-1'}} -->
+                <ion-multi-picker [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定" [(ngModel)]="temp"
+                  (ngModelChange)="changeTemp()"> </ion-multi-picker>
+                °C
+              </span></p>
             <p>{{speedKV[speedModel]}} &nbsp;&nbsp;{{modeKV[modeModel].name}}</p>
 
           </div>

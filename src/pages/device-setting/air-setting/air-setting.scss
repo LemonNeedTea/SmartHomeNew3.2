@@ -78,14 +78,24 @@ page-air-setting {
     height: 200px;
     position: absolute;
     color: rgba(255, 255, 255, 1);
+    span {
+      ion-multi-picker {
+        display: inline-flex;
+        padding: 0;
+        .multi-picker-text {
+          font-size: 75px;
+          color: #fff;
+        }
+      }
+    }
   }
   .temp-show p:first-child {
     text-align: center;
     margin: 0;
     padding-top: 35px;
-    padding-left: 20px;
+    // padding-left: 20px;
     span:first-child {
-      font-size: 75px;
+      // font-size: 75px;
     }
   }
   .temp-show p:last-child {
@@ -174,8 +184,8 @@ page-air-setting {
     color: #fff;
     font-size: 13px;
   }
- .progressbar-text{
-   color: white !important;
-   font-size: 75px !important;
- } 
+  .progressbar-text {
+    color: white !important;
+    font-size: 75px !important;
+  }
 }

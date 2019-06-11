@@ -39,6 +39,7 @@ export class AirSettingPage {
   airData: any = {};
   private monitorID: number;
   private deviceID: number;
+  tempColumns: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
@@ -71,6 +72,7 @@ export class AirSettingPage {
     };
 
 
+
   }
   ionViewDidLeave() {
     this.events.unsubscribe(`AirData:${this.monitorID}`, this.eventsAirHandler);
@@ -98,6 +100,23 @@ export class AirSettingPage {
       this.modeModel = Number(data.F603);
       this.sleepModel = Number(data.F607);
       this.speedModel = Number(data.F608);
+      let t = [];
+      for (let i = this.tempMin; i <= this.tempMax; i += 0.5) {
+        t.push({ text: `${i.toFixed(1)}`, value: i });
+      }
+      this.tempColumns = [
+        {
+          options: t
+        }];
+      console.log(this.tempColumns);
+      // this.tempColumns = [
+      //   {
+      //     options: [
+      //       { text: '8.0', value: 8 },
+      //       { text: '1.0', value: 1 },
+      //       { text: '风盘+地冷', value: 2 }
+      //     ]
+      //   }];
       this.setCircleNum();
 
 
@@ -124,21 +143,34 @@ export class AirSettingPage {
     // console.log('max:' + this.tempMax + "min:" + this.tempMin);
     let num = (this.temp - this.tempMin) / (this.tempMax - this.tempMin);
     this.barCircleObj.animate(num);
-    // Variable.socketObject.setAir(`1,${Number(this.temp)}`, this.deviceID, this.monitorID);
 
   }
   tempAdd() {
+    this.temp = Number(this.temp);
     if (this.temp < this.tempMax) {
       this.temp += 0.5;
       this.setCircleNum();
+      this.sendAir();
+
     }
 
   }
+  private sendAir() {
+    Variable.socketObject.setAir(`1,${Number(this.temp)}`, this.deviceID, this.monitorID);
+  }
   tempSub() {
+    this.temp = Number(this.temp);
+
     if (this.temp > this.tempMin) {
       this.temp -= 0.5;
       this.setCircleNum();
+      this.sendAir();
     }
+  }
+  changeTemp() {
+    this.setCircleNum();
+    this.sendAir();
+
   }
   goMorePage() {
     this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name });
