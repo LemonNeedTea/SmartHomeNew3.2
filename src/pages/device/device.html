@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>设备 ({{sumNumOPen}}/{{sumNum}})</ion-title>
+    <ion-title>设备 <span [hidden]="auto">({{sumNumOPen}}/{{sumNum}})</span><span [hidden]="!auto" style="color: red">(手动)</span></ion-title>
   </ion-navbar>
 
 </ion-header>

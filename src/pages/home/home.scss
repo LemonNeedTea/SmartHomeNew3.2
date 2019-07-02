@@ -10,7 +10,7 @@ page-home {
   .scroll-content {
     margin-top: -150px !important;
     //  padding-top: 195px;
-     background-color:#f7f7f7;
+     background-color:#f7f7f7 !important;
   }
   .home-header {
     margin-top: -150px;
@@ -228,5 +228,13 @@ page-home {
   }
   .item-inner {
     padding: 0 !important;
+  }
+  .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+    border-bottom: none;
+    background: rgba(0, 0, 0, 0);
+  }
+  .list-ios ion-item-sliding{
+    background: rgba(0, 0, 0, 0);
+
   }
 }

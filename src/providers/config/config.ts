@@ -9,8 +9,8 @@ export class ConfigProvider {
   // public apiUrl = "http://192.168.1.113:806";
 
   //websokcet地址
-  // public websocketUrl = "ws://223.112.4.23:53200";
-  public websocketUrl = "ws://192.168.4.113:5555";
+  public websocketUrl = "ws://223.112.4.23:53200";
+  // public websocketUrl = "ws://192.168.4.113:5555";
 
   //用户信息localstorage存储名称
   public userInfoSotrageName='userinfo';

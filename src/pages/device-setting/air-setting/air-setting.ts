@@ -92,9 +92,9 @@ export class AirSettingPage {
     let data = this.airData;
     if (data.F6010) {
 
-      this.tempMin = this.getTempNum(data.F6010) / 10;
-      this.tempMax = this.getTempNum(data.F6011) / 10;
-      this.temp = this.getTempNum(data.F602) / 10;
+      this.tempMin = this.getTempNum(data.F6010) ;
+      this.tempMax = this.getTempNum(data.F6011);
+      this.temp = this.getTempNum(data.F602);
       this.spaceTemp = this.getTempNum(data.F6013);
       this.open = Boolean(Number(data.F601));
       this.modeModel = Number(data.F603);
@@ -134,7 +134,7 @@ export class AirSettingPage {
       duration: 500,
       color: '#52A1F3',
       trailColor: '#eee',
-      trailWidth: 2,
+      trailWidth: 3,
       svgStyle: null,
       // boxShadow: '0 2px 6px 0 #4D95DF',
     });

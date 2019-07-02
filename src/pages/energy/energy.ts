@@ -41,6 +41,9 @@ export class EnergyPage {
     private chart: chartToolsProvider,
     private events: Events,
     private popoverCtrl: PopoverController) {
+      this.device.getEnergyInfoList().then(res=>{
+        console.log(res);
+      });
     this.eleType = EnumEnergyType.Ele;
     this.waterType = EnumEnergyType.Water;
     this.energyType = this.eleType;

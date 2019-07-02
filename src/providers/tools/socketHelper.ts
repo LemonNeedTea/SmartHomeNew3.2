@@ -114,8 +114,8 @@ export class SocketHelpProvider {
         console.log(param);
         this.socket.sendMessage(param);
     }
-    setAir(data: any, deviceID: number,MonitorID:number) {
-        // this.presentLoading(name);
+    setAir(data: any, deviceID: number, MonitorID: number) {
+        this.presentLoading("");
         // let controlData = this.tools.getSendControl(data);
         var param = {
             Type: 'set',
@@ -127,6 +127,11 @@ export class SocketHelpProvider {
         };
         console.log(param);
         this.socket.sendMessage(param);
+        Variable.controlDevice = {
+            id: deviceID,
+            name: name,
+            type: 'air'
+        };
     }
     setMode(id: string, name: string, speech: boolean = false) {
         this.presentLoading(name);
@@ -270,6 +275,24 @@ export class SocketHelpProvider {
 
                                 break;
                             }
+                        case 60: {
+                            let controlData = Variable.controlDevice;
+                            if (!data.Result) {
+                                this.tools.presentToast(data.Msg);
+                                this.dismissLoading();
+                            } else {
+                                this.dismissLoading();
+                                // if (controlData) {
+                                //     if (controlData.type === 'air') {
+
+                                //     } else {
+                                //         this.dismissLoading();
+                                //     }
+                                // } else {
+                                //     this.dismissLoading();
+                                // }
+                            }
+                        }
                     }
                     // showSetInfo(data);
                     break;
