@@ -116,23 +116,33 @@ export class WellpumpPage {
     }
   }
   getWaterlevelMapChart() {
-    let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
-    let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
-    let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
-    this.device.getWaterlevelMapChartData(start, stop, EnumChartType.WellPump).then((res: any) => {
-      let config = {
-        dw: res.DW
+
+    this.device.getEnergyQuery(-3).then((queryData:any) => {
+      let data=queryData[0];
+      let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
+      let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
+      let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
+      let params = {
+        MonitorID: data.F_MonitorID,
+        ObjType: data.F_SortIndex,
+        StartTime: start,
+        StopTime: stop,
+        DateType: EnumDateType.Hour,
+        FnID: data.F_GPRSFnID
       };
-      let data = [
-        { key: '10:11:00', value: '2', type: '井水液位' }
-      ]
-      this.chart.getLineChart('waterlevelChart', res.DataList, config);
+      this.device.getEnergyChartData(params).then((res: any) => {
+        let config = {
+          dw: res.DW
+        };
+        this.chart.getLineChart('waterlevelChart', res.DataList, config);
+      });
+
     });
 
 
   }
   goWellPumpQuery() {
-    this.navCtrl.push('WellpumpqueryPage', { name: '井水液位', type: EnumChartType.WellPump })
+    this.navCtrl.push('WellpumpqueryPage', { queryID:-3,type:'wp'})
   }
   presentShowModal() {
     let profileModal = this.modalCtrl.create('TimerPumpPage', { name: this.name });

@@ -182,7 +182,6 @@ export class DeviceRequestsProvider {
       DateType: data.DateType,
       FnID: data.FnID
     };
-    console.log(params);
     return this.http.postMain('/EnergyAppData/GetBarChartData', params);
   }
   getAlarmDataList(isLoading: boolean = true) {
@@ -306,7 +305,7 @@ export class DeviceRequestsProvider {
     return this.http.postMain("/EnergyAppData/GetMenuList",{Type:data},false);
   }
   getEnergyQuery(data:number) {
-    return this.http.postMain("/EnergyAppData/GetEnergyQuery",{ID:data});
+    return this.http.postMain("/EnergyAppData/GetEnergyQuery",{ID:data},false);
   }
 
 }

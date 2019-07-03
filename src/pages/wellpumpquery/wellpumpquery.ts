@@ -4,6 +4,7 @@ import { ToolsProvider } from '../../providers/tools/tools';
 // import { LinechartPage } from '../linechart/linechart';
 import { EnumDateType, EnumChartType } from '../../providers/model/enumdata';
 // import { MessageHistoryPage } from '../message-history/message-history';
+import { DeviceRequestsProvider } from '../../providers/tools/requests';
 
 
 
@@ -25,14 +26,26 @@ export class WellpumpqueryPage {
   stopDate: any;
   type: string;
   data: any;
+  queryID:number
+  queryData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private tools: ToolsProvider) {
+    private tools: ToolsProvider,
+    private device: DeviceRequestsProvider) {
     let nowDate = this.tools.getNowDateStr(EnumDateType.Day);
     this.startDate = nowDate;
     this.stopDate = nowDate;
-    this.name = this.navParams.get('name');
-    this.type = this.navParams.get('type');
-    this.data = this.navParams.get('data');
+    // this.name = this.navParams.get('name');
+    // this.type = this.navParams.get('type');
+    // this.data = this.navParams.get('data');
+
+
+    this.queryID = this.navParams.get('queryID');
+    this.type=this.navParams.get("type");
+    this.device.getEnergyQuery(this.queryID).then((res:any)=>{
+      this.queryData=res[0];
+      this.name=this.queryData.F_Name;
+    })
+
   }
 
   ionViewDidLoad() {
@@ -42,7 +55,13 @@ export class WellpumpqueryPage {
     if (this.type == EnumChartType.Message) {
       this.navCtrl.push('MessageHistoryPage', { StartDate: this.startDate, StopDate: this.stopDate, data: this.data });
     } else {
-      this.navCtrl.push('LinechartPage', { StartDate: this.startDate, StopDate: this.stopDate, type: this.type })
+      let params:any={};
+      params.ObjType=this.queryData.F_SortIndex;
+      params.FnID=this.queryData.F_GPRSFnID;
+      params.MonitorID=this.queryData.F_MonitorID;
+      params.StartTime=this.startDate;
+      params.StopTime=this.stopDate;
+      this.navCtrl.push('LinechartPage', {params:params})
     }
   }
 
