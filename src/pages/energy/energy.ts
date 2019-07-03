@@ -32,6 +32,7 @@ export class EnergyPage {
 
   eleShowList: Array<any> = [];
   type:any={ele:true,water:true};
+  poperList:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private tools: ToolsProvider,
@@ -45,7 +46,6 @@ export class EnergyPage {
     // this.getEnergyInfoList();
     this.device.getEnergyType().then(res=>{
       this.type=res;
-      console.log(res);
     })
 
 
@@ -93,37 +93,52 @@ export class EnergyPage {
     this.energyTypeChange();
   }
   getEleChart() {
-    let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
-    let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
-    let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
-    let params = {
-      StartTime: start,
-      StopTime: stop,
-      Type: EnumChartType.EleFull,
-      DateType: EnumDateType.Hour
-    };
-    this.device.getEnergyChartData(params).then((res: any) => {
-      let config = {
-        dw: res.DW
+
+    this.device.getEnergyQuery(-1).then((queryData:any) => {
+      let data=queryData[0];
+      let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
+      let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
+      let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
+      let params = {
+        MonitorID: data.F_MonitorID,
+        ObjType: data.F_SortIndex,
+        StartTime: start,
+        StopTime: stop,
+        DateType: EnumDateType.Hour,
+        FnID: data.F_GPRSFnID
       };
-      this.chart.getBarChart('chart', res.DataList, config);
+      this.device.getEnergyChartData(params).then((res: any) => {
+        let config = {
+          dw: res.DW
+        };
+        this.chart.getBarChart('chart', res.DataList, config);
+      });
+
     });
+
+   
   }
   getWaterChart() {
-    let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
-    let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
-    let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
-    let params = {
-      StartTime: start,
-      StopTime: stop,
-      Type: EnumChartType.Water,
-      DateType: EnumDateType.Hour
-    };
-    this.device.getEnergyChartData(params).then((res: any) => {
-      let config = {
-        dw: res.DW
+    this.device.getEnergyQuery(-2).then((queryData:any) => {
+      let data=queryData[0];
+      let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
+      let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
+      let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
+      let params = {
+        MonitorID: data.F_MonitorID,
+        ObjType: data.F_SortIndex,
+        StartTime: start,
+        StopTime: stop,
+        DateType: EnumDateType.Hour,
+        FnID: data.F_GPRSFnID
       };
-      this.chart.getBarChart('chart', res.DataList, config);
+      this.device.getEnergyChartData(params).then((res: any) => {
+        let config = {
+          dw: res.DW
+        };
+        this.chart.getBarChart('chart', res.DataList, config);
+      });
+
     });
   }
   energyTypeChange() {
@@ -139,26 +154,31 @@ export class EnergyPage {
         break;
       }
     }
+    this.device.getMenuList(this.energyType).then(res=>{
+      this.poperList=res;
+    });
   }
   showPopover(myEvent) {
-    let eleList = [
-      { name: '用电量查询', page: 'EnergyQueryPage', type: EnumChartType.Ele },
-      { name: '电负荷查询', page: 'WellpumpqueryPage', type: EnumChartType.FH },
-      { name: '空调负荷查询', page: 'WellpumpqueryPage', type: EnumChartType.Air },
-    ];
-    let waterList = [
-      { name: '用水量查询', page: 'EnergyQueryPage', type: EnumChartType.Water }
-    ];
-    let list;
-    if (this.energyType == this.eleType) {
-      list = eleList;
-    } else {
-      list = waterList;
-    }
+    // let eleList = [
+    //   { name: '用电量查询', page: 'EnergyQueryPage', type: EnumChartType.Ele },
+    //   { name: '电负荷查询', page: 'WellpumpqueryPage', type: EnumChartType.FH },
+    //   { name: '空调负荷查询', page: 'WellpumpqueryPage', type: EnumChartType.Air },
+    // ];
+    // let waterList = [
+    //   { name: '用水量查询', page: 'EnergyQueryPage', type: EnumChartType.Water }
+    // ];
+    // let list;
+    // if (this.energyType == this.eleType) {
+    //   list = eleList;
 
-    let popover = this.popoverCtrl.create('PopoverPage', { list: list });
-    popover.present({
-      ev: myEvent
-    });
+    // } else {
+    //   list = waterList;
+    // }
+      let popover = this.popoverCtrl.create('PopoverPage', { list: this.poperList });
+      popover.present({
+        ev: myEvent
+      });
+
+  
   }
 }

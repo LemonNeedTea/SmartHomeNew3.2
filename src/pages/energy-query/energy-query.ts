@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToolsProvider } from '../../providers/tools/tools';
+import { DeviceRequestsProvider } from '../../providers/tools/requests';
 // import { BarchartPage } from '../barchart/barchart';
 import { EnumDateType } from '../../providers/model/enumdata';
 
@@ -23,11 +24,52 @@ export class EnergyQueryPage {
   displayFormat: string;
   startDate: string;
   stopDate: string;
+
+  showTimeRange: boolean = false;
+  dateTypeList: any = [];
+  objList:Array<any>=[];
+
+  objType:any;
+  child:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private tools: ToolsProvider) {
-    this.name = this.navParams.get('name');
-    this.type = this.navParams.get('type');
-    this.dateType = EnumDateType.Day;
+    private tools: ToolsProvider,
+    private device: DeviceRequestsProvider) {
+    // this.name = this.navParams.get('name');
+    // this.type = this.navParams.get('type');
+    let params = this.navParams.get("Data");
+
+    this.child = params.F_Params;
+    // child=child?child.parseJSON:{};
+    if (this.child.type == 'power') {
+      this.showTimeRange = false;
+      this.dateTypeList = [
+        { key: 'day', value: '按天' },
+      ];
+      this.dateType = EnumDateType.Day;
+
+    } else {
+      this.showTimeRange = true;
+      this.dateTypeList = [
+        { key: 'year', value: '按年' },
+        { key: 'month', value: '按月' },
+        { key: 'day', value: '按天' }
+      ];
+      this.dateType = EnumDateType.Day;
+      
+    }
+    if (this.child.type == 'message') {
+
+    } else {
+      this.device.getEnergyQuery(params.F_ID).then((res:any) => {
+        this.objType=res[0].F_SortIndex;
+        this.objList=res;
+      });
+    }
+
+    this.name = params.F_MenuName;
+
+    
     this.dateTypeChange();
   }
 
@@ -48,6 +90,9 @@ export class EnergyQueryPage {
       }
     }
   }
+  objTypeChange(){
+    console.log(this.objType);
+  }
   goBarChartPage(data?: any) {
     let params: any;
     if (data) {
@@ -56,11 +101,15 @@ export class EnergyQueryPage {
       params = {
         StartTime: this.startDate,
         StopTime: this.stopDate,
-        DateType: this.dateType,
+      DateType: this.dateType,
+
       }
     }
-    params.Type = this.type;
-    this.navCtrl.push('BarchartPage', { params: params });
+    params.ObjType=this.objType;
+    params.FnID=this.objList[0].F_GPRSFnID;
+    params.MonitorID=this.objList[0].F_MonitorID;
+
+    this.navCtrl.push(this.child.url, { params: params });
   }
   timeRange(type: string) {
     let data;

@@ -67,8 +67,10 @@ export class BarchartPage {
       }
     }
     if (childParams) {
-      childParams.Type = this.parentParams.Type;
-      this.loadChart(childParams);
+      this.parentParams.StartTime=childParams.StartTime;
+      this.parentParams.StopTime=childParams.StopTime;
+      this.parentParams.DateType=childParams.DateType;
+      this.loadChart(this.parentParams);
     }
 
   }

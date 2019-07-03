@@ -18,21 +18,21 @@ import { EnumDateType, EnumChartType } from '../../providers/model/enumdata';
 })
 export class LinechartPage {
   name: string;
+  parentParams:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private device: DeviceRequestsProvider,
     private chart: chartToolsProvider,
     private tools: ToolsProvider) {
-    let startDate = this.navParams.get('StartDate');
-    let stopDate = this.navParams.get('StopDate');
-    let type: EnumChartType = this.navParams.get('type');
+      this.parentParams = this.navParams.get("params");
 
-    this.name = "日期(" + startDate + "-" + stopDate + ")";
+    this.name = "日期(" + this.parentParams.StartTime + "-" + this.parentParams.StopTime + ")";
 
-    let start = this.tools.getFullDateStr(startDate, EnumDateType.Day);
-    let stop = this.tools.getAddDate(stopDate, EnumDateType.Day);
+    let start = this.tools.getFullDateStr(this.parentParams.StartTime, EnumDateType.Day);
+    let stop = this.tools.getAddDate(this.parentParams.StopTime, EnumDateType.Day);
 
-
-    this.device.getWaterlevelMapChartData(start, stop, type).then((res: any) => {
+      this.parentParams.StartTime=start;
+      this.parentParams.StopTime=stop;
+    this.device.getWaterlevelMapChartData(this.parentParams).then((res: any) => {
       console.log(res);
       let config = {
         dw: res.DW

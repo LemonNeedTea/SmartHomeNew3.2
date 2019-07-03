@@ -50,7 +50,6 @@ export class LoginRequestsProvider {
 
         this.http.post("/EnergyAppLogin/LoginCheck", params).then(res => {
           if (res["State"] == true) {
-            console.log(res);
             let userInfo = res["UserInfo"];
             userInfo['txtUser'] = username;
             userInfo['txtPwd'] = password;
@@ -162,56 +161,28 @@ export class DeviceRequestsProvider {
   getDeviceDataListByTypeID(typeID: string) {
     return this.http.postMain('/EnergyAppData/GetDevicesDataListByTypeID', { "TypeID": typeID });
   }
-  getWaterlevelMapChartData(StartTime: string, StopTime: string, type: EnumChartType) {
-    let temp: any = {};
-    if (type == EnumChartType.FH) {
-      temp = {
-        index: '4',
-        FnID: '50',
-        dateType: 'day'
-      };
-    } else if (type == EnumChartType.WellPump) {
-      temp = {
-        index: '9',
-        FnID: '52',
-        dateType: ''
-      };
-    }
-    else if (type == EnumChartType.Air) {
-      temp = {
-        index: '5',
-        FnID: '50',
-        dateType: 'day'
-      };
-    }
+  getWaterlevelMapChartData(data:any) {
+  
     let params = {
-      MonitorID: 1,
-      SortIndex: temp.index,
-      StartTime: StartTime,
-      StopTime: StopTime,
-      DateType: temp.dateType,
-      FnID: temp.FnID
+      MonitorID: data.MonitorID,
+      SortIndex: data.ObjType,
+      StartTime: data.StartTime,
+      StopTime: data.StopTime,
+      DateType: data.DateType,
+      FnID: data.FnID
     };
     return this.http.postMain('/EnergyAppData/GetLineChartData', params);
   }
   getEnergyChartData(data: any) {
-    let index = '';
-    if (data.Type == EnumChartType.EleFull) {
-      index = '1,2,3';
-    } else if (data.Type == EnumChartType.Ele) {
-      index = '1';
-    }
-    else if (data.Type == EnumChartType.Water) {
-      index = '10';
-    }
     let params = {
-      MonitorID: 1,
-      SortIndex: index,
+      MonitorID: data.MonitorID,
+      SortIndex: data.ObjType,
       StartTime: data.StartTime,
       StopTime: data.StopTime,
       DateType: data.DateType,
-      FnID: '52'
+      FnID: data.FnID
     };
+    console.log(params);
     return this.http.postMain('/EnergyAppData/GetBarChartData', params);
   }
   getAlarmDataList(isLoading: boolean = true) {
@@ -325,10 +296,17 @@ export class DeviceRequestsProvider {
   }
 
   getEnergyInfoList(data:string) {
-    return this.http.postMain("/EnergyAppData/GetEnergyInfoList",{Type:data});
+    return this.http.postMain("/EnergyAppData/GetEnergyInfoList",{Type:data},false);
   }
   getEnergyType() {
     return this.http.postMain("/EnergyAppData/GetEnergyType",{},false);
+  }
+
+  getMenuList(data:string) {
+    return this.http.postMain("/EnergyAppData/GetMenuList",{Type:data},false);
+  }
+  getEnergyQuery(data:number) {
+    return this.http.postMain("/EnergyAppData/GetEnergyQuery",{ID:data});
   }
 
 }

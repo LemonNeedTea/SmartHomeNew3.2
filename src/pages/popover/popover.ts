@@ -26,7 +26,7 @@ export class PopoverPage {
   }
   goPage(data: any) {
     this.viewCtrl.dismiss();
-    this.app.getActiveNav().push(data.page, { name: data.name, type: data.type ,data:data.data});
+    this.app.getActiveNav().push(data.F_Url, {Data:data});
 
   }
 
