@@ -72,7 +72,7 @@ export class DevicePage {
 
           this.typeID = res[0]['F_ID'];
           this.device.getDeviceDataList().then(res => {
-            this.deviceDataList = res; console.log(res);
+            this.deviceDataList = res; 
             this.getRightCateData(this.typeID);
             // this.getFn51Data();
             reject(true);

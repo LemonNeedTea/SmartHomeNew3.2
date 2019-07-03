@@ -31,6 +31,8 @@ export class EnergyPage {
   fnIDArr: Array<number> = [];
 
   eleShowList: Array<any> = [];
+  type:any={ele:true,water:true};
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private tools: ToolsProvider,
     private device: DeviceRequestsProvider,
@@ -41,6 +43,10 @@ export class EnergyPage {
     this.waterType = EnumEnergyType.Water;
     this.energyType = this.eleType;
     // this.getEnergyInfoList();
+    this.device.getEnergyType().then(res=>{
+      this.type=res;
+      console.log(res);
+    })
 
 
   }

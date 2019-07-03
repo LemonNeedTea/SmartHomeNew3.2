@@ -50,11 +50,12 @@ export class LoginRequestsProvider {
 
         this.http.post("/EnergyAppLogin/LoginCheck", params).then(res => {
           if (res["State"] == true) {
+            console.log(res);
             let userInfo = res["UserInfo"];
             userInfo['txtUser'] = username;
             userInfo['txtPwd'] = password;
             this.tools.setUserInfo(userInfo);
-            this.events.publish('user:created', userInfo['username'], Date.now());
+            this.events.publish('user:created', userInfo, Date.now());
             this.socket.startSocket();//启动websocket
             Variable.socketObject = this.socket;
             this.getTipAlarmList();
@@ -325,6 +326,9 @@ export class DeviceRequestsProvider {
 
   getEnergyInfoList(data:string) {
     return this.http.postMain("/EnergyAppData/GetEnergyInfoList",{Type:data});
+  }
+  getEnergyType() {
+    return this.http.postMain("/EnergyAppData/GetEnergyType",{},false);
   }
 
 }

@@ -19,6 +19,7 @@ export class MyApp {
   rootPage: any = LoginPage;
   //  rootPage: any ;
   username: string = '';
+  accountSetName: string = '';
   vibrate: boolean;
   constructor(
     platform: Platform,
@@ -40,7 +41,8 @@ export class MyApp {
       }
       //接受订阅用户名称
       events.subscribe('user:created', (user, time) => {
-        this.username = user;
+        this.username = user['username'];
+        this.accountSetName=user['accountsetname'];
       });
       events.subscribe("vibrate", res => {
         this.vibrate = res;

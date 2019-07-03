@@ -20,10 +20,10 @@
 
   <ion-toolbar transparent>
     <ion-segment [(ngModel)]="energyType" color="primary" (ionChange)="energyTypeChange()">
-      <ion-segment-button value={{eleType}}>
+      <ion-segment-button value={{eleType}} [disabled]='type.ele'>
         <ion-icon name="flash"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value={{waterType}}>
+      <ion-segment-button value={{waterType}} [disabled]='type.water'>
         <ion-icon name="water"></ion-icon>
       </ion-segment-button>
     </ion-segment>
