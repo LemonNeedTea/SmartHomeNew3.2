@@ -1,7 +1,7 @@
 page-energy {
     .self-grid{
         text-align: center ;
-        .first-row{
+        ion-row:first-of-type{
             background-color: #eee !important;
             color: black !important;
         }
@@ -25,6 +25,15 @@ page-energy {
         flex-wrap: wrap;
         font-size: 1.4rem;
         padding: 0;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+
+    }
+    .jinxian-ul:first-of-type{
+        margin-top: 10px;
+    }
+    .jinxian-ul:last-of-type{
+        margin-bottom: 10px;
     }
 
      .jinxian-ul li {

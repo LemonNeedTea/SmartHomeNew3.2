@@ -35,22 +35,39 @@ export class EnergyPage {
   water: any = {};
   eleType: any;
   waterType: any;
+
+  isFrist:boolean=true;
+
+  eleShowList:Array<any>=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private tools: ToolsProvider,
     private device: DeviceRequestsProvider,
     private chart: chartToolsProvider,
     private events: Events,
     private popoverCtrl: PopoverController) {
-      this.device.getEnergyInfoList().then(res=>{
-        console.log(res);
-      });
     this.eleType = EnumEnergyType.Ele;
     this.waterType = EnumEnergyType.Water;
     this.energyType = this.eleType;
-    let f54Data = Variable.GetFnData('54');
-    let f50Data = Variable.GetFnData('50');
-    this.setF50DetailData(f50Data);
-    this.setF54DetailData(f54Data);
+    // this.getEnergyInfoList();
+
+   
+  }
+  getEnergyInfoList(){
+    this.device.getEnergyInfoList(this.energyType).then((res:any)=>{
+      this.eleShowList=res;console.log(res);
+      let f54Data = Variable.GetFnData('54');
+      let f50Data = Variable.GetFnData('50');
+      this.setF50DetailData(f50Data);
+      this.setF54DetailData(f54Data);
+      if(this.isFrist){
+        this.getFnData();
+        this.isFrist=false;
+      }
+    });
+    
+  }
+  getFnData(){
+    alert("")
     this.events.subscribe("FnData:50", (res) => {
       this.setF50DetailData(res);
     });
@@ -59,80 +76,113 @@ export class EnergyPage {
     });
   }
   setF50DetailData(data: any) {
-    if (Object.keys(data).length > 0) {
-      this.power = {
-        one: data.F504,
-        two: data.F508,
-        three: data.F509,
-        air: data.F505,
-        pump: data.F506,
-        lift: data.F507,
-      };
-      this.v = {
-        a: data.F501,
-        b: data.F502,
-        c: data.F503,
-      };
-    }
+    // if (Object.keys(data).length > 0) {
+    //   this.power = {
+    //     one: data.F504,
+    //     two: data.F508,
+    //     three: data.F509,
+    //     air: data.F505,
+    //     pump: data.F506,
+    //     lift: data.F507,
+    //   };
+    //   this.v = {
+    //     a: data.F501,
+    //     b: data.F502,
+    //     c: data.F503,
+    //   };
+    // }
+    this.setEnergyInfoData(50,data);
   }
+  setEnergyInfoData(fnID:number,data:any){
+    this.eleShowList.forEach(element => {
+      element.data.forEach(element1 => {
+        element1.data.forEach(element2 => {
+            if(element2.F_FnID==fnID){
+              let _temp=data[element2.F_FnCode];
+              if(element2.F_Bit<0){
+                element2.value=_temp;
+              }else{
+                element2.value=_temp.split(',')[element2.F_Bit];
+              }
+            }
+        });
+      });
+    });
+    // for (const key in this.eleShowList) {
+    //   if (this.eleShowList.hasOwnProperty(key)) {
+    //     const element = this.eleShowList[key];
+    //     element.name='asdas';
+    //     for (const key1 in element.data) {
+    //       if (element.hasOwnProperty(key1)) {
+    //         const element1 = element.data[key1];
+            
+    //       }
+    //     }
+        
+    //   }
+    // }
+  }
+
   setF54DetailData(data: any) {
-    if (Object.keys(data).length > 0) {
-      let f541Arr = data.F541.split(',');
-      let f542Arr = data.F542.split(',');
-      let f543Arr = data.F543.split(',');
-      this.oneData = {
-        ud: f541Arr[0],
-        um: f541Arr[1],
-        uy: f541Arr[2],
-        udh: f542Arr[0],
-        umh: f542Arr[1],
-        uyh: f542Arr[2],
-        udl: f543Arr[0],
-        uml: f543Arr[1],
-        uyl: f543Arr[2],
-      };
-      let f547Arr = data.F547.split(',');
-      let f548Arr = data.F548.split(',');
-      this.twoData = {
-        ud: f547Arr[0],
-        um: f547Arr[1],
-        uy: f547Arr[2],
-      }
-      this.threeData = {
-        ud: f548Arr[0],
-        um: f548Arr[1],
-        uy: f548Arr[2],
-      };
+    // if (Object.keys(data).length > 0) {
+    //   let f541Arr = data.F541.split(',');
+    //   let f542Arr = data.F542.split(',');
+    //   let f543Arr = data.F543.split(',');
+    //   this.oneData = {
+    //     ud: f541Arr[0],
+    //     um: f541Arr[1],
+    //     uy: f541Arr[2],
+    //     udh: f542Arr[0],
+    //     umh: f542Arr[1],
+    //     uyh: f542Arr[2],
+    //     udl: f543Arr[0],
+    //     uml: f543Arr[1],
+    //     uyl: f543Arr[2],
+    //   };
+    //   let f547Arr = data.F547.split(',');
+    //   let f548Arr = data.F548.split(',');
+    //   this.twoData = {
+    //     ud: f547Arr[0],
+    //     um: f547Arr[1],
+    //     uy: f547Arr[2],
+    //   }
+    //   this.threeData = {
+    //     ud: f548Arr[0],
+    //     um: f548Arr[1],
+    //     uy: f548Arr[2],
+    //   };
 
-      let f544Arr = data.F544.split(',');
-      let f545Arr = data.F545.split(',');
-      let f546Arr = data.F546.split(',');
-      this.airData = {
-        ud: f544Arr[0],
-        um: f544Arr[1],
-        uy: f544Arr[2],
-      };
-      this.pumpData = {
-        ud: f545Arr[0],
-        um: f545Arr[1],
-        uy: f545Arr[2],
-      };
-      this.liftData = {
-        ud: f546Arr[0],
-        um: f546Arr[1],
-        uy: f546Arr[2],
-      };
-      let f549Arr = data.F549.split(',');
-      this.water = {
-        ud: f549Arr[0],
-        um: f549Arr[1],
-        uy: f549Arr[2],
-      }
-
-
+    //   let f544Arr = data.F544.split(',');
+    //   let f545Arr = data.F545.split(',');
+    //   let f546Arr = data.F546.split(',');
+    //   this.airData = {
+    //     ud: f544Arr[0],
+    //     um: f544Arr[1],
+    //     uy: f544Arr[2],
+    //   };
+    //   this.pumpData = {
+    //     ud: f545Arr[0],
+    //     um: f545Arr[1],
+    //     uy: f545Arr[2],
+    //   };
+    //   this.liftData = {
+    //     ud: f546Arr[0],
+    //     um: f546Arr[1],
+    //     uy: f546Arr[2],
+    //   };
+    //   let f549Arr = data.F549.split(',');
+    //   this.water = {
+    //     ud: f549Arr[0],
+    //     um: f549Arr[1],
+    //     uy: f549Arr[2],
+    //   }
 
 
-    }
+
+
+    // }
+    this.setEnergyInfoData(54,data);
+
   }
 
   ionViewDidLoad() {
@@ -177,10 +227,14 @@ export class EnergyPage {
   energyTypeChange() {
     switch (this.energyType) {
       case this.eleType: {
-        this.getEleChart(); break;
+        this.getEleChart(); 
+    this.getEnergyInfoList();        
+        break;
       }
       case this.waterType: {
         this.getWaterChart();
+        this.getEnergyInfoList();        
+        break;
       }
     }
   }

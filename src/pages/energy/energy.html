@@ -35,8 +35,38 @@
   <canvas id="chart" style="width:100%"></canvas>
   <div [ngSwitch]="energyType">
     <div *ngSwitchCase="eleType">
-      <my-title [name]="'一楼总进线'"></my-title>
-      <!-- <ion-list> -->
+      <div  *ngFor="let type of eleShowList">
+          <my-title [name]="type.name"></my-title>
+          <div *ngIf="type.type=='column'" >
+              <ul class='jinxian-ul' *ngFor="let device of type.data">
+                  <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
+                 
+                </ul>
+          </div>
+          <div *ngIf="type.type=='row'" >
+              <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">
+                  <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
+                 
+                </ul> -->
+                <ion-grid class="self-grid">
+                  <!-- <ion-row class="first-row">
+                    <ion-col col-4>名称</ion-col>
+                    <ion-col>空调</ion-col>
+                    <ion-col>水泵</ion-col>
+                    <ion-col>电梯</ion-col>
+                  </ion-row> -->
+                  <ion-row *ngFor="let device of type.data">
+                    <ion-col col-4>{{device.name}}</ion-col>
+                    <ion-col *ngFor="let detail of device.data"> 
+                        <span *ngIf="detail.F_FnID">{{detail.value}}</span>
+                        <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
+                    </ion-col>
+                  </ion-row>
+                  </ion-grid>
+          </div>
+        
+      </div>
+      <!-- <my-title [name]="'一楼总进线'"></my-title>
       <ul class='jinxian-ul'>
         <li class="line-gap"><span>有功功率(kW):</span><span>{{ power.one}}</span></li>
         <li><span>电压A(V):</span><span>{{ v.a }}</span></li>
@@ -119,29 +149,35 @@
           <ion-col>{{liftData.uy}}</ion-col>
 
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
     </div>
     <div *ngSwitchCase="waterType">
-      <my-title [name]="'用水量'"></my-title>
+      <div  *ngFor="let type of eleShowList">
+        <my-title [name]="type.name"></my-title>
 
-      <ion-grid class="self-grid">
-        <ion-row class="first-row">
-          <ion-col col-6>名称</ion-col>
-          <ion-col col-6>总水量</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6>本日水量(m³)</ion-col>
-          <ion-col col-6>{{water.ud}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6>本月水量(m³)</ion-col>
-          <ion-col col-6>{{water.um}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6>本年水量(m³)</ion-col>
-          <ion-col col-6>{{water.uy}}</ion-col>
-        </ion-row>
-      </ion-grid>
+        <div *ngIf="type.type=='row'" >
+            <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">
+                <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
+               
+              </ul> -->
+              <ion-grid class="self-grid">
+                <!-- <ion-row class="first-row">
+                  <ion-col col-4>名称</ion-col>
+                  <ion-col>空调</ion-col>
+                  <ion-col>水泵</ion-col>
+                  <ion-col>电梯</ion-col>
+                </ion-row> -->
+                <ion-row *ngFor="let device of type.data">
+                  <ion-col col-4>{{device.name}}</ion-col>
+                  <ion-col *ngFor="let detail of device.data"> 
+                      <span *ngIf="detail.F_FnID">{{detail.value}}</span>
+                      <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
+                  </ion-col>
+                </ion-row>
+                </ion-grid>
+        </div>
+      
+    </div>
     </div>
   </div>
 </ion-content>

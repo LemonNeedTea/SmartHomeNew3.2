@@ -323,8 +323,8 @@ export class DeviceRequestsProvider {
     return this.http.postMain("/EnergyAppData/GetDeviceIDtoRoomaAndFloorID");
   }
 
-  getEnergyInfoList() {
-    return this.http.postMain("/EnergyAppData/GetEnergyInfoList");
+  getEnergyInfoList(data:string) {
+    return this.http.postMain("/EnergyAppData/GetEnergyInfoList",{Type:data});
   }
 
 }
