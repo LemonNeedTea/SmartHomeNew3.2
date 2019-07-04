@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 // import { ModeCurtainTimerPage } from '../timer/mode-curtain-timer/mode-curtain-timer';
 // import { ModeLightJwTimerPage } from '../timer/mode-light-jw-timer/mode-light-jw-timer';
 // import { ModeLightTimerPage } from '../timer/mode-light-timer/mode-light-timer';
+import { DeviceRequestsProvider } from '../../providers/tools/requests'
 /**
  * Generated class for the ModePublicSettingPage page.
  *
@@ -17,26 +18,16 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
   templateUrl: 'mode-public-setting.html',
 })
 export class ModePublicSettingPage {
-
+  dataList: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private device: DeviceRequestsProvider) {
+    this.device.getModeSettingDataList().then(res => {
+      this.dataList = res;
+    });
   }
 
   ionViewDidLoad() {
-  }
-  goCurtain() {
-    this.presentShowModal('ModeCurtainTimerPage');
-  }
-  goLight() {
-    this.presentShowModal('ModeLightTimerPage');
-
-  }
-  goAirSeason() {
-    this.presentShowModal('ModeAirseasonsonTimerPage');
-  }
-  goLightJW() {
-    this.presentShowModal('ModeLightJwTimerPage');
-
   }
   presentShowModal(page: any) {
     let profileModal = this.modalCtrl.create(page);

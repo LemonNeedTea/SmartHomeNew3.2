@@ -337,6 +337,9 @@ export class DeviceRequestsProvider {
   getParamsInfoData(data:string) {
     return this.http.postMain("/EnergyAppData/GetParamsInfoData",{Type:data},false);
   }
+  getModeSettingDataList() {
+    return this.http.postMain("/EnergyAppData/GetModeSettingDataList");
+  }
 
 }
 

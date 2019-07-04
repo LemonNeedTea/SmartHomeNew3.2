@@ -15,33 +15,13 @@
 
 <ion-content>
   <ion-list class="my-list">
-    <ion-item (click)="goCurtain()">
-      <div item-start class="start c1">
-        <img src='../../assets/home/timer.png'>
+    <ion-item (click)="presentShowModal(item.F_Url)" *ngFor="let item of dataList">
+      <div item-start class="start" [ngClass]="item.F_Color">
+        <img src='../../assets/home/{{item.F_Icon}}'>
       </div>
-      窗帘定时
+      {{item.F_Name}}
       <ion-icon name="arrow-forward" item-end></ion-icon>
     </ion-item>
-    <ion-item (click)="goLight()">
-      <div item-start class="start c1">
-        <img src='../../assets/home/timer.png'>
-      </div>
-      客厅主灯/书房灯定时
-      <ion-icon name="arrow-forward" item-end></ion-icon>
-    </ion-item>
-    <ion-item (click)="goAirSeason()">
-      <div item-start class="start c2">
-        <img src='../../assets/home/season.png'>
-      </div>
-      空调季节设置
-      <ion-icon name="arrow-forward" item-end></ion-icon>
-    </ion-item>
-    <ion-item (click)="goLightJW()">
-      <div item-start class="start c3">
-        <img src='../../assets/home/jw.png'>
-      </div>
-      室外灯经纬度控设置
-      <ion-icon name="arrow-forward" item-end></ion-icon>
-    </ion-item>
+
   </ion-list>
 </ion-content>
