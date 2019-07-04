@@ -340,7 +340,7 @@ export class SocketHelpProvider {
         for (const key in data) {
             if (data.hasOwnProperty(key) && Number(key) > 0) {
                 let element = data[key];
-                if (Boolean(element)) {
+                if (element==1) {
                     sum++;
 
                 }

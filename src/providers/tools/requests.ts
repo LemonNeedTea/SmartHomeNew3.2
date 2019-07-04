@@ -307,6 +307,9 @@ export class DeviceRequestsProvider {
   getEnergyQuery(data:number) {
     return this.http.postMain("/EnergyAppData/GetEnergyQuery",{ID:data},false);
   }
+  getDeviceGetInfoDataByID(data:number) {
+    return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID",{ID:data});
+  }
 
 }
 

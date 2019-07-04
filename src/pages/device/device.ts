@@ -124,7 +124,7 @@ export class DevicePage {
         const state = data[key];
         let typeID = this.deviceTypeDataList[key];
         let element = data[key];
-        if (Boolean(element)) {
+        if (element==1) {
           sumNumOPen++;
           result[typeID]++;
         }
