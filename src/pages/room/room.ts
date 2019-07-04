@@ -84,7 +84,7 @@ export class RoomPage {
         let floorID = floorAndRoomID[1];
         let roomID = floorAndRoomID[0];
         let element = data[key];
-        if (Boolean(element)) {
+        if (element==1) {
           floorResult[floorID]++;
           roomResult[roomID]++;
         }

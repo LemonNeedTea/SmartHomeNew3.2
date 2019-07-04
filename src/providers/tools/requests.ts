@@ -111,8 +111,32 @@ export class LoginRequestsProvider {
     //移除FnData
     Variable.ClearAll();
     this.socket.closeSocket();
+    this.clearClass(Variable);
     // this.socketObj.ws.close();
     // this.nav.setRoot(LoginPage);
+  }
+
+  private clearClass(data:any){
+    for (const key in data) {
+        let element = data[key];
+        if(element instanceof Function){
+
+        }else if(element instanceof Object){
+          data[key]={};
+        }
+        else{
+          data[key]=null;
+        }
+        // else if(element instanceof Object){
+        //   element={};
+        // }else if(element instanceof Boolean){
+        //   element=null;
+        // }else if(element instanceof Number){
+
+        // }
+        
+
+    }
   }
   private getTipAlarmList() {
     this.http.postMain("/EnergyAppData/GetAlarmDataList", {}, false).then((res: any) => {
@@ -309,6 +333,9 @@ export class DeviceRequestsProvider {
   }
   getDeviceGetInfoDataByID(data:number) {
     return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID",{ID:data});
+  }
+  getParamsInfoData(data:string) {
+    return this.http.postMain("/EnergyAppData/GetParamsInfoData",{Type:data},false);
   }
 
 }

@@ -21,13 +21,20 @@ export class HomePage {
 
   overview: any;
   workorder: any;
-  modeID: string;
+  modeID: number;
   modeDataList: any = [];
   weatherinfo: any = {};
   homeType: string = 'mode';
   power: string;
   oneData: any = { ud: 0, um: 0, uy: 0 };
+
+  homeParams: any;
+  energyParamsData: any = {};
+
+
   oldPowser: string;
+
+  fnIDarr: Array<number> = [];
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController, private modalCtrl: ModalController, private events: Events,
@@ -42,46 +49,45 @@ export class HomePage {
       // console.log(res);
       this.weatherinfo = res;
     });
+
+
   }
   scan() {
     this.speech.startSpeech();
   }
-  getEnergyDataFn50(data: any) {
-    if (data && data.F504) {
-      this.power = data.F504;
-      if (this.power != this.oldPowser) {
-        this.oldPowser = this.power;
-        this.tools.showAnimatePulse(this.el, 'power')
+
+  getFnEnergyData(data: any, fnCode: string, bit: number, name: string) {
+    let value = data[fnCode];
+    if (data && value) {
+      if (bit < 0) {
+        this.energyParamsData[name] = value;
+      } else {
+        let arr = value.split(',');
+        this.energyParamsData[name] = arr[bit];
       }
-    }
-  }
-  getEnergyDataFn54(data: any) {
-    if (data && data.F541) {
-      let f541Arr = data.F541.split(',');
-      this.oneData = {
-        ud: f541Arr[0],
-        um: f541Arr[1],
-        uy: f541Arr[2]
-      };
+
     }
 
   }
   fnDataSubscribe() {
-    // console.log("fnDataSubscribe");
-    this.modeID = Variable.GetFnData('51', '-2');
-    this.events.subscribe("FnData:51", (data) => {
-      // console.log("home-fn51");
-      if (data) {
-        this.modeID = data['-2'];
-      }
+    this.modeID = Variable.modeID;
+    this.events.subscribe("FnData:modeID", (res) => {
+      this.modeID = res;
     });
-    this.getEnergyDataFn50(Variable.GetFnData('50'));
-    this.events.subscribe("FnData:50", (res) => {
-      this.getEnergyDataFn50(res);
-    });
-    this.getEnergyDataFn50(Variable.GetFnData('54'));
-    this.events.subscribe("FnData:54", (res) => {
-      this.getEnergyDataFn54(res);
+    this.deviceRequest.getParamsInfoData('home').then((res: any) => {
+      this.homeParams = res;
+      res.forEach(element => {
+        let fnID = element.F_FnID;
+        let fnCode = element.F_Fncode;
+        let bit = element.F_Bit;
+        let type = element.F_Type;
+
+        let fnData = Variable.GetFnData(fnID);
+        this.getFnEnergyData(fnData, fnCode, bit, type);
+        this.events.subscribe(`FnData:${element.F_FnID}`, (res) => {
+          this.getFnEnergyData(res, fnCode, bit, type);
+        });
+      });
     });
   }
   ionViewDidLeave() {

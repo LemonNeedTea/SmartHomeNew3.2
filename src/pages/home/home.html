@@ -6,7 +6,7 @@
     </button>
     <ion-title>家居智慧能源管理</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="scan()"  end style="color:white">
+      <button ion-button icon-only (click)="scan()" end style="color:white">
         <ion-icon name="ios-mic"></ion-icon>
       </button>
     </ion-buttons>
@@ -15,9 +15,9 @@
 </ion-header>
 
 <ion-content (ionScroll)="scrollEvent($event)">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <div class="home-header">
     <div #homeHeaderContent class="home-header-content">
@@ -38,11 +38,12 @@
       </ion-row>
       <ion-row style="background-color:rgba(0, 0, 0, 0.45)">
         <ion-col class='col-right'>
-          
-            <img src="../../assets/home/power.png" />功率:<span class="power">{{power}}</span>kW
+
+          <img src="../../assets/home/power.png" />功率:<span class="power">{{energyParamsData.power}}</span>kW
 
           &nbsp; <img src="../../assets/home/energy.png " />
-          日/月/年:{{oneData.ud+" / "+oneData.um+" / "+oneData.uy+""}}
+          日/月/年:{{energyParamsData.day?energyParamsData.day:0}} / {{energyParamsData.month?energyParamsData.month:0}} /
+          {{energyParamsData.year?energyParamsData.year:0}}
 
         </ion-col>
         <!-- <p></p> -->

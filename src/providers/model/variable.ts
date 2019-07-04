@@ -1,7 +1,7 @@
 
 export class Variable {
-    private static FnData: any = {};
-    private static AirData: any = {};
+    private static FnData: object = {};
+    private static AirData: object = {};
     public static GetFnData(id: string, key?: string): any {
 
         if (this.FnData[id] != null) {
@@ -38,6 +38,7 @@ export class Variable {
     public static socketObject: any;
     public static controlDevice: any;
     public static isAuto: boolean;
+    public static modeID: number;
     public static deviceNum: number;
 
 }

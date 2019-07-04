@@ -4,6 +4,7 @@ import { ToolsProvider } from '../tools/tools';
 import { LoadingController, Events } from 'ionic-angular';
 import { WebSocketProvider } from '../../providers/ws';
 import { Subscription } from 'rxjs/Subscription';
+import { variable } from '@angular/compiler/src/output/output_ast';
 
 declare let Baiduasrtts: any;
 @Injectable()
@@ -230,6 +231,7 @@ export class SocketHelpProvider {
                     let dealData = data.Data;
                     if (data.FnID == '51') {
                         this.getAuto(data.Data);//获取手自动状态
+                        this.getModeID(data.Data);//获取模式ID
                         this.getDeviceOpenNum(data.Data);
                         dealData = this.checkDeviceComplateState(dealData);
                         // this.getDeviceOpenNum(dealData);
@@ -334,6 +336,13 @@ export class SocketHelpProvider {
         // if(auto){
         //     this.tools.presentToast("当前位手动模式，设备不可控");
         // }
+    }
+    private getModeID(data:any){
+        let modeID=data["-2"];
+        if(modeID){
+            Variable.modeID=modeID;
+            this.events.publish("FnData:modeID",modeID);
+        }
     }
     private getDeviceOpenNum(data: any) {
         let sum = 0;
