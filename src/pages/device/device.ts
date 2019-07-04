@@ -60,6 +60,8 @@ export class DevicePage {
   }
 
   loadListData() {
+    this.openStateNumArr={};
+    this.sumNum=0;
     return new Promise(reject => {
       this.device.getDeviceIDtoTypeID().then((ress: any) => {
         this.deviceTypeDataList = ress;
