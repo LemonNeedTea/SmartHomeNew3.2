@@ -200,7 +200,7 @@ export class DeviceRequestsProvider {
     return result;
   }
   getAlarmTypeDataList() {
-    return this.http.postMain("/EnergyAppData/GetAlarmType");
+    return this.http.postMain("/EnergyAppData/GetAlarmType",{},false);
   }
   GetDeviceModeDetailDatas(modeID: string) {
     return this.http.postMain("/EnergyAppData/GetDeviceModeDetailDatas", { ModeID: modeID });

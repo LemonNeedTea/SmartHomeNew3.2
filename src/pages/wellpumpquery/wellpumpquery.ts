@@ -26,6 +26,7 @@ export class WellpumpqueryPage {
   stopDate: any;
   type: string;
   data: any;
+  messageData: any;
   queryID:number
   queryData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -41,10 +42,18 @@ export class WellpumpqueryPage {
 
     this.queryID = this.navParams.get('queryID');
     this.type=this.navParams.get("type");
-    this.device.getEnergyQuery(this.queryID).then((res:any)=>{
-      this.queryData=res[0];
-      this.name=this.queryData.F_Name;
-    })
+    this.data=this.navParams.get("Data");
+
+    if (this.type==null) {
+      this.name=this.data.F_MenuName;
+      this.messageData=this.data.data;
+    }else{
+      this.device.getEnergyQuery(this.queryID).then((res:any)=>{
+        this.queryData=res[0];
+        this.name=this.queryData.F_Name;
+      });
+    }
+
 
   }
 
@@ -52,8 +61,8 @@ export class WellpumpqueryPage {
 
   }
   goLineChartPage() {
-    if (this.type == EnumChartType.Message) {
-      this.navCtrl.push('MessageHistoryPage', { StartDate: this.startDate, StopDate: this.stopDate, data: this.data });
+    if (this.type==null) {
+      this.navCtrl.push('MessageHistoryPage', { StartDate: this.startDate, StopDate: this.stopDate, data: this.messageData });
     } else {
       let params:any={};
       params.ObjType=this.queryData.F_SortIndex;

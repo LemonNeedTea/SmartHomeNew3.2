@@ -54,8 +54,8 @@ export class MessagePage {
     let popoverList = [];
     this.typeDataList.forEach(element => {
       popoverList.push({
-        name: element.F_Name,
-        page: 'WellpumpqueryPage',
+        F_MenuName: element.F_Name,
+        F_Url: 'WellpumpqueryPage',
         type: EnumChartType.Message,
         data: element
       });
