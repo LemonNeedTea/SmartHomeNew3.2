@@ -150,7 +150,7 @@ export class SpeechHelperProvider implements OnInit {
                 let temp = res.data;
                 switch (temp.type) {
                     case 'mode': {
-                        Variable.socketObject.setMode(temp.id, temp.name, true);
+                        Variable.socketObject.setMode(temp, true);
                         break;
                     } case 'device': {
                         Variable.socketObject.setDeviceState(temp.id, temp.name, temp.state, true);

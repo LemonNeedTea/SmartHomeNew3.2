@@ -134,23 +134,23 @@ export class SocketHelpProvider {
             type: 'air'
         };
     }
-    setMode(id: string, name: string, speech: boolean = false) {
-        this.presentLoading(name);
+    setMode(data:any, speech: boolean = false) {
+        this.presentLoading(data.F_Name);
         this.tools.vibrate();
         var param = {
             Type: 'set',
             UserName: this.tools.getUserName(), //用户名
-            MonitorID: 1,
-            FnID: 41,
-            controlData: `3,${id}`,
+            MonitorID: data.F_MonitorID,
+            FnID: data.F_FnID,
+            controlData: `${data.F_SettingCode},${data.F_AgreementID}`,
             speech: speech
         }
-        // console.log(param);
+        console.log(param);
         this.socket.sendMessage(param);
         Variable.controlDevice = {
             id: '-2',
-            state: id,
-            name: name,
+            state: data.F_AgreementID,
+            name: data.F_Name,
             speech: speech,
             type: 'model'
         };
@@ -266,6 +266,7 @@ export class SocketHelpProvider {
                                 } else {
                                     if (controlData) {
                                         if (controlData.type === 'model') {
+
 
                                         } else {
                                             this.dismissLoading();

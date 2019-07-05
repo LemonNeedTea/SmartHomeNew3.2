@@ -44,7 +44,9 @@ export class HomePage {
     private speech: SpeechHelperProvider,
     public el: ElementRef
   ) {
-
+      let a:number=16512;
+    
+      console.log(a.toString(2));
     this.deviceRequest.getWeatherInfo().then(res => {
       // console.log(res);
       this.weatherinfo = res;
@@ -132,8 +134,8 @@ export class HomePage {
   goModeSetting(mode: any) {
     this.navCtrl.push('ModeSettingPage', { mode: mode });
   }
-  setMode(id: string, name: string) {
-    this.tools.showAnimatePulse(this.el, `mode${id}`);
+  setMode(mode:any) {
+    this.tools.showAnimatePulse(this.el, `mode${mode.F_AgreementID}`);
     // this.tools.showAnimatePulse(`mode${id}`);
 
     let auto = Variable.isAuto;
@@ -148,8 +150,8 @@ export class HomePage {
       this.tools.presentAlarmAlert("手动模式，不可控", "提示");
       return;
     }
-    this.presentConfirm(name).then(res => {
-      Variable.socketObject.setMode(id, name);
+    this.presentConfirm(mode.F_Name).then(res => {
+      Variable.socketObject.setMode(mode);
     });
   }
   presentConfirm(name: string) {
