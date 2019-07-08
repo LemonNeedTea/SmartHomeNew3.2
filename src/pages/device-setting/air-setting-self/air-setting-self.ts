@@ -4,6 +4,7 @@ import * as ProgressBar from "progressbar.js";
 import { Variable } from '../../../providers/model/variable';
 import { DeviceRequestsProvider } from '../../../providers/tools/requests'
 import { ToolsProvider } from '../../../providers/tools/tools'
+import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Generated class for the AirSettingSelfPage page.
@@ -22,7 +23,7 @@ export class AirSettingSelfPage {
   name: string;
   id: number;
   paramData: any = {};
-  temp: number = 25;
+  temp: number = 16;
   private tempMax: number = 30;
   private tempMin: number = 16;
   barCircleObj: any;
@@ -42,6 +43,7 @@ export class AirSettingSelfPage {
   // settingTempData: any;
   selectedMode: any = {};
   selectedSpped: any = {};
+  openData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
@@ -78,10 +80,12 @@ export class AirSettingSelfPage {
     this.roomTempData = data[code1] ? data[code1] : 0;
     this.temp = data[code2] ? data[code2] : 16;
 
-    // this.paramsData = 1536;
+    this.paramsData = 33928;
     let str = this.tools.numTo15BitArr(this.paramsData);
-
+    let open = str[this.openData.F_Bit];
+    this.open = Boolean(open);
     str.forEach((value, index) => {
+
       if (value == 1) {
 
         //是否是开关
@@ -122,7 +126,11 @@ export class AirSettingSelfPage {
       this.device.getAirSpeedDataList().then(res1 => {
         // console.log(res);
         this.speedKV = res1;
-        this.getFnData(this.airParams["F_FnID"]);
+        this.device.getDeviceGetInfoDataByID(this.id).then((getInfo: any) => {
+          this.openData = getInfo;
+          this.getFnData(this.airParams["F_FnID"]);
+
+        })
       });
       this.modeKV = res;
     });
