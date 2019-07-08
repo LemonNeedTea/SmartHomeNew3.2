@@ -6,7 +6,7 @@ export class ConfigProvider {
 
   //api请求地址
   // public apiUrl = "http://223.112.4.23:11000";
-  public apiUrl = "http://192.168.1.113:806";
+  public apiUrl = "http://192.168.40.102:806";
 
   //websokcet地址
   public websocketUrl = "ws://223.112.4.23:53200";

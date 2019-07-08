@@ -16,15 +16,17 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class AirSettingModePage {
 
+  dataList: Array<any> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private viewCtrl: ViewController) {
+    this.dataList = this.navParams.get("Data");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AirSettingModePage');
   }
-  dismiss(data: number) {
-    if (data!=null) {
+  dismiss(data: any) {
+    if (data != null) {
       this.viewCtrl.dismiss(data);
     } else {
       this.viewCtrl.dismiss();

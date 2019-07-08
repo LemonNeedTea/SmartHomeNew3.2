@@ -323,7 +323,7 @@ export class ToolsProvider {
       return data;
     }
   }
-  showAnimatePulse(el: any, eleName: string, showbc: boolean=false) {
+  showAnimatePulse(el: any, eleName: string, showbc: boolean = false) {
     return new Promise((resolve) => {
       let temp = el.nativeElement.querySelector(`.${eleName}`);
       if (showbc) {
@@ -341,14 +341,29 @@ export class ToolsProvider {
     });
 
   }
-  showAnimate(el: any, eleName: string,animateName:string) {
+  showAnimate(el: any, eleName: string, animateName: string) {
     let temp = el.nativeElement.querySelector(`.${eleName}`);
     temp.classList.add('animated', animateName);
     temp.addEventListener('animationend', () => {
       temp.classList.remove('animated', animateName);
     });
   }
-  
+
+  numTo15BitArr(num: number): Array<Number> {
+    let result: Array<Number>=[];
+    let existLength = 0;
+    if (num != null) {
+      let str = num.toString(2);
+      for (let i = 0; i < str.length; i++) {
+        result.push(Number(str[str.length - i - 1]));
+      }
+    }
+    for (let i = 0; i < 15 - result.length; i++) {
+      result.push(0);
+    }
+    return result;
+  }
+
 
 
 

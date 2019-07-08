@@ -116,25 +116,25 @@ export class LoginRequestsProvider {
     // this.nav.setRoot(LoginPage);
   }
 
-  private clearClass(data:any){
+  private clearClass(data: any) {
     for (const key in data) {
-        let element = data[key];
-        if(element instanceof Function){
+      let element = data[key];
+      if (element instanceof Function) {
 
-        }else if(element instanceof Object){
-          data[key]={};
-        }
-        else{
-          data[key]=null;
-        }
-        // else if(element instanceof Object){
-        //   element={};
-        // }else if(element instanceof Boolean){
-        //   element=null;
-        // }else if(element instanceof Number){
+      } else if (element instanceof Object) {
+        data[key] = {};
+      }
+      else {
+        data[key] = null;
+      }
+      // else if(element instanceof Object){
+      //   element={};
+      // }else if(element instanceof Boolean){
+      //   element=null;
+      // }else if(element instanceof Number){
 
-        // }
-        
+      // }
+
 
     }
   }
@@ -185,8 +185,8 @@ export class DeviceRequestsProvider {
   getDeviceDataListByTypeID(typeID: string) {
     return this.http.postMain('/EnergyAppData/GetDevicesDataListByTypeID', { "TypeID": typeID });
   }
-  getWaterlevelMapChartData(data:any) {
-  
+  getWaterlevelMapChartData(data: any) {
+
     let params = {
       MonitorID: data.MonitorID,
       SortIndex: data.ObjType,
@@ -220,11 +220,11 @@ export class DeviceRequestsProvider {
     return this.http.postMain("/EnergyAppData/GetAlarmHistoryDataList", params);
   }
   setAlarmState(id: string) {
-    let result=this.http.postMain("/EnergyAppData/SetAlarmState", { ID: id },false);
+    let result = this.http.postMain("/EnergyAppData/SetAlarmState", { ID: id }, false);
     return result;
   }
   getAlarmTypeDataList() {
-    return this.http.postMain("/EnergyAppData/GetAlarmType",{},false);
+    return this.http.postMain("/EnergyAppData/GetAlarmType", {}, false);
   }
   GetDeviceModeDetailDatas(modeID: string) {
     return this.http.postMain("/EnergyAppData/GetDeviceModeDetailDatas", { ModeID: modeID });
@@ -318,27 +318,36 @@ export class DeviceRequestsProvider {
     return this.http.postMain("/EnergyAppData/GetDeviceIDtoRoomaAndFloorID");
   }
 
-  getEnergyInfoList(data:string) {
-    return this.http.postMain("/EnergyAppData/GetEnergyInfoList",{Type:data},false);
+  getEnergyInfoList(data: string) {
+    return this.http.postMain("/EnergyAppData/GetEnergyInfoList", { Type: data }, false);
   }
   getEnergyType() {
-    return this.http.postMain("/EnergyAppData/GetEnergyType",{},false);
+    return this.http.postMain("/EnergyAppData/GetEnergyType", {}, false);
   }
 
-  getMenuList(data:string) {
-    return this.http.postMain("/EnergyAppData/GetMenuList",{Type:data},false);
+  getMenuList(data: string) {
+    return this.http.postMain("/EnergyAppData/GetMenuList", { Type: data }, false);
   }
-  getEnergyQuery(data:number) {
-    return this.http.postMain("/EnergyAppData/GetEnergyQuery",{ID:data},false);
+  getEnergyQuery(data: number) {
+    return this.http.postMain("/EnergyAppData/GetEnergyQuery", { ID: data }, false);
   }
-  getDeviceGetInfoDataByID(data:number) {
-    return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID",{ID:data});
+  getDeviceGetInfoDataByID(data: number) {
+    return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID", { ID: data });
   }
-  getParamsInfoData(data:string) {
-    return this.http.postMain("/EnergyAppData/GetParamsInfoData",{Type:data},false);
+  getParamsInfoData(data: string) {
+    return this.http.postMain("/EnergyAppData/GetParamsInfoData", { Type: data }, false);
   }
   getModeSettingDataList() {
     return this.http.postMain("/EnergyAppData/GetModeSettingDataList");
+  }
+  getAirParamsDataByID(id: number) {
+    return this.http.postMain("/EnergyAppData/GetAirParamsDataByID", { ID: id });
+  }
+  getAirModeDataList() {
+    return this.http.postMain("/EnergyAppData/GetAirModeDataList");
+  }
+  getAirSpeedDataList() {
+    return this.http.postMain("/EnergyAppData/GetAirSpeedDataList");
   }
 
 }
