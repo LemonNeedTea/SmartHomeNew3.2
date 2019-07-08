@@ -83,6 +83,7 @@
           <ion-col  col-4>
             <img  *ngIf="selectedMode.F_Icon" [src]="'../../../assets/air/'+selectedMode.F_Icon" (click)="setMode()"  
               [ngClass]="selectedMode.F_Class" />
+              <img *ngIf=" !selectedMode.F_Icon" (click)="setMode()" /> 
             <!-- <img src="../../../assets/cool.png" (click)="setMode()"/> -->
             {{selectedMode.F_Name}}
           </ion-col>
@@ -92,7 +93,7 @@
             开关
           </ion-col>
           <ion-col col-4>
-            <img src="../../../assets/sleep.png" [ngClass]="{'selected': sleepModel>0}" (click)="setSleep()" />
+            <img src="../../../assets/sleep.png" [ngClass]="{'selected': sleepModel>0}"  />
 
 
             睡眠

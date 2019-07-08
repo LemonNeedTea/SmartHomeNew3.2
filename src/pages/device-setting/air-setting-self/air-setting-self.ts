@@ -26,17 +26,10 @@ export class AirSettingSelfPage {
   private tempMax: number = 30;
   private tempMin: number = 16;
   barCircleObj: any;
-  modeColumns: any;
-  speedColumns: any;
-  sleepColumns: any;
-  modeModel: number = 0;
-  speedModel: number;
-  sleepModel: number;
   modeKV: any = [];
   speedKV: any = [];
 
   open: boolean;
-  sleep: number;
   // speed: number;
   airData: any = {};
   private monitorID: number;
@@ -85,7 +78,7 @@ export class AirSettingSelfPage {
     this.roomTempData = data[code1] ? data[code1] : 0;
     this.temp = data[code2] ? data[code2] : 16;
 
-    this.paramsData = 1536;
+    // this.paramsData = 1536;
     let str = this.tools.numTo15BitArr(this.paramsData);
 
     str.forEach((value, index) => {
@@ -134,16 +127,6 @@ export class AirSettingSelfPage {
       this.modeKV = res;
     });
 
-
-
-
-    // this.setCircle();
-    // this.airData = Variable.GetAirData(this.monitorID + "");
-    // this.setDetailData();
-    // this.events.subscribe(`AirData:${this.monitorID}`, this.eventsAirHandler);
-
-    // Variable.socketObject.getAirData(this.monitorID);
-
   }
   getTempColumns() {
     let t = [];
@@ -155,41 +138,7 @@ export class AirSettingSelfPage {
         options: t
       }];
   }
-  // setDetailData() {
-  //   let data = this.airData;
-  //   if (data.F6010) {
 
-  //     this.tempMin = this.getTempNum(data.F6010);
-  //     this.tempMax = this.getTempNum(data.F6011);
-  //     this.temp = this.getTempNum(data.F602);
-  //     this.spaceTemp = this.getTempNum(data.F6013);
-  //     this.open = Boolean(Number(data.F601));
-  //     this.modeModel = Number(data.F603);
-  //     this.sleepModel = Number(data.F607);
-  //     this.speedModel = Number(data.F608);
-  //     let t = [];
-  //     for (let i = this.tempMin; i <= this.tempMax; i += 0.5) {
-  //       t.push({ text: `${i.toFixed(1)}`, value: i });
-  //     }
-  //     this.tempColumns = [
-  //       {
-  //         options: t
-  //       }];
-  //     console.log(this.tempColumns);
-  //     // this.tempColumns = [
-  //     //   {
-  //     //     options: [
-  //     //       { text: '8.0', value: 8 },
-  //     //       { text: '1.0', value: 1 },
-  //     //       { text: '风盘+地冷', value: 2 }
-  //     //     ]
-  //     //   }];
-  //     this.setCircleNum();
-
-
-  //     // this.setCircle(data.F6010, data.F6011);
-  //   }
-  // }
   private getTempNum(data: string) {
     let num: number = Number(data);
     return num;
@@ -239,9 +188,6 @@ export class AirSettingSelfPage {
     this.sendAir();
 
   }
-  // goMorePage() {
-  //   this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name });
-  // }
   modeChange() {
     console.log("modechange");
   }
@@ -256,13 +202,7 @@ export class AirSettingSelfPage {
     // Variable.socketObject.setAir(`7,${Number(this.speedModel)}`, this.deviceID, this.monitorID);
 
   }
-  setSleep() {
-    if (this.sleep > 0) {
-      this.sleep = 0;
-    } else {
-      this.sleep = 1;
-    }
-  }
+
   setMode() {
     let modalObj = this.modalCtrl.create('AirSettingModePage', { Data: this.modeKV });
     modalObj.onDidDismiss(res => {
