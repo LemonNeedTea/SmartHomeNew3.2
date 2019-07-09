@@ -35,6 +35,7 @@ export class HomePage {
   oldPowser: string;
 
   fnIDarr: Array<number> = [];
+  envData: any = [];
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController, private modalCtrl: ModalController, private events: Events,
@@ -44,15 +45,21 @@ export class HomePage {
     private speech: SpeechHelperProvider,
     public el: ElementRef
   ) {
-      let a:number=16512;
-    
-      console.log(a.toString(2));
     this.deviceRequest.getWeatherInfo().then(res => {
       // console.log(res);
       this.weatherinfo = res;
     });
 
+    this.deviceRequest.getMenuList('env').then((res: any) => {
+      this.envData = res;
+    })
 
+
+  }
+  goEnv() {
+    if (this.envData[0]) {
+      this.navCtrl.push(this.envData[0].F_Url,{Data:this.envData[0]});
+    }
   }
   scan() {
     this.speech.startSpeech();
@@ -134,7 +141,7 @@ export class HomePage {
   goModeSetting(mode: any) {
     this.navCtrl.push('ModeSettingPage', { mode: mode });
   }
-  setMode(mode:any) {
+  setMode(mode: any) {
     this.tools.showAnimatePulse(this.el, `mode${mode.F_AgreementID}`);
     // this.tools.showAnimatePulse(`mode${id}`);
 

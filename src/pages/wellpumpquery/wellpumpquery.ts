@@ -27,8 +27,8 @@ export class WellpumpqueryPage {
   type: string;
   data: any;
   messageData: any;
-  queryID:number
-  queryData:any;
+  queryID: number
+  queryData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private tools: ToolsProvider,
     private device: DeviceRequestsProvider) {
@@ -41,17 +41,23 @@ export class WellpumpqueryPage {
 
 
     this.queryID = this.navParams.get('queryID');
-    this.type=this.navParams.get("type");
-    this.data=this.navParams.get("Data");
+    this.type = this.navParams.get("type");
+    this.data = this.navParams.get("Data");
 
-    if (this.type==null) {
-      this.name=this.data.F_MenuName;
-      this.messageData=this.data.data;
-    }else{
-      this.device.getEnergyQuery(this.queryID).then((res:any)=>{
-        this.queryData=res[0];
-        this.name=this.queryData.F_Name;
-      });
+    if (this.type == null) {
+      this.name = this.data.F_MenuName;
+      this.messageData = this.data.data;
+    } else {
+      if (this.type == 'env') {
+        this.queryData = this.data;
+        this.name = this.queryData.F_Name;
+      } else {
+        this.device.getEnergyQuery(this.queryID).then((res: any) => {
+          this.queryData = res[0];
+          this.name = this.queryData.F_Name;
+        });
+      }
+
     }
 
 
@@ -61,16 +67,17 @@ export class WellpumpqueryPage {
 
   }
   goLineChartPage() {
-    if (this.type==null) {
+    if (this.type == null) {
       this.navCtrl.push('MessageHistoryPage', { StartDate: this.startDate, StopDate: this.stopDate, data: this.messageData });
     } else {
-      let params:any={};
-      params.ObjType=this.queryData.F_SortIndex;
-      params.FnID=this.queryData.F_GPRSFnID;
-      params.MonitorID=this.queryData.F_MonitorID;
-      params.StartTime=this.startDate;
-      params.StopTime=this.stopDate;
-      this.navCtrl.push('LinechartPage', {params:params})
+      let params: any = {};
+      params.ObjType = this.queryData.F_SortIndex;
+      params.FnID = this.queryData.F_GPRSFnID;
+      params.MonitorID = this.queryData.F_MonitorID;
+      params.StartTime = this.startDate;
+      params.StopTime = this.stopDate;
+      console.log(params);
+      this.navCtrl.push('LinechartPage', { params: params })
     }
   }
 

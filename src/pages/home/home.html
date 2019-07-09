@@ -15,9 +15,9 @@
 </ion-header>
 
 <ion-content (ionScroll)="scrollEvent($event)">
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher> -->
 
   <div class="home-header">
     <div #homeHeaderContent class="home-header-content">
@@ -25,16 +25,12 @@
         <ion-col col-6 text-left class="col-left">
           <div class="city">{{weatherinfo.location}}</div>
           <p no-margin>{{weatherinfo.temperature}}°C | {{weatherinfo.cond_txt}}</p>
+          <p no-margin style="display: flex;align-items: center;" *ngIf="envData.length>0" (click)="goEnv()">环境参数&nbsp;<ion-icon name="arrow-forward"></ion-icon></p>
+          
 
         </ion-col>
-        <!-- <ion-col col-6 text-right class='col-right'> -->
-        <!-- <div class="header-right" float-right>111</div> -->
-        <!-- 功率:0.026kW
-              <p no-margin>日:0.6度</p>
-              <p no-margin>月:58.7度</p>
-              <p no-margin>年:145.4度</p> -->
-
-        <!-- </ion-col> -->
+        <ion-col col-6 text-right class='col-left'>
+        </ion-col>
       </ion-row>
       <ion-row style="background-color:rgba(0, 0, 0, 0.45)">
         <ion-col class='col-right'>

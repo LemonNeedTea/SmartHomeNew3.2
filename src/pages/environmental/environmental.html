@@ -1,0 +1,36 @@
+<!--
+  Generated template for the EnvironmentalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>环境参数</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="cate_right">
+    <ion-list class="device-list">
+      <button ion-item class="show-setting" (click)="goSetting(item)" *ngFor="let item of dataList">
+        <div item-start class="c5 start">
+          <img src='../assets/img/home/env/{{item.F_Icon}}'></div>
+        <ion-label>
+          <div class="label">
+            <div>
+              {{item.F_Name}}
+            </div>
+
+            <div class="label-right">
+              <p>{{item.Value}}</p>
+            </div>
+          </div>
+
+        </ion-label>
+
+      </button>
+      
+    </ion-list>
+  </div>
+</ion-content>

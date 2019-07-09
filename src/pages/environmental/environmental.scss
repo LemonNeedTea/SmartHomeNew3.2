@@ -1,0 +1,13 @@
+page-environmental {
+    .start {
+        border-radius: 5px;
+        width: 45px;
+        height: 45px;
+        padding: 3px;
+      }
+      .label-right{
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+      }
+}
