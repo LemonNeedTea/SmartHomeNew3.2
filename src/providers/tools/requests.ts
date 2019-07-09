@@ -340,14 +340,11 @@ export class DeviceRequestsProvider {
   getModeSettingDataList() {
     return this.http.postMain("/EnergyAppData/GetModeSettingDataList");
   }
-  getAirParamsDataByID(id: number) {
-    return this.http.postMain("/EnergyAppData/GetAirParamsDataByID", { ID: id });
+  getAirDataByID(id: number) {
+    return this.http.postMain("/EnergyAppData/GetAirDataByID", { ID: id });
   }
-  getAirModeDataList() {
-    return this.http.postMain("/EnergyAppData/GetAirModeDataList");
-  }
-  getAirSpeedDataList() {
-    return this.http.postMain("/EnergyAppData/GetAirSpeedDataList");
+  getAirParamsDataList() {
+    return this.http.postMain("/EnergyAppData/GetAirparamsDataList");
   }
 
 }

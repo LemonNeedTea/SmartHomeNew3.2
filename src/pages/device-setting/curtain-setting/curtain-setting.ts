@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
-import{DeviceRequestsProvider} from '../../../providers/tools/requests'
+import { DeviceRequestsProvider } from '../../../providers/tools/requests'
 
 /**
  * Generated class for the CurtainSettingPage page.
@@ -20,19 +20,20 @@ export class CurtainSettingPage {
   id: number;
   state: number;
   auto: boolean;
+  fnID: number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private events: Events,
-    private device:DeviceRequestsProvider
+    private device: DeviceRequestsProvider
   ) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
 
-    this.device.getDeviceGetInfoDataByID(this.id).then(res=>{
-      let fnID=res["F_FnID"];
-      let fnData = Variable.GetFnData(fnID);
+    this.device.getDeviceGetInfoDataByID(this.id).then(res => {
+      this.fnID = res["F_FnID"];
+      let fnData = Variable.GetFnData(this.fnID.toString());
       this.getDeviceState(fnData);
-      this.events.subscribe(`FnData:${fnID}`, this.eventsFn51Handler);
-    })
+      this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    });
 
 
 
@@ -61,7 +62,7 @@ export class CurtainSettingPage {
     Variable.socketObject.setDeviceState(this.id, this.name, state);
   }
   ionViewDidLeave() {
-    this.events.unsubscribe("FnData:51", this.eventsFn51Handler);
+    this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
 
   }

@@ -25,10 +25,11 @@ export class AirSettingSelfPage {
   paramData: any = {};
   temp: number = 16;
   private tempMax: number = 30;
-  private tempMin: number = 16;
+  private tempMin: number = 0;
   barCircleObj: any;
   modeKV: any = [];
   speedKV: any = [];
+  tempKv: any = [];
 
   open: boolean;
   // speed: number;
@@ -78,7 +79,7 @@ export class AirSettingSelfPage {
     this.paramsData = data[code] ? data[code] : 0;
     console.table(this.paramsData);
     this.roomTempData = data[code1] ? data[code1] : 0;
-    this.temp = data[code2] ? data[code2] : 16;
+    this.temp = data[code2] ? Number(data[code2]) : this.tempMin;
 
     this.paramsData = 33928;
     let str = this.tools.numTo15BitArr(this.paramsData);
@@ -117,22 +118,19 @@ export class AirSettingSelfPage {
   ionViewDidLoad() {
     this.setCircle();
 
-    this.device.getAirParamsDataByID(this.id).then(res => {
+    this.device.getAirDataByID(this.id).then(res => {
       this.airParams = res;
 
     });
-    this.device.getAirModeDataList().then(res => {
-      // console.log(res);
-      this.device.getAirSpeedDataList().then(res1 => {
-        // console.log(res);
-        this.speedKV = res1;
-        this.device.getDeviceGetInfoDataByID(this.id).then((getInfo: any) => {
-          this.openData = getInfo;
-          this.getFnData(this.airParams["F_FnID"]);
+    this.device.getAirParamsDataList().then(res => {
+      this.modeKV = res['mode'];
+      this.speedKV = res['speed'];
+      this.tempKv = res['temp'];
+      this.device.getDeviceGetInfoDataByID(this.id).then((getInfo: any) => {
+        this.openData = getInfo;
+        this.getFnData(this.airParams["F_FnID"]);
 
-        })
       });
-      this.modeKV = res;
     });
 
   }
@@ -174,13 +172,15 @@ export class AirSettingSelfPage {
     if (this.temp < this.tempMax) {
       this.temp += 0.5;
       this.setCircleNum();
+      this.setAirTemp();
       // this.sendAir();
 
     }
 
   }
-  private sendAir() {
-    Variable.socketObject.setAir(`1,${Number(this.temp)}`, this.deviceID, this.monitorID);
+  private setAirTemp() {
+    this.setAir(this.tempKv[0]['F_Mode'], Number(this.temp) + "");
+
   }
   tempSub() {
     this.temp = Number(this.temp);
@@ -188,12 +188,13 @@ export class AirSettingSelfPage {
     if (this.temp > this.tempMin) {
       this.temp -= 0.5;
       this.setCircleNum();
+      this.setAirTemp();
       // this.sendAir();
     }
   }
   changeTemp() {
     this.setCircleNum();
-    this.sendAir();
+    this.setAirTemp();
 
   }
   modeChange() {
@@ -207,7 +208,7 @@ export class AirSettingSelfPage {
   setSpeed(data: any) {
     // this.speed = data;
     this.selectedSpped = data;
-    // Variable.socketObject.setAir(`7,${Number(this.speedModel)}`, this.deviceID, this.monitorID);
+    this.setAir(data['F_Mode'], data['F_Code']);
 
   }
 
@@ -216,13 +217,22 @@ export class AirSettingSelfPage {
     modalObj.onDidDismiss(res => {
       if (res != null) {
         this.selectedMode = res;
-        // Variable.socketObject.setAir(`2,${Number(this.modeModel)}`, this.deviceID, this.monitorID);
+        this.setAir(res['F_Mode'], res['F_Code']);
 
       }
     });
     modalObj.present();
 
 
+  }
+
+  setAir(mode: string, code: string) {
+    let setID = this.airParams.F_SetID;
+
+    let data = `${setID},${mode},${code}`;//42 主机标号 模式 参数
+
+
+    Variable.socketObject.setAir(data, this.airParams.F_MonitorID, this.airParams.F_SetFnID);
   }
   // private eventsAirHandler = (data: any) => {
   //   this.airData = data;

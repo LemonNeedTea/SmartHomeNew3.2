@@ -115,21 +115,19 @@ export class SocketHelpProvider {
         console.log(param);
         this.socket.sendMessage(param);
     }
-    setAir(data: any, deviceID: number, MonitorID: number) {
+    setAir(data: any,MonitorID: number,fnID:number) {
         this.presentLoading("");
         // let controlData = this.tools.getSendControl(data);
         var param = {
             Type: 'set',
             UserName: this.tools.getUserName(), //用户名
-            DeviceID: deviceID,
-            FnID: 60,
+            FnID: fnID,
             MonitorID: MonitorID,
             controlData: data
         };
         console.log(param);
         this.socket.sendMessage(param);
         Variable.controlDevice = {
-            id: deviceID,
             name: name,
             type: 'air'
         };
