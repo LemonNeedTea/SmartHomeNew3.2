@@ -45,6 +45,7 @@ export class AirSettingSelfPage {
   selectedMode: any = {};
   selectedSpped: any = {};
   openData: any;
+  fnID: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
@@ -77,14 +78,11 @@ export class AirSettingSelfPage {
     let code2 = this.airParams.F_SettingTempFnCode;
 
     this.paramsData = data[code] ? data[code] : 0;
-    console.table(this.paramsData);
     this.roomTempData = data[code1] ? data[code1] : 0;
     this.temp = data[code2] ? Number(data[code2]) : this.tempMin;
 
-    this.paramsData = 33928;
+    // this.paramsData = 33928;
     let str = this.tools.numTo15BitArr(this.paramsData);
-    let open = str[this.openData.F_Bit];
-    this.open = Boolean(open);
     str.forEach((value, index) => {
 
       if (value == 1) {
@@ -112,28 +110,46 @@ export class AirSettingSelfPage {
   }
 
   ionViewDidLeave() {
-    // this.events.unsubscribe(`AirData:${this.monitorID}`, this.eventsAirHandler);
+    this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
   }
 
   ionViewDidLoad() {
     this.setCircle();
 
-    this.device.getAirDataByID(this.id).then(res => {
-      this.airParams = res;
 
-    });
     this.device.getAirParamsDataList().then(res => {
       this.modeKV = res['mode'];
       this.speedKV = res['speed'];
       this.tempKv = res['temp'];
-      this.device.getDeviceGetInfoDataByID(this.id).then((getInfo: any) => {
-        this.openData = getInfo;
+      this.device.getAirDataByID(this.id).then(res => {
+        this.airParams = res;
         this.getFnData(this.airParams["F_FnID"]);
 
+
       });
+
+    });
+
+    this.device.getDeviceGetInfoDataByID(this.id).then(res => {
+      this.fnID = res["F_FnID"];
+      let fnData = Variable.GetFnData(this.fnID.toString());
+      this.getDeviceState(fnData);
+      this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     });
 
   }
+  private eventsFn51Handler = (data: any) => {
+    this.getDeviceState(data);
+  }
+  getDeviceState(data: any) {
+    if (data) {
+      this.open = data[this.id];
+    }
+  }
+  // setDeviceState(state: any) {
+  //   this.open = state;
+  //   Variable.socketObject.setDeviceState(this.id, this.name, state);
+  // }
   getTempColumns() {
     let t = [];
     for (let i = this.tempMin; i <= this.tempMax; i += 0.5) {
@@ -198,12 +214,11 @@ export class AirSettingSelfPage {
 
   }
   modeChange() {
-    console.log("modechange");
   }
 
   setOpen() {
     this.open = !this.open;
-    Variable.socketObject.setAir(`0,${Number(this.open)}`, this.deviceID, this.monitorID);
+    Variable.socketObject.setDeviceState(this.id, this.name, this.open);
   }
   setSpeed(data: any) {
     // this.speed = data;
