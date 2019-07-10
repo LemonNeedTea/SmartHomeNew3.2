@@ -35,7 +35,7 @@ export class ModeSettingPage {
   }
   getModeDeviceDataList() {
     this.device.GetDeviceModeDetailDatas(this.modeID).then(res => {
-      this.dataList = res; console.log(res);
+      this.dataList = res; 
     });
   }
   ionViewDidLoad() {

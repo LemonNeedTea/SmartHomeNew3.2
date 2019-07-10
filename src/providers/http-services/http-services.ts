@@ -6,12 +6,14 @@ import { LoadingController, ToastController } from 'ionic-angular';
 import { ConfigProvider } from '../config/config';
 import { ToolsProvider } from '../tools/tools';
 
+import { LoadingHelperProvider } from '../tools/loadingHelper';
+
 
 @Injectable()
 export class HttpServicesProvider {
     constructor(
         private http: Http,
-        private loading: LoadingController,
+        private loading: LoadingHelperProvider,
         private toastCtrl: ToastController,
         private config: ConfigProvider,
         private tools: ToolsProvider) {
@@ -56,12 +58,15 @@ export class HttpServicesProvider {
         for (const key in params) {
             urlParams.set(key, params[key]);
         }
-        let loader;
+        // let loader;
+        // if (isLoading === true) {
+        //     loader = this.loading.create({
+        //         // content: "Please wait..."
+        //     });
+        //     loader.present();
+        // }
         if (isLoading === true) {
-            loader = this.loading.create({
-                // content: "Please wait..."
-            });
-            loader.present();
+            this.loading.show();
         }
 
         return new Promise((resolve: any, reject) => {
@@ -72,8 +77,11 @@ export class HttpServicesProvider {
                 })
             })
                 .subscribe(res => {
-                    if (isLoading) {
-                        loader.dismiss();
+                    // if (isLoading) {
+                    //     loader.dismiss();
+                    // }
+                    if (isLoading === true) {
+                        this.loading.hide();
                     }
                     try {
                         resolve(res.json());
@@ -89,7 +97,10 @@ export class HttpServicesProvider {
                     });
                     toast.present();
                     if (isLoading) {
-                        loader.dismiss();
+                        // loader.dismiss();
+                        if (isLoading === true) {
+                            this.loading.hide();
+                        }
                     }
                     reject('');
                 });
@@ -103,7 +114,7 @@ export class HttpServicesProvider {
             if (username) {
                 params['UserName'] = username;
                 this.post(url, params, isLoading).then(res => {
-                    if (res["MainData"]!=null) {
+                    if (res["MainData"] != null) {
                         resolve(res["MainData"]);
                     }
                 }, err => { });

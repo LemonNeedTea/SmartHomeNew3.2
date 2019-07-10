@@ -3,13 +3,14 @@ import { Injectable, ViewChild } from '@angular/core';
 import { ToolsProvider } from '../tools/tools';
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-import { ToastController, Events, Nav } from 'ionic-angular'
+import { ToastController, Events, Nav, Loading } from 'ionic-angular'
 import { ConfigProvider } from '../config/config';
 import { EnumChartType } from '../model/enumdata';
 import { SocketHelpProvider } from './socketHelper';
 import { Variable } from '../../providers/model/variable';
 import { resolve } from 'url';
 import { Http } from '@angular/http'
+import { loadavg } from 'os';
 
 @Injectable()
 export class LoginRequestsProvider {
@@ -328,8 +329,8 @@ export class DeviceRequestsProvider {
   getMenuList(data: string) {
     return this.http.postMain("/EnergyAppData/GetMenuList", { Type: data }, false);
   }
-  getEnergyQuery(data: number) {
-    return this.http.postMain("/EnergyAppData/GetEnergyQuery", { ID: data }, false);
+  getEnergyQuery(data: number,loading:boolean=false) {
+    return this.http.postMain("/EnergyAppData/GetEnergyQuery", { ID: data }, loading);
   }
   getDeviceGetInfoDataByID(data: number) {
     return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID", { ID: data });

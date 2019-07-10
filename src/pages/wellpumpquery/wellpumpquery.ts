@@ -76,7 +76,6 @@ export class WellpumpqueryPage {
       params.MonitorID = this.queryData.F_MonitorID;
       params.StartTime = this.startDate;
       params.StopTime = this.stopDate;
-      console.log(params);
       this.navCtrl.push('LinechartPage', { params: params })
     }
   }

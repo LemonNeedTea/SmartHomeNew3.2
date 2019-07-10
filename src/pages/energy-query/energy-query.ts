@@ -91,7 +91,6 @@ export class EnergyQueryPage {
     }
   }
   objTypeChange(){
-    console.log(this.objType);
   }
   goBarChartPage(data?: any) {
     let params: any;

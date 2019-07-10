@@ -23,7 +23,6 @@ export class AirSettingModePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AirSettingModePage');
   }
   dismiss(data: any) {
     if (data != null) {

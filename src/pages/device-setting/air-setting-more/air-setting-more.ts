@@ -52,7 +52,6 @@ export class AirSettingMorePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AirSettingMorePage');
   }
 
 }

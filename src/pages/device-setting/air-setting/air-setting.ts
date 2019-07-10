@@ -108,7 +108,6 @@ export class AirSettingPage {
         {
           options: t
         }];
-      console.log(this.tempColumns);
       // this.tempColumns = [
       //   {
       //     options: [
@@ -140,7 +139,6 @@ export class AirSettingPage {
     });
   }
   setCircleNum() {
-    // console.log('max:' + this.tempMax + "min:" + this.tempMin);
     let num = (this.temp - this.tempMin) / (this.tempMax - this.tempMin);
     this.barCircleObj.animate(num);
 
@@ -176,7 +174,6 @@ export class AirSettingPage {
     this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name });
   }
   modeChange() {
-    console.log("modechange");
   }
 
   setOpen() {
@@ -212,7 +209,6 @@ export class AirSettingPage {
   private eventsAirHandler = (data: any) => {
     this.airData = data;
     this.setDetailData();
-    console.log(this.airData);
   }
 
 }

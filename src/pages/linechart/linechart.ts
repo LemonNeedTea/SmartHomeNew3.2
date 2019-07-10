@@ -33,7 +33,6 @@ export class LinechartPage {
       this.parentParams.StartTime=start;
       this.parentParams.StopTime=stop;
     this.device.getWaterlevelMapChartData(this.parentParams).then((res: any) => {
-      console.log(res);
       let config = {
         dw: res.DW
       }

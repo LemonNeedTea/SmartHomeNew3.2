@@ -46,7 +46,6 @@ export class HomePage {
     public el: ElementRef
   ) {
     this.deviceRequest.getWeatherInfo().then(res => {
-      // console.log(res);
       this.weatherinfo = res;
     });
 
@@ -100,14 +99,12 @@ export class HomePage {
     });
   }
   ionViewDidLeave() {
-    // console.log("ionViewWillLeave");
     // this.events.unsubscribe("FnData:51", () => { });
     // this.events.unsubscribe("FnData:50", () => { });
     // this.events.unsubscribe("FnData:54", () => { });
 
   }
   ionViewWillUnload() {
-    // console.log("ionViewWillUnload");
 
   }
   ionViewDidEnter() {

@@ -71,7 +71,6 @@ export class TimerPumpPage {
   }
   getTimerPumpInofo() {
     // let temp=this.tools.getMinuteByTime('1:30');
-    // console.log(this.tools.getTimeStrByMin(90));
     let fnData = Variable.GetFnData('55');
     this.timerOpen = Number(fnData.F551);
     this.startDate = [fnData.F552, fnData.F553];

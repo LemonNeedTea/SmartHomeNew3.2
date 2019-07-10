@@ -37,7 +37,7 @@ export class ValveEastnorthpoolSettingPage {
   }
   private getBeyondState(data: any) {
     if (data) {
-      this.timerState = Boolean(data["-1"]); console.log(this.timerState);
+      this.timerState = Boolean(data["-1"]);
     }
   }
 

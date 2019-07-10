@@ -32,6 +32,8 @@ import { chartToolsProvider } from "../providers/tools/chart";
 import { SocketHelpProvider } from '../providers/tools/socketHelper';
 import { ServerSocket } from '../providers/server-socket.service';
 import { SpeechHelperProvider } from '../providers/tools/speechHelper';
+import { LoadingHelperProvider } from '../providers/tools/loadingHelper';
+
 
 
 
@@ -106,7 +108,7 @@ import { ComponentsModule } from '../components/components.module';
     SpeechHelperProvider,
     Vibration,
     JPush,
-    Device,
+    Device,LoadingHelperProvider
   ]
 })
 export class AppModule { }

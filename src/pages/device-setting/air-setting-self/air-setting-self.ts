@@ -252,7 +252,6 @@ export class AirSettingSelfPage {
   // private eventsAirHandler = (data: any) => {
   //   this.airData = data;
   //   this.setDetailData();
-  //   console.log(this.airData);
   // }
 
 }

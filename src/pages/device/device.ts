@@ -97,7 +97,6 @@ export class DevicePage {
     this.auto = Variable.isAuto;
     this.events.subscribe("FnData:isAuto", (data) => {
       this.auto = data;
-      //  console.log(data);
     });
   }
   getFn51Data() {
@@ -111,13 +110,11 @@ export class DevicePage {
   // ionViewDidLeave() {
   //   this.events.unsubscribe("FnData:51",()=>{});
   //   this.events.unsubscribe("FnData:isAuto",()=>{});
-  //   console.log('ionViewDidLeave')
   // }
   getTypeDeviceNum(data: any) {
     this.sumNumOPen = 0;
     let sumNumOPen = 0;
     let result = JSON.parse(JSON.stringify(this.openStateNumArr));
-    // console.log(result);
 
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
@@ -129,7 +126,6 @@ export class DevicePage {
           result[typeID]++;
         }
       }
-      // console.log(result);
 
     };
     this.sumNumOPen = sumNumOPen;

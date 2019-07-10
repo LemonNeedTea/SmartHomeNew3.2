@@ -70,7 +70,7 @@ export class WellpumpPage {
   ionViewWillEnter() {
 
   }
-  ionViewWillUnload() {console.log("leave");
+  ionViewWillUnload() {
     this.events.unsubscribe("FnData:50", this.eventsFn50Handler);
     this.events.unsubscribe("FnData:51", this.eventsFn51Handler);
     this.events.unsubscribe("FnData:52", this.eventsFn52Handler);
@@ -127,13 +127,13 @@ export class WellpumpPage {
         ObjType: data.F_SortIndex,
         StartTime: start,
         StopTime: stop,
-        DateType: EnumDateType.Hour,
+        // DateType: EnumDateType.Hour,
         FnID: data.F_GPRSFnID
       };
-      this.device.getEnergyChartData(params).then((res: any) => {
+      this.device.getWaterlevelMapChartData(params).then((res: any) => {
         let config = {
           dw: res.DW
-        };
+        }
         this.chart.getLineChart('waterlevelChart', res.DataList, config);
       });
 
