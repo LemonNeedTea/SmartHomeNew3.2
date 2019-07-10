@@ -329,7 +329,7 @@ export class DeviceRequestsProvider {
   getMenuList(data: string) {
     return this.http.postMain("/EnergyAppData/GetMenuList", { Type: data }, false);
   }
-  getEnergyQuery(data: number,loading:boolean=false) {
+  getEnergyQuery(data: number, loading: boolean = false) {
     return this.http.postMain("/EnergyAppData/GetEnergyQuery", { ID: data }, loading);
   }
   getDeviceGetInfoDataByID(data: number) {
@@ -347,6 +347,11 @@ export class DeviceRequestsProvider {
   getAirParamsDataList() {
     return this.http.postMain("/EnergyAppData/GetAirparamsDataList");
   }
+  getEnergyPieChart(params: any) {
+    return this.http.postMain("/EnergyAppData/GetEnergyPieChart", params);
+  }
+
+
 
 }
 

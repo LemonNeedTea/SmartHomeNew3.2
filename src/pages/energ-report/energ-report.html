@@ -1,0 +1,36 @@
+<!--
+  Generated template for the EnergReportPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{parentParams.F_MenuName}}</ion-title>
+
+    
+  </ion-navbar>
+  <div style="padding: 10px">
+      <ion-segment [(ngModel)]="pet">
+          <ion-segment-button value="day">
+              日
+          </ion-segment-button>
+          <ion-segment-button value="month">
+              月
+          </ion-segment-button>
+          <ion-segment-button value="year">
+              年
+          </ion-segment-button>
+        </ion-segment>
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <div class="chart-wrapper">
+    <canvas id="mountNode" style="width: 100%"></canvas>
+  </div>
+  <div class="chart-wrapper">
+      <canvas id="mountNode1" style="width: 100%"></canvas>
+    </div>
+</ion-content>

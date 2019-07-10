@@ -1,12 +1,72 @@
 import { Injectable } from '@angular/core';
-import F2 from '@antv/f2';
+// import F2 from '@antv/f2';
+import F2 from "@antv/f2/lib/index-all";
 
 @Injectable()
 export class chartToolsProvider {
     private chartObj: any = {};
 
     constructor() {
-        this.chartObj={};
+        this.chartObj = {};
+    }
+    getPieChart(id: string, data: any) {
+        if (this.chartObj[id]) {
+            this.chartObj[id].clear();
+            this.chartObj[id] = null;
+        }
+        var chart = new F2.Chart({
+            id: id,
+            pixelRatio: window.devicePixelRatio,
+            height: 280,
+
+        });
+        chart.source(data, {
+            percent: {
+                formatter: function formatter(val) {
+                    return val * 100 + '%';
+                }
+            }
+        });
+        chart.coord('polar', {
+            transposed: true,
+            radius: 0.85,
+            innerRadius: 0.618
+        });
+        chart.axis(false);
+        chart.legend(false);
+        chart.tooltip(false);
+        chart.guide().html({
+            position: ['50%', '50%'],
+            html: '<div style="text-align: center;width: 100px;height: 72px;vertical-align: middle;">' + `<p id="number${id}" style="font-size: 28px;margin: 10px 10px 5px;font-weight: bold;"></p>` + `<p id="name${id}" style="font-size: 12px;margin: 0;"></p>` + '</div>'
+        });
+        chart.interval().position('1*number').adjust('stack').color('type', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14']);
+        chart.pieLabel({
+            sidePadding: 30,
+            activeShape: true,
+            label1: function label1(data) {
+                return {
+                    text: data.number * 100 + "%",
+                    fill: '#343434',
+                    fontWeight: 'bold'
+                };
+            },
+            label2: function label2(data) {
+                return {
+                    text: data.type,
+                    fill: '#999'
+                };
+            },
+            onClick: function onClick(ev) {
+                var data = ev.data;
+                if (data) {
+
+                    document.getElementById(`name${id}`).innerText = data.type;
+                    document.getElementById(`number${id}`).innerText = data.number * 100 + "%";
+                }
+            },
+        });
+        chart.render();
+        this.chartObj[id] = chart;
     }
     getLineChart(id: string, data: any, config: any) {
         return this.getChart(id, 'line', data, config);
