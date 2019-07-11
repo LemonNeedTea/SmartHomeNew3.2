@@ -9,7 +9,7 @@ export class chartToolsProvider {
     constructor() {
         this.chartObj = {};
     }
-    getPieChart(id: string, data: any) {
+    getPieChart(id: string, data: any,dw:string) {
         if (this.chartObj[id]) {
             this.chartObj[id].clear();
             this.chartObj[id] = null;
@@ -45,7 +45,7 @@ export class chartToolsProvider {
             activeShape: true,
             label1: function label1(data) {
                 return {
-                    text: data.number * 100 + "%",
+                    text: data.number +dw,//* 100 + "%",
                     fill: '#343434',
                     fontWeight: 'bold'
                 };
@@ -61,7 +61,8 @@ export class chartToolsProvider {
                 if (data) {
 
                     document.getElementById(`name${id}`).innerText = data.type;
-                    document.getElementById(`number${id}`).innerText = data.number * 100 + "%";
+                    let value=(data.number/data.const) * 100;
+                    document.getElementById(`number${id}`).innerText = value.toFixed(2) + "%";
                 }
             },
         });

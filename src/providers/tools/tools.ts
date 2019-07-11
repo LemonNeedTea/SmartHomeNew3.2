@@ -158,6 +158,15 @@ export class ToolsProvider {
     result.DateType = EnumDateType.Day;
     return result;
   }
+  getNowDay() {
+    let result: any = {};
+    let now = Moment();
+    result.StartTime = now.format('YYYY-MM-DD');
+    result.StopTime = now.add(1, 'd').format('YYYY-MM-DD');
+    result.DateType = 'day';
+
+    return result;
+  }
   getDayRange(day?: string) {
     let result: any = {};
     if (day == null) {
@@ -350,7 +359,7 @@ export class ToolsProvider {
   }
 
   numTo15BitArr(num: number): Array<Number> {
-    let result: Array<Number>=[];
+    let result: Array<Number> = [];
     let existLength = 0;
     if (num != null) {
       let str = num.toString(2);
