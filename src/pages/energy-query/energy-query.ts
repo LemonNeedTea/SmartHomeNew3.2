@@ -61,7 +61,7 @@ export class EnergyQueryPage {
     if (this.child.type == 'message') {
 
     } else {
-      this.device.getEnergyQuery(params.F_ID).then((res:any) => {
+      this.device.getEnergyQuery(params.F_ID,true).then((res:any) => {
         this.objType=res[0].F_SortIndex;
         this.objList=res;
       });
