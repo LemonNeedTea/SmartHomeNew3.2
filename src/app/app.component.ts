@@ -48,7 +48,7 @@ export class MyApp {
         this.vibrate = res;
       });
       //自动登录
-      this.autoLogin();
+      // this.autoLogin();
     });
 
     // 
@@ -101,13 +101,13 @@ export class MyApp {
   /**
    * 自动登录
    */
-  autoLogin() {
-    this.loginRequest.autoLogin().then(res => {
-      this.rootPage = TabsPage;
-    }, err => {
-      this.rootPage = LoginPage;
-    });
-  }
+  // autoLogin() {
+  //   this.loginRequest.autoLogin().then(res => {
+  //     this.rootPage = TabsPage;
+  //   }, err => {
+  //     this.rootPage = LoginPage;
+  //   });
+  // }
 
   logout() {
     this.loginRequest.removeUserInfo();

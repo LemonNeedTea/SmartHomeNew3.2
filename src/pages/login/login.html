@@ -10,32 +10,51 @@
   </ion-navbar>
 </ion-header> -->
 
-<ion-content padding >
+<ion-content padding>
   <div ion-text color="primary" text-center class="logo">
-    <img src="../../assets/img/login/logo@3x.png"/>
+    <img src="../../assets/img/login/logo@3x.png" />
     <!-- <ion-icon  name="ionic" style="font-size :4em;" padding-right></ion-icon> -->
-    <p  >家居智慧能源管理</p>
+    <p>家居智慧能源管理</p>
   </div>
-  <form class="list-form">
-    <ion-item  >
+  <div class="list-form">
+    <ion-item>
       <!-- <ion-label fixed><ion-icon color="primary" name="person" item-start></ion-icon></ion-label> -->
-      <ion-label floating><ion-icon name="person" item-start ></ion-icon>用 户 名</ion-label>
-      <ion-input type="text"  #username></ion-input>
+      <ion-label floating>
+        <ion-icon name="person" item-start></ion-icon>用 户 名
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="username" [disabled]='!isEdit'></ion-input>
     </ion-item>
-    <ion-item >
+    <ion-item>
       <!-- <ion-label fixed><ion-icon color="primary" name="lock" item-start></ion-icon></ion-label> -->
-      <ion-label floating><ion-icon name="lock" item-start ></ion-icon>密 码</ion-label>
-      <ion-input type="password" #password clearInput="true"></ion-input>
+      <ion-label floating>
+        <ion-icon name="lock" item-start></ion-icon>密 码
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="password" clearInput="true" [disabled]='!isEdit'></ion-input>
     </ion-item>
     <!-- <ion-item no-lines style="margin-top:20px;font-size:1.4rem;">
       <label item-right>记住密码</label>
       <ion-toggle></ion-toggle>
     </ion-item> -->
-  </form>
+  </div>
   <!-- <div > -->
-    <button button ion-button round tappable  margin-top icon-right block color="primary"  (click)="Login(username, password)">
+  <!-- <button button ion-button round tappable  margin-top icon-right block color="primary"  (click)="Login(username, password)">
       
       登 录<ion-icon name="arrow-round-forward"></ion-icon>
+    </button> -->
+  <div style='text-align: center;margin-top: 65px'>
+    <button class="login" id='login' (click)="login(username, password)" >
+      <p>登 录</p>
+      <div class="loading">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <svg class="checkmark" width='30px' height='30px' stroke='white' fill='none'>
+        <polyline points='2 10 12,18 28,2'></polyline>
+      </svg>
     </button>
+  </div>
+
   <!-- </div> -->
 </ion-content>

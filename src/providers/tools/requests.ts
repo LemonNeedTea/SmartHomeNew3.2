@@ -49,7 +49,7 @@ export class LoginRequestsProvider {
           'RegistrationId': res,
         };
 
-        this.http.post("/EnergyAppLogin/LoginCheck", params).then(res => {
+        this.http.post("/EnergyAppLogin/LoginCheck", params,false).then(res => {
           if (res["State"] == true) {
             let userInfo = res["UserInfo"];
             userInfo['txtUser'] = username;
@@ -81,6 +81,10 @@ export class LoginRequestsProvider {
 
     });
 
+  }
+  isExistUserInfoData(){
+    let userinfo = this.storage.get(this.config.userInfoSotrageName);
+    return userinfo;
   }
   autoLogin() {
     return new Promise((resolve, reject) => {

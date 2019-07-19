@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Events, MenuController, Keyboard } from 'ionic-angular';
 import { TabsPage } from "../tabs/tabs";
 import { LoginRequestsProvider } from '../../providers/tools/requests';
+import { ToolsProvider } from '../../providers/tools/tools';
 
 
 
@@ -18,6 +19,9 @@ import { LoginRequestsProvider } from '../../providers/tools/requests';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  username: string;
+  password: string;
+  isEdit = true;
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
@@ -25,20 +29,79 @@ export class LoginPage {
     private loginRequest: LoginRequestsProvider,
     private events: Events,
     private menuCtrl: MenuController,
-    private keyboard: Keyboard) {
+    private keyboard: Keyboard,
+    private tools: ToolsProvider) {
   }
   ionViewDidLoad() {
     this.menuCtrl.enable(false);
+    this.autoLogin();
   }
   ionViewDidLeave() {
     this.menuCtrl.enable(true);
   }
-  Login(username: HTMLInputElement, password: HTMLInputElement) {
-    // this.keyboard.close();
-    // this.navCtrl.setRoot(TabsPage);
-    this.loginRequest.login(username.value, password.value).then(res => {
-      this.navCtrl.setRoot(TabsPage);
-    }, err => { });
+  // Login() {
+  //   // this.keyboard.close();
+  //   // this.navCtrl.setRoot(TabsPage);
+  //   this.loginRequest.login(this.username, this.password).then(res => {
+  //     this.navCtrl.setRoot(TabsPage);
+  //   }, err => { });
 
+  // }
+  login() {
+    if(this.isEdit==false) return;
+    this.isEdit = false;
+    console.log('sss')
+    this.removeClass();
+    let loginObj = document.getElementById('login');
+
+    loginObj.classList.add("active");
+    try {
+      setTimeout(() => {
+        this.loginRequest.login(this.username, this.password).then(res => {
+          setTimeout(() => {
+            loginObj.classList.add('verity');
+            setTimeout(() => {
+              this.navCtrl.setRoot(TabsPage);
+
+            }, 1000);
+
+          }, 1000);
+        }, err => {
+          this.removeClass();
+          this.isEdit = true;
+        });
+      }, 1000);
+
+    } catch (error) {
+      this.removeClass();
+      this.isEdit = true;
+
+    }
+
+
+  }
+  removeClass() {
+    let loginObj = document.getElementById('login');
+    if (loginObj.classList.contains("active")) {
+      loginObj.classList.remove("active");
+    }
+    if (loginObj.classList.contains("verity")) {
+      loginObj.classList.remove("verity");
+    }
+  }
+  autoLogin() {
+    let userinfo = this.loginRequest.isExistUserInfoData();
+    if (userinfo) {
+      this.username = userinfo["txtUser"];
+      this.password = userinfo["txtPwd"];
+      this.login();
+    }
+
+
+    // this.loginRequest.autoLogin().then(res => {
+    //   this.rootPage = TabsPage;
+    // }, err => {
+    //   this.rootPage = LoginPage;
+    // });
   }
 }
