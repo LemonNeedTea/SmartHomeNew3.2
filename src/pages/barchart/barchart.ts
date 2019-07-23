@@ -42,7 +42,7 @@ export class BarchartPage {
     this.device.getEnergyChartData(params).then((res: any) => {
       this.dataList = res.DataList;
       this.dw = res.DW;
-      this.sum = res.Sum;
+      this.sum = Number(res.Sum);
       let config = {
         dw: this.dw
       }
