@@ -39,7 +39,7 @@ export class chartToolsProvider {
             position: ['50%', '50%'],
             html: '<div style="text-align: center;width: 100px;height: 72px;vertical-align: middle;">' + `<p id="number${id}" style="font-size: 25px;margin: 10px 10px 5px;font-weight: bold;"></p>` + `<p id="name${id}" style="font-size: 12px;margin: 0;"></p>` + '</div>'
         });
-        chart.interval().position('1*number').adjust('stack').color('type', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14']);
+        chart.interval().position('1*number').adjust('stack').color('type', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14','#88b7c9','#66acfd','#8b7991','#6699cc']);
         chart.pieLabel({
             sidePadding: 30,
             activeShape: true,
