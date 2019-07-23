@@ -1,8 +1,13 @@
 page-door-setting {
-  .selected {
-    background-color: color($colors, primary) !important;
-    color: #ffff !important;
-  }
+  .blue{
+    color: color($colors, primary) !important;
+}
+.white{
+    color: white !important;
+}
+.selected {
+background-color: color($colors, primary) !important;
+}
   .curtain-img {
     // padding:
     background: rgba(16, 142, 233, 0.1);

@@ -17,19 +17,19 @@
   <my-title name="状态"></my-title>
   <div class="curtain-img" padding>
     <div>
-      <img src="../../../assets//img//home//icon-devicesetting//curtain-pic.png" float-left>
+      <img src="../../../assets/img/home/icon-devicesetting/curtain-pic.png" float-left>
     </div>
   </div>
   <ion-grid margin-top>
     <ion-row>
       <ion-col text-center>
-        <button ion-button outline [ngClass]="{'selected': state==1}" (click)="setDeviceState(1)" [disabled]="auto">打开</button>
+        <button ion-button outline [ngClass]="{'selected': state==1}" (click)="setDeviceState(1)" [disabled]="auto"><span [ngClass]="{true:'white',false:'blue'}[state==1]">打开</span></button>
       </ion-col>
       <ion-col text-center>
-        <button ion-button outline [ngClass]="{'selected': state==2}" (click)="setDeviceState(2)" [disabled]="auto">停止</button>
+        <button ion-button outline [ngClass]="{'selected': state==2}" (click)="setDeviceState(2)" [disabled]="auto"><span [ngClass]="{true:'white',false:'blue'}[state==2]">停止</span></button>
       </ion-col>
       <ion-col text-center>
-        <button ion-button outline [ngClass]="{'selected': state==0}" (click)="setDeviceState(0)" [disabled]="auto">关闭</button>
+        <button ion-button outline [ngClass]="{'selected': state==0}" (click)="setDeviceState(0)" [disabled]="auto"><span [ngClass]="{true:'white',false:'blue'}[state==0]">关闭</span></button>
 
       </ion-col>
     </ion-row>
