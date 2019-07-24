@@ -64,6 +64,7 @@ export class SocketHelpProvider {
             DeviceID: id,
             SetState: Number(state)
         };
+        console.log(param);
         this.socket.sendMessage(param);
         this.tools.vibrate();
         this.presentLoading(name, "51");
