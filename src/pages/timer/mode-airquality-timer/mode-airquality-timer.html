@@ -1,0 +1,79 @@
+<!--
+  Generated template for the ModeAirqualityTimerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon ios="md-close" md="md-close"></ion-icon>
+      </button>
+
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="complate()">
+        <ion-icon ios="md-checkmark" md="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="setting-page">
+
+    <ion-list>
+      <ion-item>
+        <ion-label>净化器关联控制启用</ion-label>
+        <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
+      </ion-item>
+      <ion-item>
+      <ion-label>新风机关联控制启用</ion-label>
+      <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
+    </ion-item>
+
+    </ion-list>
+    <ion-list >
+        <ion-item>
+            <ion-label>PM2.5下限</ion-label>
+            <ion-input type="number" text-right placeholder="(ug/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>PM2.5上限</ion-label>
+              <ion-input type="number" text-right placeholder="(ug/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+            </ion-item>
+    </ion-list>
+
+    <ion-list >
+        <ion-item>
+            <ion-label>TVOC下限</ion-label>
+            <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>TVOC上限</ion-label>
+              <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+            </ion-item>
+    </ion-list>
+
+    <ion-list >
+        <ion-item>
+            <ion-label>CH2O下限</ion-label>
+            <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>CH2O上限</ion-label>
+              <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+            </ion-item>
+    </ion-list>
+
+    <ion-list >
+        <ion-item>
+            <ion-label>CO2下限</ion-label>
+            <ion-input type="number" text-right placeholder="(10ppm)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>CO2上限</ion-label>
+              <ion-input type="number" text-right placeholder="(10ppm)" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
+            </ion-item>
+    </ion-list>
+</ion-content>

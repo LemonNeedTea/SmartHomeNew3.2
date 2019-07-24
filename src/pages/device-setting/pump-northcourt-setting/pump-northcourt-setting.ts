@@ -20,6 +20,8 @@ export class PumpNorthcourtSettingPage {
   id: string;
   state: boolean;
   auto: boolean;
+  timerState: boolean;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -32,6 +34,14 @@ export class PumpNorthcourtSettingPage {
     this.events.subscribe("FnData:51", this.eventsFn51Handler);
     this.auto = Variable.isAuto;
     this.events.subscribe("FnData:isAuto", this.eventsFnAutoHandler);
+    let fn55Data = Variable.GetFnData('55');
+    this.getTimerState(fn55Data);
+    this.events.subscribe("FnData:55", this.eventsFn55Handler);
+  }
+  private getTimerState(data: any) {
+    if (data) {
+      this.timerState = !Boolean(Number(data["F5547"]));
+    }
   }
 
   ionViewDidLoad() {
@@ -53,6 +63,7 @@ export class PumpNorthcourtSettingPage {
   ionViewDidLeave() {
     this.events.unsubscribe("FnData:51", this.eventsFn51Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
+    this.events.unsubscribe("FnData:55", this.eventsFn55Handler);
 
   }
   /**start**/
@@ -61,6 +72,9 @@ export class PumpNorthcourtSettingPage {
   }
   private eventsFn51Handler = (data: any) => {
     this.getDeviceState(data);
+  }
+  private eventsFn55Handler = (data: any) => {
+    this.getTimerState(data);
   }
   /**end***/
 }

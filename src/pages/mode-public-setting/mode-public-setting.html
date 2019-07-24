@@ -15,7 +15,7 @@
 
 <ion-content>
   <ion-list class="my-list">
-    <ion-item (click)="presentShowModal(item.F_Url)" *ngFor="let item of dataList">
+    <ion-item (click)="presentShowModal(item)" *ngFor="let item of dataList">
       <div item-start class="start" [ngClass]="item.F_Color">
         <img src='../../assets/home/{{item.F_Icon}}'>
       </div>

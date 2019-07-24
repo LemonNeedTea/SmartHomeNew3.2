@@ -30,7 +30,7 @@ export class ModePublicSettingPage {
   ionViewDidLoad() {
   }
   presentShowModal(page: any) {
-    let profileModal = this.modalCtrl.create(page);
+    let profileModal = this.modalCtrl.create(page["F_Url"],{Data:page});
     profileModal.onDidDismiss(data => {
     });
     profileModal.present();
