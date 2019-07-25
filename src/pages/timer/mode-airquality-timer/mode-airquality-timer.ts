@@ -18,6 +18,7 @@ import { CurtainModeParams, AirQualityParams } from '../../../providers/model/mo
 export class ModeAirqualityTimerPage {
 
   timerOpen: any;
+  timerOpen1: any;
   maxNum: number;
   minNum: number;
   maxNum2: number;
@@ -56,6 +57,7 @@ export class ModeAirqualityTimerPage {
   getParams() {
     let params = new AirQualityParams();//注意组装顺序
     params.timerOpen = Number(this.timerOpen);
+    params.timerOpen1 = Number(this.timerOpen1);
     params.maxNum = this.maxNum;
     params.minNum = this.minNum;
     params.maxNum2 = this.maxNum2;
@@ -77,7 +79,7 @@ export class ModeAirqualityTimerPage {
   getData() {
     let fnData = Variable.GetFnData('55');
     this.timerOpen = Number(fnData.F556);
-    this.timerOpen = Number(fnData.F557);
+    this.timerOpen1 = Number(fnData.F557);
     this.maxNum = Number(fnData.F558);
     this.minNum = Number(fnData.F559);
 
