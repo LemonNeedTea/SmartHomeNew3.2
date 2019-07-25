@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
 import { ToolsProvider } from '../../../providers/tools/tools';
-import { CurtainModeParams } from '../../../providers/model/model';
+import { CurtainModeParams, AirQualityParams } from '../../../providers/model/model';
 /**
  * Generated class for the ModeAirqualityTimerPage page.
  *
@@ -17,12 +17,19 @@ import { CurtainModeParams } from '../../../providers/model/model';
 })
 export class ModeAirqualityTimerPage {
 
-  loop: any;
   timerOpen: any;
-  startDate: any;
-  stopDate: any;
-  startDate1: any;
-  stopDate1: any;
+  maxNum: number;
+  minNum: number;
+  maxNum2: number;
+  minNum2: number;
+
+  maxNum3: number;
+  minNum3: number;
+
+  maxNum4: number;
+  minNum4: number;
+
+
   title: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -47,37 +54,40 @@ export class ModeAirqualityTimerPage {
 
   }
   getParams() {
-    let params = new CurtainModeParams();//注意组装顺序
+    let params = new AirQualityParams();//注意组装顺序
     params.timerOpen = Number(this.timerOpen);
-    params.loop = this.getfullMonth(this.loop);
-    params.starDate = this.startDate;
-    params.stopDate = this.stopDate;
-    params.starDate1 = this.startDate1;
-    params.stopDate1 = this.stopDate1;
+    params.maxNum = this.maxNum;
+    params.minNum = this.minNum;
+    params.maxNum2 = this.maxNum2;
+    params.minNum2 = this.minNum2;
+    params.maxNum3 = this.maxNum3;
+    params.minNum3 = this.minNum3;
+    params.maxNum4 = this.maxNum4;
+    params.minNum4 = this.minNum4;
     return params;
   }
-  getfullMonth(data: Array<number>): Array<number> {
-    let count = data.length;
-    for (let i = 0; i < 6 - count; i++) {
-      data.push(0);
-    }
-    return data;
-  }
+
   checkParam(): boolean {
-    if (this.loop.length > 6) {
-      this.tools.presentToast("最多选择6个月");
-      return false;
-    }
+    // let reg=/[1-200]/;
+    // if(reg.test(this.maxNum+"")){
+    //   this.tools.presentToast(xia xian)
+    // }
     return true;
   }
   getData() {
     let fnData = Variable.GetFnData('55');
-    this.loop = this.tools.getArrayByFnData(fnData, '55', 33, 6);
-    this.timerOpen = Number(fnData.F5532);
-    this.startDate = [fnData.F5539, fnData.F5540];
-    this.stopDate = [fnData.F5541, fnData.F5542];
-    this.startDate1 = [fnData.F5543, fnData.F5544];
-    this.stopDate1 = [fnData.F5545, fnData.F5546];
-  }
+    this.timerOpen = Number(fnData.F556);
+    this.timerOpen = Number(fnData.F557);
+    this.maxNum = Number(fnData.F558);
+    this.minNum = Number(fnData.F559);
 
+    this.maxNum2 = Number(fnData.F5510);
+    this.minNum2 = Number(fnData.F5511);
+
+    this.maxNum3 = Number(fnData.F5512);
+    this.minNum3 = Number(fnData.F5513);
+
+    this.maxNum4 = Number(fnData.F5514);
+    this.minNum4 = Number(fnData.F5515);
+  }
 }

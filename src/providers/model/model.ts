@@ -95,3 +95,44 @@ export class LighJWModeParams {
     public runtime: number;
     public runtime1: number;
 }
+
+export class CurtainBrightnessParams {
+    public code: number = 3;
+    public timerOpen: number;
+    public maxNum: Array<any>;
+    public minNum: Array<any>;
+}
+
+export class AirQualityParams {
+    public code: number = 4;
+    public timerOpen: number;
+    public timerOpen1: number;
+    public maxNum: number;
+    public minNum: number;
+    public maxNum2: number;
+    public minNum2: number;
+    public maxNum3: number;
+    public minNum3: number;
+    public maxNum4: number;
+    public minNum4: number;
+}
+
+export class HumidityParams {
+    public code: number = 5;
+    public timerOpen: number;
+    public tempMaxNum1: number;
+    public tempMinNum1: number;
+    public humiMaxNum1: number;
+    public humiMinNum1: number;
+
+    public tempMaxNum2: number;
+    public tempMinNum2: number;
+    public humiMaxNum2: number;
+    public humiMinNum2: number;
+
+    public tempMaxNum3: number;
+    public tempMinNum3: number;
+    public humiMaxNum3: number;
+    public humiMinNum3: number;
+
+}

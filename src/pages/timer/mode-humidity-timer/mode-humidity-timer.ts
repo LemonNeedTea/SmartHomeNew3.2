@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
 import { ToolsProvider } from '../../../providers/tools/tools';
-import { CurtainModeParams } from '../../../providers/model/model';
+import { CurtainModeParams, HumidityParams } from '../../../providers/model/model';
 /**
  * Generated class for the ModeHumidityTimerPage page.
  *
@@ -17,19 +17,30 @@ import { CurtainModeParams } from '../../../providers/model/model';
 })
 export class ModeHumidityTimerPage {
 
-  loop: any;
   timerOpen: any;
-  startDate: any;
-  stopDate: any;
-  startDate1: any;
-  stopDate1: any;
-  title:string;
+  tempMaxNum1: number;
+  tempMinNum1: number;
+  humiMaxNum1: number;
+  humiMinNum1: number;
+
+  tempMaxNum2: number;
+  tempMinNum2: number;
+  humiMaxNum2: number;
+  humiMinNum2: number;
+
+  tempMaxNum3: number;
+  tempMinNum3: number;
+  humiMaxNum3: number;
+  humiMinNum3: number;
+
+
+  title: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private viewCtrl: ViewController,
     private tools: ToolsProvider) {
-      let data = this.navParams.get("Data");
-      this.title = data["F_Name"];
+    let data = this.navParams.get("Data");
+    this.title = data["F_Name"];
     this.getData();
   }
 
@@ -47,37 +58,50 @@ export class ModeHumidityTimerPage {
 
   }
   getParams() {
-    let params = new CurtainModeParams();//注意组装顺序
+    let params = new HumidityParams();//注意组装顺序
     params.timerOpen = Number(this.timerOpen);
-    params.loop = this.getfullMonth(this.loop);
-    params.starDate = this.startDate;
-    params.stopDate = this.stopDate;
-    params.starDate1 = this.startDate1;
-    params.stopDate1 = this.stopDate1;
+    params.tempMaxNum1 = this.tempMaxNum1;
+    params.tempMinNum1 = this.tempMinNum1;
+    params.humiMaxNum1 = this.humiMaxNum1;
+    params.humiMinNum1 = this.humiMinNum1;
+
+    params.tempMaxNum2 = this.tempMaxNum2;
+    params.tempMinNum2 = this.tempMinNum2;
+    params.humiMaxNum2 = this.humiMaxNum2;
+    params.humiMinNum2 = this.humiMinNum2;
+
+    params.tempMaxNum3 = this.tempMaxNum3;
+    params.tempMinNum3 = this.tempMinNum3;
+    params.humiMaxNum3 = this.humiMaxNum3;
+    params.humiMinNum3 = this.humiMinNum3;
+    
     return params;
   }
-  getfullMonth(data: Array<number>): Array<number> {
-    let count = data.length;
-    for (let i = 0; i < 6 - count; i++) {
-      data.push(0);
-    }
-    return data;
-  }
+
   checkParam(): boolean {
-    if (this.loop.length > 6) {
-      this.tools.presentToast("最多选择6个月");
-      return false;
-    }
+    // let reg=/[1-200]/;
+    // if(reg.test(this.maxNum+"")){
+    //   this.tools.presentToast(xia xian)
+    // }
     return true;
   }
   getData() {
     let fnData = Variable.GetFnData('55');
-    this.loop = this.tools.getArrayByFnData(fnData, '55', 33, 6);
-    this.timerOpen = Number(fnData.F5532);
-    this.startDate = [fnData.F5539, fnData.F5540];
-    this.stopDate = [fnData.F5541, fnData.F5542];
-    this.startDate1 = [fnData.F5543, fnData.F5544];
-    this.stopDate1 = [fnData.F5545, fnData.F5546];
-  }
+    this.timerOpen = Number(fnData.F5516);
 
+    this.tempMaxNum1 = Number(fnData.F5517);
+    this.tempMinNum1 = Number(fnData.F5518);
+    this.humiMaxNum1 = Number(fnData.F5519);
+    this.humiMinNum1 = Number(fnData.F5520);
+
+    this.tempMaxNum2 = Number(fnData.F5521);
+    this.tempMinNum2 = Number(fnData.F5522);
+    this.humiMaxNum2 = Number(fnData.F5523);
+    this.humiMinNum2 = Number(fnData.F5524);
+
+    this.tempMaxNum3 = Number(fnData.F5525);
+    this.tempMinNum3 = Number(fnData.F5526);
+    this.humiMaxNum3 = Number(fnData.F5527);
+    this.humiMinNum3 = Number(fnData.F5528);
+  }
 }

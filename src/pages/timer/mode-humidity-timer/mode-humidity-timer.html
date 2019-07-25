@@ -22,14 +22,78 @@
 </ion-header>
 
 <ion-content class="setting-page">
+
   <ion-list>
     <ion-item>
-      <ion-label>定时开启</ion-label>
+      <ion-label>关联控制启用</ion-label>
       <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
     </ion-item>
-    <ion-item>
-        <ion-label>最高液位</ion-label>
-        <ion-input type="number" text-right placeholder="1~200" [max]=200 min=1 step=5 [(ngModel)]="maxLevel" clearInput="true" ></ion-input>
-      </ion-item>
   </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>策略1 温度下限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="tempMaxNum1"
+        clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>策略1 温度上限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="tempMinNum1"
+        clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label>策略1 湿度下限</ion-label>
+    <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="humiMaxNum1"
+      clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>策略1 湿度上限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="humiMinNum1"
+        clearInput="true"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>策略2 温度下限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="tempMaxNum2"
+        clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>策略2 温度上限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="tempMinNum2"
+        clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label>策略2 湿度下限</ion-label>
+    <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="humiMaxNum2"
+      clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>策略2 湿度上限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="humiMinNum2"
+        clearInput="true"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>策略3 温度下限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="tempMaxNum3"
+        clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>策略3 温度上限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="tempMinNum2"
+        clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label>策略3 湿度下限</ion-label>
+    <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="humiMaxNum3"
+      clearInput="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>策略3 湿度上限</ion-label>
+      <ion-input type="number" text-right placeholder="1-200" [max]=200 min=1 step=5 [(ngModel)]="humiMinNum3"
+        clearInput="true"></ion-input>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

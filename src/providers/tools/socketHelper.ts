@@ -162,6 +162,7 @@ export class SocketHelpProvider {
             MonitorID: 1,
             ControlData: agreementID
         }
+        console.log(param);
         this.socket.sendMessage(param);
 
     }
