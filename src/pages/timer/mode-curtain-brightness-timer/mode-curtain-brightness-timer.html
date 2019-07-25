@@ -28,12 +28,12 @@
         <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
       </ion-item>
       <ion-item>
-          <ion-label>开照度阀值</ion-label>
-          <ion-input type="number" text-right placeholder="1~200" [max]=200 min=1 step=5 [(ngModel)]="maxNum" clearInput="true" ></ion-input>
+          <ion-label>开照度阀值<span class="dw">(Lux)</span></ion-label>
+          <ion-input type="number" text-right placeholder="0~65535"  min=1 step=5 [(ngModel)]="maxNum" clearInput="true" ></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>关照度阀值</ion-label>
-            <ion-input type="number" text-right placeholder="1~200" [max]=200 min=1 step=5 [(ngModel)]="minNum" clearInput="true" ></ion-input>
+            <ion-label>关照度阀值<span class="dw">(Lux)</span></ion-label>
+            <ion-input type="number" text-right placeholder="0~65535"  min=1 step=5 [(ngModel)]="minNum" clearInput="true" ></ion-input>
           </ion-item>
     </ion-list>
 </ion-content>

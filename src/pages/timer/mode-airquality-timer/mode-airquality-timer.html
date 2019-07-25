@@ -22,58 +22,66 @@
 </ion-header>
 <ion-content class="setting-page">
 
-    <ion-list>
-      <ion-item>
-        <ion-label>净化器关联控制启用</ion-label>
-        <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
-      </ion-item>
-      <ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label>净化器关联控制启用</ion-label>
+      <ion-toggle [(ngModel)]="timerOpen"></ion-toggle>
+    </ion-item>
+    <ion-item>
       <ion-label>新风机关联控制启用</ion-label>
       <ion-toggle [(ngModel)]="timerOpen1"></ion-toggle>
     </ion-item>
 
-    </ion-list>
-    <ion-list >
-        <ion-item>
-            <ion-label>PM2.5下限</ion-label>
-            <ion-input type="number" text-right placeholder="(ug/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxNum" clearInput="true" ></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label>PM2.5上限</ion-label>
-              <ion-input type="number" text-right placeholder="(ug/m3)" [max]=200 min=1 step=5 [(ngModel)]="minNum" clearInput="true" ></ion-input>
-            </ion-item>
-    </ion-list>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>PM2.5下限<span class="dw">(ug/m3)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="maxNum" clearInput="true">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>PM2.5上限<span class="dw">(ug/m3)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="minNum" clearInput="true">
+      </ion-input>
+    </ion-item>
+  </ion-list>
 
-    <ion-list >
-        <ion-item>
-            <ion-label>TVOC下限</ion-label>
-            <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxNum2" clearInput="true" ></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label>TVOC上限</ion-label>
-              <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="minNum2" clearInput="true" ></ion-input>
-            </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>TVOC下限<span class="dw">(mg/m3)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="maxNum2" clearInput="true">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>TVOC上限<span class="dw">(mg/m3)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="minNum2" clearInput="true">
+      </ion-input>
+    </ion-item>
+  </ion-list>
 
-    <ion-list >
-        <ion-item>
-            <ion-label>CH2O下限</ion-label>
-            <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="maxNum3" clearInput="true" ></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label>CH2O上限</ion-label>
-              <ion-input type="number" text-right placeholder="(0.01mg/m3)" [max]=200 min=1 step=5 [(ngModel)]="minNum3" clearInput="true" ></ion-input>
-            </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>CH2O下限<span class="dw">(mg/m3)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="maxNum3" clearInput="true">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>CH2O上限<span class="dw">(mg/m3)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="minNum3" clearInput="true">
+      </ion-input>
+    </ion-item>
+  </ion-list>
 
-    <ion-list >
-        <ion-item>
-            <ion-label>CO2下限</ion-label>
-            <ion-input type="number" text-right placeholder="(10ppm)" [max]=200 min=1 step=5 [(ngModel)]="maxNum4" clearInput="true" ></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label>CO2上限</ion-label>
-              <ion-input type="number" text-right placeholder="(10ppm)" [max]=200 min=1 step=5 [(ngModel)]="minNum4" clearInput="true" ></ion-input>
-            </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>CO2下限<span class="dw">(ppm)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="maxNum4" clearInput="true">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>CO2上限<span class="dw">(ppm)</span></ion-label>
+      <ion-input type="number" text-right placeholder="0-255" min=1 step=5 [(ngModel)]="minNum4" clearInput="true">
+      </ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>
