@@ -224,6 +224,8 @@ export class SocketHelpProvider {
         }
     }
     socketMessageHandle(data: any) {
+
+        if(data.FnID == '53')
         console.log(data);
         switch (data.Type) {
             case 'get':
@@ -251,12 +253,13 @@ export class SocketHelpProvider {
                 }
             case 'set':
                 {
+                    console.log(data);
                     switch (data.FnID) {
                         case 40://设备设置
                             {
                                 break;
                             }
-                        case 41://模式和定时设置
+                        case 41:case 42://模式和定时设置
                             {
                                 let controlData = Variable.controlDevice;
                                 if (!data.Result) {

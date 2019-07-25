@@ -65,6 +65,7 @@ export class ModeSettingPage {
       });
     });
     this.mode.F_SecurityRun = this.alarm;
+    console.log(paramsData);
     this.device.setModeDetail(this.mode, paramsData).then(res => {
       if (res == true) {
         Variable.socketObject.setModeDetail(this.mode.F_AgreementID);

@@ -25,7 +25,7 @@ export class AirSettingSelfPage {
   paramData: any = {};
   temp: number = 16;
   private tempMax: number = 30;
-  private tempMin: number = 0;
+  private tempMin: number = 16;
   barCircleObj: any;
   modeKV: any = [];
   speedKV: any = [];
@@ -150,10 +150,11 @@ export class AirSettingSelfPage {
   //   this.open = state;
   //   Variable.socketObject.setDeviceState(this.id, this.name, state);
   // }
+
   getTempColumns() {
     let t = [];
-    for (let i = this.tempMin; i <= this.tempMax; i += 0.5) {
-      t.push({ text: `${i.toFixed(1)}`, value: i });
+    for (let i = this.tempMin; i <= this.tempMax; i++) {
+      t.push({ text: `${i}`, value: i });
     }
     this.tempColumns = [
       {
@@ -186,7 +187,7 @@ export class AirSettingSelfPage {
   tempAdd() {
     this.temp = Number(this.temp);
     if (this.temp < this.tempMax) {
-      this.temp += 0.5;
+      this.temp++;
       this.setCircleNum();
       this.setAirTemp();
       // this.sendAir();
@@ -202,7 +203,7 @@ export class AirSettingSelfPage {
     this.temp = Number(this.temp);
 
     if (this.temp > this.tempMin) {
-      this.temp -= 0.5;
+      this.temp--;
       this.setCircleNum();
       this.setAirTemp();
       // this.sendAir();

@@ -362,7 +362,8 @@ export class ToolsProvider {
     let result: Array<Number> = [];
     let existLength = 0;
     if (num != null) {
-      let str = num.toString(2);
+      let n=parseInt(num.toString());
+      let str = n.toString(2);
       for (let i = 0; i < str.length; i++) {
         result.push(Number(str[str.length - i - 1]));
       }
