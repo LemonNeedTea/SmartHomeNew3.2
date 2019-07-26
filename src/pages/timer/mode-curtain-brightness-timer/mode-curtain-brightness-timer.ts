@@ -53,7 +53,7 @@ export class ModeCurtainBrightnessTimerPage {
 
   getTwoValue(num: number): Array<any> {
     let temp = parseInt(num.toString());
-    let num16 = temp.toString(16).padStart(4, '0');
+    let num16 = this.tools.padStart(temp.toString(16), 4, '0');
     let reg = /\w{2}/gi;
     let arr: Array<string> = num16.match(reg);
     let one = parseInt(arr[1], 16);
@@ -66,9 +66,9 @@ export class ModeCurtainBrightnessTimerPage {
   }
 
   checkParam(): boolean {
-    let reg=/[0-65535]/;
-    let msg='';
-    if(!reg.test(this.maxNum.toString())){
+    let reg = /[0-65535]/;
+    let msg = '';
+    if (!reg.test(this.maxNum.toString())) {
       this.tools.presentToast("开光照度值范围0-65535");
       return false;
     }

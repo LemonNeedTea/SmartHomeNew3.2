@@ -357,23 +357,31 @@ export class ToolsProvider {
       temp.classList.remove('animated', animateName);
     });
   }
-
+  padStart(data: string, num: number, str: string): string {
+    if (data.length >= num) return data;
+    let num1 = num - data.length;
+    let addStr = '';
+    for (let i = 0; i < num1; i++) {
+      addStr += '0';
+    }
+    return addStr += data;
+  }
   numTo15BitArr(num: number): Array<any> {
     let result: Array<any> = [];
     let existLength = 0;
     if (num != null) {
       let n = parseInt(num.toString());
 
-      let num16 = n.toString(16).padStart(4, '0');
+      let num16 = this.padStart(n.toString(16), 4, '0');
       let reg = /\w{2}/gi;
       let arr = num16.match(reg);
       let one = arr[0];
       let two = arr[1];
 
       let reg1 = /\w{1}/gi;
-      console.log(one,two);
-      let oneArr = parseInt(two,16).toString(2).padStart(8,'0').match(reg1);
-      let twoArr =parseInt(one,16).toString(2).padStart(8,'0').match(reg1);
+      console.log(one, two);
+      let oneArr = this.padStart(parseInt(two, 16).toString(2), 8, '0').match(reg1);
+      let twoArr = this.padStart(parseInt(one, 16).toString(2), 8, '0').match(reg1);
 
       result = [...oneArr, ...twoArr];
 
@@ -389,7 +397,7 @@ export class ToolsProvider {
       // for (let i = 0; i < 15 - result.length; i++) {
       //   result.push(0);
       // }
-      result=result.reverse();
+      result = result.reverse();
       console.log(result);
     }
     return result;
