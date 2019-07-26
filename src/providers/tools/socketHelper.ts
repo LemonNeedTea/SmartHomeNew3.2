@@ -225,7 +225,7 @@ export class SocketHelpProvider {
     }
     socketMessageHandle(data: any) {
 
-        if(data.FnID == '53')
+        if(data.FnID == '51')
         console.log(data);
         switch (data.Type) {
             case 'get':

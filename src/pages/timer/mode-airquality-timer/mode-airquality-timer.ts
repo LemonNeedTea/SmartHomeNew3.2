@@ -70,7 +70,7 @@ export class ModeAirqualityTimerPage {
   }
 
   checkParam(): boolean {
-    // let reg=/[1-200]/;
+    let reg=/[0-255]/;
     // if(reg.test(this.maxNum+"")){
     //   this.tools.presentToast(xia xian)
     // }

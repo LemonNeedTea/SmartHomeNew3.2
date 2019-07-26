@@ -358,18 +358,39 @@ export class ToolsProvider {
     });
   }
 
-  numTo15BitArr(num: number): Array<Number> {
-    let result: Array<Number> = [];
+  numTo15BitArr(num: number): Array<any> {
+    let result: Array<any> = [];
     let existLength = 0;
     if (num != null) {
-      let n=parseInt(num.toString());
-      let str = n.toString(2);
-      for (let i = 0; i < str.length; i++) {
-        result.push(Number(str[str.length - i - 1]));
-      }
-    }
-    for (let i = 0; i < 15 - result.length; i++) {
-      result.push(0);
+      let n = parseInt(num.toString());
+
+      let num16 = n.toString(16).padStart(4, '0');
+      let reg = /\w{2}/gi;
+      let arr = num16.match(reg);
+      let one = arr[0];
+      let two = arr[1];
+
+      let reg1 = /\w{1}/gi;
+      console.log(one,two);
+      let oneArr = parseInt(two,16).toString(2).padStart(8,'0').match(reg1);
+      let twoArr =parseInt(one,16).toString(2).padStart(8,'0').match(reg1);
+
+      result = [...oneArr, ...twoArr];
+
+
+      //   let str = n.toString(2);
+
+
+
+      //   for (let i = 0; i < str.length; i++) {
+      //     result.push(Number(str[str.length - i - 1]));
+      //   }
+      // }
+      // for (let i = 0; i < 15 - result.length; i++) {
+      //   result.push(0);
+      // }
+      result=result.reverse();
+      console.log(result);
     }
     return result;
   }

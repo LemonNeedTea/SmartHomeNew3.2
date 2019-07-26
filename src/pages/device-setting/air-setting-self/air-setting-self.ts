@@ -5,6 +5,7 @@ import { Variable } from '../../../providers/model/variable';
 import { DeviceRequestsProvider } from '../../../providers/tools/requests'
 import { ToolsProvider } from '../../../providers/tools/tools'
 import { ThrowStmt } from '@angular/compiler';
+import { find } from 'rxjs/operators';
 
 /**
  * Generated class for the AirSettingSelfPage page.
@@ -46,6 +47,7 @@ export class AirSettingSelfPage {
   selectedSpped: any = {};
   openData: any;
   fnID: number;
+  fnID53: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
@@ -66,9 +68,8 @@ export class AirSettingSelfPage {
   getFnData(fnID: number) {
     let fnData = Variable.GetFnData(fnID + "");
     this.getParamsFnData(fnData);
-    this.events.subscribe(`FnData:${fnID}`, res => {
-      this.getParamsFnData(res);
-    });
+    this.fnID53 = fnID;
+    this.events.subscribe(`FnData:${fnID}`, this.eventsFn53Handler);
 
   }
   getParamsFnData(data: any) {
@@ -111,6 +112,7 @@ export class AirSettingSelfPage {
 
   ionViewDidLeave() {
     this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    this.events.unsubscribe(`FnData:${this.fnID53}`, this.eventsFn53Handler);
   }
 
   ionViewDidLoad() {
@@ -140,6 +142,10 @@ export class AirSettingSelfPage {
   }
   private eventsFn51Handler = (data: any) => {
     this.getDeviceState(data);
+  }
+
+  private eventsFn53Handler = (data: any) => {
+    this.getParamsFnData(data);
   }
   getDeviceState(data: any) {
     if (data) {
