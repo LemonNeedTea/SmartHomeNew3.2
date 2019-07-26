@@ -48,6 +48,7 @@ export class AirSettingSelfPage {
   openData: any;
   fnID: number;
   fnID53: number;
+  setInfo: any = { type: '', value: '' };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
@@ -74,6 +75,7 @@ export class AirSettingSelfPage {
   }
   getParamsFnData(data: any) {
 
+    console.log(this.setInfo);
     let code = this.airParams.F_ParamsFnCode;
     let code1 = this.airParams.F_RoomTempFnCode;
     let code2 = this.airParams.F_SettingTempFnCode;
@@ -81,6 +83,8 @@ export class AirSettingSelfPage {
     this.paramsData = data[code] ? data[code] : 0;
     this.roomTempData = data[code1] ? data[code1] : 0;
     this.temp = data[code2] ? Number(data[code2]) : this.tempMin;
+
+    if (this.setInfo.type === 'temp') { if (this.temp == this.setInfo.value) { this.dismissLoading(); } }
 
     // this.paramsData = 33928;
     let str = this.tools.numTo15BitArr(this.paramsData);
@@ -93,6 +97,8 @@ export class AirSettingSelfPage {
         this.modeKV.forEach(element => {
           if (element.F_Bit == index) {
             this.selectedMode = element;
+            if (this.setInfo.type === 'mode') { if (element.F_ID == this.setInfo.value) { this.dismissLoading(); } }
+
             find = true;
           }
         });
@@ -100,6 +106,8 @@ export class AirSettingSelfPage {
           this.speedKV.forEach(element => {
             if (element.F_Bit == index) {
               this.selectedSpped = element;
+              if (this.setInfo.type === 'speed') { if (element.F_ID == this.setInfo.value) { this.dismissLoading(); } }
+
             }
           });
         }
@@ -108,6 +116,22 @@ export class AirSettingSelfPage {
     });
 
     this.setCircleNum();
+  }
+  dismissLoading() {
+    this.setInfo.type = '';
+    this.setInfo.value = '';
+    Variable.socketObject.dismissLoading();
+  }
+  checkSetInfo() {
+    switch (this.setInfo.type) {
+      case 'open': { break; }
+      case 'speed': {
+
+        break;
+      }
+      case 'mode': { break; }
+
+    }
   }
 
   ionViewDidLeave() {
@@ -203,6 +227,8 @@ export class AirSettingSelfPage {
   }
   private setAirTemp() {
     this.setAir(this.tempKv[0]['F_Mode'], Number(this.temp) + "");
+    this.setInfo.type = 'temp';
+    this.setInfo.value = this.temp;
 
   }
   tempSub() {
@@ -226,11 +252,15 @@ export class AirSettingSelfPage {
   setOpen() {
     this.open = !this.open;
     Variable.socketObject.setDeviceState(this.id, this.name, this.open);
+    this.setInfo.type = 'open';
+    this.setInfo.value = this.open;
   }
   setSpeed(data: any) {
     // this.speed = data;
     this.selectedSpped = data;
     this.setAir(data['F_Mode'], data['F_Code']);
+    this.setInfo.type = 'speed';
+    this.setInfo.value = data.F_ID;
 
   }
 
@@ -240,7 +270,8 @@ export class AirSettingSelfPage {
       if (res != null) {
         this.selectedMode = res;
         this.setAir(res['F_Mode'], res['F_Code']);
-
+        this.setInfo.type = 'mode';
+        this.setInfo.value = res.F_ID;
       }
     });
     modalObj.present();

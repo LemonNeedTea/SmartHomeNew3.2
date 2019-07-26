@@ -4,7 +4,6 @@ import { ToolsProvider } from '../tools/tools';
 import { LoadingController, Events } from 'ionic-angular';
 import { WebSocketProvider } from '../../providers/ws';
 import { Subscription } from 'rxjs/Subscription';
-import { variable } from '@angular/compiler/src/output/output_ast';
 
 declare let Baiduasrtts: any;
 @Injectable()
@@ -259,7 +258,7 @@ export class SocketHelpProvider {
                             {
                                 break;
                             }
-                        case 41:case 42://模式和定时设置
+                        case 41://模式和定时设置
                             {
                                 let controlData = Variable.controlDevice;
                                 if (!data.Result) {
