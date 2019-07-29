@@ -74,7 +74,9 @@ export class AirSettingSelfPage {
 
   }
   getParamsFnData(data: any) {
-
+    console.log(data)
+    this.getDeviceState(data.State);
+    data = data.Data;
     console.log(this.setInfo);
     let code = this.airParams.F_ParamsFnCode;
     let code1 = this.airParams.F_RoomTempFnCode;
@@ -135,7 +137,7 @@ export class AirSettingSelfPage {
   }
 
   ionViewDidLeave() {
-    this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     this.events.unsubscribe(`FnData:${this.fnID53}`, this.eventsFn53Handler);
   }
 
@@ -156,17 +158,17 @@ export class AirSettingSelfPage {
 
     });
 
-    this.device.getDeviceGetInfoDataByID(this.id).then(res => {
-      this.fnID = res["F_FnID"];
-      let fnData = Variable.GetFnData(this.fnID.toString());
-      this.getDeviceState(fnData);
-      this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
-    });
+    // this.device.getDeviceGetInfoDataByID(this.id).then(res => {
+    //   this.fnID = res["F_FnID"];
+    //   let fnData = Variable.GetFnData(this.fnID.toString());
+    //   this.getDeviceState(fnData);
+    //   this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    // });
 
   }
-  private eventsFn51Handler = (data: any) => {
-    this.getDeviceState(data);
-  }
+  // private eventsFn51Handler = (data: any) => {
+  //   this.getDeviceState(data);
+  // }
 
   private eventsFn53Handler = (data: any) => {
     this.getParamsFnData(data);
@@ -174,6 +176,8 @@ export class AirSettingSelfPage {
   getDeviceState(data: any) {
     if (data) {
       this.open = data[this.id];
+      if (this.setInfo.type === 'open') { if (this.open == this.setInfo.value) { this.dismissLoading(); } }
+
     }
   }
   // setDeviceState(state: any) {

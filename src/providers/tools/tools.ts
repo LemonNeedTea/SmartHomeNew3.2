@@ -375,8 +375,8 @@ export class ToolsProvider {
       let num16 = this.padStart(n.toString(16), 4, '0');
       let reg = /\w{2}/gi;
       let arr = num16.match(reg);
-      let one = arr[0];
-      let two = arr[1];
+      let one = arr[1];
+      let two = arr[0];
 
       let reg1 = /\w{1}/gi;
       console.log(one, two);

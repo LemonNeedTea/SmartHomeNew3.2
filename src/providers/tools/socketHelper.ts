@@ -115,7 +115,7 @@ export class SocketHelpProvider {
         console.log(param);
         this.socket.sendMessage(param);
     }
-    setAir(data: any,MonitorID: number,fnID:number) {
+    setAir(data: any, MonitorID: number, fnID: number) {
         this.presentLoading("");
         // let controlData = this.tools.getSendControl(data);
         var param = {
@@ -132,7 +132,7 @@ export class SocketHelpProvider {
             type: 'air'
         };
     }
-    setMode(data:any, speech: boolean = false) {
+    setMode(data: any, speech: boolean = false) {
         this.presentLoading(data.F_Name);
         this.tools.vibrate();
         var param = {
@@ -224,8 +224,8 @@ export class SocketHelpProvider {
     }
     socketMessageHandle(data: any) {
 
-        if(data.FnID == '51')
-        console.log(data);
+        if (data.FnID == '56')
+            console.log(data);
         switch (data.Type) {
             case 'get':
                 {
@@ -238,15 +238,15 @@ export class SocketHelpProvider {
                         // this.getDeviceOpenNum(dealData);
 
                     }
-                    if (data.FnID == '60') {
-                        this.dismissLoading();
-                        Variable.SetAirData(data.MonitorID, dealData);
-                        this.events.publish("AirData:" + data.MonitorID, dealData);
+                    if (data.FnID == '56') {
+                        if (data.Data.State) {
+                            this.getAirOpenNum(data.Data.State);
+                        }
 
-                    } else {
-                        Variable.SetFnData(data.FnID, dealData);
-                        this.events.publish("FnData:" + data.FnID, dealData);
                     }
+                    Variable.SetFnData(data.FnID, dealData);
+                    this.events.publish("FnData:" + data.FnID, dealData);
+
 
                     break;
                 }
@@ -340,11 +340,11 @@ export class SocketHelpProvider {
         //     this.tools.presentToast("当前位手动模式，设备不可控");
         // }
     }
-    private getModeID(data:any){
-        let modeID=data["-2"];
-        if(modeID){
-            Variable.modeID=modeID;
-            this.events.publish("FnData:modeID",modeID);
+    private getModeID(data: any) {
+        let modeID = data["-2"];
+        if (modeID) {
+            Variable.modeID = modeID;
+            this.events.publish("FnData:modeID", modeID);
         }
     }
     private getDeviceOpenNum(data: any) {
@@ -352,15 +352,29 @@ export class SocketHelpProvider {
         for (const key in data) {
             if (data.hasOwnProperty(key) && Number(key) > 0) {
                 let element = data[key];
-                if (element==1) {
+                if (element == 1) {
                     sum++;
-
                 }
             }
 
         };
-        this.events.publish("FnData:DeviceOpenNum", sum);
         Variable.deviceNum = sum;
+        this.events.publish("FnData:DeviceOpenNum", sum + Variable.airNum);
+
+    }
+    //统计空调数目
+    private getAirOpenNum(data: any) {
+        let sum = 0;
+        for (const key in data) {
+            if (data.hasOwnProperty(key) && Number(key) > 0) {
+                let element = data[key];
+                if (element == 1) {
+                    sum++;
+                }
+            }
+        };
+        Variable.airNum = sum;
+        this.events.publish("FnData:DeviceOpenNum", sum + Variable.deviceNum);
     }
     private checkDeviceComplateState(dealData: any) {
         let controlData = Variable.controlDevice;
