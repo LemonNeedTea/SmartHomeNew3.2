@@ -32,6 +32,9 @@ export class RoomdevicePage {
   auto: boolean;
   isType: boolean;
   sumNumOpen: number = 0;
+  stateAir: object = {};
+  stateCommon: object = {};
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -44,11 +47,13 @@ export class RoomdevicePage {
       this.device.getDeviceDataListByTypeID(this.roomID).then(res => {
         this.deviceDataListShow = res;
         this.initFn51();
+        this.initFn51();
       });
     } else {
       this.device.getDeviceDataListByRoomID(this.roomID).then(res => {
         this.deviceDataListShow = res;
         this.initFn51();
+        this.initFn56();
 
       });
     }
@@ -61,10 +66,25 @@ export class RoomdevicePage {
     this.auto = data;
   };
   initFn51() {
-    this.getRoomDeviceState(Variable.GetFnData('51'));
-    this.events.subscribe("FnData:51", this.getRoomDeviceState);
+    let fn51Data = Variable.GetFnData('51');
+    this.fn51handler(fn51Data);
+    this.events.subscribe("FnData:51", this.fn51handler);
   }
-  getRoomDeviceState = (data: any) => {
+  initFn56() {
+    let fn56Data = Variable.GetFnData('56');
+    this.fn56handler(fn56Data);
+    this.events.subscribe("FnData:56", this.fn56handler);
+  }
+  fn51handler = (data: object) => {
+    this.stateCommon = data;
+    this.getRoomDeviceState();
+  }
+  fn56handler = (data: object) => {
+    this.stateAir = data["State"];
+    this.getRoomDeviceState();
+  }
+  getRoomDeviceState() {
+    let data = { ...this.stateCommon, ...this.stateAir };
     let result = {};
     this.sumNumOpen = 0;
     this.deviceDataListShow.forEach(element => {
@@ -72,6 +92,8 @@ export class RoomdevicePage {
       result[element.F_ID] = state;
       if (state) this.sumNumOpen++;
     });
+    console.log(result)
+
     this.stateData = result;
   }
   ionViewDidLoad() {
@@ -82,7 +104,8 @@ export class RoomdevicePage {
 
   }
   ionViewWillUnload() {
-    this.events.unsubscribe("FnData:51", this.getRoomDeviceState);
+    this.events.unsubscribe("FnData:51", this.fn51handler);
+    this.events.unsubscribe("FnData:56", this.fn56handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsIsAutoHandler);
 
   }
@@ -122,7 +145,7 @@ export class RoomdevicePage {
         let params = {
           id: data["F_ID"],
           name: data["F_Name"],
-          data:data
+          data: data
         };
         this.navCtrl.push(page, params);
       }

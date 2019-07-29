@@ -34,6 +34,8 @@ export class DevicePage {
   typeID: string;
   stateData: any = {};
   stateData1: any = {};
+  stateAir: object = {};
+  stateCommon: object = {};
   auto: boolean;
   sumNumOPen: number = 0;
   sumNum: number = 0;
@@ -60,8 +62,8 @@ export class DevicePage {
   }
 
   loadListData() {
-    this.openStateNumArr={};
-    this.sumNum=0;
+    this.openStateNumArr = {};
+    this.sumNum = 0;
     return new Promise(reject => {
       this.device.getDeviceIDtoTypeID().then((ress: any) => {
         this.deviceTypeDataList = ress;
@@ -74,7 +76,7 @@ export class DevicePage {
 
           this.typeID = res[0]['F_ID'];
           this.device.getDeviceDataList().then(res => {
-            this.deviceDataList = res; 
+            this.deviceDataList = res;
             this.getRightCateData(this.typeID);
             // this.getFn51Data();
             reject(true);
@@ -100,28 +102,41 @@ export class DevicePage {
     });
   }
   getFn51Data() {
-    let data = Variable.GetFnData('51'); this.stateData1 = data;
-    this.getTypeDeviceNum(data);
+    let data = Variable.GetFnData('51');
+    this.stateCommon = data;
+    this.getTypeDeviceNum();
     this.events.subscribe("FnData:51", (res) => {
-      this.stateData1 = res;
-      this.getTypeDeviceNum(res);
+      this.stateCommon = res;
+      this.getTypeDeviceNum();
+    });
+
+    let data2 = Variable.GetFnData('56');
+    this.stateAir = data2;
+    this.getTypeDeviceNum();
+    this.events.subscribe("FnData:56", (res) => {
+      this.stateAir = res;
+      this.getTypeDeviceNum();
     });
   }
   // ionViewDidLeave() {
   //   this.events.unsubscribe("FnData:51",()=>{});
   //   this.events.unsubscribe("FnData:isAuto",()=>{});
   // }
-  getTypeDeviceNum(data: any) {
+  getTypeDeviceNum() {
+    this.stateData1 = { ...this.stateCommon, ...this.stateAir["State"] };
+    let data = this.stateData1;
     this.sumNumOPen = 0;
     let sumNumOPen = 0;
     let result = JSON.parse(JSON.stringify(this.openStateNumArr));
+
+    console.log(result);
 
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
         const state = data[key];
         let typeID = this.deviceTypeDataList[key];
         let element = data[key];
-        if (element==1) {
+        if (element == 1) {
           sumNumOPen++;
           result[typeID]++;
         }

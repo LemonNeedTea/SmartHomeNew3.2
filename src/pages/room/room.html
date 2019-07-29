@@ -14,9 +14,9 @@
 
 
 <ion-content>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-slides pager>
 
     <ion-slide>
@@ -33,25 +33,25 @@
 
   </ion-slides>
   <ion-list>
-      <ion-item-group *ngFor="let floor of floors"> 
-        <ion-item-divider sticky >
-         {{floor.F_Name}}
-    <p float-right class="state">{{roomResultData[floor.F_ID]}}/{{floor.F_DeviceNum}}</p>
+    <ion-item-group *ngFor="let floor of floors">
+      <ion-item-divider sticky>
+        {{floor.F_Name}}
+        <p float-right class="state" padding-right>{{floorResultData[floor.F_ID]}}/{{floor.F_DeviceNum}}</p>
 
-        </ion-item-divider>
-  
-        <ion-item-sliding *ngFor="let room of rooms" (click)="goRoomDevice(room.F_ID,floor.F_Name+room.F_Name)">
-          <button ion-item *ngIf="room.F_FloorID==floor.F_ID" class="animated bounceInUp"> 
-            <div item-start class="start" [ngClass]="room.F_Color">
-              <img src="../../assets/room/{{room.F_Img}}">
-            </div>
-            
-           {{room.F_Name}}
-           <p item-end  class="state"><span>{{roomResultData[room.F_ID]}}</span>/{{room.F_DeviceNum}}</p>
-          </button>
-        </ion-item-sliding>
-  
-      </ion-item-group>
-    </ion-list>
-  
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let room of rooms" (click)="goRoomDevice(room.F_ID,floor.F_Name+room.F_Name)">
+        <button ion-item *ngIf="room.F_FloorID==floor.F_ID" class="animated bounceInUp">
+          <div item-start class="start" [ngClass]="room.F_Color">
+            <img src="../../assets/room/{{room.F_Img}}">
+          </div>
+
+          {{room.F_Name}}
+          <p item-end class="state"><span>{{roomResultData[room.F_ID]}}</span>/{{room.F_DeviceNum}}</p>
+        </button>
+      </ion-item-sliding>
+
+    </ion-item-group>
+  </ion-list>
+
 </ion-content>

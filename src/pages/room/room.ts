@@ -24,6 +24,8 @@ export class RoomPage {
   floorAndRoomArr: any;
   floorResultData: any = {};
   roomResultData: any = {};
+  stateAir: object = {};
+  stateCommon: object = {};
   private isFirst = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private device: DeviceRequestsProvider,
     private events: Events) {
@@ -65,12 +67,23 @@ export class RoomPage {
 
   getFn51Data() {
     let data = Variable.GetFnData('51');
-    this.getTypeDeviceNum(data);
+    this.stateCommon = data;
+    this.getTypeDeviceNum();
     this.events.subscribe("FnData:51", (res) => {
-      this.getTypeDeviceNum(res);
+      this.stateCommon = res;
+      this.getTypeDeviceNum();
+    });
+
+    let data2 = Variable.GetFnData('56');
+    this.stateAir = data2;
+    this.getTypeDeviceNum();
+    this.events.subscribe("FnData:56", (res) => {
+      this.stateAir = res;
+      this.getTypeDeviceNum();
     });
   }
-  getTypeDeviceNum(data: any) {
+  getTypeDeviceNum() {
+    let data = { ...this.stateCommon, ...this.stateAir["State"] };
     let floorResult = JSON.parse(JSON.stringify(this.floorStartNumArr));
     let roomResult = JSON.parse(JSON.stringify(this.roomStartNumArr));
     for (const key in data) {
@@ -83,7 +96,7 @@ export class RoomPage {
         let floorID = floorAndRoomID[1];
         let roomID = floorAndRoomID[0];
         let element = data[key];
-        if (element==1) {
+        if (element == 1) {
           floorResult[floorID]++;
           roomResult[roomID]++;
         }

@@ -280,24 +280,6 @@ export class SocketHelpProvider {
 
                                 break;
                             }
-                        case 60: {
-                            let controlData = Variable.controlDevice;
-                            if (!data.Result) {
-                                this.tools.presentToast(data.Msg);
-                                this.dismissLoading();
-                            } else {
-                                this.dismissLoading();
-                                // if (controlData) {
-                                //     if (controlData.type === 'air') {
-
-                                //     } else {
-                                //         this.dismissLoading();
-                                //     }
-                                // } else {
-                                //     this.dismissLoading();
-                                // }
-                            }
-                        }
                     }
                     // showSetInfo(data);
                     break;
