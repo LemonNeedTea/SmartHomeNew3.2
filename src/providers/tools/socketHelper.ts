@@ -35,16 +35,13 @@ export class SocketHelpProvider {
                 this.startSocket();
             }, 1000);
 
-        }, () => {
-            setTimeout(() => {
-                this.startSocket();
-            }, 1000);
         });
         // Variable.socketObject = this.socket;
     }
 
     closeSocket() {
         this.socket.ws.close();
+        this.socket.ws = null;
         clearInterval(this.interval);
         for (const key in this.events["_channels"]) {
             if (this.events["_channels"].hasOwnProperty(key)) {

@@ -23,7 +23,7 @@ export class EnvironmentalPage {
     private device: DeviceRequestsProvider,
     private events: Events, ) {
     this.parentParam = this.navParams.get("Data");
-    this.device.getEnergyQuery(this.parentParam.F_ID,true).then(res => {
+    this.device.getEnergyQuery(this.parentParam.F_ID, true).then(res => {
       this.dataList = res;
       this.fnID = res[0].F_GPRSFnID;
       let fnData = Variable.GetFnData(this.fnID.toString());
