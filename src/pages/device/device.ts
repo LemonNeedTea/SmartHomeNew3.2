@@ -129,8 +129,6 @@ export class DevicePage {
     let sumNumOPen = 0;
     let result = JSON.parse(JSON.stringify(this.openStateNumArr));
 
-    console.log(result);
-
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
         const state = data[key];

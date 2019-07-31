@@ -74,10 +74,8 @@ export class AirSettingSelfPage {
 
   }
   getParamsFnData(data: any) {
-    console.log(data)
     this.getDeviceState(data.State);
     data = data.Data;
-    console.log(this.setInfo);
     let code = this.airParams.F_ParamsFnCode;
     let code1 = this.airParams.F_RoomTempFnCode;
     let code2 = this.airParams.F_SettingTempFnCode;

@@ -68,12 +68,11 @@ export class EnergReportPage {
   }
   loadChart(params: any) {
     this.device.getEnergyPieChart(params).then((res: any) => {
-      console.log(res);
       if (res.chart) {
-        this.chart.getPieChart('mountNode', res.chart,'度');
+        this.chart.getPieChart('mountNode', res.chart, '度');
       }
       if (res.chart1) {
-        this.chart.getPieChart('mountNode1', res.chart1,'度');
+        this.chart.getPieChart('mountNode1', res.chart1, '度');
       }
     })
   }
@@ -98,7 +97,6 @@ export class EnergReportPage {
     }
     data.DateType = this.pet;
     this.loadChart(data);
-    console.log(data);
   }
 
 

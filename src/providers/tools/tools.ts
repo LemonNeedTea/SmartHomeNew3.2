@@ -379,7 +379,6 @@ export class ToolsProvider {
       let two = arr[0];
 
       let reg1 = /\w{1}/gi;
-      console.log(one, two);
       let oneArr = this.padStart(parseInt(two, 16).toString(2), 8, '0').match(reg1);
       let twoArr = this.padStart(parseInt(one, 16).toString(2), 8, '0').match(reg1);
 
@@ -398,7 +397,6 @@ export class ToolsProvider {
       //   result.push(0);
       // }
       result = result.reverse();
-      console.log(result);
     }
     return result;
   }

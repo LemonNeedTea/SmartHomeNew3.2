@@ -35,7 +35,7 @@ export class ModeSettingPage {
   }
   getModeDeviceDataList() {
     this.device.GetDeviceModeDetailDatas(this.modeID).then(res => {
-      this.dataList = res; 
+      this.dataList = res;
     });
   }
   ionViewDidLoad() {
@@ -65,7 +65,6 @@ export class ModeSettingPage {
       });
     });
     this.mode.F_SecurityRun = this.alarm;
-    console.log(paramsData);
     this.device.setModeDetail(this.mode, paramsData).then(res => {
       if (res == true) {
         Variable.socketObject.setModeDetail(this.mode.F_AgreementID);

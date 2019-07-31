@@ -92,7 +92,6 @@ export class RoomdevicePage {
       result[element.F_ID] = state;
       if (state) this.sumNumOpen++;
     });
-    console.log(result)
 
     this.stateData = result;
   }
