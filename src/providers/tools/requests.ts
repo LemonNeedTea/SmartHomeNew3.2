@@ -49,7 +49,7 @@ export class LoginRequestsProvider {
           'RegistrationId': res,
         };
 
-        this.http.post("/EnergyAppLogin/LoginCheck", params,false).then(res => {
+        this.http.post("/EnergyAppLogin/LoginCheck", params, false).then(res => {
           if (res["State"] == true) {
             let userInfo = res["UserInfo"];
             userInfo['txtUser'] = username;
@@ -82,7 +82,7 @@ export class LoginRequestsProvider {
     });
 
   }
-  isExistUserInfoData(){
+  isExistUserInfoData() {
     let userinfo = this.storage.get(this.config.userInfoSotrageName);
     return userinfo;
   }
@@ -226,6 +226,10 @@ export class DeviceRequestsProvider {
   }
   setAlarmState(id: string) {
     let result = this.http.postMain("/EnergyAppData/SetAlarmState", { ID: id }, false);
+    return result;
+  }
+  setAllAlarmState() {
+    let result = this.http.postMain("/EnergyAppData/SetAllAlarmState", {}, false);
     return result;
   }
   getAlarmTypeDataList() {

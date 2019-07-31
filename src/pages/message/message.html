@@ -3,6 +3,12 @@
     <ion-title>
       消息
     </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="allRead()">
+        <!-- <ion-icon name="more"></ion-icon> -->
+        全部已阅
+      </button>
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only (click)="showPopover($event)">
         <ion-icon name="more"></ion-icon>
@@ -13,11 +19,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of messagelists" [ngClass]="'message'+item.F_ID" >
+    <ion-item *ngFor="let item of messagelists" [ngClass]="'message'+item.F_ID">
       <div>
         <span class="biaoqian color8" margin-right>报警</span>{{item.F_AlarmText}}
         <p class="p">{{item.F_AlarmTimeStr}}</p>
       </div>
+
       <button ion-button clear small item-end (click)="setState(item.F_ID)">已阅</button>
     </ion-item>
   </ion-list>

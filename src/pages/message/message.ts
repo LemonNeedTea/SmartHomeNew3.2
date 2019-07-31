@@ -2,7 +2,7 @@ import { Component, ElementRef } from '@angular/core';
 import { NavController, Events } from 'ionic-angular';
 import { HttpServicesProvider } from "../../providers/http-services/http-services";
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
-import { PopoverController } from 'ionic-angular';
+import { PopoverController, AlertController } from 'ionic-angular';
 // import { WellpumpqueryPage } from '../wellpumpquery/wellpumpquery';
 // import { PopoverPage } from '../popover/popover';
 import { EnumChartType } from '../../providers/model/enumdata';
@@ -21,7 +21,8 @@ export class MessagePage {
     private popoverCtrl: PopoverController,
     private tools: ToolsProvider,
     private events: Events,
-    public el: ElementRef) {
+    public el: ElementRef,
+    public alertCtrl: AlertController) {
     this.events.subscribe("data:messageList", res => {
       this.messagelists = res;
     })
@@ -29,8 +30,9 @@ export class MessagePage {
   }
 
   loadDataList() {
-    this.device.getAlarmDataList().then(res => {
+    this.device.getAlarmDataList().then((res: any) => {
       this.messagelists = res;
+      this.events.publish("FnData:MessageNum", res.length)
     });
   }
   ionViewDidEnter() {
@@ -41,13 +43,13 @@ export class MessagePage {
     this.device.setAlarmState(id).then(res => {
       if (res) {
         // this.tools.showAnimatePulse(this.el, `message${id}`);
-      this.loadDataList();
+        this.loadDataList();
       }
     })
   }
   getAlarmTypeDataList() {
     this.device.getAlarmTypeDataList().then(res => {
-      this.typeDataList = res; 
+      this.typeDataList = res;
     });
   }
   showPopover(myEvent) {
@@ -70,6 +72,35 @@ export class MessagePage {
     popover.present({
       ev: myEvent
     });
+  }
+  allRead() {
+    this.presentConfirm();
+  }
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: '提 示',
+      message: '报警信息全部已阅?',
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            // console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            this.device.setAllAlarmState().then(res => {
+              if (res) {
+                this.loadDataList();
+              }
+            })
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

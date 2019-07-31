@@ -58,6 +58,10 @@ export class TabsPage {
     this.interval = setInterval(() => {
       this.getMessageNum();
     }, 10000);
+    this.events.subscribe("FnData:MessageNum", (res: any) => {
+      this.tabRoots[4].tabBadge = res;
+      this.jpush.setApplicationIconBadgeNumber(Number(res));
+    });
   }
   ionViewWillLeave() {
     clearInterval(this.interval);
