@@ -35,8 +35,9 @@ export class ModeLightJwTimerPage {
     this.viewCtrl.dismiss();
   }
   complate() {
-    let params = this.getParams();
     if (this.checkParam()) {
+
+      let params = this.getParams();
       Variable.socketObject.setTimer(params);
       this.dismiss();
     }
@@ -50,10 +51,18 @@ export class ModeLightJwTimerPage {
     return params;
   }
   checkParam(): boolean {
+    if (this.runtime > 240) {
+      this.tools.presentToast("延时关闭时长不能超过4小时");
+      return false;
+    }
+    if (this.runtime1 > 240) {
+      this.tools.presentToast("偏移时间时长不能超过4小时");
+      return false;
+    }
     return true;
   }
   getData() {
-    let fnData = Variable.GetFnData('55'); 
+    let fnData = Variable.GetFnData('55');
     this.timerOpen = Number(fnData.F5578);
     this.runtime = fnData.F5579;
     this.runtime1 = fnData.F5580;

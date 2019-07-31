@@ -9,7 +9,7 @@
   <ion-navbar color='primary'>
     <ion-title>{{name}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="presentShowModal()">
+      <button ion-button icon-only (click)="presentShowModal()" [disabled]="timerState">
         <ion-icon name="alarm"></ion-icon>
       </button>
     </ion-buttons>
@@ -31,6 +31,7 @@
 
   </ion-list>
   <div text-center>
+    <div style="color:red;" *ngIf="timerState">天气原因，定时失效</div>
     <div style="color:red;" *ngIf="timerState">水位超限</div>
     <img src="../../../assets/img/icons/pump-setting.png" style="width: 100%;" />
   </div>

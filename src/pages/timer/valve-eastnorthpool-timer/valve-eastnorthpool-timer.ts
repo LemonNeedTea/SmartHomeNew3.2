@@ -33,9 +33,12 @@ export class ValveEastnorthpoolTimerPage {
     this.viewCtrl.dismiss();
   }
   complate() {
-    let params = this.getParams();
-    Variable.socketObject.setTimer(params);
-    this.dismiss();
+    if (this.checkParam()) {
+      let params = this.getParams();
+      Variable.socketObject.setTimer(params);
+      this.dismiss();
+    }
+
   }
   getParams() {
     let params = new EastnorthpoolValveParams();//注意组装顺序
@@ -46,6 +49,11 @@ export class ValveEastnorthpoolTimerPage {
     return params;
   }
   checkParam(): boolean {
+    if (this.runtime > 240) {
+      this.tools.presentToast("运行时长不能超过4小时");
+      return false;
+    }
+
     return true;
   }
   getData() {

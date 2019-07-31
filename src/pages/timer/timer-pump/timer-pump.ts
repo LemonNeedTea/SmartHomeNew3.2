@@ -67,6 +67,10 @@ export class TimerPumpPage {
       this.tools.presentToast('最低液位1～200');
       return false;
     }
+    if (this.runtime > 240) {
+      this.tools.presentToast("运行时长不能超过4小时");
+      return false;
+    }
     return true;
   }
   getTimerPumpInofo() {

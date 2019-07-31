@@ -17,7 +17,7 @@ import { NorthCourtPumpParams } from '../../../providers/model/model';
 })
 export class PumpNorthcourtTimerPage {
   startDate: any;
-  timerOpen:any;
+  timerOpen: any;
   runtime: number;
   loop: any;
   timerOpen1: any;
@@ -35,9 +35,12 @@ export class PumpNorthcourtTimerPage {
     this.viewCtrl.dismiss();
   }
   complate() {
-    let params = this.getParams();
-    Variable.socketObject.setTimer(params);
-    this.dismiss();
+    if (this.checkParam()) {
+      let params = this.getParams();
+      Variable.socketObject.setTimer(params);
+      this.dismiss();
+    }
+
   }
   getParams() {
     let params = new NorthCourtPumpParams();//注意组装顺序
@@ -48,6 +51,10 @@ export class PumpNorthcourtTimerPage {
     return params;
   }
   checkParam(): boolean {
+    if (this.runtime > 240) {
+      this.tools.presentToast("运行时长不能超过4小时");
+      return false;
+    }
     return true;
   }
   getData() {
