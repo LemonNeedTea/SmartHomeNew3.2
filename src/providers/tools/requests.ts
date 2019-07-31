@@ -171,6 +171,18 @@ export class DeviceRequestsProvider {
   /** 
 * 获取设备列表
 */
+  getDevicePageInfo() {
+    return this.http.postMain('/EnergyAppData/GetDevicePageInfo');
+  }
+  getHomePageInfo() {
+    return this.http.postMain('/EnergyAppData/GetHomePageInfo');
+  }
+  getRoomPageInfo() {
+    return this.http.postMain('/EnergyAppData/GetRoomPageInfo');
+  }
+  getEnergyPageInfo() {
+    return this.http.postMain('/EnergyAppData/GetEnergyPageInfo');
+  }
   getDeviceDataList() {
     return this.http.postMain('/EnergyAppData/GetDevicesDataList');
   }

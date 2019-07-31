@@ -49,15 +49,15 @@ export class HomePage {
       this.weatherinfo = res;
     });
 
-    this.deviceRequest.getMenuList('env').then((res: any) => {
-      this.envData = res;
-    })
+    // this.deviceRequest.getMenuList('env').then((res: any) => {
+    //   this.envData = res;
+    // })
 
 
   }
   goEnv() {
     if (this.envData[0]) {
-      this.navCtrl.push(this.envData[0].F_Url,{Data:this.envData[0]});
+      this.navCtrl.push(this.envData[0].F_Url, { Data: this.envData[0] });
     }
   }
   scan() {
@@ -82,21 +82,21 @@ export class HomePage {
     this.events.subscribe("FnData:modeID", (res) => {
       this.modeID = res;
     });
-    this.deviceRequest.getParamsInfoData('home').then((res: any) => {
-      this.homeParams = res;
-      res.forEach(element => {
-        let fnID = element.F_FnID;
-        let fnCode = element.F_Fncode;
-        let bit = element.F_Bit;
-        let type = element.F_Type;
+    // this.deviceRequest.getParamsInfoData('home').then((res: any) => {
+    // this.homeParams = res;
+    this.homeParams.forEach(element => {
+      let fnID = element.F_FnID;
+      let fnCode = element.F_Fncode;
+      let bit = element.F_Bit;
+      let type = element.F_Type;
 
-        let fnData = Variable.GetFnData(fnID);
-        this.getFnEnergyData(fnData, fnCode, bit, type);
-        this.events.subscribe(`FnData:${element.F_FnID}`, (res) => {
-          this.getFnEnergyData(res, fnCode, bit, type);
-        });
+      let fnData = Variable.GetFnData(fnID);
+      this.getFnEnergyData(fnData, fnCode, bit, type);
+      this.events.subscribe(`FnData:${element.F_FnID}`, (res) => {
+        this.getFnEnergyData(res, fnCode, bit, type);
       });
     });
+    // });
   }
   ionViewDidLeave() {
     // this.events.unsubscribe("FnData:51", () => { });
@@ -123,13 +123,19 @@ export class HomePage {
   }
   loadListData() {
     return new Promise(reject => {
-      this.deviceRequest.getWeatherInfo().then(res => {
-        this.weatherinfo = res;
-      });
-      this.deviceRequest.getDeviceMode().then(res => {
-        this.modeDataList = res;
+      // this.deviceRequest.getWeatherInfo().then(res => {
+      //   this.weatherinfo = res;
+      // });
+      this.deviceRequest.getHomePageInfo().then(res => {
+        this.envData = res['envData'];
+        this.modeDataList = res['modeDataList'];
+        this.homeParams = res['homeParams'];
         reject(true);
-      }, err => { });
+      });
+      // this.deviceRequest.getDeviceMode().then(res => {
+      //   this.modeDataList = res;
+      //   reject(true);
+      // }, err => { });
     })
   }
   goModePublicSetting() {

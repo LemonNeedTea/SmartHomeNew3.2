@@ -36,27 +36,41 @@ export class RoomPage {
 
   loadListData() {
     return new Promise(reject => {
-      this.device.getFloorDataList().then((res: any) => {
-        this.floors = res;
-        res.forEach(element => {
+      this.device.getRoomPageInfo().then(res => {
+        this.floors = res["floors"];
+        this.rooms = res["rooms"];
+        this.floorAndRoomArr = res["floorAndRoomArr"];
+
+        this.floors.forEach(element => {
           this.floorStartNumArr[element.F_ID] = 0;
         });
-        this.device.getRoomDataList().then((res1: any) => {
-          this.rooms = res1;
-          res1.forEach(element => {
-            this.roomStartNumArr[element.F_ID] = 0;
-          });
-          //
-          this.device.getDeviceIDtoRoomaAndFloorID().then((res3) => {
-            this.floorAndRoomArr = res3;
-            // this.getFn51Data();
-
-            this.isFirst = false;
-            reject(true);
-          })
+        this.rooms.forEach(element => {
+          this.roomStartNumArr[element.F_ID] = 0;
         });
+        reject(true);
+
       });
-    })
+      // this.device.getFloorDataList().then((res: any) => {
+      //   this.floors = res;
+      //   res.forEach(element => {
+      //     this.floorStartNumArr[element.F_ID] = 0;
+      //   });
+      //   this.device.getRoomDataList().then((res1: any) => {
+      //     this.rooms = res1;
+      //     res1.forEach(element => {
+      //       this.roomStartNumArr[element.F_ID] = 0;
+      //     });
+      //     //
+      //     this.device.getDeviceIDtoRoomaAndFloorID().then((res3) => {
+      //       this.floorAndRoomArr = res3;
+      //       // this.getFn51Data();
+
+      //       this.isFirst = false;
+      //       reject(true);
+      //     })
+      //   });
+      // });
+    });
   }
   ionViewDidEnter() {
     // if (!this.isFirst) {

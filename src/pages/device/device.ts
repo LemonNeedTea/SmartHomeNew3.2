@@ -4,6 +4,7 @@ import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
 import { Variable } from '../../providers/model/variable';
 import { rejects } from 'assert';
+import { resolve } from 'dns';
 // import { WellpumpPage } from '../wellpump/wellpump';
 // import { CurtainSettingPage } from '../device-setting/curtain-setting/curtain-setting';
 // import { DoorSettingPage } from '../device-setting/door-setting/door-setting';
@@ -45,48 +46,67 @@ export class DevicePage {
     private tools: ToolsProvider,
     private el: ElementRef) {
     this.getIsAuto();
-    // this.device.getDeviceTypeDataList().then((res: any) => {
-    //   this.typeDataList = res;
-    //   res.forEach(element => {
-    //     this.openStateNumArr[element.F_ID] = 0;
-    //     this.sumNum += element.F_DeviceNum;
-    //   });
 
-
-    // });
-    this.loadListData().then(res => {
+    this.loadDataNew().then(res => {
       this.getFn51Data();
     })
 
 
   }
 
-  loadListData() {
-    this.openStateNumArr = {};
-    this.sumNum = 0;
-    return new Promise(reject => {
-      this.device.getDeviceIDtoTypeID().then((ress: any) => {
-        this.deviceTypeDataList = ress;
-        this.device.getDeviceTypeDataList().then((res: any) => {
-          this.typeDataList = res;
-          res.forEach(element => {
-            this.openStateNumArr[element.F_ID] = 0;
-            this.sumNum += element.F_DeviceNum;
-          });
+  loadDataNew() {
+    return new Promise((reject) => {
+      this.device.getDevicePageInfo().then((res: object) => {
+        this.deviceTypeDataList = res['deviceTypeDataList'];
+        this.typeDataList = res['typeDataList'];
+        this.deviceDataList = res['deviceDataList'];
+        this.cleanNum(this.typeDataList);
+        this.typeID = this.typeDataList[0]['F_ID'];//默认选中第一个类型
+        this.getRightCateData(this.typeID);
+        reject(true);
 
-          this.typeID = res[0]['F_ID'];
-          this.device.getDeviceDataList().then(res => {
-            this.deviceDataList = res;
-            this.getRightCateData(this.typeID);
-            // this.getFn51Data();
-            reject(true);
-
-
-          });
-        });
       });
-    })
+    });
+
   }
+
+  cleanNum(data: any) {
+    let openStateNumArr = {};
+    let sumNum = 0;
+    data.forEach(element => {
+      openStateNumArr[element.F_ID] = 0;
+      sumNum += element.F_DeviceNum;
+    });
+    this.openStateNumArr = openStateNumArr;
+    this.sumNum = sumNum;
+  }
+
+  // loadListData() {
+  //   this.openStateNumArr = {};
+  //   this.sumNum = 0;
+  //   return new Promise(reject => {
+  //     this.device.getDeviceIDtoTypeID().then((ress: any) => {
+  //       this.deviceTypeDataList = ress;
+  //       this.device.getDeviceTypeDataList().then((res: any) => {
+  //         this.typeDataList = res;
+  //         res.forEach(element => {
+  //           this.openStateNumArr[element.F_ID] = 0;
+  //           this.sumNum += element.F_DeviceNum;
+  //         });
+
+  //         this.typeID = res[0]['F_ID'];
+  //         this.device.getDeviceDataList().then(res => {
+  //           this.deviceDataList = res;
+  //           this.getRightCateData(this.typeID);
+  //           // this.getFn51Data();
+  //           reject(true);
+
+
+  //         });
+  //       });
+  //     });
+  //   })
+  // }
 
   ionViewDidEnter() {
     // if (!this.isFirst) {
@@ -206,7 +226,7 @@ export class DevicePage {
     this.navCtrl.push('RoomdevicePage', { id: id, name: name, isType: true });
   }
   doRefresh(refresher) {
-    this.loadListData().then(res => {
+    this.loadDataNew().then(res => {
       refresher.complete();
     });
     setTimeout(() => {
