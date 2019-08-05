@@ -29,9 +29,9 @@ export class PumpNorthcourtSettingPage {
   ) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
-    let fn51Data = Variable.GetFnData('51');
+    let fn51Data = Variable.GetFnData('state');
     this.getDeviceState(fn51Data);
-    this.events.subscribe("FnData:51", this.eventsFn51Handler);
+    this.events.subscribe("FnData:state", this.eventsFn51Handler);
     this.auto = Variable.isAuto;
     this.events.subscribe("FnData:isAuto", this.eventsFnAutoHandler);
     let fn55Data = Variable.GetFnData('55');
@@ -54,7 +54,7 @@ export class PumpNorthcourtSettingPage {
   }
   getDeviceState(data: any) {
     if (data) {
-      this.state = data[this.id];
+      this.state = data[this.id][0];
     }
   }
   setDeviceState(state: string) {

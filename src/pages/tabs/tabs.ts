@@ -78,7 +78,7 @@ export class TabsPage {
     // });
   }
   private getDeviceOpenNum() {
-    this.tabRoots[2].tabBadge = Variable.deviceNum + Variable.airNum;
+    this.tabRoots[2].tabBadge = Variable.deviceNum;
     this.events.subscribe("FnData:DeviceOpenNum", (res: any) => {
       this.tabRoots[2].tabBadge = res;
     });

@@ -171,7 +171,7 @@ export class AirSettingPage {
   }
   getDeviceState(data: any) {
     if (data) {
-      this.open = data[this.id];
+      this.open = data[this.id][0];
       if (this.setInfo.type === 'open') { if (this.open == this.setInfo.value) { this.dismissLoading(); } }
 
     }

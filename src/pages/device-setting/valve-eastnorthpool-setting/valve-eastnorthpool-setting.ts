@@ -27,10 +27,10 @@ export class ValveEastnorthpoolSettingPage {
   ) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
-    let fn51Data = Variable.GetFnData('51');
+    let fn51Data = Variable.GetFnData('state');
     this.getDeviceState(fn51Data);
     this.getBeyondState(fn51Data);
-    this.events.subscribe("FnData:51", this.eventsFn51Handler);
+    this.events.subscribe("FnData:state", this.eventsFn51Handler);
 
     this.auto = Variable.isAuto;
     this.events.subscribe("FnData:isAuto", this.eventsFnAutoHandler);
@@ -59,14 +59,14 @@ export class ValveEastnorthpoolSettingPage {
   }
   getDeviceState(data: any) {
     if (data) {
-      this.state = data[this.id];
+      this.state = data[this.id][0];
     }
   }
   setDeviceState(state: string) {
     Variable.socketObject.setDeviceState(this.id, this.name, state);
   }
   ionViewDidLeave() {
-    this.events.unsubscribe("FnData:51", this.eventsFn51Handler);
+    this.events.unsubscribe("FnData:state", this.eventsFn51Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
     this.events.unsubscribe("FnData:55", this.eventsFn55Handler);
 

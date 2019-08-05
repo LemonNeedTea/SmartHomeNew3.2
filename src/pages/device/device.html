@@ -1,7 +1,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>设备 <span [hidden]="auto">({{sumNumOPen}}/{{sumNum}})</span><span [hidden]="!auto" style="color: red">(手动)</span></ion-title>
+    <ion-title>设备 <span [hidden]="auto">({{sumNumOPen}}/{{sumNum}})</span><span [hidden]="!auto"
+        style="color: red">(手动)</span></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -41,8 +42,8 @@
             </div>
 
           </ion-label>
-          <ion-toggle [(ngModel)]="stateData1[item.F_ID]" *ngIf="item.F_ShowButton" [disabled]="auto"
-            (ngModelChange)="setDeviceState(item.F_ID,item.F_Name,stateData1[item.F_ID])"></ion-toggle>
+          <ion-toggle [(ngModel)]="deviceStateData[item.F_ID]" *ngIf="item.F_ShowButton" [disabled]="auto"
+            (ngModelChange)="setDeviceState(item.F_ID,item.F_Name,deviceStateData[item.F_ID])"></ion-toggle>
         </button>
       </ion-list>
     </div>

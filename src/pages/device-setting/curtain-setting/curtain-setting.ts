@@ -20,7 +20,7 @@ export class CurtainSettingPage {
   id: number;
   state: number;
   auto: boolean;
-  fnID: number;
+  fnID: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private events: Events,
     private device: DeviceRequestsProvider
@@ -28,12 +28,13 @@ export class CurtainSettingPage {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
 
-    this.device.getDeviceGetInfoDataByID(this.id).then(res => {
-      this.fnID = res["F_FnID"];
-      let fnData = Variable.GetFnData(this.fnID.toString());
-      this.getDeviceState(fnData);
-      this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
-    });
+    // this.device.getDeviceGetInfoDataByID(this.id).then(res => {
+    // this.fnID = res["F_FnID"];
+    this.fnID = 'state';
+    let fnData = Variable.GetFnData(this.fnID);
+    this.getDeviceState(fnData);
+    this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    // });
 
 
 
@@ -54,7 +55,7 @@ export class CurtainSettingPage {
   }
   getDeviceState(data: any) {
     if (data) {
-      this.state = data[this.id];
+      this.state = data[this.id][0];
     }
   }
   setDeviceState(state: any) {

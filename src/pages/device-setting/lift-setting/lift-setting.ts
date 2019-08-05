@@ -20,7 +20,7 @@ export class LiftSettingPage {
   state: boolean;
   f50Data: any;
   auto: boolean;
-  paramData:any;
+  paramData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private events: Events,
   ) {
@@ -28,9 +28,9 @@ export class LiftSettingPage {
     this.name = this.navParams.get("name");
     this.paramData = this.navParams.get("data");
 
-    let fn51Data = Variable.GetFnData('51');
+    let fn51Data = Variable.GetFnData('state');
     this.getDeviceState(fn51Data);
-    this.events.subscribe("FnData:51", this.eventsFn51Handler);
+    this.events.subscribe("FnData:state", this.eventsFn51Handler);
     this.f50Data = Variable.GetFnData('50');
     this.events.subscribe("FnData:50", this.eventsFn50Handler);
 
@@ -42,7 +42,7 @@ export class LiftSettingPage {
   }
   getDeviceState(data: any) {
     if (data) {
-      this.state = data[this.id];
+      this.state = data[this.id][0];
     }
   }
   setDeviceState(state: string) {
@@ -50,7 +50,7 @@ export class LiftSettingPage {
   }
   ionViewDidLeave() {
     this.events.unsubscribe("FnData:50", this.eventsFn50Handler);
-    this.events.unsubscribe("FnData:51", this.eventsFn51Handler);
+    this.events.unsubscribe("FnData:state", this.eventsFn51Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
   }
   /**start**/

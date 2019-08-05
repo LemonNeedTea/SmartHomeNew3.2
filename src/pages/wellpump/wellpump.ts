@@ -45,9 +45,9 @@ export class WellpumpPage {
     public modalCtrl: ModalController) {
     this.id = this.navParams.get('id');
     this.name = this.navParams.get('name');
-    let fn51Data = Variable.GetFnData('51');
+    let fn51Data = Variable.GetFnData('state');
     this.getDeviceState(fn51Data);
-    this.events.subscribe("FnData:51", this.eventsFn51Handler);
+    this.events.subscribe("FnData:state", this.eventsFn51Handler);
 
     this.f50Data = Variable.GetFnData('50');
     this.events.subscribe("FnData:50", this.eventsFn50Handler);
@@ -56,7 +56,7 @@ export class WellpumpPage {
   }
   getDeviceState(data: any) {
     if (data) {
-      this.state = data[this.id];
+      this.state = data[this.id][0];
     }
   }
   setDeviceState(state: string) {
@@ -117,8 +117,8 @@ export class WellpumpPage {
   }
   getWaterlevelMapChart() {
 
-    this.device.getEnergyQuery(-3).then((queryData:any) => {
-      let data=queryData[0];
+    this.device.getEnergyQuery(-3).then((queryData: any) => {
+      let data = queryData[0];
       let nowDateStr = this.tools.getNowDateStr(EnumDateType.Day);
       let start = this.tools.getFullDateStr(nowDateStr, EnumDateType.Day);
       let stop = this.tools.getAddDate(nowDateStr, EnumDateType.Day);
@@ -142,7 +142,7 @@ export class WellpumpPage {
 
   }
   goWellPumpQuery() {
-    this.navCtrl.push('WellpumpqueryPage', { queryID:-3,type:'wp'})
+    this.navCtrl.push('WellpumpqueryPage', { queryID: -3, type: 'wp' })
   }
   presentShowModal() {
     let profileModal = this.modalCtrl.create('TimerPumpPage', { name: this.name });

@@ -40,7 +40,6 @@ export class Variable {
     public static isAuto: boolean;
     public static modeID: number;
     public static deviceNum: number = 0;
-    public static airNum: number = 0;
     public static loadingNum: number = 0;
     public static loadingObj: any;
 

@@ -352,9 +352,9 @@ export class DeviceRequestsProvider {
   getEnergyQuery(data: number, loading: boolean = false) {
     return this.http.postMain("/EnergyAppData/GetEnergyQuery", { ID: data }, loading);
   }
-  getDeviceGetInfoDataByID(data: number) {
-    return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID", { ID: data });
-  }
+  // getDeviceGetInfoDataByID(data: number) {
+  //   return this.http.postMain("/EnergyAppData/GetDeviceGetInfoDataByID", { ID: data });
+  // }
   getParamsInfoData(data: string) {
     return this.http.postMain("/EnergyAppData/GetParamsInfoData", { Type: data }, false);
   }

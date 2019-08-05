@@ -63,7 +63,7 @@ export class SocketHelpProvider {
         console.log(param);
         this.socket.sendMessage(param);
         this.tools.vibrate();
-        this.presentLoading(name, "51");
+        this.presentLoading(name, "state");
         Variable.controlDevice = {
             id: id,
             state: state,
@@ -224,23 +224,18 @@ export class SocketHelpProvider {
         // if (data.FnID == '56')
         console.log(data);
         switch (data.Type) {
+            case 'state': {
+                let dealData = data.Data;
+                this.getAuto(dealData);//获取手自动状态
+                this.getModeID(dealData);//获取模式ID
+                this.getDeviceOpenNum(dealData);
+                dealData = this.checkDeviceComplateState(dealData);
+                Variable.SetFnData('state', dealData);
+                this.events.publish("FnData:state", dealData);
+            }
             case 'get':
                 {
                     let dealData = data.Data;
-                    if (data.FnID == '51') {
-                        this.getAuto(data.Data);//获取手自动状态
-                        this.getModeID(data.Data);//获取模式ID
-                        this.getDeviceOpenNum(data.Data);
-                        dealData = this.checkDeviceComplateState(dealData);
-                        // this.getDeviceOpenNum(dealData);
-
-                    }
-                    if (data.FnID == '56') {
-                        if (data.Data.State) {
-                            this.getAirOpenNum(data.Data.State);
-                        }
-
-                    }
                     Variable.SetFnData(data.FnID, dealData);
                     this.events.publish("FnData:" + data.FnID, dealData);
 
@@ -311,7 +306,7 @@ export class SocketHelpProvider {
      * 私有函数
      */
     private getAuto(data: any) {
-        let auto = data['0'] == '0' ? true : false;
+        let auto = data['0'][0] == '0' ? true : false;
         Variable.isAuto = auto;
         this.events.publish("FnData:isAuto", auto);
         // console.log("auto",auto);
@@ -320,7 +315,7 @@ export class SocketHelpProvider {
         // }
     }
     private getModeID(data: any) {
-        let modeID = data["-2"];
+        let modeID = data["-2"][0];
         if (modeID) {
             Variable.modeID = modeID;
             this.events.publish("FnData:modeID", modeID);
@@ -330,7 +325,7 @@ export class SocketHelpProvider {
         let sum = 0;
         for (const key in data) {
             if (data.hasOwnProperty(key) && Number(key) > 0) {
-                let element = data[key];
+                let element = data[key][0];
                 if (element == 1) {
                     sum++;
                 }
@@ -338,31 +333,17 @@ export class SocketHelpProvider {
 
         };
         Variable.deviceNum = sum;
-        this.events.publish("FnData:DeviceOpenNum", sum + Variable.airNum);
+        this.events.publish("FnData:DeviceOpenNum", sum);
 
-    }
-    //统计空调数目
-    private getAirOpenNum(data: any) {
-        let sum = 0;
-        for (const key in data) {
-            if (data.hasOwnProperty(key) && Number(key) > 0) {
-                let element = data[key];
-                if (element == 1) {
-                    sum++;
-                }
-            }
-        };
-        Variable.airNum = sum;
-        this.events.publish("FnData:DeviceOpenNum", sum + Variable.deviceNum);
     }
     private checkDeviceComplateState(dealData: any) {
         let controlData = Variable.controlDevice;
         if (controlData) {
-            if (controlData.state == dealData[controlData.id]) {
+            if (controlData.state == dealData[controlData.id][0]) {
                 this.dismissLoading();
                 this.speechDevice(controlData);
             } else {
-                dealData[controlData.id] = controlData.state;
+                dealData[controlData.id][0] = controlData.state;
             }
         }
         return dealData;

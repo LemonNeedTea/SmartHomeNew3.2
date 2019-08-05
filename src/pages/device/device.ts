@@ -3,24 +3,6 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
 import { Variable } from '../../providers/model/variable';
-import { rejects } from 'assert';
-import { resolve } from 'dns';
-// import { WellpumpPage } from '../wellpump/wellpump';
-// import { CurtainSettingPage } from '../device-setting/curtain-setting/curtain-setting';
-// import { DoorSettingPage } from '../device-setting/door-setting/door-setting';
-// import { LiftSettingPage } from '../device-setting/lift-setting/lift-setting';
-// import { PumpEastnorthpoolSettingPage } from '../device-setting/pump-eastnorthpool-setting/pump-eastnorthpool-setting';
-// import { PumpNorthcourtSettingPage } from '../device-setting/pump-northcourt-setting/pump-northcourt-setting';
-// import { ValveEastcourtSettingPage } from '../device-setting/valve-eastcourt-setting/valve-eastcourt-setting';
-// import { ValveEastnorthpoolSettingPage } from '../device-setting/valve-eastnorthpool-setting/valve-eastnorthpool-setting';
-// import { RoomdevicePage } from '../../pages/roomdevice/roomdevice';
-
-/**
- * Generated class for the DevicePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -34,9 +16,7 @@ export class DevicePage {
   deviceDataListShow: any;
   typeID: string;
   stateData: any = {};
-  stateData1: any = {};
-  stateAir: object = {};
-  stateCommon: object = {};
+  deviceStateData: any = {};
   auto: boolean;
   sumNumOPen: number = 0;
   sumNum: number = 0;
@@ -122,38 +102,28 @@ export class DevicePage {
     });
   }
   getFn51Data() {
-    let data = Variable.GetFnData('51');
-    this.stateCommon = data;
-    this.getTypeDeviceNum();
-    this.events.subscribe("FnData:51", (res) => {
-      this.stateCommon = res;
-      this.getTypeDeviceNum();
-    });
-
-    let data2 = Variable.GetFnData('56');
-    this.stateAir = data2;
-    this.getTypeDeviceNum();
-    this.events.subscribe("FnData:56", (res) => {
-      this.stateAir = res;
-      this.getTypeDeviceNum();
+    let data = Variable.GetFnData('state');
+    this.getTypeDeviceNum(data);
+    this.events.subscribe("FnData:state", (res) => {
+      this.getTypeDeviceNum(res);
     });
   }
   // ionViewDidLeave() {
   //   this.events.unsubscribe("FnData:51",()=>{});
   //   this.events.unsubscribe("FnData:isAuto",()=>{});
   // }
-  getTypeDeviceNum() {
-    this.stateData1 = { ...this.stateCommon, ...this.stateAir["State"] };
-    let data = this.stateData1;
+  getTypeDeviceNum(data: any) {
     this.sumNumOPen = 0;
     let sumNumOPen = 0;
+
     let result = JSON.parse(JSON.stringify(this.openStateNumArr));
 
+    let deviceStateData = {};
     for (const key in data) {
       if (data.hasOwnProperty(key) && Number(key) > 0) {
-        const state = data[key];
+        deviceStateData[key] = data[key][0];
         let typeID = this.deviceTypeDataList[key];
-        let element = data[key];
+        let element = data[key][0];
         if (element == 1) {
           sumNumOPen++;
           result[typeID]++;
@@ -163,6 +133,7 @@ export class DevicePage {
     };
     this.sumNumOPen = sumNumOPen;
     this.stateData = result;
+    this.deviceStateData = deviceStateData;
   }
   getRightCateData(typeID: string) {
     // this.tools.showAnimatePulse(this.el,`type${typeID}`)

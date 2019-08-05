@@ -32,16 +32,16 @@ export class PumpEastnorthpoolSettingPage {
     public events: Events) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
-    let fn51Data = Variable.GetFnData('51');
+    let fn51Data = Variable.GetFnData('state');
     this.getDeviceState(fn51Data);
-    this.events.subscribe("FnData:51", this.eventsFn51Handler);
+    this.events.subscribe("FnData:state", this.eventsFn51Handler);
     this.auto = Variable.isAuto;
     this.events.subscribe("FnData:isAuto", this.eventsFnAutoHandler);
   }
   getDeviceState(data: any) {
     if (data) {
-      this.state = data[this.idE];
-      this.state1 = data[this.idN];
+      this.state = data[this.idE][0];
+      this.state1 = data[this.idN][0];
     }
   }
   setDeviceState(id: string, name: string, state: string) {
@@ -52,7 +52,7 @@ export class PumpEastnorthpoolSettingPage {
   ionViewDidLoad() {
   }
   ionViewDidLeave() {
-    this.events.unsubscribe("FnData:51", this.eventsFn51Handler);
+    this.events.unsubscribe("FnData:state", this.eventsFn51Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
 
   }
