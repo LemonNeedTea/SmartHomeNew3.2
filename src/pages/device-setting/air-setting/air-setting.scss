@@ -188,4 +188,15 @@ page-air-setting {
     color: white !important;
     font-size: 75px !important;
   }
+  .clock {
+    text-align: center;
+    font-size: 14px;
+    color: red;
+    line-height: 50px;
+    height: 50px;
+  }
+  .clock img {
+    width: 18px;
+    height: 18px;
+  }
 }

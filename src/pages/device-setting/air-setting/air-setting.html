@@ -18,28 +18,24 @@
 <ion-content>
   <ion-list style="    width: 100%;position: absolute;top: 0;">
     <ion-row class="room-temp-row">
-      <div class="room-temp">室温&nbsp;&nbsp;{{spaceTemp}}°C</div>
+      <div class="room-temp">室温&nbsp;&nbsp;{{roomTempData}}°C</div>
     </ion-row>
     <ion-row>
-      <ion-col class="shidu">
+      <!-- <ion-col class="shidu">
         湿度&nbsp;&nbsp;{{airData.F6014}}%
+
+      </ion-col> -->
+    </ion-row>
+  </ion-list>
+  <ion-grid style="margin-top: -50px;">
+    <ion-row>
+      <ion-col>
+        <div class="clock">
+          <img src="../../../assets/air/lock.png" alt="">
+          键盘锁</div>
 
       </ion-col>
     </ion-row>
-  </ion-list>
-
-  <!-- <my-device-info [data]="paramData"></my-device-info> -->
-  <!-- <ion-item class="border-dividing">
-    <ion-label> <span *ngIf="!state">已关闭</span>
-      <div ion-text color='primary' *ngIf="state">已打开
-      </div>
-    </ion-label>
-    <ion-toggle [(ngModel)]="state"  [disabled]="auto"></ion-toggle>
-  </ion-item> -->
-  <ion-grid>
-    <!-- <ion-row class="room-temp-row">
-      <div class="room-temp">室温&nbsp;&nbsp;28°C</div>
-    </ion-row> -->
     <ion-row>
       <ion-col class="temp-add" col-2>
         <button ion-button icon-only (click)="tempAdd()">
@@ -47,7 +43,7 @@
         </button>
       </ion-col>
       <ion-col col-8 style="display: flex;justify-content: center;align-items: center;">
-        <div id="container" class="container">
+        <div id="circlebar" class="container">
           <div class="temp-show">
             <p><span>
                 <!-- {{temp | number:'1.1-1'}} -->
@@ -55,7 +51,7 @@
                   (ngModelChange)="changeTemp()"> </ion-multi-picker>
                 °C
               </span></p>
-            <p>{{speedKV[speedModel]}} &nbsp;&nbsp;{{modeKV[modeModel].name}}</p>
+            <p>{{selectedSpped.F_Name}} &nbsp;&nbsp;{{selectedMode.F_Name}}</p>
 
           </div>
         </div>
@@ -80,32 +76,35 @@
       </ion-col>
       <ion-col col-8>
         <ul>
-          <li [ngClass]="{'selected': speedModel==0}" (click)="setSpeed(0)">自动</li>
+          <li *ngFor="let item of speedKV" [ngClass]="{'selected': selectedSpped.F_ID==item.F_ID}"
+            (click)="setSpeed(item)">{{item.F_Name}}</li>
+          <!-- <li [ngClass]="{'selected': speedModel==0}" (click)="setSpeed(0)">自动</li>
           <li [ngClass]="{'selected': speedModel==3}" (click)="setSpeed(3)">高</li>
           <li [ngClass]="{'selected': speedModel==2}" (click)="setSpeed(2)">中</li>
-          <li [ngClass]="{'selected': speedModel==1}" (click)="setSpeed(1)">低</li>
+          <li [ngClass]="{'selected': speedModel==1}" (click)="setSpeed(1)">低</li> -->
         </ul>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-grid class="mode">
         <ion-row>
-          <ion-col>
-            <img [src]="'../../../assets/air/'+modeKV[modeModel].url" (click)="setMode()"
-              [ngClass]="modeKV[modeModel].class" />
+          <ion-col col-4>
+            <img *ngIf="selectedMode.F_Icon" [src]="'../../../assets/air/'+selectedMode.F_Icon" (click)="setMode()"
+              [ngClass]="selectedMode.F_Class" />
+            <img *ngIf=" !selectedMode.F_Icon" (click)="setMode()" />
             <!-- <img src="../../../assets/cool.png" (click)="setMode()"/> -->
-            {{modeKV[modeModel].name}}
+            {{selectedMode.F_Name}}
           </ion-col>
-          <ion-col>
+          <ion-col col-4>
             <img src="../../../assets/check.png" [ngClass]="{'selected': open}" (click)="setOpen()" />
 
             开关
           </ion-col>
-          <ion-col>
-            <img src="../../../assets/sleep.png" [ngClass]="{'selected': sleepModel>0}" (click)="setSleep()" />
+          <ion-col col-4>
+            <img src="../../../assets/air/eco.png" [ngClass]="{'selected': sleepModel>0}" />
 
 
-            睡眠
+            节能
           </ion-col>
         </ion-row>
       </ion-grid>
