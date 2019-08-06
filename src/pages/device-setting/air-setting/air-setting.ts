@@ -54,6 +54,8 @@ export class AirSettingPage {
   keyboardLock: boolean;
   airSetInfo: object = {};
   timeoutObj: any;
+  coolOffline: number;
+  hotUpperLimit: number;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -85,6 +87,19 @@ export class AirSettingPage {
     this.modeKV.forEach(element => {
       if (element.F_paramsValue == modeValue) {
         this.selectedMode = element;
+        if (this.eco) {
+          if (element.F_Class == 'hot') {
+            this.tempMax = this.hotUpperLimit;
+            this.tempMin = 15;
+          } else {
+            this.tempMin = this.coolOffline;
+            this.tempMax = 30;
+          }
+        } else {
+          this.tempMin = 15;
+          this.tempMax = 30;
+        }
+
         if (this.setInfo.type === 'mode') { if (element.F_ID == this.setInfo.value) { this.dismissLoading(); } }
 
       }
@@ -122,6 +137,9 @@ export class AirSettingPage {
     let keyboardLock = getInfo.keyboardLock;
     let hotUpperLimit = getInfo.hotUpperLimit;
     let coolOffline = getInfo.coolOffline;
+
+    this.hotUpperLimit = data[hotUpperLimit];
+    this.coolOffline = data[coolOffline];
 
     this.open = this.tools.parseToBooleanByString(data[open]);
     if (this.setInfo.type === 'open') { if (this.open == this.setInfo.value) { this.dismissLoading(); } }
