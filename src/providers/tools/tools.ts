@@ -8,6 +8,7 @@ import Moment, { now } from 'moment';
 import { EnumEnergyType, EnumDateType, EnumChartType } from '../../providers/model/enumdata';
 import { Vibration } from '@ionic-native/vibration';
 import { JPush } from '@jiguang-ionic/jpush';
+import { stringify } from 'querystring';
 
 
 @Injectable()
@@ -180,9 +181,20 @@ export class ToolsProvider {
       result.StopTime = day;
 
     }
-
     result.DateType = EnumDateType.Hour;
     return result;
+  }
+  parseToBooleanByString(data: string): boolean {
+    if (parseInt(data)) {
+      let n = parseInt(data);
+      if (n = 0) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }
   presentToast(data: string) {
     let toast = this.toastCtrl.create({
@@ -399,6 +411,15 @@ export class ToolsProvider {
       result = result.reverse();
     }
     return result;
+  }
+  getMonitorFnID(fnID: string, monitorID: string): string {
+    let result = "";
+    if (monitorID == "1") {
+      return result + fnID;
+    } else {
+      return result + `${fnID};MonitorID:${monitorID}`
+
+    }
   }
 
 

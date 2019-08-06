@@ -30,7 +30,7 @@
   <ion-grid style="margin-top: -50px;">
     <ion-row>
       <ion-col>
-        <div class="clock">
+        <div class="clock" *ngIf="keyboardLock">
           <img src="../../../assets/air/lock.png" alt="">
           键盘锁</div>
 
@@ -51,7 +51,8 @@
                   (ngModelChange)="changeTemp()"> </ion-multi-picker>
                 °C
               </span></p>
-            <p>{{selectedSpped.F_Name}} &nbsp;&nbsp;{{selectedMode.F_Name}}</p>
+            <p>{{selectedSpped.F_ParamsName?selectedSpped.F_ParamsName:'自动'}} &nbsp;&nbsp;{{selectedMode.F_ParamsName}}
+            </p>
 
           </div>
         </div>
@@ -76,8 +77,9 @@
       </ion-col>
       <ion-col col-8>
         <ul>
+          <li [ngClass]="{'selected': speedMode}" (click)="setSpeedMode()">自动</li>
           <li *ngFor="let item of speedKV" [ngClass]="{'selected': selectedSpped.F_ID==item.F_ID}"
-            (click)="setSpeed(item)">{{item.F_Name}}</li>
+            (click)="setSpeed(item)">{{item.F_ParamsName}}</li>
           <!-- <li [ngClass]="{'selected': speedModel==0}" (click)="setSpeed(0)">自动</li>
           <li [ngClass]="{'selected': speedModel==3}" (click)="setSpeed(3)">高</li>
           <li [ngClass]="{'selected': speedModel==2}" (click)="setSpeed(2)">中</li>
@@ -93,7 +95,7 @@
               [ngClass]="selectedMode.F_Class" />
             <img *ngIf=" !selectedMode.F_Icon" (click)="setMode()" />
             <!-- <img src="../../../assets/cool.png" (click)="setMode()"/> -->
-            {{selectedMode.F_Name}}
+            {{selectedMode.F_ParamsName}}
           </ion-col>
           <ion-col col-4>
             <img src="../../../assets/check.png" [ngClass]="{'selected': open}" (click)="setOpen()" />
@@ -101,7 +103,7 @@
             开关
           </ion-col>
           <ion-col col-4>
-            <img src="../../../assets/air/eco.png" [ngClass]="{'selected': sleepModel>0}" />
+            <img src="../../../assets/air/eco.png" [ngClass]="{'selected': eco}" (click)='setEco()' />
 
 
             节能

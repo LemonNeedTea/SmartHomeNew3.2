@@ -4,6 +4,7 @@ import * as ProgressBar from "progressbar.js";
 import { Variable } from '../../../providers/model/variable';
 import { DeviceRequestsProvider } from '../../../providers/tools/requests'
 import { ToolsProvider } from '../../../providers/tools/tools'
+import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Generated class for the AirSettingPage page.
@@ -24,13 +25,14 @@ export class AirSettingPage {
   paramData: any = {};
   temp: number = 16;
   private tempMax: number = 30;
-  private tempMin: number = 16;
+  private tempMin: number = 15;
   barCircleObj: any;
   modeKV: any = [];
   speedKV: any = [];
   tempKv: any = [];
 
   open: boolean;
+  eco: boolean;
   // speed: number;
   airData: any = {};
   private monitorID: number;
@@ -45,8 +47,14 @@ export class AirSettingPage {
   selectedSpped: any = {};
   openData: any;
   fnID: number;
-  fnID53: number;
+  airfFnID: string;
   setInfo: any = { type: '', value: '' };
+  airTypeParam: any = {};
+  speedMode: boolean;
+  keyboardLock: boolean;
+  airSetInfo: object = {};
+  timeoutObj: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private modalCtrl: ModalController,
@@ -57,129 +65,128 @@ export class AirSettingPage {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
     this.paramData = this.navParams.get("data");
-    this.monitorID = this.paramData.F_MonitorID;
+    // this.monitorID = this.paramData.F_MonitorID;
     this.deviceID = this.paramData.F_ID;
+
 
     this.getTempColumns();
 
 
   }
-  getFnData(fnID: number) {
-    let fnData = Variable.GetFnData(fnID + "");
+
+  getFnData() {
+    let fnID = this.airfFnID;
+    let fnData = Variable.GetFnData(fnID);
     this.getParamsFnData(fnData);
-    this.fnID53 = fnID;
-    this.events.subscribe(`FnData:${fnID}`, this.eventsFn53Handler);
+    this.events.subscribe(`FnData:${fnID}`, this.eventsFnAirHandler);
 
   }
-  getParamsFnData(data: any) {
-    this.getDeviceState(data.State);
-    data = data.Data;
-    let code = this.airParams.F_ParamsFnCode;
-    let code1 = this.airParams.F_RoomTempFnCode;
-    let code2 = this.airParams.F_SettingTempFnCode;
-
-    this.paramsData = data[code] ? data[code] : 0;
-    this.roomTempData = data[code1] ? data[code1] : 0;
-    this.temp = data[code2] ? Number(data[code2]) : this.tempMin;
-
-    if (this.setInfo.type === 'temp') { if (this.temp == this.setInfo.value) { this.dismissLoading(); } }
-
-    // this.paramsData = 33928;
-    let str = this.tools.numTo15BitArr(this.paramsData);
-    str.forEach((value, index) => {
-
-      if (value == 1) {
-
-        //是否是开关
-        let find = false;
-        this.modeKV.forEach(element => {
-          if (element.F_Bit == index) {
-            this.selectedMode = element;
-            if (this.setInfo.type === 'mode') { if (element.F_ID == this.setInfo.value) { this.dismissLoading(); } }
-
-            find = true;
-          }
-        });
-        if (find == false) {
-          this.speedKV.forEach(element => {
-            if (element.F_Bit == index) {
-              this.selectedSpped = element;
-              if (this.setInfo.type === 'speed') { if (element.F_ID == this.setInfo.value) { this.dismissLoading(); } }
-
-            }
-          });
-        }
+  getModeState(modeValue: string) {//获取模式状态
+    this.modeKV.forEach(element => {
+      if (element.F_paramsValue == modeValue) {
+        this.selectedMode = element;
+        if (this.setInfo.type === 'mode') { if (element.F_ID == this.setInfo.value) { this.dismissLoading(); } }
 
       }
     });
+  }
+  getSpeedState(speed: string, speedMode: string) {//获取风速状态
+    if (speedMode == '0') {
+      this.speedMode = true;
+      if (this.setInfo.type === 'speedMode') { this.dismissLoading(); }
+      this.selectedSpped = {};
+    } else {
+      let temp = {};
+      this.speedKV.forEach(element => {
+        if (element.F_paramsValue == speed) {
+          temp = element;
+          this.speedMode = false;
+        }
+      });
+      if (temp) {
+        if (this.setInfo.type === 'speed') { if (temp["F_ID"] == this.setInfo.value) { this.dismissLoading(); } }
 
+      }
+      this.selectedSpped = temp;
+    }
+  }
+  getParamsFnData(data: any) {
+    let getInfo = this.airTypeParam.airGetInfo;
+    let open = getInfo.open;
+    let eco = getInfo.eco;
+    let mode = getInfo.mode;
+    let roomTemp = getInfo.roomTemp;
+    let speed = getInfo.speed;
+    let speedMode = getInfo.speedMode;
+    let setTemp = getInfo.setTemp;
+    let keyboardLock = getInfo.keyboardLock;
+    let hotUpperLimit = getInfo.hotUpperLimit;
+    let coolOffline = getInfo.coolOffline;
+
+    this.open = this.tools.parseToBooleanByString(data[open]);
+    if (this.setInfo.type === 'open') { if (this.open == this.setInfo.value) { this.dismissLoading(); } }
+
+    this.roomTempData = data[roomTemp];
+    this.temp = data[setTemp];
+    if (this.setInfo.type === 'setTemp') { if (this.temp == this.setInfo.value) { this.dismissLoading(); } }
+
+    let modeValue = data[mode];
+    this.getModeState(modeValue);//获取模式状态
+    let speedModeValue = data[speedMode];
+    let speedValue = data[speed];
+
+    this.getSpeedState(speedValue, speedModeValue);//获取风速状态
+
+    this.eco = this.tools.parseToBooleanByString(data[eco]);
+    if (this.setInfo.type === 'eco') { if (this.eco == this.setInfo.value) { this.dismissLoading(); } }
+
+    this.keyboardLock = this.tools.parseToBooleanByString(data[keyboardLock]);
+
+    console.log(data);
     this.setCircleNum();
   }
   dismissLoading() {
     this.setInfo.type = '';
     this.setInfo.value = '';
     Variable.socketObject.dismissLoading();
+    clearTimeout(this.timeoutObj);
   }
-  checkSetInfo() {
-    switch (this.setInfo.type) {
-      case 'open': { break; }
-      case 'speed': {
-
-        break;
-      }
-      case 'mode': { break; }
-
-    }
+  checkSetInfo(type: string, value: any) {
+    this.setInfo.type = type;
+    this.setInfo.value = value;
+    this.timeoutObj = setTimeout(() => {
+      this.dismissLoading();
+    }, 60000);
   }
 
   ionViewDidLeave() {
     // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
-    this.events.unsubscribe(`FnData:${this.fnID53}`, this.eventsFn53Handler);
+    this.events.unsubscribe(`FnData:${this.airfFnID}`, this.eventsFnAirHandler);
   }
+
 
   ionViewDidLoad() {
     this.setCircle();
 
-
-    this.device.getAirParamsDataList().then(res => {
-      this.modeKV = res['mode'];
-      this.speedKV = res['speed'];
-      this.tempKv = res['temp'];
-      this.device.getAirDataByID(this.id).then(res => {
-        this.airParams = res;
-        this.getFnData(this.airParams["F_FnID"]);
-
-
-      });
-
+    this.device.getAirTypeParams(this.deviceID, 'yssAir').then((res: any) => {
+      this.airTypeParam = res;
+      this.monitorID = res.MonitorID;
+      this.airSetInfo = res.airSetInfo;
+      if (res.airParam) {
+        this.modeKV = res.airParam["mode"];
+        this.speedKV = res.airParam['speed'];
+      }
+      this.airfFnID = this.tools.getMonitorFnID(res.FnID, res.MonitorID);
+      this.getFnData();
+      Variable.socketObject.getFnData(res.FnID, res.MonitorID);
     });
 
-    // this.device.getDeviceGetInfoDataByID(this.id).then(res => {
-    //   this.fnID = res["F_FnID"];
-    //   let fnData = Variable.GetFnData(this.fnID.toString());
-    //   this.getDeviceState(fnData);
-    //   this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
-    // });
-
   }
-  // private eventsFn51Handler = (data: any) => {
-  //   this.getDeviceState(data);
-  // }
 
-  private eventsFn53Handler = (data: any) => {
+
+  private eventsFnAirHandler = (data: any) => {
     this.getParamsFnData(data);
   }
-  getDeviceState(data: any) {
-    if (data) {
-      this.open = data[this.id][0];
-      if (this.setInfo.type === 'open') { if (this.open == this.setInfo.value) { this.dismissLoading(); } }
-
-    }
-  }
-  // setDeviceState(state: any) {
-  //   this.open = state;
-  //   Variable.socketObject.setDeviceState(this.id, this.name, state);
-  // }
 
   getTempColumns() {
     let t = [];
@@ -226,9 +233,8 @@ export class AirSettingPage {
 
   }
   private setAirTemp() {
-    this.setAir(this.tempKv[0]['F_Mode'], Number(this.temp) + "");
-    this.setInfo.type = 'temp';
-    this.setInfo.value = this.temp;
+    Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['setTemp'], Number(this.temp))
+    this.checkSetInfo('setTemp', this.temp);
 
   }
   tempSub() {
@@ -251,16 +257,30 @@ export class AirSettingPage {
 
   setOpen() {
     this.open = !this.open;
-    Variable.socketObject.setDeviceState(this.id, this.name, this.open);
-    this.setInfo.type = 'open';
-    this.setInfo.value = this.open;
+    Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['open'], this.open ? 1 : 0)
+    this.checkSetInfo('open', this.open);
+  }
+  setEco() {
+    this.eco = !this.eco;
+    Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['eco'], this.eco ? 1 : 0)
+    this.checkSetInfo('eco', this.eco);
   }
   setSpeed(data: any) {
-    // this.speed = data;
+    this.speedMode = false;
     this.selectedSpped = data;
-    this.setAir(data['F_Mode'], data['F_Code']);
-    this.setInfo.type = 'speed';
-    this.setInfo.value = data.F_ID;
+    // this.setAir(data['F_Mode'], data['F_Code']);
+    Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['speed'], data.F_paramsValue)
+    this.checkSetInfo('speed', data.F_ID);
+
+
+  }
+  setSpeedMode() {
+    this.selectedSpped = {};
+    this.speedMode = true;
+    // this.setAir(data['F_Mode'], data['F_Code']);
+    Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['speed'], 0)
+    this.checkSetInfo('speedMode', true);
+
 
   }
 
@@ -269,9 +289,8 @@ export class AirSettingPage {
     modalObj.onDidDismiss(res => {
       if (res != null) {
         this.selectedMode = res;
-        this.setAir(res['F_Mode'], res['F_Code']);
-        this.setInfo.type = 'mode';
-        this.setInfo.value = res.F_ID;
+        Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['mode'], res.F_paramsValue)
+        this.checkSetInfo('mode', res.F_ID);
       }
     });
     modalObj.present();

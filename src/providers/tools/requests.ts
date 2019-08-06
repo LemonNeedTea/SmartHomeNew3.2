@@ -370,6 +370,9 @@ export class DeviceRequestsProvider {
   getEnergyPieChart(params: any) {
     return this.http.postMain("/EnergyAppData/GetEnergyPieChart", params);
   }
+  getAirTypeParams(deviceID: number, typeCode: string) {
+    return this.http.postMain("/EnergyAppData/GetAirTypeParams", { TypeCode: typeCode, DeviceID: deviceID });
+  }
 
 
 

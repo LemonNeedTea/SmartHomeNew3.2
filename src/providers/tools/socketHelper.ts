@@ -129,6 +129,19 @@ export class SocketHelpProvider {
             type: 'air'
         };
     }
+    sendMessage(monitorID: number, fnID: number, data: string) {
+        this.presentLoading("");
+        // let controlData = this.tools.getSendControl(data);
+        var param = {
+            Type: 'set',
+            UserName: this.tools.getUserName(), //用户名
+            FnID: fnID,
+            MonitorID: monitorID,
+            controlData: data
+        };
+        console.log(param);
+        this.socket.sendMessage(param);
+    }
     setMode(data: any, speech: boolean = false) {
         this.presentLoading(data.F_Name);
         this.tools.vibrate();
@@ -222,7 +235,7 @@ export class SocketHelpProvider {
     socketMessageHandle(data: any) {
 
         // if (data.FnID == '56')
-        console.log(data);
+        // console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;
@@ -232,12 +245,15 @@ export class SocketHelpProvider {
                 dealData = this.checkDeviceComplateState(dealData);
                 Variable.SetFnData('state', dealData);
                 this.events.publish("FnData:state", dealData);
+                break;
             }
             case 'get':
                 {
+                    // console.log(data);
                     let dealData = data.Data;
-                    Variable.SetFnData(data.FnID, dealData);
-                    this.events.publish("FnData:" + data.FnID, dealData);
+                    let fnID = this.tools.getMonitorFnID(data.FnID, data.MonitorID);
+                    Variable.SetFnData(fnID, dealData);
+                    this.events.publish("FnData:" + fnID, dealData);
 
 
                     break;
