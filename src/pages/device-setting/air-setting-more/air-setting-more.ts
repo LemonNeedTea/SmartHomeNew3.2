@@ -22,36 +22,28 @@ export class AirSettingMorePage {
   hotPumpModel: number;
   coolModel: number;
   hotModel: number;
+  tempMin: number = 16;
+  tempMax: number = 30;
+  tempColumns: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.name = this.navParams.get("name");
     this.id = this.navParams.get("id");
-    this.hotPumpModeColumns = [
-      {
-        options: [
-          { text: '制冷', value: 0 },
-          { text: '制热', value: 1 }
-        ]
-      }];
-    this.hotColumns = [
-      {
-        options: [
-          { text: '风盘', value: 0 },
-          { text: '地暖', value: 1 },
-          { text: '风盘+地暖', value: 2 }
-        ]
-      }];
-    this.coolColumns = [
-      {
-        options: [
-          { text: '风盘', value: 0 },
-          { text: '地冷', value: 1 },
-          { text: '风盘+地冷', value: 2 }
-        ]
-      }];
+    this.getTempColumns();
   }
 
   ionViewDidLoad() {
   }
+  getTempColumns() {
+    let t = [];
+    for (let i = this.tempMin; i <= this.tempMax; i++) {
+      t.push({ text: `${i}`, value: i });
+    }
+    this.tempColumns = [
+      {
+        options: t
+      }];
+  }
+
 
 }

@@ -8,34 +8,56 @@
   <ion-navbar transparent>
     <ion-title>更多设置</ion-title>
     <ion-buttons end>
-        <button ion-button clear (click)="goMorePage()" style="font-size: 10px;color:red;">
-          恢复出厂设置
-        </button>
-      </ion-buttons>
+      <button ion-button icon-only (click)="presentShowModal()">
+        <ion-icon name="alarm" style="color: white"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list no-margin>
     <button ion-item>
-      <ion-label>热泵模式</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="hotPumpModeColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="hotPumpModel" (ioniChange)="change()"> </ion-multi-picker>
+      <ion-label>制热上限（℃）</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="hotUpperLimitModel" (ioniChange)="change()"> </ion-multi-picker>
     </button>
     <button ion-item>
-      <ion-label>制热方式</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="hotColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="hotModel"> </ion-multi-picker>
-    </button>
-    <button ion-item>
-      <ion-label>制冷方式</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="coolColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="coolModel"> </ion-multi-picker>
+      <ion-label>制冷下限（℃）</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="coolOfflineModel"> </ion-multi-picker>
     </button>
     <ion-item>
-      <ion-label>风机运行时间</ion-label>
-      <p item-content color='primary'>12:00:00</p>
-
+      <ion-label>水阀1</ion-label>
+      <ion-toggle [(ngModel)]="valve1"></ion-toggle>
     </ion-item>
+    <ion-item>
+      <ion-label>水阀2</ion-label>
+      <ion-toggle [(ngModel)]="valve2"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>联动状态</ion-label>
+      <ion-toggle [(ngModel)]="valve2"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>键盘锁</ion-label>
+      <ion-toggle [(ngModel)]="keyboard"></ion-toggle>
+    </ion-item>
+    <button ion-item>
+      <ion-label>背光延时（秒）</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="coolOfflineModel"> </ion-multi-picker>
+    </button>
+    <button ion-item>
+      <ion-label>温度偏移（℃）</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="coolOfflineModel"> </ion-multi-picker>
+    </button>
+    <button ion-item>
+      <ion-label>服务器地址</ion-label>
+    </button>
+    <button ion-item>
+      <ion-label>备用服务器地址</ion-label>
+    </button>
   </ion-list>
 </ion-content>
