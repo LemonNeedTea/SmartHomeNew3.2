@@ -199,4 +199,14 @@ page-air-setting {
     width: 18px;
     height: 18px;
   }
+  .col-clock {
+    text-align: center;
+    color: white;
+    min-height: 61px;
+    // height: 86px;
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
 }

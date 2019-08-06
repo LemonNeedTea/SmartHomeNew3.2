@@ -27,12 +27,20 @@
       </ion-col> -->
     </ion-row>
   </ion-list>
-  <ion-grid style="margin-top: -50px;">
+  <ion-grid>
     <ion-row>
-      <ion-col>
-        <div class="clock" *ngIf="keyboardLock">
-          <img src="../../../assets/air/lock.png" alt="">
-          键盘锁</div>
+      <ion-col col-6 class="col-clock">
+        <div *ngIf="keyboardLock">
+          <img src="../../../assets/air/lock.png" />
+          <div>键盘锁</div>
+        </div>
+
+      </ion-col>
+      <ion-col col-6 class="col-clock">
+        <div *ngIf="linkage">
+          <img src="../../../assets/air/connect.png" />
+          <div>联动</div>
+        </div>
 
       </ion-col>
     </ion-row>
@@ -63,6 +71,24 @@
         <button ion-button icon-only (click)="tempSub()">
           <ion-icon name="remove"></ion-icon>
         </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 class="col-clock">
+        <div *ngIf="valve1">
+
+          <img src="../../../assets/air/valve.png" />
+          <div>水阀1</div>
+        </div>
+
+      </ion-col>
+      <ion-col col-6 class="col-clock">
+        <div *ngIf="valve2">
+
+          <img src="../../../assets/air/valve.png" />
+          <div>水阀2</div>
+        </div>
+
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -112,22 +138,4 @@
       </ion-grid>
     </ion-row>
   </ion-grid>
-  <!-- <ion-list>
-    <button ion-item>
-      <ion-label>模式选择</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="modeColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="modeModel" (ngModelChange)="modeChange()"> </ion-multi-picker>
-    </button>
-    <button ion-item>
-      <ion-label>风速选择</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="speedColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="speedModel"> </ion-multi-picker>
-    </button>
-    <button ion-item>
-      <ion-label>睡眠选择</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="sleepColumns" cancelText="取消" doneText="确定"
-        [(ngModel)]="sleepModel"> </ion-multi-picker>
-    </button>
-  </ion-list> -->
-
 </ion-footer>

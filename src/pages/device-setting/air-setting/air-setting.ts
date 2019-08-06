@@ -52,6 +52,9 @@ export class AirSettingPage {
   airTypeParam: any = {};
   speedMode: boolean;
   keyboardLock: boolean;
+  valve1: boolean;
+  valve2: boolean;
+  linkage: boolean;
   airSetInfo: object = {};
   timeoutObj: any;
   coolOffline: number;
@@ -140,6 +143,10 @@ export class AirSettingPage {
 
     this.hotUpperLimit = data[hotUpperLimit];
     this.coolOffline = data[coolOffline];
+
+    this.linkage = this.tools.parseToBooleanByString(data[getInfo.linkage]);
+    this.valve1 = this.tools.parseToBooleanByString(data[getInfo.value1]);
+    this.valve2 = this.tools.parseToBooleanByString(data[getInfo.value2]);
 
     this.open = this.tools.parseToBooleanByString(data[open]);
     if (this.setInfo.type === 'open') { if (this.open == this.setInfo.value) { this.dismissLoading(); } }
