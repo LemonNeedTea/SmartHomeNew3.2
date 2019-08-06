@@ -166,7 +166,9 @@ page-air-setting {
       height: 100% !important;
     }
   }
-  .selected {
+  .selected,
+  .cool,
+  .cool1 {
     background-color: color($colors, primary) !important;
     border-color: color($colors, primary) !important;
   }
@@ -174,7 +176,8 @@ page-air-setting {
   //   background: #ff9900;
   //   border-color: #ff9900;
   // }
-  .hot {
+  .hot,
+  .hot1 {
     background: #ff9900;
     border-color: #ff9900 !important;
   }

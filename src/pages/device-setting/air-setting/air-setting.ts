@@ -94,8 +94,11 @@ export class AirSettingPage {
           if (element.F_Class == 'hot') {
             this.tempMax = this.hotUpperLimit;
             this.tempMin = 15;
-          } else {
+          } else if (element.F_Class == 'cool') {
             this.tempMin = this.coolOffline;
+            this.tempMax = 30;
+          } else {
+            this.tempMin = 15;
             this.tempMax = 30;
           }
         } else {
@@ -141,8 +144,8 @@ export class AirSettingPage {
     let hotUpperLimit = getInfo.hotUpperLimit;
     let coolOffline = getInfo.coolOffline;
 
-    this.hotUpperLimit = data[hotUpperLimit];
-    this.coolOffline = data[coolOffline];
+    this.hotUpperLimit = parseInt(data[hotUpperLimit]); 
+    this.coolOffline = parseInt(data[coolOffline]);
 
     this.linkage = this.tools.parseToBooleanByString(data[getInfo.linkage]);
     this.valve1 = this.tools.parseToBooleanByString(data[getInfo.value1]);
@@ -222,6 +225,7 @@ export class AirSettingPage {
       {
         options: t
       }];
+    console.log(this.tempColumns);
   }
 
   private getTempNum(data: string) {
@@ -242,11 +246,14 @@ export class AirSettingPage {
     this.setCircleNum();
   }
   setCircleNum() {
-    let num = (this.temp - this.tempMin) / (this.tempMax - this.tempMin);
+    this.getTempColumns();
+    let num = (this.temp * 1 - this.tempMin*1) / (this.tempMax*1 - this.tempMin*1);
     this.barCircleObj.animate(num);
-
+ 
+   
+  
   }
-  tempAdd() {
+   tempAdd() {  
     this.temp = Number(this.temp);
     if (this.temp < this.tempMax) {
       this.temp++;
