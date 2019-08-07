@@ -4,7 +4,6 @@ import * as ProgressBar from "progressbar.js";
 import { Variable } from '../../../providers/model/variable';
 import { DeviceRequestsProvider } from '../../../providers/tools/requests'
 import { ToolsProvider } from '../../../providers/tools/tools'
-import { ThrowStmt } from '@angular/compiler';
 
 /**
  * Generated class for the AirSettingPage page.
@@ -144,7 +143,7 @@ export class AirSettingPage {
     let hotUpperLimit = getInfo.hotUpperLimit;
     let coolOffline = getInfo.coolOffline;
 
-    this.hotUpperLimit = parseInt(data[hotUpperLimit]); 
+    this.hotUpperLimit = parseInt(data[hotUpperLimit]);
     this.coolOffline = parseInt(data[coolOffline]);
 
     this.linkage = this.tools.parseToBooleanByString(data[getInfo.linkage]);
@@ -170,7 +169,6 @@ export class AirSettingPage {
 
     this.keyboardLock = this.tools.parseToBooleanByString(data[keyboardLock]);
 
-    console.log(data);
     this.setCircleNum();
   }
   dismissLoading() {
@@ -187,7 +185,7 @@ export class AirSettingPage {
     }, 60000);
   }
 
-  ionViewDidLeave() {
+  ionViewWillUnload() {
     // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     this.events.unsubscribe(`FnData:${this.airfFnID}`, this.eventsFnAirHandler);
   }
@@ -199,6 +197,7 @@ export class AirSettingPage {
     this.device.getAirTypeParams(this.deviceID, 'yssAir').then((res: any) => {
       this.airTypeParam = res;
       this.monitorID = res.MonitorID;
+      this.fnID = res.FnID;
       this.airSetInfo = res.airSetInfo;
       if (res.airParam) {
         this.modeKV = res.airParam["mode"];
@@ -225,7 +224,6 @@ export class AirSettingPage {
       {
         options: t
       }];
-    console.log(this.tempColumns);
   }
 
   private getTempNum(data: string) {
@@ -247,13 +245,13 @@ export class AirSettingPage {
   }
   setCircleNum() {
     this.getTempColumns();
-    let num = (this.temp * 1 - this.tempMin*1) / (this.tempMax*1 - this.tempMin*1);
+    let num = (this.temp * 1 - this.tempMin * 1) / (this.tempMax * 1 - this.tempMin * 1);
     this.barCircleObj.animate(num);
- 
-   
-  
+
+
+
   }
-   tempAdd() {  
+  tempAdd() {
     this.temp = Number(this.temp);
     if (this.temp < this.tempMax) {
       this.temp++;
@@ -344,6 +342,6 @@ export class AirSettingPage {
   // }
 
   goMorePage() {
-    this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name });
+    this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name, airTypeParam: this.airTypeParam, fnID: this.fnID, monitorID: this.monitorID });
   }
 }

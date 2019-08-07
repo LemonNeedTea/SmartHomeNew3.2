@@ -46,7 +46,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="temp-add" col-2>
-        <button ion-button icon-only (click)="tempAdd()">
+        <button ion-button icon-only (click)="tempAdd()" [hidden]="!open">
           <ion-icon name="add"></ion-icon>
         </button>
       </ion-col>
@@ -56,10 +56,11 @@
             <p><span>
                 <!-- {{temp | number:'1.1-1'}} -->
                 <ion-multi-picker [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定" [(ngModel)]="temp"
-                  (ngModelChange)="changeTemp()"> </ion-multi-picker>
+                  (ngModelChange)="changeTemp()" [disabled]="!open"> </ion-multi-picker>
                 °C
               </span></p>
-            <p>{{selectedSpped.F_ParamsName?selectedSpped.F_ParamsName:'自动'}} &nbsp;&nbsp;{{selectedMode.F_ParamsName}}
+            <p [hidden]="!open">{{selectedSpped.F_ParamsName?selectedSpped.F_ParamsName:'自动'}}
+              &nbsp;&nbsp;{{selectedMode.F_ParamsName}}
             </p>
 
           </div>
@@ -67,7 +68,7 @@
       </ion-col>
 
 
-      <ion-col class="temp-sub" col-2>
+      <ion-col class="temp-sub" col-2 [hidden]="!open">
         <button ion-button icon-only (click)="tempSub()">
           <ion-icon name="remove"></ion-icon>
         </button>
@@ -97,7 +98,7 @@
 </ion-content>
 <ion-footer>
   <ion-grid>
-    <ion-row class="speed">
+    <ion-row class="speed" [hidden]="!open">
       <ion-col col-4>
         风速设定
       </ion-col>
@@ -114,21 +115,24 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-grid class="mode">
+      <ion-grid class="mode" [ngClass]="{'border-top-none': !open}">
         <ion-row>
           <ion-col col-4>
-            <img *ngIf="selectedMode.F_Icon" [src]="'../../../assets/air/'+selectedMode.F_Icon" (click)="setMode()"
-              [ngClass]="selectedMode.F_Class" />
-            <img *ngIf=" !selectedMode.F_Icon" (click)="setMode()" />
-            <!-- <img src="../../../assets/cool.png" (click)="setMode()"/> -->
-            {{selectedMode.F_ParamsName}}
+            <div class="mode-div" [hidden]="!open">
+              <img *ngIf="selectedMode.F_Icon" [src]="'../../../assets/air/'+selectedMode.F_Icon" (click)="setMode()"
+                [ngClass]="selectedMode.F_Class" />
+              <img *ngIf=" !selectedMode.F_Icon" (click)="setMode()" />
+              <!-- <img src="../../../assets/cool.png" (click)="setMode()"/> -->
+              {{selectedMode.F_ParamsName}}
+            </div>
+
           </ion-col>
           <ion-col col-4>
             <img src="../../../assets/check.png" [ngClass]="{'selected': open}" (click)="setOpen()" />
 
             开关
           </ion-col>
-          <ion-col col-4>
+          <ion-col col-4 [hidden]="!open">
             <img src="../../../assets/air/eco.png" [ngClass]="{'selected': eco}" (click)='setEco()' />
 
 
