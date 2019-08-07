@@ -226,4 +226,29 @@ page-air-setting {
   .border-top-none {
     border-top: none !important;
   }
+  .timer-div {
+    width: 80%;
+    height: 29px;
+    // background: #ccc;
+    font-size: 14px;
+    color: white;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+  .timer-div span {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background-color: lightgreen;
+    border-radius: 100%;
+  }
+  .timer-close {
+    background-color: gainsboro !important;
+  }
+  .col-center {
+    display: flex;
+    justify-content: center;
+  }
 }

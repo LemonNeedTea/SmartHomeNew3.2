@@ -47,6 +47,7 @@ export class AirSettingPage {
   openData: any;
   fnID: number;
   airfFnID: string;
+  airTimerfFnID: string;
   setInfo: any = { type: '', value: '' };
   airTypeParam: any = {};
   speedMode: boolean;
@@ -58,6 +59,10 @@ export class AirSettingPage {
   timeoutObj: any;
   coolOffline: number;
   hotUpperLimit: number;
+  timer1Open: boolean;
+  timer2Open: boolean;
+  timer3Open: boolean;
+  timer4Open: boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -84,6 +89,19 @@ export class AirSettingPage {
     this.getParamsFnData(fnData);
     this.events.subscribe(`FnData:${fnID}`, this.eventsFnAirHandler);
 
+  }
+  getFn3Data() {
+    let fnID = this.airTimerfFnID;
+    let fnData = Variable.GetFnData(fnID);
+    this.getTimerFnData(fnData);
+    this.events.subscribe(`FnData:${fnID}`, this.eventsFnAirTimerHandler);
+
+  }
+  getTimerFnData(data: any) {
+    this.timer1Open = data['F31'] == '0' ? false : true;
+    this.timer2Open = data['F313'] == '0' ? false : true;
+    this.timer3Open = data['F325'] == '0' ? false : true;
+    this.timer4Open = data['F337'] == '0' ? false : true;
   }
   getModeState(modeValue: string) {//获取模式状态
     this.modeKV.forEach(element => {
@@ -188,6 +206,7 @@ export class AirSettingPage {
   ionViewWillUnload() {
     // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     this.events.unsubscribe(`FnData:${this.airfFnID}`, this.eventsFnAirHandler);
+    this.events.unsubscribe(`FnData:${this.airTimerfFnID}`, this.eventsFnAirTimerHandler);
   }
 
 
@@ -206,6 +225,10 @@ export class AirSettingPage {
       this.airfFnID = this.tools.getMonitorFnID(res.FnID, res.MonitorID);
       this.getFnData();
       Variable.socketObject.getFnData(res.FnID, res.MonitorID);
+      this.airTimerfFnID = this.tools.getMonitorFnID('3', res.MonitorID);
+      this.getFn3Data();
+      Variable.socketObject.getFnData('3', res.MonitorID);
+
     });
 
   }
@@ -213,6 +236,10 @@ export class AirSettingPage {
 
   private eventsFnAirHandler = (data: any) => {
     this.getParamsFnData(data);
+  }
+
+  private eventsFnAirTimerHandler = (data: any) => {
+    this.getTimerFnData(data);
   }
 
   getTempColumns() {
