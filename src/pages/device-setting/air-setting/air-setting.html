@@ -94,25 +94,25 @@
     </ion-row>
     <ion-row>
       <ion-col col-3 class="col-center">
-        <div class="timer-div">
+        <div class="timer-div" (click)="presentShowModal(1,'定时1')">
           <span [ngClass]="{'timer-close': !timer1Open}"></span>
           定时1
         </div>
       </ion-col>
       <ion-col col-3 class="col-center">
-        <div class="timer-div">
+        <div class="timer-div" (click)="presentShowModal(2,'定时2')">
           <span [ngClass]="{'timer-close': !timer1Open}"></span>
           定时2
         </div>
       </ion-col>
       <ion-col col-3 class="col-center">
-        <div class="timer-div">
+        <div class="timer-div" (click)="presentShowModal(3,'定时3')">
           <span [ngClass]="{'timer-close': !timer1Open}"></span>
           定时3
         </div>
       </ion-col>
       <ion-col col-3 class="col-center">
-        <div class="timer-div">
+        <div class="timer-div" (click)="presentShowModal(4,'定时4')">
           <span [ngClass]="{'timer-close': !timer1Open}"></span>
           定时4
         </div>

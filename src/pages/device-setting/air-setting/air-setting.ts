@@ -46,6 +46,7 @@ export class AirSettingPage {
   selectedSpped: any = {};
   openData: any;
   fnID: number;
+  fnID3: number;
   airfFnID: string;
   airTimerfFnID: string;
   setInfo: any = { type: '', value: '' };
@@ -225,9 +226,10 @@ export class AirSettingPage {
       this.airfFnID = this.tools.getMonitorFnID(res.FnID, res.MonitorID);
       this.getFnData();
       Variable.socketObject.getFnData(res.FnID, res.MonitorID);
-      this.airTimerfFnID = this.tools.getMonitorFnID('3', res.MonitorID);
+      this.fnID3 = 3;
+      this.airTimerfFnID = this.tools.getMonitorFnID(this.fnID3.toString(), res.MonitorID);
       this.getFn3Data();
-      Variable.socketObject.getFnData('3', res.MonitorID);
+      Variable.socketObject.getFnData(this.fnID3.toString(), res.MonitorID);
 
     });
 
@@ -370,5 +372,11 @@ export class AirSettingPage {
 
   goMorePage() {
     this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name, airTypeParam: this.airTypeParam, fnID: this.fnID, monitorID: this.monitorID });
+  }
+  presentShowModal(id: number, name: string) {
+    let profileModal = this.modalCtrl.create('AirSettingTimerPage', { id: id, name: name, fnID: this.fnID3 });
+    profileModal.onDidDismiss(data => {
+    });
+    profileModal.present();
   }
 }
