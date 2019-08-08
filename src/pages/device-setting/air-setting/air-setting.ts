@@ -374,7 +374,9 @@ export class AirSettingPage {
     this.navCtrl.push("AirSettingMorePage", { id: this.id, name: this.name, airTypeParam: this.airTypeParam, fnID: this.fnID, monitorID: this.monitorID });
   }
   presentShowModal(id: number, name: string) {
-    let profileModal = this.modalCtrl.create('AirSettingTimerPage', { id: id, name: name, fnID: this.fnID3 });
+    let mode = this.airTypeParam.airParam.mode;
+    let speed = this.airTypeParam.airParam.speed;
+    let profileModal = this.modalCtrl.create('AirSettingTimerPage', { id: id, name: name, fnID: this.fnID3, mode: mode, speed: speed, monitorID: this.monitorID });
     profileModal.onDidDismiss(data => {
     });
     profileModal.present();

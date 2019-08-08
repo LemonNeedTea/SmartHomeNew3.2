@@ -233,7 +233,7 @@ export class ToolsProvider {
     let minute = time.minutes();
     return hour * 60 + minute;
   }
-  getSendControl(data: any) {
+  getSendControl(data: any, strLength = 18) {
     let num = 0;
     let arr = new Array();
     for (const item in data) {
@@ -250,7 +250,7 @@ export class ToolsProvider {
         arr.push(temp);
       }
     }
-    let addNum = 18 - arr.length;
+    let addNum = strLength - arr.length;
     while (addNum-- > 0) {
       arr.push(0);
     }

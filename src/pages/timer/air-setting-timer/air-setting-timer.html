@@ -21,11 +21,33 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="setting-page">
   <ion-list>
     <my-loop [(myModel)]="loop"></my-loop>
+  </ion-list>
+  <ion-list>
     <my-time name='开启时间' [(myModel)]="startDate"></my-time>
-    <my-time name='结束时间' [(myModel)]="startDate"></my-time>
-
+    <my-time name='结束时间' [(myModel)]="stopDate"></my-time>
+  </ion-list>
+  <ion-list>
+    <my-time name='开启时间' [(myModel)]="startDate1"></my-time>
+    <my-time name='结束时间' [(myModel)]="stopDate1"></my-time>
+  </ion-list>
+  <ion-list>
+    <button ion-item>
+      <ion-label>设定模式</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="modeColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="modeModal"> </ion-multi-picker>
+    </button>
+    <button ion-item>
+      <ion-label>设定风速</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="speedColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="speedModal"> </ion-multi-picker>
+    </button>
+    <button ion-item>
+      <ion-label>设定温度</ion-label>
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+        [(ngModel)]="tempModal"> </ion-multi-picker>
+    </button>
   </ion-list>
 </ion-content>

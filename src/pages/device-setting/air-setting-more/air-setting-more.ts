@@ -24,7 +24,7 @@ export class AirSettingMorePage {
   hotPumpModel: number;
   coolModel: number;
   hotModel: number;
-  tempMin: number = 16;
+  tempMin: number = 15;
   tempMax: number = 30;
   tempColumns: any = [];
   backLightColumns: any = [];
