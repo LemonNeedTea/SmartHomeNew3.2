@@ -81,7 +81,7 @@ export class AirSettingTimerPage {
     this.startDate1 = [data[fnCode + (startNum + 6)], data[fnCode + (startNum + 7)]];
     this.stopDate1 = [data[fnCode + (startNum + 8)], data[fnCode + (startNum + 9)]];
     this.modeModal = data[fnCode + (startNum + 10)];
-    this.speedModal = data[fnCode + (startNum + 11)];
+    // this.speedModal = data[fnCode + (startNum + 11)];
     this.tempModal = data[fnCode + (startNum + 12)];
 
   }
@@ -160,7 +160,7 @@ export class AirSettingTimerPage {
     params.startDate1 = this.startDate1;
     params.stopDate1 = this.stopDate1;
     params.mode = this.modeModal;
-    params.speed = this.speedModal;
+    params.speed = '0';
     params.temp = this.tempModal;
     let controlData = this.tools.getSendControl(params, 13);
     Variable.socketObject.sendMessage(this.monitorID, 9, controlData);
