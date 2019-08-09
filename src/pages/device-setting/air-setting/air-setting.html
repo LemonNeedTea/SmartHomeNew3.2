@@ -6,7 +6,7 @@
 -->
 <ion-header no-border>
   <ion-navbar transparent>
-    <ion-title>设备设置</ion-title>
+    <ion-title>{{name}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="goMorePage()" style="color: white">
         <ion-icon name="more"></ion-icon>
@@ -27,7 +27,7 @@
       </ion-col> -->
     </ion-row>
   </ion-list>
-  <ion-grid style="margin-bottom: -50px;">
+  <ion-grid>
     <ion-row>
       <ion-col col-6 class="col-clock">
         <div *ngIf="keyboardLock">
@@ -92,7 +92,7 @@
 
       </ion-col>
     </ion-row>
-    <ion-row style="margin-top: 50px;">
+    <ion-row>
       <ion-col col-3 class="col-center">
         <div class="timer-div" (click)="presentShowModal(1,'定时1')">
           <span [ngClass]="{'timer-close': !timer1Open}"></span>
