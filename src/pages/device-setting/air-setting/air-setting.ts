@@ -64,6 +64,8 @@ export class AirSettingPage {
   timer2Open: boolean;
   timer3Open: boolean;
   timer4Open: boolean;
+  tempTimeoutObj: any;
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -285,11 +287,20 @@ export class AirSettingPage {
     if (this.temp < this.tempMax) {
       this.temp++;
       this.setCircleNum();
-      this.setAirTemp();
+      this.setTempoutTemp();
+      // this.setAirTemp();
       // this.sendAir();
 
     }
 
+  }
+  setTempoutTemp() {
+    if (this.tempTimeoutObj) {
+      clearTimeout(this.tempTimeoutObj);
+    }
+    this.tempTimeoutObj = setTimeout(() => {
+      this.setAirTemp();
+    }, 500);
   }
   private setAirTemp() {
     Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['setTemp'], Number(this.temp))
@@ -302,7 +313,8 @@ export class AirSettingPage {
     if (this.temp > this.tempMin) {
       this.temp--;
       this.setCircleNum();
-      this.setAirTemp();
+      // this.setAirTemp();
+      this.setTempoutTemp();
       // this.sendAir();
     }
   }
