@@ -124,10 +124,10 @@ export class SocketHelpProvider {
         };
         console.log(param);
         this.socket.sendMessage(param);
-        Variable.controlDevice = {
-            name: name,
-            type: 'air'
-        };
+        // Variable.controlDevice = {
+        //     name: name,
+        //     type: 'air'
+        // };
     }
     sendMessage(monitorID: number, fnID: number, data: string) {
         this.presentLoading("");
@@ -234,8 +234,8 @@ export class SocketHelpProvider {
     }
     socketMessageHandle(data: any) {
 
-        if (data.FnID == '3')
-            console.log(data);
+        // if (data.FnID == '3')
+        console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;

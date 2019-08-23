@@ -14,7 +14,7 @@
     <div class="cate_left">
       <ion-list class="my-list">
         <ion-item *ngFor="let item of typeDataList" (tap)="getRightCateData(item['F_ID'])"
-          [ngClass]="{'item-selected': item['F_ID']==typeID}">
+          [ngClass]="{true:'item-selected',false:'unselected' }[item['F_ID']==typeID]">
           <ion-badge color='danger' *ngIf="stateData[item['F_ID']]">{{stateData[item['F_ID']]}}</ion-badge>
 
           <div class="start" [ngClass]="item['F_Color']">
@@ -36,8 +36,7 @@
                 <p><span class="biaoqian">{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
               </div>
               <div class="label-right">
-                <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
-                  style="font-size: 15px;">{{item.F_SettingName}}</button>
+                <button ion-button clear small float-right *ngIf="item.F_ShowSetting">{{item.F_SettingName}}</button>
               </div>
             </div>
 

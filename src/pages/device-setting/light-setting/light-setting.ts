@@ -36,6 +36,10 @@ export class LightSettingPage {
     let fnData = Variable.GetFnData(this.fnID);
     this.getDeviceState(fnData);
     this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+
+    let fn50Data = Variable.GetFnData('50');
+    this.getLightState(fn50Data);
+    this.events.subscribe(`FnData:50`, this.eventsFn50Handler);
     // });
 
 
@@ -51,9 +55,16 @@ export class LightSettingPage {
   private eventsFn51Handler = (data: any) => {
     this.getDeviceState(data);
   }
+  private eventsFn50Handler = (data: any) => {
+    this.getLightState(data);
+  }
   /**end***/
 
   ionViewDidLoad() {
+  }
+  getLightState(data: any) {
+    // console.log(data);
+
   }
   getDeviceState(data: any) {
     if (data) {
@@ -69,6 +80,7 @@ export class LightSettingPage {
   }
   ionViewDidLeave() {
     this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    this.events.unsubscribe(`FnData:50`, this.eventsFn50Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
 
   }

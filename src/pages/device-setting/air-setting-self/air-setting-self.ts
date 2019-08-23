@@ -72,10 +72,14 @@ export class AirSettingSelfPage {
     this.fnID53 = fnID;
     this.events.subscribe(`FnData:${fnID}`, this.eventsFn53Handler);
 
+    let fnStateData = Variable.GetFnData('state');
+    this.getDeviceState(fnStateData);
+    this.events.subscribe(`FnData:state`, this.eventsFnStateHandler);
+
   }
   getParamsFnData(data: any) {
-    this.getDeviceState(data.State);
-    data = data.Data;
+    // this.getDeviceState(data.State);
+    // data = data.Data;
     let code = this.airParams.F_ParamsFnCode;
     let code1 = this.airParams.F_RoomTempFnCode;
     let code2 = this.airParams.F_SettingTempFnCode;
@@ -137,6 +141,7 @@ export class AirSettingSelfPage {
   ionViewDidLeave() {
     // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     this.events.unsubscribe(`FnData:${this.fnID53}`, this.eventsFn53Handler);
+    this.events.unsubscribe(`FnData:state`, this.eventsFnStateHandler);
   }
 
   ionViewDidLoad() {
@@ -170,6 +175,10 @@ export class AirSettingSelfPage {
 
   private eventsFn53Handler = (data: any) => {
     this.getParamsFnData(data);
+  }
+
+  private eventsFnStateHandler = (data: any) => {
+    this.getDeviceState(data);
   }
   getDeviceState(data: any) {
     if (data) {

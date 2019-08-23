@@ -76,9 +76,12 @@ export class RoomdevicePage {
     let result = {};
     this.sumNumOpen = 0;
     this.deviceDataListShow.forEach(element => {
-      let state = Boolean(data[element.F_ID][0]);
-      result[element.F_ID] = state;
-      if (state) this.sumNumOpen++;
+      if (data[element.F_ID]) {
+        let state = Boolean(data[element.F_ID][0]);
+        result[element.F_ID] = state;
+        if (state) this.sumNumOpen++;
+      }
+
     });
 
     this.stateData = result;
