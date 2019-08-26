@@ -36,7 +36,8 @@
                 <p><span class="biaoqian">{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
               </div>
               <div class="label-right">
-                <button ion-button clear small float-right *ngIf="item.F_ShowSetting">{{item.F_SettingName}}</button>
+                <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
+                  [ngClass]="{'close': !deviceStateData[item.F_ID]}">{{item.F_SettingName}}</button>
               </div>
             </div>
 

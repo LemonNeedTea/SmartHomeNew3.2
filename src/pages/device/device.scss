@@ -62,9 +62,12 @@ page-device {
   }
   .unselected {
     // background-color: #e0e0e0;
-    opacity: 0.8;
-    .start {
-      opacity: 0.4;
-    }
+    // opacity: 0.8;
+    // .start {
+    //   opacity: 0.4;
+    // }
+  }
+  .close {
+    color: gray !important;
   }
 }
