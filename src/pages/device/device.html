@@ -17,8 +17,8 @@
           [ngClass]="{true:'item-selected',false:'unselected' }[item['F_ID']==typeID]">
           <ion-badge color='danger' *ngIf="stateData[item['F_ID']]">{{stateData[item['F_ID']]}}</ion-badge>
 
-          <div class="start" [ngClass]="item['F_Color']">
-            <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'></div>
+          <div class="start">
+            <img src='../assets/img/home/icon-devicesetting1/{{item.F_Img}}'></div>
           <!-- <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'> -->
           <h3 style="font-size: 15px">{{item.F_Name}}</h3>
 
@@ -33,7 +33,8 @@
             <div class="label">
               <div>
                 {{item.F_Name}}
-                <p><span class="biaoqian">{{item.F_FloorName+'/'+item.F_RoomName}}</span></p>
+                <p><span class="biaoqian" [ngClass]="item.F_Color">{{item.F_FloorName+'/'+item.F_RoomName}}</span>
+                </p>
               </div>
               <div class="label-right">
                 <button ion-button clear small float-right *ngIf="item.F_ShowSetting"

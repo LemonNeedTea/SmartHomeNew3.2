@@ -40,6 +40,7 @@ export class DevicePage {
         this.deviceTypeDataList = res['deviceTypeDataList'];
         this.typeDataList = res['typeDataList'];
         this.deviceDataList = res['deviceDataList'];
+
         this.cleanNum(this.typeDataList);
         this.typeID = this.typeDataList[0]['F_ID'];//默认选中第一个类型
         this.getRightCateData(this.typeID);

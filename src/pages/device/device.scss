@@ -1,7 +1,8 @@
 page-device {
   .cate_content {
     width: 100%;
-    height: 100%; /*首先看高度100% 是否管用  如果没有作用我们要给元素设置绝对定位*/
+    height: 100%;
+    /*首先看高度100% 是否管用  如果没有作用我们要给元素设置绝对定位*/
     display: flex;
 
     .cate_left {
@@ -10,18 +11,22 @@ page-device {
       border-right: 10px solid #eee;
       overflow-y: auto;
       color: #666;
+
       .item-selected {
         border-left: 3px;
         border-left-style: solid;
         border-color: color($colors, primary);
         background-color: #eee;
       }
+
       ion-item {
         padding: 0;
         text-align: center;
+
         .item-inner {
           padding: 0;
         }
+
         // img{
         //     width: 20px;
         //     height: 20px;
@@ -29,6 +34,7 @@ page-device {
       }
     }
   }
+
   .my-list {
     ion-icon {
       color: #8e9093;
@@ -36,6 +42,7 @@ page-device {
       display: flex;
       align-items: center;
     }
+
     ion-badge {
       position: absolute;
       right: 6px;
@@ -43,23 +50,27 @@ page-device {
       //   padding: 3px;
       //   border-radius: 50%
     }
+
     .start {
       border-radius: 50%;
       width: 40px;
       height: 40px;
-      padding: 8px;
+      padding: 4px;
       display: inline-block;
     }
   }
+
   .biaoqian {
-    color: #636363;
-    background-color: #f0f0f0;
+    color: #fff;
+    // background-color: #f0f0f0;
   }
+
   .device-list {
     .item-inner {
       padding-right: 8px !important;
     }
   }
+
   .unselected {
     // background-color: #e0e0e0;
     // opacity: 0.8;
@@ -67,6 +78,7 @@ page-device {
     //   opacity: 0.4;
     // }
   }
+
   .close {
     color: gray !important;
   }

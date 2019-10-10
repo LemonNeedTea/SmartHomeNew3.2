@@ -235,7 +235,7 @@ export class SocketHelpProvider {
     socketMessageHandle(data: any) {
 
         // if (data.FnID == '3')
-        console.log(data);
+        // console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;
