@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color='primary' >
+  <ion-navbar color='primary'>
     <ion-title>{{{true:'用电',false:'用水'}[energyType==eleType]}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="showPopover($event)">
@@ -18,12 +18,12 @@
 </ion-header>
 <ion-footer no-border>
 
-  <ion-toolbar transparent>
+  <ion-toolbar transparent *ngIf="!type.water">
     <ion-segment [(ngModel)]="energyType" color="primary" (ionChange)="energyTypeChange()">
       <ion-segment-button value={{eleType}} [disabled]='type.ele'>
         <ion-icon name="flash"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value={{waterType}} [disabled]='type.water'>
+      <ion-segment-button value={{waterType}}>
         <ion-icon name="water"></ion-icon>
       </ion-segment-button>
     </ion-segment>
@@ -35,36 +35,36 @@
   <canvas id="chart" style="width:100%"></canvas>
   <div [ngSwitch]="energyType">
     <div *ngSwitchCase="eleType">
-      <div  *ngFor="let type of eleShowList">
-          <my-title [name]="type.name"></my-title>
-          <div *ngIf="type.type=='column'" >
-              <ul class='jinxian-ul' *ngFor="let device of type.data">
-                  <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
-                 
-                </ul>
-          </div>
-          <div *ngIf="type.type=='row'" >
-              <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">
+      <div *ngFor="let type of eleShowList">
+        <my-title [name]="type.name"></my-title>
+        <div *ngIf="type.type=='column'">
+          <ul class='jinxian-ul' *ngFor="let device of type.data">
+            <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
+
+          </ul>
+        </div>
+        <div *ngIf="type.type=='row'">
+          <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">
                   <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
                  
                 </ul> -->
-                <ion-grid class="self-grid">
-                  <!-- <ion-row class="first-row">
+          <ion-grid class="self-grid">
+            <!-- <ion-row class="first-row">
                     <ion-col col-4>名称</ion-col>
                     <ion-col>空调</ion-col>
                     <ion-col>水泵</ion-col>
                     <ion-col>电梯</ion-col>
                   </ion-row> -->
-                  <ion-row *ngFor="let device of type.data">
-                    <ion-col col-4>{{device.name}}</ion-col>
-                    <ion-col *ngFor="let detail of device.data"> 
-                        <span *ngIf="detail.F_FnID">{{detail.value}}</span>
-                        <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
-                    </ion-col>
-                  </ion-row>
-                  </ion-grid>
-          </div>
-        
+            <ion-row *ngFor="let device of type.data">
+              <ion-col col-4>{{device.name}}</ion-col>
+              <ion-col *ngFor="let detail of device.data">
+                <span *ngIf="detail.F_FnID">{{detail.value}}</span>
+                <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
       </div>
       <!-- <my-title [name]="'一楼总进线'"></my-title>
       <ul class='jinxian-ul'>
@@ -152,32 +152,32 @@
       </ion-grid> -->
     </div>
     <div *ngSwitchCase="waterType">
-      <div  *ngFor="let type of eleShowList">
+      <div *ngFor="let type of eleShowList">
         <my-title [name]="type.name"></my-title>
 
-        <div *ngIf="type.type=='row'" >
-            <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">
+        <div *ngIf="type.type=='row'">
+          <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">
                 <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
                
               </ul> -->
-              <ion-grid class="self-grid">
-                <!-- <ion-row class="first-row">
+          <ion-grid class="self-grid">
+            <!-- <ion-row class="first-row">
                   <ion-col col-4>名称</ion-col>
                   <ion-col>空调</ion-col>
                   <ion-col>水泵</ion-col>
                   <ion-col>电梯</ion-col>
                 </ion-row> -->
-                <ion-row *ngFor="let device of type.data">
-                  <ion-col col-4>{{device.name}}</ion-col>
-                  <ion-col *ngFor="let detail of device.data"> 
-                      <span *ngIf="detail.F_FnID">{{detail.value}}</span>
-                      <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
-                  </ion-col>
-                </ion-row>
-                </ion-grid>
+            <ion-row *ngFor="let device of type.data">
+              <ion-col col-4>{{device.name}}</ion-col>
+              <ion-col *ngFor="let detail of device.data">
+                <span *ngIf="detail.F_FnID">{{detail.value}}</span>
+                <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </div>
-      
-    </div>
+
+      </div>
     </div>
   </div>
 </ion-content>
