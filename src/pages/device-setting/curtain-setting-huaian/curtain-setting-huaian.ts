@@ -132,7 +132,7 @@ export class CurtainSettingHuaianPage {
 
   setInfo: any;
   setDeviceState(num) {
-    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, num, false);
+    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, num);
 
   }
 

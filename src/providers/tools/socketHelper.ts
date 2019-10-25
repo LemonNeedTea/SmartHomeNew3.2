@@ -234,8 +234,8 @@ export class SocketHelpProvider {
     }
     socketMessageHandle(data: any) {
 
-        if (data.FnID <= 40)
-            console.log(data);
+        // if (data.FnID <= 40)
+        //     console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;
@@ -266,6 +266,10 @@ export class SocketHelpProvider {
                         this.dismissLoading();
                     }
                     switch (data.FnID) {
+                        case 21: case 22: case 23: case 33: case 34: case 35: case 36: {
+                            this.dismissLoading();
+                            break;
+                        }
                         case 40://设备设置
                             {
                                 break;
