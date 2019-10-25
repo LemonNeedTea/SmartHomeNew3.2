@@ -18,6 +18,15 @@ export class Variable {
             }
         }
     }
+    public static GetFnDataByMonitorID(fnID: string, monitorID: any): any {
+        let result = "";
+        if (monitorID == "1") {
+            result = fnID;
+        } else {
+            result = `${fnID};MonitorID:${monitorID}`
+        }
+        return this.GetFnData(result);
+    }
     public static GetAirData(id: string): any {
 
         if (this.AirData[id] != null) {

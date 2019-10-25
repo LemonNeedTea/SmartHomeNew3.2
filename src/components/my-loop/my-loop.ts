@@ -38,6 +38,7 @@ export class MyLoopComponent implements OnInit {
       this.loop = temp;
     } else {
       this.loop = v;
+
     }
 
 

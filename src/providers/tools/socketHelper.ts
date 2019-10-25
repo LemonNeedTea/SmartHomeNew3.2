@@ -78,7 +78,7 @@ export class SocketHelpProvider {
     }
     private speechDevice(controlData: any, success: boolean = true) {
         let statestr = "";
-        if (controlData.speech) {
+        if (controlData && controlData.speech) {
             if (controlData.type === 'model') {
                 statestr = "打开";
             } else {
@@ -129,8 +129,8 @@ export class SocketHelpProvider {
         //     type: 'air'
         // };
     }
-    sendMessage(monitorID: number, fnID: number, data: string) {
-        this.presentLoading("");
+    sendMessage(monitorID: number, fnID: number, data: string, isLoading = true) {
+        !isLoading || this.presentLoading("");
         // let controlData = this.tools.getSendControl(data);
         var param = {
             Type: 'set',
@@ -234,8 +234,8 @@ export class SocketHelpProvider {
     }
     socketMessageHandle(data: any) {
 
-        // if (data.FnID == '3')
-        // console.log(data);
+        if (data.FnID <= 40)
+            console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;
@@ -261,6 +261,10 @@ export class SocketHelpProvider {
             case 'set':
                 {
                     console.log(data);
+                    if (!data.Result) {
+                        this.tools.presentToast(data.Msg);
+                        this.dismissLoading();
+                    }
                     switch (data.FnID) {
                         case 40://设备设置
                             {
@@ -270,9 +274,9 @@ export class SocketHelpProvider {
                             {
                                 let controlData = Variable.controlDevice;
                                 if (!data.Result) {
-                                    this.tools.presentToast(data.Msg);
+                                    // this.tools.presentToast(data.Msg);
                                     this.speechDevice(controlData, false);
-                                    this.dismissLoading();
+                                    // this.dismissLoading();
                                 } else {
                                     if (controlData) {
                                         if (controlData.type === 'model') {

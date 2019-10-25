@@ -421,6 +421,22 @@ export class ToolsProvider {
 
     }
   }
+  getBinaryArr(num: any): any {
+    let arr: Array<number> = [];
+    let binStr = parseInt(num).toString(2);
+    let fullBinStr = this.padStart(binStr, 7, '0');
+    let splitArr = fullBinStr.match(/\w/gi);
+    let resplitArr = splitArr.reverse();
+    arr.push(parseInt(resplitArr[6]));
+    arr.push(parseInt(resplitArr[0]));
+    arr.push(parseInt(resplitArr[1]));
+    arr.push(parseInt(resplitArr[2]));
+    arr.push(parseInt(resplitArr[3]));
+    arr.push(parseInt(resplitArr[4]));
+    arr.push(parseInt(resplitArr[5]));
+    return arr;
+
+  }
 
 
 

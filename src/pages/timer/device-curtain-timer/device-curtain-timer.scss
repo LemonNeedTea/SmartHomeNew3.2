@@ -1,0 +1,8 @@
+page-device-curtain-timer {
+  .list-div {
+    // transition: all .5s;
+    transition: height 1s ease;
+    // height: auto;
+    overflow: hidden;
+  }
+}

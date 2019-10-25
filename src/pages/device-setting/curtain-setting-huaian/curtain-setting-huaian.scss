@@ -1,0 +1,43 @@
+page-curtain-setting-huaian {
+    .blue {
+        color: color($colors, primary) !important;
+    }
+
+    .white {
+        color: white !important;
+    }
+
+    .selected {
+        background-color: color($colors, primary) !important;
+    }
+
+    .curtain-img {
+        // padding:
+        background: rgba(16, 142, 233, 0.1);
+
+        div {
+            width: 100%;
+            height: 140px;
+            background: rgba(16, 142, 233, 0.2);
+        }
+    }
+
+    img {
+        width: 120px;
+        // height: 180px;;
+    }
+
+    .sewen {
+        .range-bar {
+            background-image: linear-gradient(135deg, #07a7fc 0%, #fcd516 100%) !important;
+        }
+    }
+
+    .range-bar {
+        border-radius: 6px;
+    }
+
+    .range {
+        padding: 15px !important;
+    }
+}

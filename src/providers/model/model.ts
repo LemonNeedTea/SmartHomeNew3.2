@@ -147,3 +147,10 @@ export class airSettingTimerParams {
     public speed: string;
     public temp: string;
 }
+export class CurtainTimerParams {
+    public code: number;
+    public group: number;
+    public loop: Array<number>;
+    public startDate: Array<any>;
+    public timerOpen: number;
+}
