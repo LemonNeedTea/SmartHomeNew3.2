@@ -40,6 +40,8 @@ export class DevicePage {
         this.deviceTypeDataList = res['deviceTypeDataList'];
         this.typeDataList = res['typeDataList'];
         this.deviceDataList = res['deviceDataList'];
+        console.log(this.deviceDataList);
+
 
 
         this.cleanNum(this.typeDataList);

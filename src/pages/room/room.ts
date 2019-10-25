@@ -40,6 +40,7 @@ export class RoomPage {
         this.rooms = res["rooms"];
         this.floorAndRoomArr = res["floorAndRoomArr"];
 
+
         this.floors.forEach(element => {
           this.floorStartNumArr[element.F_ID] = 0;
         });
