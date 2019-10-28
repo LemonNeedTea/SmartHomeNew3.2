@@ -83,7 +83,7 @@ export class DeviceCurtainTimerPage {
     let group = index - 1;
     let loop = this.tools.getNumberByArr(this.loop[index]);
     let startDate = this.startDate[index];
-    let timerOpen = this.timerOpen[index] ? 1 : 0;
+    let timerOpen = this.timerOpen[index] ? 1 : 2;
 
     return `${code},${group},${loop},${startDate},${timerOpen}`;
     // return params;

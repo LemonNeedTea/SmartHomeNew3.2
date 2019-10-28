@@ -19,18 +19,9 @@
   </ion-refresher>
   <ion-slides pager>
 
-    <ion-slide>
-      <img src="../../assets/room1.png" />
+    <ion-slide *ngFor="let item of roomImages">
+      <img [src]="item.url" />
     </ion-slide>
-
-    <ion-slide>
-      <h2>二 楼</h2>
-    </ion-slide>
-
-    <ion-slide>
-      <h2>三 楼</h2>
-    </ion-slide>
-
   </ion-slides>
   <ion-list>
     <ion-item-group *ngFor="let floor of floors">

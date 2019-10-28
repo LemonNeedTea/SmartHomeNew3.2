@@ -217,6 +217,7 @@ export class AirSettingPage {
     this.setCircle();
 
     this.device.getAirTypeParams(this.deviceID, 'yssAir').then((res: any) => {
+      console.log(res)
       this.airTypeParam = res;
       this.monitorID = res.MonitorID;
       this.fnID = res.FnID;
@@ -328,6 +329,7 @@ export class AirSettingPage {
 
   setOpen() {
     this.open = !this.open;
+
     Variable.socketObject.sendMessage(this.monitorID, this.airSetInfo['open'], this.open ? 1 : 0)
     this.checkSetInfo('open', this.open);
   }
