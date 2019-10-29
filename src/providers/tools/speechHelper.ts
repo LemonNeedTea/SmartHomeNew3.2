@@ -24,7 +24,7 @@ export class SpeechHelperProvider implements OnInit {
             if (Baiduasrtts) {
                 Baiduasrtts.startSpeechRecognize(null, e => {
                 }, r => {
-        
+
                 });
 
             }
@@ -148,9 +148,10 @@ export class SpeechHelperProvider implements OnInit {
 
             if (res.success) {
                 let temp = res.data;
+                console.log(temp);
                 switch (temp.type) {
                     case 'mode': {
-                        Variable.socketObject.setMode(temp, true);
+                        Variable.socketObject.setMode(temp.data, true);
                         break;
                     } case 'device': {
                         Variable.socketObject.setDeviceState(temp.id, temp.name, temp.state, true);
