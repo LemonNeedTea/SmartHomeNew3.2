@@ -102,5 +102,18 @@ export class MessagePage {
     });
     alert.present();
   }
+  showDetail(data) {
+    console.log(data);
+    const alert = this.alertCtrl.create({
+      title: '报警',
+      subTitle: data.F_AlarmTimeStr,
+      message: data.F_AlarmText,
+      buttons: ['知 道']
+    });
+    alert.present();
+  }
+  showAlert() {
+
+  }
 
 }

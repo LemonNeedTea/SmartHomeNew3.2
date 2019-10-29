@@ -20,8 +20,11 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of messagelists" [ngClass]="'message'+item.F_ID">
-      <div>
-        <span class="biaoqian color8" margin-right>报警</span>{{item.F_AlarmText}}
+      <!-- <div item-start class="message-title">
+        能
+      </div>-->
+      <div class="message-item-content-div" (click)="showDetail(item)">
+        <span class="biaoqian color8" style="margin-right: 5px;">报警</span>{{item.F_AlarmText}}
         <p class="p">{{item.F_AlarmTimeStr}}</p>
       </div>
 

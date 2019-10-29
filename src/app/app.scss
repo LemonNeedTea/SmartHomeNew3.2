@@ -113,15 +113,19 @@
 .color1 {
   background-color: #6699cc;
 }
+
 .color2 {
   background-color: #8b7991;
 }
+
 .color3 {
   background-color: #4d669e;
 }
+
 .color4 {
   background-color: #88b7c9;
 }
+
 // .color1 {
 //   background-image: linear-gradient(-152deg, #b8da5a 7%, #acd944 96%);
 // }
@@ -150,9 +154,10 @@
 //   background-image: linear-gradient(45deg, #06d2ff 2%, #06d2ff 98%);
 // }
 
-// .color8 {
-//   background-image: linear-gradient(45deg, #ff0000c0 2%, #dd370ddc 98%);
-// }
+.color8 {
+  background-color: #ff0000c0;
+  // background-image: linear-gradient(45deg, #ff0000c0 2%, #dd370ddc 98%);
+}
 
 .cate_right {
   height: 100%;
@@ -228,6 +233,7 @@
 }
 
 .alarm {
+
   // color: red !important;
   .alert-head {
     // background-color: red !important;
