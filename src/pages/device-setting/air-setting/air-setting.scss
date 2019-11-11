@@ -2,9 +2,11 @@ page-air-setting {
   .toolbar-title {
     color: #fff;
   }
+
   .back-button {
     color: #fff !important;
   }
+
   .scroll-content {
     background-color: transparent;
     display: flex;
@@ -12,6 +14,7 @@ page-air-setting {
     justify-content: center;
     flex-direction: column;
   }
+
   .fixed-content {
     // background-color: transparent;
     background-image: url(../../../assets/bg2.png);
@@ -24,6 +27,7 @@ page-air-setting {
     -o-filter: blur(20px);
     filter: blur(20px);
   }
+
   ion-content {
     background: gray !important;
     //     background-image: url(../../../assets/bg2.png);
@@ -36,23 +40,27 @@ page-air-setting {
     //     -o-filter: blur(20px);
     //     filter: blur(20px);
   }
+
   .container {
     height: 200px;
     width: 200px;
   }
+
   .room-temp-row {
     padding: 10px;
     display: flex;
     justify-content: flex-end;
   }
+
   .temp-add,
   .temp-sub {
     display: flex;
     justify-content: center;
     align-items: center;
+
     .button {
       // background-color: #fff !important;
-      // color: color($colors, primary) !important;
+      // color: color($colors, primary1) !important;
       font-size: 30px;
       font-weight: bold;
       width: 46px;
@@ -61,6 +69,7 @@ page-air-setting {
       color: white;
     }
   }
+
   .room-temp {
     height: 28px;
     width: 104px;
@@ -73,15 +82,18 @@ page-air-setting {
     text-align: center;
     line-height: 28px;
   }
+
   .temp-show {
     width: 200px;
     height: 200px;
     position: absolute;
     color: rgba(255, 255, 255, 1);
+
     span {
       ion-multi-picker {
         display: inline-flex;
         padding: 0;
+
         .multi-picker-text {
           font-size: 75px;
           color: #fff;
@@ -89,33 +101,40 @@ page-air-setting {
       }
     }
   }
+
   .temp-show p:first-child {
     text-align: center;
     margin: 0;
     padding-top: 35px;
+
     // padding-left: 20px;
     span:first-child {
       // font-size: 75px;
     }
   }
+
   .temp-show p:last-child {
     margin: 0;
     font-size: 18px;
     text-align: center;
   }
+
   .multi-picker-text {
     // font-size: 14px;
     color: rgba(0, 0, 0, 0.45);
   }
+
   .border-dividing {
     .item-inner {
       border-bottom: none !important;
     }
   }
+
   .speed {
     color: #fff;
     transition: all 1.5s;
     height: 48px;
+
     ion-col {
       line-height: 38px;
       height: 100%;
@@ -129,6 +148,7 @@ page-air-setting {
       list-style-type: none;
       align-items: center;
       height: 100%;
+
       li {
         border: 1px solid white;
         border-radius: 50%;
@@ -139,18 +159,21 @@ page-air-setting {
       }
     }
   }
+
   ion-footer {
     border-top: 1px solid white;
     // border: 1 0;
     // border-left: none;
     // border-right: none;
   }
+
   .mode {
     padding: 0 !important;
     text-align: center;
     height: 100px;
     border-top: 1px dashed white;
     color: white;
+
     img {
       height: 48px;
       width: 48px;
@@ -158,9 +181,11 @@ page-air-setting {
       border-radius: 100%;
       padding: 5px;
     }
+
     ion-row {
       height: 100%;
     }
+
     ion-col {
       display: flex;
       flex-direction: column;
@@ -169,12 +194,14 @@ page-air-setting {
       height: 100% !important;
     }
   }
+
   .selected,
   .cool,
   .cool1 {
-    background-color: color($colors, primary) !important;
-    border-color: color($colors, primary) !important;
+    background-color: color($colors, primary1) !important;
+    border-color: color($colors, primary1) !important;
   }
+
   // .cool{
   //   background: #ff9900;
   //   border-color: #ff9900;
@@ -184,16 +211,19 @@ page-air-setting {
     background: #ff9900;
     border-color: #ff9900 !important;
   }
+
   .shidu {
     text-align: right;
     padding-right: 26px;
     color: #fff;
     font-size: 13px;
   }
+
   .progressbar-text {
     color: white !important;
     font-size: 75px !important;
   }
+
   .clock {
     text-align: center;
     font-size: 14px;
@@ -201,20 +231,24 @@ page-air-setting {
     line-height: 50px;
     height: 50px;
   }
+
   .clock img {
     width: 18px;
     height: 18px;
   }
+
   .col-clock {
     text-align: center;
     color: white;
     min-height: 61px;
+
     // height: 86px;
     img {
       width: 28px;
       height: 28px;
     }
   }
+
   .mode-div {
     display: flex;
     height: 100%;
@@ -223,9 +257,11 @@ page-air-setting {
     justify-content: center;
     align-items: center;
   }
+
   .border-top-none {
     border-top: none !important;
   }
+
   .timer-div {
     width: 80%;
     height: 29px;
@@ -237,6 +273,7 @@ page-air-setting {
     border: 1px solid #fff;
     border-radius: 5px;
   }
+
   .timer-div span {
     display: inline-block;
     width: 9px;
@@ -244,13 +281,16 @@ page-air-setting {
     background-color: lightgreen;
     border-radius: 100%;
   }
+
   .timer-close {
     background-color: gainsboro !important;
   }
+
   .col-center {
     display: flex;
     justify-content: center;
   }
+
   .eco-color {
     background-color: #7ccd7c;
     border-color: #7ccd7c !important;
