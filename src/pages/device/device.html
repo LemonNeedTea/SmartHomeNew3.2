@@ -38,7 +38,7 @@
               </div>
               <div class="label-right">
                 <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
-                  [ngClass]="{'close': !deviceStateData[item.F_ID]}">{{item.F_SettingName}}</button>
+                  [ngClass]="{'close': deviceStateData[item.F_ID]!=1}">{{item.F_SettingName}}</button>
               </div>
             </div>
 

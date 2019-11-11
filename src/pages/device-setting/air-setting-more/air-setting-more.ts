@@ -88,13 +88,14 @@ export class AirSettingMorePage {
       if (i >= 60) {
         let m: number = Math.trunc(i / 60);
         let s: number = i % 60;
+        t.push({ text: `${text}`, value: i });
         text = `${m}分${s}秒`;
         i += 10;
       } else {
         text = i + "秒";
+        t.push({ text: `${text}`, value: i });
         i += 5;
       }
-      t.push({ text: `${text}`, value: i });
     }
     this.backLightColumns = [
       {

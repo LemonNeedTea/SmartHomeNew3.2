@@ -126,6 +126,7 @@ export class HomePage {
       // this.deviceRequest.getWeatherInfo().then(res => {
       //   this.weatherinfo = res;
       // });
+
       this.deviceRequest.getHomePageInfo().then(res => {
         this.envData = res['envData'];
         this.modeDataList = res['modeDataList'];

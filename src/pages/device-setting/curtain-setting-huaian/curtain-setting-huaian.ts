@@ -42,9 +42,24 @@ export class CurtainSettingHuaianPage {
     this.monitorID = this.navParams.get("monitorID");
     this.getCurtainInfo();
     Variable.socketObject.getFnData(this.curtainInfo.timerGetFnID, this.monitorID);
+
+
+    this.fnID = 'state';
+    let fnData = Variable.GetFnData(this.fnID);
+    this.getDeviceState1(fnData);
+    this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
   }
 
+  private eventsFn51Handler = (data: any) => {
+    this.getDeviceState1(data);
+  }
+  /**end***/
 
+  getDeviceState1(data: any) {
+    if (data) {
+      this.state = data[this.id][0];
+    }
+  }
   //获取窗帘设置和获取信息
   getCurtainInfo() {
     if (this.monitorID == 16) {
@@ -69,9 +84,9 @@ export class CurtainSettingHuaianPage {
         }
       }
 
-    } else if (this.monitorID == 17) {
+    } else if (this.monitorID == 17 || this.monitorID == 18) {
       switch (this.id) {
-        case 61: {
+        case 71: case 74: {
           this.curtainInfo = {
             openFnID: 33,
             timerSetFnID: 36,
@@ -80,7 +95,7 @@ export class CurtainSettingHuaianPage {
           };
           break;
         }
-        case 62: {
+        case 72: case 75: {
           this.curtainInfo = {
             openFnID: 34,
             timerSetFnID: 36,
@@ -89,7 +104,7 @@ export class CurtainSettingHuaianPage {
           };
           break;
         }
-        case 63: {
+        case 73: case 76: {
           this.curtainInfo = {
             openFnID: 35,
             timerSetFnID: 36,
@@ -113,13 +128,13 @@ export class CurtainSettingHuaianPage {
         if (kaidu == this.setInfo.kaidu && state == this.setInfo.state) {
           // debugger;
 
-          this.state = state;
+          // this.state = state;
           this.saturation = kaidu;
           this.dismissLoading();
 
         }
       } else {
-        this.state = state;
+        // this.state = state;
         this.saturation = kaidu;
       }
 
@@ -132,13 +147,17 @@ export class CurtainSettingHuaianPage {
 
   setInfo: any;
   setDeviceState(num) {
+    switch (num) {
+      case 1: { this.state = 1; break; }
+      case 2: { this.state = 0; break; }
+      case 3: { this.state = 2; break; }
+    }
     Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, num);
 
   }
 
-  ionViewDidLeave() {
-    // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn72Handler);
-    // this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
+  ionViewWillUnload() {
+    this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
 
   }
 
