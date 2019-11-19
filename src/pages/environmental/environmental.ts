@@ -19,12 +19,18 @@ export class EnvironmentalPage {
   parentParam: any;
   dataList: any = [];
   fnID: number;
+  envStand: any = {};
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private device: DeviceRequestsProvider,
     private events: Events, ) {
+
+
     this.parentParam = this.navParams.get("Data");
     this.device.getEnergyQuery(this.parentParam.F_ID, true).then(res => {
       this.dataList = res;
+      console.log(res);
+
       this.fnID = res[0].F_GPRSFnID;
       let fnData = Variable.GetFnData(this.fnID.toString());
       this.getState(fnData);

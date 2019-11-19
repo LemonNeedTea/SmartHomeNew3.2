@@ -23,14 +23,18 @@
             </div>
 
             <div class="label-right">
-              <p>{{item.Value}}</p>
+              <p>
+                <span class="high" *ngIf="item.F_Max<item.Value" (click)="alert()">过高</span>
+                <span class="low" *ngIf="item.F_Min>item.Value">过低</span>
+                <span>{{item.Value}}</span>
+              </p>
             </div>
           </div>
 
         </ion-label>
 
       </button>
-      
+
     </ion-list>
   </div>
 </ion-content>

@@ -1,13 +1,48 @@
 page-environmental {
-    .start {
-        border-radius: 5px;
-        width: 45px;
-        height: 45px;
-        padding: 3px;
-      }
-      .label-right{
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-      }
+  .start {
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+    padding: 3px;
+  }
+
+  .label-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .high {
+    background-color: red;
+    color: #fff;
+
+    border-radius: 5px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    width: 35px;
+    text-align: center;
+  }
+
+  .high-color {
+    color: red;
+  }
+
+  .low-color {
+    color: orange;
+  }
+
+  .low {
+    background-color: orange;
+    color: #fff;
+    border-radius: 5px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    width: 35px;
+    text-align: center;
+  }
+
 }
