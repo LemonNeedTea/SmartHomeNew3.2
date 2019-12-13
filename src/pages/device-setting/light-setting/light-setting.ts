@@ -69,10 +69,35 @@ export class LightSettingPage {
   getDeviceState(data: any) {
     if (data) {
       this.state = data[this.id][0];
-      this.brightness = Number(data['-11'])[0];
-      this.brightness1 = Number(data['-12'])[0];
+      let type1Data = Number(data['-11'][0]);
+      let type2Data = Number(data['-12'][0]);
+
+      if (this.setInfo){
+        if (this.setInfo.type == "type1") {
+          if (this.setInfo.value == type1Data) {
+            this.brightness = type1Data;
+            this.dismissLoading();
+          }
+        }
+        if (this.setInfo.type == "type2") {
+          if (this.setInfo.value == type2Data) {
+            this.brightness1 = type2Data;
+            this.dismissLoading();
+          }
+        }
+      }else{
+            this.brightness = type1Data;
+            this.brightness1 = type2Data;
+
+      }
+      
 
     }
+  }
+  dismissLoading() {
+    this.setInfo.type = '';
+    this.setInfo.value = '';
+    Variable.socketObject.dismissLoading();
   }
   setDeviceState(state: any) {
     this.state = state;
@@ -84,6 +109,8 @@ export class LightSettingPage {
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
 
   }
+
+  setInfo:any;
   brightnessChange(data: any) {
     let id = 0;
     switch (data) {
@@ -92,6 +119,10 @@ export class LightSettingPage {
       case 3: { id = 30; break; }
     }
     this.setLight(id);
+    this.setInfo={
+      type:'type1',
+      value:data
+    };
 
   }
   colorChange(data: any) {
@@ -102,6 +133,10 @@ export class LightSettingPage {
       case 3: { id = 27; break; }
     }
     this.setLight(id);
+    this.setInfo = {
+      type: 'type2',
+      value: data
+    };
   }
   setLight(id: number) {
     let data = `${id},1`;//42 主机标号 模式 参数

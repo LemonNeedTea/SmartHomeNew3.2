@@ -34,6 +34,8 @@
         <header-file src="src/ios/BDSClientHeaders/ASR/BDSEventManager.h"/>
         <header-file src="src/ios/BDSClientHeaders/ASR/BDSASRDefines.h"/>
         <header-file src="src/ios/BDSClientHeaders/ASR/BDSASRParameters.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSWakeupDefines.h" />
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSWakeupParameters.h" />
 
         <header-file src="src/ios/BDSClientHeaders/TTS/BDS_EttsModelManagerInterface.h"/>
         <header-file src="src/ios/BDSClientHeaders/TTS/BDSTTSEventManager.h"/>
@@ -59,11 +61,13 @@
         <resource-file src="src/ios/BDSClientLib/ASR/bds_easr_wakeup_words.dat"/>
         <resource-file src="src/ios/BDSClientLib/ASR/bds_license.dat"/> 
         <resource-file src="src/ios/BDSClientLib/ASR/temp_license_2018-02-24.dat"/>
+        <resource-file src="src/ios/BDSClientLib/ASR/WakeUp.bin" />
 
         <resource-file src="src/ios/BDSClientLib/TTS/Chinese_And_English_Text.dat"/> 
         <resource-file src="src/ios/BDSClientLib/TTS/Chinese_And_English_Speech_Female.dat"/> 
         <resource-file src="src/ios/BDSClientLib/TTS/offline_engine_tmp_license.dat"/> 
         <resource-file src="src/ios/BDSClientLib/TTS/tmp_license.dat"/>
+        
 
         <source-file src="src/ios/CDVBaiduasrtts.m"/>
 

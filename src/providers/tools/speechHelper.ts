@@ -131,6 +131,10 @@ export class SpeechHelperProvider implements OnInit {
 
                     break;
                 }
+                case "asrWakeUpStarted":{
+                    alert("唤醒启动");
+                    break;
+                }
 
                 default:
                     break;
