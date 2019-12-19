@@ -20,17 +20,17 @@ export class SpeechHelperProvider implements OnInit {
         private loadingCtrl: LoadingController,
         private device: DeviceRequestsProvider
     ) {
-        try {
-            if (Baiduasrtts) {
-                Baiduasrtts.startSpeechRecognize(null, e => {
-                }, r => {
+        // try {
+        //     if (Baiduasrtts) {
+        //         Baiduasrtts.startSpeechRecognize(null, e => {
+        //         }, r => {
 
-                });
+        //         });
 
-            }
-        } catch (err) {
+        //     }
+        // } catch (err) {
 
-        }
+        // }
 
     }
     ngOnInit() {
