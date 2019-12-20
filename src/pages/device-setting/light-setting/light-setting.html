@@ -25,7 +25,8 @@
 
     <my-title name="亮度调节"></my-title>
     <!-- <ion-item> -->
-    <ion-range min="20" max="80" step="1" [(ngModel)]="brightness" (ngModelChange)="brightnessChange(brightness)"
+    <ion-range [disabled]="!state" min="20" max="80" step="1" [(ngModel)]="brightness"
+      (ngModelChange)="brightnessChange(brightness)"
       max='3' min='1'>
 
 
@@ -37,7 +38,8 @@
   <ion-list class="sewen">
 
     <my-title name="色调调节"></my-title>
-    <ion-range step="1" [(ngModel)]="brightness1" max='3' min='1' (ngModelChange)="colorChange(brightness1)">
+    <ion-range [disabled]="!state" step="1" [(ngModel)]="brightness1" max='3' min='1'
+      (ngModelChange)="colorChange(brightness1)">
       <ion-label range-left>暖</ion-label>
       <ion-label range-right>冷</ion-label>
     </ion-range>
