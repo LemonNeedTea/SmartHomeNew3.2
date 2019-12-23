@@ -34,7 +34,7 @@ export class DeviceCurtainTimerPage {
     this.curtainInfo = this.navParams.get("curtainInfo");
     this.monitorID = this.navParams.get("monitorID");
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 6; i++) {
       this.dataList.push({
         index: i
       });
@@ -80,7 +80,7 @@ export class DeviceCurtainTimerPage {
   getParams(index) {
     // let params = new CurtainTimerParams();//注意组装顺序
     let code = this.curtainInfo.timerRoadID;
-    let group = index - 1;
+    let group = index;
     let loop = this.tools.getNumberByArr(this.loop[index]);
     let startDate = this.startDate[index];
     let timerOpen = this.timerOpen[index] ? 1 : 2;
@@ -94,7 +94,7 @@ export class DeviceCurtainTimerPage {
   getData() {
     this.fnData = Variable.GetFnDataByMonitorID(this.curtainInfo.timerGetFnID, this.monitorID);
     // console.log(fnData);
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 6; i++) {
       this.loop[i] = this.tools.getBinaryArr(this.getFnStr(1 + (i - 1) * 4));
       this.startDate[i] = [this.getFnStr(2 + (i - 1) * 4), this.getFnStr(3 + (i - 1) * 4)];
       this.timerOpen[i] = this.getFnStr(4 + (i - 1) * 4) == 1 ? true : false;

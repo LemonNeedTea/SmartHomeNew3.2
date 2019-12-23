@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ModalController } from 'ionic-angular';
 import { Variable } from '../../../providers/model/variable';
-import { DeviceRequestsProvider } from '../../../providers/tools/requests'
+import { DeviceRequestsProvider } from '../../../providers/tools/requests';
+import { ToolsProvider } from '../../../providers/tools/tools'
 
 /**
  * Generated class for the CurtainSettingHuaianPage page.
@@ -35,6 +36,7 @@ export class CurtainSettingHuaianPage {
     private events: Events,
     private device: DeviceRequestsProvider,
     public modalCtrl: ModalController,
+    public tools: ToolsProvider,
 
   ) {
     this.id = this.navParams.get("id");
@@ -57,64 +59,112 @@ export class CurtainSettingHuaianPage {
 
   getDeviceState1(data: any) {
     if (data) {
-      this.state = data[this.id][0];
+      // this.state = data[this.id][0];
+      let type1Data = Number(data[this.id][0]);
+
+      if (this.setInfo) {
+        if (this.setInfo.type == "type1") {
+          if (this.setInfo.value == type1Data) {
+            if (type1Data >= 10) {
+              this.state = type1Data;
+              this.saturation = type1Data-10;
+            } else {
+              this.state = type1Data;
+              this.saturation = 0;
+            }
+            this.dismissLoading();
+          }
+        }
+      } else {
+        if (type1Data >= 10) {
+          this.state = type1Data;
+          this.saturation = type1Data-10;
+        } else {
+          this.state = type1Data;
+          this.saturation = 0;
+        }
+
+      }
     }
   }
   //获取窗帘设置和获取信息
   getCurtainInfo() {
-    if (this.monitorID == 16) {
-      switch (this.id) {
-        case 59: {
-          this.curtainInfo = {
-            openFnID: 21,
-            timerSetFnID: 23,
-            timerRoadID: 1,
-            timerGetFnID: 9
-          };
-          break;
-        }
-        case 60: {
-          this.curtainInfo = {
-            openFnID: 22,
-            timerSetFnID: 23,
-            timerRoadID: 2,
-            timerGetFnID: 9
-          };
-          break;
-        }
+    switch (this.id) {
+      case 71: {//遮阳顶棚
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 16,
+          timerSetFnID: 38,
+          timerRoadID: 5,
+          timerGetFnID: 25
+        };
+        break;
+      }
+      case 72: {//东帘
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 1,
+          timerSetFnID: 38,
+          timerRoadID: 1,
+          timerGetFnID: 13
+        };
+        break;
+      }
+      case 73: {//南帘
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 2,
+          timerSetFnID: 38,
+          timerRoadID: 2,
+          timerGetFnID: 13
+        };
+        break;
+      }
+      case 74: {//西帘
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 4,
+          timerSetFnID: 38,
+          timerRoadID: 3,
+          timerGetFnID: 13
+        };
+        break;
+      }
+      case 75: {//北
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 8,
+          timerSetFnID: 38,
+          timerRoadID: 4,
+          timerGetFnID: 13
+        };
+        break;
+      }
+      case 76: {//照明
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 32,
+          timerSetFnID: 38,
+          timerRoadID: 6,
+          timerGetFnID: 13
+        };
+        break;
+      }
+      case 76: {//群控
+        this.curtainInfo = {
+          openFnID: 37,
+          openSetPipe: 0,
+          timerSetFnID: 38,
+          // timerRoadID: 1,
+          // timerGetFnID: 25
+        };
+        break;
       }
 
-    } else if (this.monitorID == 17 || this.monitorID == 18) {
-      switch (this.id) {
-        case 71: case 74: {
-          this.curtainInfo = {
-            openFnID: 33,
-            timerSetFnID: 36,
-            timerRoadID: 1,
-            timerGetFnID: 11
-          };
-          break;
-        }
-        case 72: case 75: {
-          this.curtainInfo = {
-            openFnID: 34,
-            timerSetFnID: 36,
-            timerRoadID: 2,
-            timerGetFnID: 11
-          };
-          break;
-        }
-        case 73: case 76: {
-          this.curtainInfo = {
-            openFnID: 35,
-            timerSetFnID: 36,
-            timerRoadID: 3,
-            timerGetFnID: 11
-          };
-          break;
-        }
-      }
+
+
     }
+
   }
 
   ionViewDidLoad() {
@@ -147,12 +197,13 @@ export class CurtainSettingHuaianPage {
 
   setInfo: any;
   setDeviceState(num) {
-    switch (num) {
-      case 1: { this.state = 1; break; }
-      case 2: { this.state = 0; break; }
-      case 3: { this.state = 2; break; }
-    }
-    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, num);
+    this.setInfo = {
+      type: 'type1',
+      value: num,
+    };
+    this.state=num;
+    let controData = `${this.curtainInfo.openSetPipe},${num}`;
+    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData);
 
   }
 
@@ -165,13 +216,13 @@ export class CurtainSettingHuaianPage {
   rangeChange() {
     if (!this.timerObj) {
       this.timerObj = setTimeout(() => {
-        console.log(this.saturation);
-        Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, this.saturation * 1 + 10, false);
-
-
-
-        // console.log(this.saturation);
-        // this.setDeviceState(this.saturation, 1);
+        let setKaiduValue = this.saturation * 1 + 10;
+        this.setInfo = {
+          type: 'type1',
+          value: setKaiduValue,
+        };
+        let controData = `${this.curtainInfo.openSetPipe},${setKaiduValue}`;
+        Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData);
         clearTimeout(this.timerObj);
         this.timerObj = null;
       }, 500);
@@ -185,5 +236,10 @@ export class CurtainSettingHuaianPage {
     });
     profileModal.present();
   }
+
+  // setDeviceState(state: any) {
+  //   this.state = state;
+  //   Variable.socketObject.setDeviceStateAndMonitorID(this.id, this.name, state, this.monitorID);
+  // }
 
 }

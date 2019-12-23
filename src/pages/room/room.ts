@@ -41,7 +41,6 @@ export class RoomPage {
         this.rooms = res["rooms"];
         this.floorAndRoomArr = res["floorAndRoomArr"];
         this.roomImages = res["roomImages"];
-        console.log(this.roomImages);
 
 
 

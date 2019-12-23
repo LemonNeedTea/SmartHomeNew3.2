@@ -1,6 +1,6 @@
 page-curtain-setting-huaian {
   .blue {
-    color: color($colors, primary) !important;
+    color: color($colors, primary) ;
   }
 
   .white {
@@ -9,6 +9,7 @@ page-curtain-setting-huaian {
 
   .selected {
     background-color: color($colors, primary) !important;
+    color: #ffffff !important;
   }
 
   .curtain-img {

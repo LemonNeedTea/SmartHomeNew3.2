@@ -72,6 +72,26 @@ export class SocketHelpProvider {
             type: 'device'
         };
     }
+    setDeviceStateAndMonitorID(id: string, name: string, state: number, monitorID: number = 1) {
+        var param = {
+            Type: 'set',
+            UserName: this.tools.getUserName(), //用户名
+            MonitorID: monitorID, //设备ID
+            DeviceID: id,
+            SetState: Number(state)
+        };
+        console.log(param);
+        this.socket.sendMessage(param);
+        this.tools.vibrate();
+        this.presentLoading(name, "state");
+        Variable.controlDevice = {
+            id: id,
+            state: state,
+            name: name,
+            speech: false,
+            type: 'device'
+        };
+    }
     private initTTSconfig(data: string) {
         Baiduasrtts.initTTSconfig((e) => { }, (r) => { });
         Baiduasrtts.synthesizeSpeech(`${data}`, (e) => { }, (r) => { });
@@ -234,8 +254,8 @@ export class SocketHelpProvider {
     }
     socketMessageHandle(data: any) {
 
-        // if (data.FnID <= 40)
-        //     console.log(data);
+        // if (data.Type == 'state')
+            console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;
