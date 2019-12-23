@@ -80,7 +80,7 @@ export class DeviceCurtainTimerPage {
   getParams(index) {
     // let params = new CurtainTimerParams();//注意组装顺序
     let code = this.curtainInfo.timerRoadID;
-    let group = index;
+    let group = index-1;
     let loop = this.tools.getNumberByArr(this.loop[index]);
     let startDate = this.startDate[index];
     let timerOpen = this.timerOpen[index] ? 1 : 2;

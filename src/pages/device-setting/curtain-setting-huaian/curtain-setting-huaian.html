@@ -8,7 +8,7 @@
 
   <ion-navbar color='primary'>
     <ion-title>{{name}}</ion-title>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="isNotQunKong">
       <button ion-button icon-only (click)="presentShowModal()">
         <ion-icon name="alarm"></ion-icon>
       </button>

@@ -31,6 +31,7 @@ export class CurtainSettingHuaianPage {
     timerRoadID: 0,
     timerGetFnID: 0
   };
+  isNotQunKong:boolean=true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private events: Events,
@@ -42,14 +43,18 @@ export class CurtainSettingHuaianPage {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
     this.monitorID = this.navParams.get("monitorID");
+    if(this.id==77){
+      this.isNotQunKong=false;
+    }
     this.getCurtainInfo();
-    Variable.socketObject.getFnData(this.curtainInfo.timerGetFnID, this.monitorID);
 
+    if(this.isNotQunKong){
+      this.fnID = 'state';
+      let fnData = Variable.GetFnData(this.fnID);
+      this.getDeviceState1(fnData);
+      this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    }
 
-    this.fnID = 'state';
-    let fnData = Variable.GetFnData(this.fnID);
-    this.getDeviceState1(fnData);
-    this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
   }
 
   private eventsFn51Handler = (data: any) => {
@@ -150,7 +155,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 76: {//群控
+      case 77: {//群控
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 0,
@@ -203,7 +208,7 @@ export class CurtainSettingHuaianPage {
     };
     this.state=num;
     let controData = `${this.curtainInfo.openSetPipe},${num}`;
-    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData);
+    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData,this.isNotQunKong);
 
   }
 
@@ -222,7 +227,7 @@ export class CurtainSettingHuaianPage {
           value: setKaiduValue,
         };
         let controData = `${this.curtainInfo.openSetPipe},${setKaiduValue}`;
-        Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData);
+        Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData, this.isNotQunKong);
         clearTimeout(this.timerObj);
         this.timerObj = null;
       }, 500);
