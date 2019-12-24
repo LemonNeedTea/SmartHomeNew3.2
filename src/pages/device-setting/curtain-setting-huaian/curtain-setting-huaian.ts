@@ -53,6 +53,7 @@ export class CurtainSettingHuaianPage {
       let fnData = Variable.GetFnData(this.fnID);
       this.getDeviceState1(fnData);
       this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+      Variable.socketObject.getFnData("13",this.monitorID);
     }
 
   }
@@ -101,7 +102,7 @@ export class CurtainSettingHuaianPage {
           openSetPipe: 16,
           timerSetFnID: 38,
           timerRoadID: 5,
-          timerGetFnID: 25
+          timerGetFnID: 13
         };
         break;
       }

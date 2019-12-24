@@ -61,7 +61,11 @@ export class DeviceCurtainTimerPage {
     let params = this.getParams(index);
     if (this.checkParam()) {
       Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.timerSetFnID, params);
-      this.dismiss();
+      // setTimeout(() => {
+      //   Variable.socketObject.dismissLoading();
+        this.dismiss();
+
+      // }, 3000);
     }
     // console.log(params);
     /*
@@ -80,7 +84,7 @@ export class DeviceCurtainTimerPage {
   getParams(index) {
     // let params = new CurtainTimerParams();//注意组装顺序
     let code = this.curtainInfo.timerRoadID;
-    let group = index-1;
+    let group = index - 1;
     let loop = this.tools.getNumberByArr(this.loop[index]);
     let startDate = this.startDate[index];
     let timerOpen = this.timerOpen[index] ? 1 : 2;
@@ -105,7 +109,7 @@ export class DeviceCurtainTimerPage {
 
   }
   getFnStr(num) {
-    let str = `F${this.curtainInfo.timerGetFnID}${num + (this.curtainInfo.timerRoadID - 1) * 40}`;
+    let str = `F${this.curtainInfo.timerGetFnID}${num + (this.curtainInfo.timerRoadID - 1) * 24}`;
     return this.fnData[str];
   }
 

@@ -286,7 +286,7 @@ export class SocketHelpProvider {
                         this.dismissLoading();
                     }
                     switch (data.FnID) {
-                        case 21: case 22: case 23: case 33: case 34: case 35: case 36: {
+                        case 21: case 22: case 23: case 33: case 34: case 35: case 36: case 38:{
                             this.dismissLoading();
                             break;
                         }
