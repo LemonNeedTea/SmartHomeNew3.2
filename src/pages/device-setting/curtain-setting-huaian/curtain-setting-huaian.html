@@ -53,7 +53,7 @@
         <button ion-button outline [ngClass]="{'selected': state==1}" (click)="setDeviceState(1)"
           [disabled]="auto">打开</button>
       </ion-col>
-      <ion-col text-center *ngIf="id!=76&&id!=71">
+      <ion-col text-center *ngIf="id!=76">
         <button ion-button outline [ngClass]="{'selected': state==3}" (click)="setDeviceState(3)"
           [disabled]="auto">停止</button>
       </ion-col>
