@@ -218,21 +218,15 @@ export class CurtainSettingHuaianPage {
 
   }
 
-  timerObj: any;
+
   rangeChange() {
-    if (!this.timerObj) {
-      this.timerObj = setTimeout(() => {
-        let setKaiduValue = this.saturation * 1 + 10;
-        this.setInfo = {
-          type: 'type1',
-          value: setKaiduValue,
-        };
-        let controData = `${this.curtainInfo.openSetPipe},${setKaiduValue}`;
-        Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData, this.isNotQunKong);
-        clearTimeout(this.timerObj);
-        this.timerObj = null;
-      }, 500);
-    }
+    let setKaiduValue = this.saturation * 1 + 10;
+    this.setInfo = {
+      type: 'type1',
+      value: setKaiduValue,
+    };
+    let controData = `${this.curtainInfo.openSetPipe},${setKaiduValue}`;
+    Variable.socketObject.sendMessage(this.monitorID, this.curtainInfo.openFnID, controData, this.isNotQunKong);
 
 
   }
