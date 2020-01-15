@@ -1,0 +1,50 @@
+page-ele-cost {
+  .margin-bottom-15 {
+    margin-bottom: 15px;
+  }
+
+  .item {
+    padding: 0;
+  }
+
+  .li-header {
+    background: #f1f1f1;
+  }
+
+  .li1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .li1 span {
+    width: 50%;
+    text-align: center;
+  }
+
+  .selectedSpan {
+    background: #ddd;
+  }
+
+  .li1 span {
+    border-right: 1px solid #ddd;
+  }
+
+  ul .detail {
+    padding: 5px 0 0 0;
+    background: #ddd;
+    font: 13px;
+  }
+
+  .li-detail {
+    background: #ffff;
+  }
+  .list{
+      padding:0;
+    //   background-color: #fff;
+      margin-top: 8px;
+  }
+}

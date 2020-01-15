@@ -96,7 +96,7 @@ export class CurtainSettingHuaianPage {
   //获取窗帘设置和获取信息
   getCurtainInfo() {
     switch (this.id) {
-      case 71: {//遮阳顶棚
+      case 71:case 78: {//遮阳顶棚
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 16,
@@ -106,7 +106,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 72: {//东帘
+      case 72: case 79: {//东帘
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 1,
@@ -116,7 +116,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 73: {//南帘
+      case 73: case 80:  {//南帘
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 2,
@@ -126,7 +126,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 74: {//西帘
+      case 74: case 81: {//西帘
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 4,
@@ -136,7 +136,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 75: {//北
+      case 75: case 82: {//北
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 8,
@@ -146,7 +146,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 76: {//照明
+      case 76: case 83: {//照明
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 32,
@@ -156,7 +156,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 77: {//群控
+      case 77: case 84:  {//群控
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 0,

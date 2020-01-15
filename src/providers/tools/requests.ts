@@ -373,6 +373,9 @@ export class DeviceRequestsProvider {
   getAirTypeParams(deviceID: number, typeCode: string) {
     return this.http.postMain("/EnergyAppData/GetAirTypeParams", { TypeCode: typeCode, DeviceID: deviceID });
   }
+  getEleStepPrice(year: number) {
+    return this.http.postMain("/EnergyAppData/GetEleStepPrice", { Year: year });
+  }
 
 
 
