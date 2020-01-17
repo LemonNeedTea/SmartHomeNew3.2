@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
 import { Variable } from '../../providers/model/variable';
+import{ ConfigProvider } from '../../providers/config/config'
 
 @IonicPage()
 @Component({
@@ -24,7 +25,9 @@ export class DevicePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private device: DeviceRequestsProvider,
     private events: Events,
     private tools: ToolsProvider,
-    private el: ElementRef) {
+    private el: ElementRef,
+    public config: ConfigProvider
+    ) {
     this.getIsAuto();
 
     this.loadDataNew().then(res => {

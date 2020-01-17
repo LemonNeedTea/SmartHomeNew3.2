@@ -37,7 +37,7 @@
             <img src="../../assets/room/{{room.F_Img}}">
           </div>
 
-          {{room.F_Name}}
+          {{config.chinese?room.F_Name:room.F_Name_En}}
           <p item-end class="state"><span>{{roomResultData[room.F_ID]}}</span>/{{room.F_DeviceNum}}</p>
         </button>
       </ion-item-sliding>

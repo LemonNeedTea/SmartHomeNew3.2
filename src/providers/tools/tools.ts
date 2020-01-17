@@ -486,6 +486,11 @@ export class ToolsProvider {
         this.translate.use(data);
         // this.translate.setDefaultLang(data);
         this.setLanguageStorage(data);
+        if(data==='en'){
+          this.config.chinese=false;
+        }else{
+          this.config.chinese=true;
+        }
 
 
       }

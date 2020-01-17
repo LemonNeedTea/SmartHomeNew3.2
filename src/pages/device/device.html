@@ -20,7 +20,9 @@
           <div class="start">
             <img src='../assets/img/home/icon-devicesetting1/{{item.F_Img}}'></div>
           <!-- <img src='../assets/img/home/icon-devicesetting/{{item.F_Img}}'> -->
-          <h3 style="font-size: 15px">{{item.F_Name}}</h3>
+          <h3 style="font-size: 15px">
+            {{config.chinese?item.F_Name:item.F_Name_En}}
+          </h3>
 
         </ion-item>
       </ion-list>
@@ -32,13 +34,19 @@
           <ion-label>
             <div class="label">
               <div>
-                {{item.F_Name}}
-                <p><span class="biaoqian" [ngClass]="item.F_Color">{{item.F_FloorName+'/'+item.F_RoomName}}</span>
+                {{config.chinese?item.F_Name:item.F_Name_En}}
+                <p><span class="biaoqian" [ngClass]="item.F_Color">
+                  {{config.chinese?item.F_FloorName:item.F_FloorName_En}}
+                  /
+                  {{config.chinese?item.F_RoomName:item.F_RoomName_En}}
+                </span>
                 </p>
               </div>
               <div class="label-right">
                 <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
-                  [ngClass]="{'close': deviceStateData[item.F_ID]!=1}">{{item.F_SettingName}}</button>
+                  [ngClass]="{'close': deviceStateData[item.F_ID]!=1}">
+                  {{config.chinese?item.F_SettingName:item.F_SettingName_En}}
+                </button>
               </div>
             </div>
 

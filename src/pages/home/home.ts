@@ -5,7 +5,8 @@ import { DeviceRequestsProvider } from '../../providers/tools/requests'
 // import { ModePublicSettingPage } from '../mode-public-setting/mode-public-setting';
 // import { ModeSettingPage } from '../mode-setting/mode-setting';
 import { ToolsProvider } from '../../providers/tools/tools';
-import { SpeechHelperProvider } from '../../providers/tools/speechHelper'
+import { SpeechHelperProvider } from '../../providers/tools/speechHelper';
+import{ ConfigProvider } from '../../providers/config/config'
 
 
 
@@ -43,7 +44,8 @@ export class HomePage {
     private alertCtrl: AlertController,
     private tools: ToolsProvider,
     private speech: SpeechHelperProvider,
-    public el: ElementRef
+    public el: ElementRef,
+    public config: ConfigProvider
   ) {
     this.deviceRequest.getWeatherInfo().then(res => {
       this.weatherinfo = res;

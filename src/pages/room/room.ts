@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { Variable } from '../../providers/model/variable';
-// import { RoomdevicePage } from '../../pages/roomdevice/roomdevice';
+// import { RoomdevicePage } from '../../pages/roomdevice/roomdevice
+import{ ConfigProvider } from '../../providers/config/config'
 
 /**
  * Generated class for the RoomPage page.
@@ -28,7 +29,9 @@ export class RoomPage {
   private isFirst = true;
   roomImages: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private device: DeviceRequestsProvider,
-    private events: Events) {
+    private events: Events,
+    public config: ConfigProvider
+    ) {
     this.loadListData().then(res => {
       this.getFn51Data();
     })

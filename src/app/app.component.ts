@@ -10,6 +10,7 @@ import { LoginRequestsProvider } from '../providers/tools/requests';
 import { Network } from '@ionic-native/network';
 // import { PasswordPage } from '../pages/password/password';
 import { TranslateService } from '@ngx-translate/core';
+import{ ConfigProvider } from '../providers/config/config';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +32,8 @@ export class MyApp {
     private modalCtrl: ModalController,
     private network: Network,
     private toastCtrl: ToastController,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    public config: ConfigProvider) {
     platform.ready().then(() => {//app启动成功执行
       statusBar.styleDefault();
       splashScreen.hide();
@@ -125,6 +127,9 @@ export class MyApp {
 
     if (language){
       this.translate.use(language);
+      if (language === 'en') {
+        this.config.chinese=false;
+      }
     }else{
       debugger;
       const browserLang = this.translate.getBrowserLang();
@@ -141,6 +146,7 @@ export class MyApp {
           }
         } else {
           this.translate.use(this.translate.getBrowserLang());
+        this.config.chinese=false;
         }
       } else {
         // 设置翻译
