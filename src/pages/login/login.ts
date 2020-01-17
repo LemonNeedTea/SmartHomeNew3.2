@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, Events, MenuContr
 import { TabsPage } from "../tabs/tabs";
 import { LoginRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
-
+import { TranslateService } from '@ngx-translate/core';
 
 
 /**
@@ -30,7 +30,8 @@ export class LoginPage {
     private events: Events,
     private menuCtrl: MenuController,
     private keyboard: Keyboard,
-    private tools: ToolsProvider) {
+    private tools: ToolsProvider,
+    private translate: TranslateService) {
   }
   ionViewDidLoad() {
     this.menuCtrl.enable(false);
@@ -89,6 +90,11 @@ export class LoginPage {
       loginObj.classList.remove("verity");
     }
   }
+
+  public changeLanguage() {
+    // this.translate.use(language);
+    this.tools.showLanguage();
+  }
   autoLogin() {
     let userinfo = this.loginRequest.isExistUserInfoData();
     if (userinfo) {
@@ -103,5 +109,6 @@ export class LoginPage {
     // }, err => {
     //   this.rootPage = LoginPage;
     // });
+
   }
 }

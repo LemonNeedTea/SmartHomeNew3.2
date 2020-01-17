@@ -73,7 +73,7 @@
 
 
         <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
-            <string>是否允许使用您的麦克风进行语音控制设备？</string>
+            <string>是否允许使用您的麦克风进行设备控制设备？</string>
         </config-file>
 
     </platform>

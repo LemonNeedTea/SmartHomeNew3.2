@@ -4,7 +4,7 @@
       <ion-icon class="user"></ion-icon>
 
     </button>
-    <ion-title>家居智慧能源管理</ion-title>
+    <ion-title>{{'HOME.TITLE'|translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="scan()" end style="color:white">
         <ion-icon name="ios-mic"></ion-icon>
@@ -35,10 +35,10 @@
       <ion-row style="background-color:rgba(0, 0, 0, 0.45)">
         <ion-col class='col-right'>
 
-          <img src="../../assets/home/power.png" />功率:<span class="power">{{energyParamsData.power}}</span>kW
+          <img src="../../assets/home/power.png" />{{'功率'|translate}}:<span class="power">{{energyParamsData.power}}</span>kW
 
           &nbsp; <img src="../../assets/home/energy.png " />
-          日/月/年:{{energyParamsData.day?energyParamsData.day:0}} / {{energyParamsData.month?energyParamsData.month:0}} /
+          {{'日'|translate}}/{{'月'|translate}}/{{'年'|translate}}:{{energyParamsData.day?energyParamsData.day:0}} / {{energyParamsData.month?energyParamsData.month:0}} /
           {{energyParamsData.year?energyParamsData.year:0}}
 
         </ion-col>
@@ -64,10 +64,10 @@
     <ion-item-divider sticky no-padding style="background:white;height: 40px;">
       <ion-segment [(ngModel)]="homeType">
         <ion-segment-button value="mode">
-          模式
+          {{'模式'|translate}}
         </ion-segment-button>
         <ion-segment-button value="setting">
-          设置
+          {{'设置'|translate}}
         </ion-segment-button>
       </ion-segment>
     </ion-item-divider>
@@ -89,7 +89,7 @@
                       <ion-card-header no-padding>
                         <div style="width: 25%;float: left;" *ngIf="modeID==mode.F_AgreementID">
                           <div class="now">
-                            当前
+                            {{'当前'|translate}}
                           </div>
                         </div>
                         <button ion-button clear small float-right (click)="goModeSetting(mode)">
@@ -116,7 +116,7 @@
               <div item-start class="start c5">
                 <img src='../../assets/home/publicsetting.png'>
               </div>
-              模式公共设置
+              {{'模式公共设置'|translate}}
               <ion-icon name="arrow-forward" item-end></ion-icon>
             </ion-item>
 

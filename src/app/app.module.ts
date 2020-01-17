@@ -49,6 +49,10 @@ import { EnergyPage } from '../pages/energy/energy';
 //组件
 import { ComponentsModule } from '../components/components.module';
 
+// 导入包
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 
 
@@ -73,7 +77,15 @@ import { ComponentsModule } from '../components/components.module';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     ComponentsModule,
-    MultiPickerModule
+    MultiPickerModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (HttpLoaderFactory),
+        deps: [HttpClient]
+      }
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -108,7 +120,11 @@ import { ComponentsModule } from '../components/components.module';
     SpeechHelperProvider,
     Vibration,
     JPush,
-    Device,LoadingHelperProvider
+    Device, LoadingHelperProvider
   ]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

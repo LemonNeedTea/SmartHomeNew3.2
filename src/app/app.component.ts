@@ -9,7 +9,7 @@ import { ToolsProvider } from '../providers/tools/tools';
 import { LoginRequestsProvider } from '../providers/tools/requests';
 import { Network } from '@ionic-native/network';
 // import { PasswordPage } from '../pages/password/password';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,7 +30,8 @@ export class MyApp {
     public events: Events,
     private modalCtrl: ModalController,
     private network: Network,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private translate: TranslateService) {
     platform.ready().then(() => {//app启动成功执行
       statusBar.styleDefault();
       splashScreen.hide();
@@ -42,7 +43,7 @@ export class MyApp {
       //接受订阅用户名称
       events.subscribe('user:created', (user, time) => {
         this.username = user['username'];
-        this.accountSetName=user['accountsetname'];
+        this.accountSetName = user['accountsetname'];
       });
       events.subscribe("vibrate", res => {
         this.vibrate = res;
@@ -50,6 +51,7 @@ export class MyApp {
       //自动登录
       // this.autoLogin();
     });
+    this.initTranslate();
 
     // 
   }
@@ -115,5 +117,38 @@ export class MyApp {
   }
   setVibrate() {
     this.tools.setVibrate(this.vibrate);
+  }
+  initTranslate() {
+    // 根据浏览器来判断字符集
+    // this.translate.setDefaultLang('zh-cmn-Hans');
+    let language = this.tools.getLanguageStorage();
+
+    if (language){
+      this.translate.use(language);
+    }else{
+      debugger;
+      const browserLang = this.translate.getBrowserLang();
+      this.tools
+
+      if (browserLang) {
+        if (browserLang === 'zh') {
+          const browserCultureLang = this.translate.getBrowserCultureLang();
+
+          if (browserCultureLang.match(/-CN|CHS|Hans/i)) {
+            this.translate.use('zh-cmn-Hans');
+          } else if (browserCultureLang.match(/-TW|CHT|Hant/i)) {
+            this.translate.use('zh-cmn-Hant');
+          }
+        } else {
+          this.translate.use(this.translate.getBrowserLang());
+        }
+      } else {
+        // 设置翻译
+        this.translate.use('zh-cmn-Hans');
+      }
+    }
+    
+   
+
   }
 }

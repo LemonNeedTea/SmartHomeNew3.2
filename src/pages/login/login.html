@@ -4,31 +4,37 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!-- <ion-header>
+<ion-header>
   <ion-navbar>
-    <ion-title>登录</ion-title>
+    <!-- <ion-title>登录</ion-title>
+     -->
+     <ion-buttons end>
+       <button ion-button icon-only (click)="changeLanguage()"> 
+         {{'language'|translate}}
+       </button>
+     </ion-buttons>
   </ion-navbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content padding>
   <div class="login-div">
     <div ion-text color="primary" text-center class="logo">
       <img src="../../assets/img/login/logo@3x.png" />
       <!-- <ion-icon  name="ionic" style="font-size :4em;" padding-right></ion-icon> -->
-      <p>家居智慧能源管理</p>
+      <p>{{ 'HOME.TITLE' | translate }}</p>
     </div>
     <div class="list-form">
       <ion-item>
         <!-- <ion-label fixed><ion-icon color="primary" name="person" item-start></ion-icon></ion-label> -->
         <ion-label floating>
-          <ion-icon name="person" item-start></ion-icon>用 户 名
+          <ion-icon name="person" item-start></ion-icon>{{'USERNAME'|translate}}
         </ion-label>
         <ion-input type="text" [(ngModel)]="username" [disabled]='!isEdit'></ion-input>
       </ion-item>
       <ion-item>
         <!-- <ion-label fixed><ion-icon color="primary" name="lock" item-start></ion-icon></ion-label> -->
         <ion-label floating>
-          <ion-icon name="lock" item-start></ion-icon>密 码
+          <ion-icon name="lock" item-start></ion-icon>{{'PASSWORD'|translate}}
         </ion-label>
         <ion-input type="password" [(ngModel)]="password" clearInput="true" [disabled]='!isEdit'></ion-input>
       </ion-item>
@@ -44,7 +50,7 @@
     </button> -->
     <div style='text-align: center;margin-top: 65px'>
       <button class="login" id='login' (click)="login(username, password)">
-        <p>登 录</p>
+        <p translate>{{ 'HOME.LOGIN' }}</p>
         <div class="loading">
           <div></div>
           <div></div>
@@ -61,3 +67,6 @@
   </div>
 
 </ion-content>
+  <div>
+    <!-- <button  ion-button color="light"></button> -->
+  </div>

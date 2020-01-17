@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      消息
+      {{'消息'|translate}}
     </ion-title>
     <ion-buttons start>
       <button ion-button icon-only (click)="allRead()">
         <!-- <ion-icon name="more"></ion-icon> -->
-        全部已阅
+        {{'全部已阅'|translate}}
       </button>
     </ion-buttons>
     <ion-buttons end>
@@ -24,11 +24,11 @@
         能
       </div>-->
       <div class="message-item-content-div" (click)="showDetail(item)">
-        <span class="biaoqian color8" style="margin-right: 5px;">报警</span>{{item.F_AlarmText}}
+        <span class="biaoqian color8" style="margin-right: 5px;">{{'报警'|translate}}</span>{{item.F_AlarmText}}
         <p class="p">{{item.F_AlarmTimeStr}}</p>
       </div>
 
-      <button ion-button clear small item-end (click)="setState(item.F_ID)">已阅</button>
+      <button ion-button clear small item-end (click)="setState(item.F_ID)">{{'已阅'|translate}}</button>
     </ion-item>
   </ion-list>
 </ion-content>

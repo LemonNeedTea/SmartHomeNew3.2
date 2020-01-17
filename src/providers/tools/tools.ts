@@ -8,7 +8,8 @@ import Moment, { now } from 'moment';
 import { EnumEnergyType, EnumDateType, EnumChartType } from '../../providers/model/enumdata';
 import { Vibration } from '@ionic-native/vibration';
 import { JPush } from '@jiguang-ionic/jpush';
-import { stringify } from 'querystring';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -22,6 +23,7 @@ export class ToolsProvider {
     private alertCtrl: AlertController,
     private vibration: Vibration,
     private jpush: JPush,
+    private translate: TranslateService
   ) {
   }
   //获取用户信息
@@ -344,6 +346,17 @@ export class ToolsProvider {
       return data;
     }
   }
+  setLanguageStorage(data: string) {
+    this.storage.set("language", data);
+  }
+  getLanguageStorage() {
+    let data = this.storage.get("language");
+    if (data == null) {
+      return false;
+    } else {
+      return data;
+    }
+  }
   showAnimatePulse(el: any, eleName: string, showbc: boolean = false) {
     return new Promise((resolve) => {
       let temp = el.nativeElement.querySelector(`.${eleName}`);
@@ -436,6 +449,48 @@ export class ToolsProvider {
     arr.push(parseInt(resplitArr[5]));
     return arr;
 
+  }
+  async showLanguage() {
+    let alert = this.alertCtrl.create();
+
+    let title, ok, cancel;
+    await this.translate.get("language").subscribe(res => title = res);
+    await this.translate.get("ok").subscribe(res => ok = res);
+    await this.translate.get("cancel").subscribe(res => cancel = res);
+    alert.setTitle(title);
+
+    let selectedLanguage=this.getLanguageStorage();
+    alert.addInput({
+      type: 'radio',
+      label: '简体中文',
+      value: 'zh-cmn-Hans',
+      checked: selectedLanguage === 'zh-cmn-Hans'?true:false
+    });
+    // alert.addInput({
+    //   type: 'radio',
+    //   label: '繁体中文',
+    //   value: 'zh-cmn-Hant',
+    //   checked: selectedLanguage === 'zh-cmn-Hant' ? true : false
+    // });
+    alert.addInput({
+      type: 'radio',
+      label: 'English',
+      value: 'en',
+      checked: selectedLanguage === 'en' ? true : false
+    });
+
+    alert.addButton(cancel);
+    alert.addButton({
+      text: ok,
+      handler: data => {
+        this.translate.use(data);
+        // this.translate.setDefaultLang(data);
+        this.setLanguageStorage(data);
+
+
+      }
+    });
+    alert.present();
   }
 
 

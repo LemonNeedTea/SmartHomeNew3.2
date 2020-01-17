@@ -1,0 +1,37 @@
+{
+  "HOME": {
+    "TITLE": "Smart Home",
+    "LOGIN": "Login"
+  },
+  "language": "Language",
+    "ok": "OK",
+    "cancel": "Cancel",
+  "choiceLanguage": "English",
+    "USERNAME": "UserName",
+    "PASSWORD": "PassWord",
+    "修改密码":"Password",
+    "震动反馈":"Vibration",
+    "个人资料":"Presonal",
+    "退出登录":"Exit",
+    "江苏联宏": "Jiang Su Lian Hong",
+    "模式":"Mode",
+    "设置":"Setting",
+    "首页":"Home",
+    "房间":"Room",
+    "设备":"Device",
+    "用能": "Enegy",
+    "消息":"Message",
+    "功率":"Power",
+    "年":"Y",
+    "月": "M",
+    "日": "D",
+    "当前":"Now",
+    "模式公共设置":"Public mode setting",
+    "用电":"Electric",
+    "用水": "Water",
+    "全部已阅":"Read all",
+    "已阅":"Read",
+    "报警":"Alarm"
+
+
+}

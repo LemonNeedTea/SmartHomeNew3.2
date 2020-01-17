@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color='primary'>
-    <ion-title>{{{true:'用电',false:'用水'}[energyType==eleType]}}</ion-title>
+    <ion-title>{{{true:'用电',false:'用水'}[energyType==eleType]| translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="showPopover($event)">
         <ion-icon name="more"></ion-icon>
