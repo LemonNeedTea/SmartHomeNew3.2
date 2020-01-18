@@ -19,7 +19,8 @@
     <ion-row>
       <ion-col *ngFor="let item of dataList" col-4>
         <img src="../../../assets/air/{{item.F_Icon}}" (click)="dismiss(item)" />
-        {{item.F_Name?item.F_Name:item.F_ParamsName}}
+        <!-- {{item.F_Name?item.F_Name:item.F_ParamsName}} -->
+        {{config.chinese?item.F_ParamsName:item.F_ParamsName_En}}
       </ion-col>
 
     </ion-row>

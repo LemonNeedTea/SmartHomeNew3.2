@@ -39,7 +39,7 @@
       <ion-col col-6 class="col-clock">
         <div *ngIf="linkage">
           <img src="../../../assets/air/connect.png" />
-          <div>联动</div>
+          <div>{{'联动'|translate}}</div>
         </div>
 
       </ion-col>
@@ -59,8 +59,9 @@
                   (ngModelChange)="changeTemp()" [disabled]="!open"> </ion-multi-picker>
                 °C
               </span></p>
-            <p [hidden]="!open">{{selectedSpped.F_ParamsName?selectedSpped.F_ParamsName:'自动'}}
-              &nbsp;&nbsp;{{selectedMode.F_ParamsName}}
+            <p [hidden]="!open">{{(selectedSpped.F_ParamsName?selectedSpped.F_ParamsName:'自动') |translate}}
+              &nbsp;&nbsp;
+              {{config.chinese?selectedMode.F_ParamsName:selectedMode.F_ParamsName_En}}
             </p>
 
           </div>
@@ -79,7 +80,7 @@
         <div *ngIf="valve1">
 
           <img src="../../../assets/air/valve.png" />
-          <div>水阀1</div>
+          <div>{{'水阀'|translate}}1</div>
         </div>
 
       </ion-col>
@@ -87,7 +88,7 @@
         <div *ngIf="valve2">
 
           <img src="../../../assets/air/valve.png" />
-          <div>水阀2</div>
+          <div>{{'水阀'|translate}}2</div>
         </div>
 
       </ion-col>
@@ -96,25 +97,25 @@
       <ion-col col-3 class="col-center">
         <div class="timer-div" (click)="presentShowModal(1,'定时1')">
           <span [ngClass]="{'timer-close': !timer1Open}"></span>
-          定时1
+          {{'定时'|translate}}1
         </div>
       </ion-col>
       <ion-col col-3 class="col-center">
         <div class="timer-div" (click)="presentShowModal(2,'定时2')">
           <span [ngClass]="{'timer-close': !timer2Open}"></span>
-          定时2
+          {{'定时'|translate}}2
         </div>
       </ion-col>
       <ion-col col-3 class="col-center">
         <div class="timer-div" (click)="presentShowModal(3,'定时3')">
           <span [ngClass]="{'timer-close': !timer3Open}"></span>
-          定时3
+          {{'定时'|translate}}3
         </div>
       </ion-col>
       <ion-col col-3 class="col-center">
         <div class="timer-div" (click)="presentShowModal(4,'定时4')">
           <span [ngClass]="{'timer-close': !timer4Open}"></span>
-          定时4
+          {{'定时'|translate}}4
         </div>
       </ion-col>
     </ion-row>
@@ -126,13 +127,13 @@
   <ion-grid>
     <ion-row class="speed" [hidden]="!open">
       <ion-col col-4>
-        风速设定
+        {{'风速设定'|translate}}
       </ion-col>
       <ion-col col-8>
         <ul>
-          <li [ngClass]="{'selected': speedMode}" (click)="setSpeedMode()">自动</li>
+          <li [ngClass]="{'selected': speedMode}" (click)="setSpeedMode()">{{'自动'|translate}}</li>
           <li *ngFor="let item of speedKV" [ngClass]="{'selected': selectedSpped.F_ID==item.F_ID}"
-            (click)="setSpeed(item)">{{item.F_ParamsName}}</li>
+            (click)="setSpeed(item)">{{item.F_ParamsName |translate}}</li>
           <!-- <li [ngClass]="{'selected': speedModel==0}" (click)="setSpeed(0)">自动</li>
           <li [ngClass]="{'selected': speedModel==3}" (click)="setSpeed(3)">高</li>
           <li [ngClass]="{'selected': speedModel==2}" (click)="setSpeed(2)">中</li>
@@ -149,20 +150,22 @@
                 [ngClass]="selectedMode.F_Class" />
               <img *ngIf=" !selectedMode.F_Icon" (click)="setMode()" />
               <!-- <img src="../../../assets/cool.png" (click)="setMode()"/> -->
-              {{selectedMode.F_ParamsName}}
+              {{config.chinese?selectedMode.F_ParamsName:selectedMode.F_ParamsName_En}}
             </div>
 
           </ion-col>
           <ion-col col-4>
             <img src="../../../assets/check.png" [ngClass]="{'selected': open}" (click)="setOpen()" />
 
-            开关
+            
+            {{'开关'|translate}}
           </ion-col>
           <ion-col col-4 [hidden]="!open">
             <img src="../../../assets/air/eco.png" [ngClass]="{'eco-color': eco}" (click)='setEco()' />
 
 
-            节能
+            
+            {{'节能'|translate}}
           </ion-col>
         </ion-row>
       </ion-grid>

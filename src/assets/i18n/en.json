@@ -37,8 +37,23 @@
     "室温":"Temp",
     "键盘锁":"Keyboard lock",
     "联动":"Linkage",
-    "水阀1": "Water valve 1",
-    "水阀2": "Water valve 2",
+    "水阀": "Water valve",
+    "定时": "Timer",
+    "风速设定":"Speed",
+    "自动": "Auto",
+    "高":"H",
+    "中": "M",
+    "低": "L",
+    "开关": "Open",
+    "节能": "ECO",
+    "关机模式下有效":"Effective in shutdown mode",
+    "开":"Open",
+    "制热上限":"Heating limit",
+    "制冷下限": "Lower cooling limit",
+    "温度偏移":"Temperature offset",
+    "背光延时": "Backlight delay",
+    "更多设置": "More Setting"
+
 
 
 }

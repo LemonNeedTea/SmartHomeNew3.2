@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController, Events } from 'io
 import * as ProgressBar from "progressbar.js";
 import { Variable } from '../../../providers/model/variable';
 import { DeviceRequestsProvider } from '../../../providers/tools/requests'
-import { ToolsProvider } from '../../../providers/tools/tools'
+import { ToolsProvider } from '../../../providers/tools/tools';
+import{ ConfigProvider } from '../../../providers/config/config';
 
 /**
  * Generated class for the AirSettingPage page.
@@ -72,7 +73,8 @@ export class AirSettingPage {
     private modalCtrl: ModalController,
     private events: Events,
     private device: DeviceRequestsProvider,
-    private tools: ToolsProvider) {
+    private tools: ToolsProvider,
+    public config: ConfigProvider) {
 
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");

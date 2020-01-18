@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { ThrowStmt } from '@angular/compiler';
+import{ ConfigProvider } from '../../../providers/config/config';
+
 
 /**
  * Generated class for the AirSettingModePage page.
@@ -18,7 +19,8 @@ export class AirSettingModePage {
 
   dataList: Array<any> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private viewCtrl: ViewController) {
+    private viewCtrl: ViewController,
+    public config: ConfigProvider) {
     this.dataList = this.navParams.get("Data");
   }
 
