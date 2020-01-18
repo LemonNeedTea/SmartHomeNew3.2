@@ -1,1 +1,2 @@
-<button ion-item (click)="goPage(item)" *ngFor="let item of list">{{item.F_MenuName}}</button>
+<button ion-item (click)="goPage(item)" *ngFor="let item of list">
+    {{config.chinese?item.F_MenuName:item.F_MenuName_En}}</button>

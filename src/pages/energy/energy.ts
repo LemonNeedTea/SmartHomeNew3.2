@@ -161,6 +161,7 @@ export class EnergyPage {
     }
     this.device.getMenuList(this.energyType).then(res=>{
       this.poperList=res;
+      console.log(res);
     });
   }
   showPopover(myEvent) {

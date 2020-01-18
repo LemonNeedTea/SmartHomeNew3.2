@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, App } from 'ionic-angular';
 // import { WellpumpqueryPage } from '../wellpumpquery/wellpumpquery';
+import{ ConfigProvider } from '../../providers/config/config';
 
 
 /**
@@ -17,8 +18,10 @@ import { IonicPage, NavController, NavParams, ViewController, App } from 'ionic-
 })
 export class PopoverPage {
   list: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private app: App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private app: App,
+    public config: ConfigProvider) {
     this.list = this.navParams.get('list');
+    
   }
 
   ionViewDidLoad() {
