@@ -33,7 +33,12 @@
     "已阅":"Read",
     "报警":"Alarm",
     "总用电趋势图": "Total electricity trend chart",
-    "总用水趋势图":  "Total water trend chart"
+    "总用水趋势图":  "Total water trend chart",
+    "室温":"Temp",
+    "键盘锁":"Keyboard lock",
+    "联动":"Linkage",
+    "水阀1": "Water valve 1",
+    "水阀2": "Water valve 2",
 
 
 }
