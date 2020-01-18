@@ -31,15 +31,15 @@
 </ion-footer>
 
 <ion-content>
-  <my-title [name]="{true:' 总用电趋势图',false:'总用水趋势图'}[energyType==eleType]"></my-title>
+  <my-title [name]="{true:'总用电趋势图',false:'总用水趋势图'}[energyType==eleType] | translate"></my-title>
   <canvas id="chart" style="width:100%"></canvas>
   <div [ngSwitch]="energyType">
     <div *ngSwitchCase="eleType">
       <div *ngFor="let type of eleShowList">
-        <my-title [name]="type.name"></my-title>
+        <my-title [name]="config.chinese?type.name:type.name_en"></my-title>
         <div *ngIf="type.type=='column'">
           <ul class='jinxian-ul' *ngFor="let device of type.data">
-            <li *ngFor="let detail of device.data"><span>{{detail.F_Name}}</span><span>{{detail.value}}</span></li>
+            <li *ngFor="let detail of device.data"><span>{{config.chinese?detail.F_Name:detail.F_Name_En}}</span><span>{{detail.value}}</span></li>
 
           </ul>
         </div>
@@ -56,100 +56,19 @@
                     <ion-col>电梯</ion-col>
                   </ion-row> -->
             <ion-row *ngFor="let device of type.data">
-              <ion-col col-4>{{device.name}}</ion-col>
+              <ion-col col-4>
+                {{config.chinese?device.name:device.name_en}}
+              </ion-col>
               <ion-col *ngFor="let detail of device.data">
                 <span *ngIf="detail.F_FnID">{{detail.value}}</span>
-                <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
+                <span *ngIf="!detail.F_FnID">
+                {{config.chinese?detail.F_Name:detail.F_Name_En}}</span>
               </ion-col>
             </ion-row>
           </ion-grid>
         </div>
 
       </div>
-      <!-- <my-title [name]="'一楼总进线'"></my-title>
-      <ul class='jinxian-ul'>
-        <li class="line-gap"><span>有功功率(kW):</span><span>{{ power.one}}</span></li>
-        <li><span>电压A(V):</span><span>{{ v.a }}</span></li>
-        <li><span>电压B(V):</span><span>{{ v.b }}</span></li>
-        <li class="line-gap"><span>电压C(V):</span><span>{{ v.c }}</span></li>
-
-        <li><span>本日电量(kWh):</span><span>{{oneData.ud}}</span></li>
-        <li><span>日峰电量(kWh):</span><span>{{oneData.udh}}</span></li>
-        <li class="line-gap"><span>日谷电量(kWh):</span><span>{{oneData.udl}}</span></li>
-
-        <li><span>本月电量(kWh):</span><span>{{oneData.um}}</span></li>
-        <li><span>月峰电量(kWh):</span><span>{{oneData.umh}}</span></li>
-        <li class="line-gap"><span>月谷电量(kWh):</span><span>{{oneData.uml}}</span></li>
-
-        <li><span>本年电量(kWh):</span><span>{{oneData.uy}}</span></li>
-        <li><span>年峰电量(kWh):</span><span>{{oneData.uyh}}</span></li>
-        <li class="line-gap"><span>年谷电量(kWh):</span><span>{{oneData.uyl}}</span></li>
-      </ul>
-      <my-title [name]="'二楼、三楼用电量'"></my-title>
-
-      <ion-grid class="self-grid">
-        <ion-row class="first-row">
-          <ion-col col-4>名称</ion-col>
-          <ion-col>二楼</ion-col>
-          <ion-col>三楼</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>有功功率(kW)</ion-col>
-          <ion-col>{{power.two}}</ion-col>
-          <ion-col>{{power.three}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>本日电量(kWh)</ion-col>
-          <ion-col>{{twoData.ud}}</ion-col>
-          <ion-col>{{threeData.ud}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>本月电量(kWh)</ion-col>
-          <ion-col>{{twoData.um}}</ion-col>
-          <ion-col>{{threeData.um}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>本年电量(kWh)</ion-col>
-          <ion-col>{{twoData.uy}}</ion-col>
-          <ion-col>{{threeData.uy}}</ion-col>
-
-        </ion-row>
-      </ion-grid>
-      <my-title [name]="'重点设备用电量'"></my-title>
-
-      <ion-grid class="self-grid">
-        <ion-row class="first-row">
-          <ion-col col-4>名称</ion-col>
-          <ion-col>空调</ion-col>
-          <ion-col>水泵</ion-col>
-          <ion-col>电梯</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>有功功率(kW)</ion-col>
-          <ion-col> {{power.air}}</ion-col>
-          <ion-col>{{power.pump}}</ion-col>
-          <ion-col>{{power.lift}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>本日电量(kWh)</ion-col>
-          <ion-col>{{airData.ud}}</ion-col>
-          <ion-col>{{pumpData.ud}}</ion-col>
-          <ion-col>{{liftData.ud}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>本月电量(kWh)</ion-col>
-          <ion-col>{{airData.um}}</ion-col>
-          <ion-col>{{pumpData.um}}</ion-col>
-          <ion-col>{{liftData.um}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-4>本年电量(kWh)</ion-col>
-          <ion-col>{{airData.uy}}</ion-col>
-          <ion-col>{{pumpData.uy}}</ion-col>
-          <ion-col>{{liftData.uy}}</ion-col>
-
-        </ion-row>
-      </ion-grid> -->
     </div>
     <div *ngSwitchCase="waterType">
       <div *ngFor="let type of eleShowList">
@@ -168,10 +87,10 @@
                   <ion-col>电梯</ion-col>
                 </ion-row> -->
             <ion-row *ngFor="let device of type.data">
-              <ion-col col-4>{{device.name}}</ion-col>
+              <ion-col col-4>{{config.chinese?device.name:device.name_en}}</ion-col>
               <ion-col *ngFor="let detail of device.data">
                 <span *ngIf="detail.F_FnID">{{detail.value}}</span>
-                <span *ngIf="!detail.F_FnID">{{detail.F_Name}}</span>
+                <span *ngIf="!detail.F_FnID">{{config.chinese?detail.F_Name:detail.F_Name_En}}</span>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -180,4 +99,5 @@
       </div>
     </div>
   </div>
+  <div style="margin-bottom:30px"></div>
 </ion-content>

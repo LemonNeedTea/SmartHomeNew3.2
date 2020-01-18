@@ -9,6 +9,7 @@ import { PopoverController } from 'ionic-angular';
 // import { WellpumpqueryPage } from '../wellpumpquery/wellpumpquery';
 // import { EnergyQueryPage } from '../energy-query/energy-query';
 import { EnumEnergyType, EnumDateType, EnumChartType } from '../../providers/model/enumdata';
+import{ ConfigProvider } from '../../providers/config/config';
 
 /**
  * Generated class for the EnergyPage page.
@@ -39,7 +40,8 @@ export class EnergyPage {
     private device: DeviceRequestsProvider,
     private chart: chartToolsProvider,
     private events: Events,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    public config: ConfigProvider) {
     this.eleType = EnumEnergyType.Ele;
     this.waterType = EnumEnergyType.Water;
     this.energyType = this.eleType;
@@ -53,6 +55,9 @@ export class EnergyPage {
   getEnergyInfoList() {
     this.device.getEnergyInfoList(this.energyType).then((res: any) => {
       this.eleShowList = res.main;
+      console.log('====================================');
+      console.log(res);
+      console.log('====================================');
 
       res.fn.forEach(element => {
         let fnData = Variable.GetFnData(element);

@@ -31,7 +31,9 @@
     "用水": "Water",
     "全部已阅":"Read all",
     "已阅":"Read",
-    "报警":"Alarm"
+    "报警":"Alarm",
+    "总用电趋势图": "Total electricity trend chart",
+    "总用水趋势图":  "Total water trend chart"
 
 
 }

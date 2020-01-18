@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { Variable } from '../../providers/model/variable';
 // import { RoomdevicePage } from '../../pages/roomdevice/roomdevice
-import{ ConfigProvider } from '../../providers/config/config'
+import{ ConfigProvider } from '../../providers/config/config';
 
 /**
  * Generated class for the RoomPage page.
