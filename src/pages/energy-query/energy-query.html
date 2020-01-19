@@ -35,13 +35,13 @@
       </ion-item>
       <ion-item >
         <ion-label>查询对象</ion-label>
-        <ion-select [(ngModel)]="objType" (ionChange)="objTypeChange()" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}" multiple='false'>
+        <ion-select [(ngModel)]="objType" (ionChange)="objTypeChange()" cancelText="{{'取消' | translate}}" okText="{{'确定' | translate}}" multiple='false'>
             <ion-option [value]="item.F_SortIndex" *ngFor="let item of objList">{{item.F_Name}}</ion-option>
           </ion-select>
     </ion-item>
       <ion-item >
           <ion-label>数据类型</ion-label>
-          <ion-select [(ngModel)]="dateType" (ionChange)="dateTypeChange()" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}">
+          <ion-select [(ngModel)]="dateType" (ionChange)="dateTypeChange()" cancelText="{{'取消' | translate}}" okText="{{'确定' | translate}}">
               <ion-option [value]="item.key" *ngFor="let item of dateTypeList">{{item.value}}</ion-option>
             </ion-select>
       </ion-item>
