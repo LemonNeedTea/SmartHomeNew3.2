@@ -55,7 +55,12 @@
     "更多设置": "More Setting",
     "报警系统":"alarm system",
     "保存":"Save",
-    "设备选择":"Device Selection"
+    "设备选择":"Device Selection",
+    "确定": "Confirm",
+    "取消":"Cancel",
+    "提示":"Tip"
+
+    
 
 
 

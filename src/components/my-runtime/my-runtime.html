@@ -1,7 +1,7 @@
 <!-- Generated template for the MyRuntimeComponent component -->
 <ion-item>
   <ion-label>{{name}}</ion-label>
-  <ion-datetime displayFormat="H小时m分钟" pickerFormat="HH mm" [(ngModel)]="model" cancelText='取消' doneText='确定'
+  <ion-datetime displayFormat="H小时m分钟" pickerFormat="HH mm" [(ngModel)]="model" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}"
   (ngModelChange)="change()">
   </ion-datetime>
 </ion-item>

@@ -7,6 +7,9 @@ import { PopoverController, AlertController } from 'ionic-angular';
 // import { PopoverPage } from '../popover/popover';
 import { EnumChartType } from '../../providers/model/enumdata';
 import { ToolsProvider } from '../../providers/tools/tools';
+import { TranslateService } from "@ngx-translate/core";
+
+
 
 
 @Component({
@@ -22,7 +25,8 @@ export class MessagePage {
     private tools: ToolsProvider,
     private events: Events,
     public el: ElementRef,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public translate: TranslateService) {
     this.events.subscribe("data:messageList", res => {
       this.messagelists = res;
     })
@@ -57,6 +61,7 @@ export class MessagePage {
     this.typeDataList.forEach(element => {
       popoverList.push({
         F_MenuName: element.F_Name,
+        F_MenuName_En: element.F_Name_En,
         F_Url: 'WellpumpqueryPage',
         type: EnumChartType.Message,
         data: element
@@ -76,20 +81,26 @@ export class MessagePage {
   allRead() {
     this.presentConfirm();
   }
-  presentConfirm() {
+  async presentConfirm() {
+    let okText,cancelText,tipText,readAllText;
+    await this.translate.get('确定').subscribe(res => okText = res);
+    await this.translate.get('取消').subscribe(res => cancelText = res);
+    await this.translate.get('提示').subscribe(res => tipText = res);
+    await this.translate.get('全部已阅').subscribe(res => readAllText = res);
+
     let alert = this.alertCtrl.create({
-      title: '提 示',
-      message: '报警信息全部已阅?',
+      title: tipText,
+      message: readAllText+'?',
       buttons: [
         {
-          text: '取消',
+          text: cancelText,
           role: 'cancel',
           handler: () => {
             // console.log('Cancel clicked');
           }
         },
         {
-          text: '确定',
+          text: okText,
           handler: () => {
             this.device.setAllAlarmState().then(res => {
               if (res) {
@@ -102,13 +113,16 @@ export class MessagePage {
     });
     alert.present();
   }
-  showDetail(data) {
-    console.log(data);
+  async showDetail(data) {
+    let okText, alamText;
+    await this.translate.get('ok').subscribe(res => okText = res);
+    await this.translate.get('报警').subscribe(res => alamText = res);
+
     const alert = this.alertCtrl.create({
-      title: '报警',
+      title: alamText,
       subTitle: data.F_AlarmTimeStr,
       message: data.F_AlarmText,
-      buttons: ['知 道']
+      buttons: [okText]
     });
     alert.present();
   }

@@ -36,17 +36,17 @@
     </ion-item>
     <button ion-item>
       <ion-label>{{'制热上限'|translate}}</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}"
         [(ngModel)]="hotUpperLimit" (ionChange)="sethotUpperLimit()"> </ion-multi-picker>
     </button>
     <button ion-item>
       <ion-label>{{'制冷下限'|translate}}</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="取消" doneText="确定"
+      <ion-multi-picker item-content [multiPickerColumns]="tempColumns" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}"
         [(ngModel)]="coolOffline" (ionChange)="setcoolOffline()"> </ion-multi-picker>
     </button>
     <button ion-item>
       <ion-label>{{'背光延时'|translate}}</ion-label>
-      <ion-multi-picker item-content [multiPickerColumns]="backLightColumns" cancelText="取消" doneText="确定"
+      <ion-multi-picker item-content [multiPickerColumns]="backLightColumns" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}"
         [(ngModel)]="backlightDelay" (ionChange)="setBacklightDelay()"> </ion-multi-picker>
     </button>
     <button ion-item (click)="presentPrompt(tempDeviation)">

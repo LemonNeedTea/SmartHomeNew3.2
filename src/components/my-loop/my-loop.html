@@ -1,7 +1,7 @@
 <!-- Generated template for the MyLoopComponent component -->
 <ion-item>
   <ion-label>{{name}}</ion-label>
-  <ion-select [(ngModel)]="loop" okText="确定" cancelText="取消" multiple (ngModelChange)="change()">
+  <ion-select [(ngModel)]="loop" okText="{{'确定' | translate}}" cancelText="{{'取消' | translate}}" multiple (ngModelChange)="change()">
     <ion-option *ngFor="let item of dataList" [value]="item.key">{{item.value}}</ion-option>
   </ion-select>
 </ion-item>
