@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{name}}</ion-title>
+    <ion-title>{{config.chinese? mode.F_Name:mode.F_Name_En}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="presentShowModal()">
         <ion-icon name='list'></ion-icon>
@@ -21,7 +21,7 @@
 <ion-content>
   <!-- <ion-list> -->
   <ion-item>
-    <ion-label>报警系统</ion-label>
+    <ion-label>{{'报警系统'|translate}}</ion-label>
     <ion-toggle [(ngModel)]="alarm"></ion-toggle>
   </ion-item>
   <!-- </ion-list> -->
@@ -29,7 +29,7 @@
     <ion-item-group *ngFor="let item of dataList">
       <ion-item-divider sticky>
         <ion-label>
-          {{item.name}}
+          {{config.chinese?item.name:item.name_en}}
         </ion-label>
       </ion-item-divider>
 
@@ -41,14 +41,19 @@
           <ion-label>
             <div class="label">
               <div>
-                {{device.DeviceName}}
-                <p><span>{{device.FloorName+'/'+device.RoomName}}</span></p>
+          {{config.chinese?device.DeviceName:device.DeviceName_En}}
+
+                <p><span>
+          {{config.chinese?device.FloorName:device.FloorName_En}}
+          /
+          {{config.chinese?device.RoomName:device.RoomName_En}}</span></p>
               </div>
             </div>
 
           </ion-label>
           <ion-toggle [(ngModel)]="device.Open"></ion-toggle>
-          {{device.DeviceName}}
+          <!-- {{config.chinese?device.DeviceName:device.DeviceName_En}} -->
+
         </ion-item>
 
         <!-- </ng-container> -->
@@ -59,5 +64,5 @@
 
 </ion-content>
 <ion-footer>
-  <button ion-button block color='primary' no-margin (click)="saveMode()">保 存</button>
+  <button ion-button block color='primary' no-margin (click)="saveMode()">{{'保存'|translate}}</button>
 </ion-footer>

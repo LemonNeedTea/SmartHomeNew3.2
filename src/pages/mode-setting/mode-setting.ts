@@ -4,6 +4,7 @@ import { DeviceRequestsProvider } from '../../providers/tools/requests';
 // import { ModeDeviceSelectedSettingPage } from '../mode-device-selected-setting/mode-device-selected-setting';
 import { deepCopy } from 'ionic-angular/umd/util/util';
 import { Variable } from '../../providers/model/variable';
+import{ ConfigProvider } from '../../providers/config/config';
 
 /**
  * Generated class for the ModeSettingPage page.
@@ -25,10 +26,11 @@ export class ModeSettingPage {
   mode: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private device: DeviceRequestsProvider,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    public config: ConfigProvider) {
     this.mode = this.navParams.get("mode");
     this.modeID = this.mode.F_AgreementID;
-    this.name = this.mode.F_Name;
+    // this.name =this.config.chinese? this.mode.F_Name:this.mode.F_Name_En;
     this.alarm = this.mode.F_SecurityRun;
     ;
     this.getModeDeviceDataList();

@@ -233,7 +233,6 @@
 }
 
 .alarm {
-
   // color: red !important;
   .alert-head {
     // background-color: red !important;
@@ -285,4 +284,9 @@
 
 .picker-toolbar-multi-picker-cancel {
   text-align: start !important;
+}
+.label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>设备选择</ion-title>
+    <ion-title>{{'设备选择'|translate}}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <ion-icon ios="md-close" md="md-close"></ion-icon>
@@ -29,7 +29,8 @@
     <ion-item-group *ngFor="let item of dataList">
       <ion-item-divider sticky>
         <ion-label>
-          {{item.name}}
+          {{config.chinese?item.name:item.name_en}}
+
         </ion-label>
       </ion-item-divider>
 
@@ -41,8 +42,11 @@
               <img src='../assets/img/home/icon-devicesetting/{{device.Img}}'></div>
             <div class="label">
               <div>
-                {{device.DeviceName}}
-                <p><span>{{device.FloorName+'/'+device.RoomName}}</span></p>
+                {{config.chinese?device.DeviceName:device.DeviceName_En}}
+
+                <p><span>{{config.chinese?device.FloorName:device.FloorName_En}}
+                    /
+                    {{config.chinese?device.RoomName:device.RoomName_En}}</span></p>
               </div>
             </div>
 
