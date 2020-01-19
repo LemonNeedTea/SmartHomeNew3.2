@@ -55,9 +55,6 @@ export class EnergyPage {
   getEnergyInfoList() {
     this.device.getEnergyInfoList(this.energyType).then((res: any) => {
       this.eleShowList = res.main;
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
 
       res.fn.forEach(element => {
         let fnData = Variable.GetFnData(element);
@@ -161,7 +158,6 @@ export class EnergyPage {
     }
     this.device.getMenuList(this.energyType).then(res=>{
       this.poperList=res;
-      console.log(res);
     });
   }
   showPopover(myEvent) {
