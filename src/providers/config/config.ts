@@ -5,8 +5,8 @@ import 'rxjs/add/operator/map';
 export class ConfigProvider {
 
   //api请求地址
-  // public apiUrl = "http://223.112.4.23:11000";
-  public apiUrl = "http://192.168.4.168:801";
+  public apiUrl = "http://223.112.4.23:11000";
+  // public apiUrl = "http://192.168.4.168:801";
 
   //websokcet地址
   public websocketUrl = "ws://223.112.4.23:53200";

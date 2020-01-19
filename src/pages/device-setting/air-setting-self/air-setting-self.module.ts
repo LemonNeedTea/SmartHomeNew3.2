@@ -3,6 +3,8 @@ import { IonicPageModule } from 'ionic-angular';
 import { AirSettingSelfPage } from './air-setting-self';
 import { ComponentsModule } from '../../../components/components.module';
 import { MultiPickerModule } from 'ion-multi-picker';
+import { TranslateModule } from "@ngx-translate/core";
+
 @NgModule({
   declarations: [
     AirSettingSelfPage,
@@ -10,7 +12,8 @@ import { MultiPickerModule } from 'ion-multi-picker';
   imports: [
     IonicPageModule.forChild(AirSettingSelfPage),
     ComponentsModule,
-    MultiPickerModule
+    MultiPickerModule,
+    TranslateModule
   ],
 })
 export class AirSettingSelfPageModule {}
