@@ -72,7 +72,7 @@
     </div>
     <div *ngSwitchCase="waterType">
       <div *ngFor="let type of eleShowList">
-        <my-title [name]="type.name"></my-title>
+        <my-title [name]="config.chinese?type.name:type.name_en"></my-title>
 
         <div *ngIf="type.type=='row'">
           <!-- <ul class='jinxian-ul' *ngFor="let device of type.data">

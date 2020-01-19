@@ -357,6 +357,13 @@ export class ToolsProvider {
       return data;
     }
   }
+  getIsEn() {
+    let temp = this.getLanguageStorage();
+    if(temp==='en'){
+      return 'en';
+    }
+    return 'zh';
+  }
   showAnimatePulse(el: any, eleName: string, showbc: boolean = false) {
     return new Promise((resolve) => {
       let temp = el.nativeElement.querySelector(`.${eleName}`);

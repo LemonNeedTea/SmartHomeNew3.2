@@ -58,6 +58,7 @@ export class HttpServicesProvider {
         for (const key in params) {
             urlParams.set(key, params[key]);
         }
+        urlParams.set("IsEn",this.tools.getIsEn());
         // let loader;
         // if (isLoading === true) {
         //     loader = this.loading.create({

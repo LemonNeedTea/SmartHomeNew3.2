@@ -131,7 +131,6 @@ export class MyApp {
         this.config.chinese=false;
       }
     }else{
-      debugger;
       const browserLang = this.translate.getBrowserLang();
       this.tools
 

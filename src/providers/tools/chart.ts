@@ -89,7 +89,7 @@ export class chartToolsProvider {
         if (config['dw']) {
             chart.guide().text({
                 position: ['min', 'max'],
-                content: "单位(" + config['dw'] + ")",
+                content: config['dw'],
                 style: {
                     textBaseline: 'middle',
                     textAlign: 'center'

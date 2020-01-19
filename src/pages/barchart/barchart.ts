@@ -21,8 +21,10 @@ export class BarchartPage {
   parentParams: any;
   name: string;
   dataList: any = [];
+  tableDataList: any = [];
   dw: string = "";
   sum: number;
+  sumDataList=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private device: DeviceRequestsProvider,
     private chart: chartToolsProvider,
@@ -41,6 +43,7 @@ export class BarchartPage {
     params.StopTime = this.tools.getAddDate(params.StopTime, params.DateType);
     this.device.getEnergyChartData(params).then((res: any) => {
       this.dataList = res.DataList;
+      this.tableDataList=this.groupBy(res.DataList);
       this.dw = res.DW;
       this.sum = Number(res.Sum);
       let config = {
@@ -50,6 +53,43 @@ export class BarchartPage {
       this.parentParams = data;
     });
   }
+
+  titleArr=[];
+  groupBy(arr:Array<any>){
+    let result={};
+    let titleArr = [];
+    let titleObj = {};
+    arr.map(res=>{
+      if(!result[res.key]){
+        result[res.key]=[];
+      }
+        result[res.key].push(res);
+
+      if (titleArr.indexOf(res.type)<0){
+        titleArr.push(res.type);
+        titleObj[res.type]=[];
+      }
+      titleObj[res.type].push(res);
+
+
+    });
+    let result1 = [];
+
+    for (let key in result) {
+      result1.push(result[key]);
+    }
+    this.titleArr=titleArr;
+    // 求和
+    for(let key in titleObj){
+      let sum=0;
+      titleObj[key].map(res=>{
+        sum+=res.value;
+      });
+      this.sumDataList.push(sum.toFixed(2));
+    }
+    return result1;
+  }
+
   goDetail(data: string) {
     let childParams: any;
     switch (this.parentParams.DateType) {

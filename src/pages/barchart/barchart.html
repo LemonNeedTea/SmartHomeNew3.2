@@ -31,18 +31,19 @@
     <li class="item">
       <div class='li1 li-header'>
         <span>日期</span>
-        <span>单位（{{dw}}）</span>
+        <span *ngFor="let item of titleArr">{{item}}</span>
       </div>
     </li>
-    <li *ngFor="let item of dataList" class="item">
-      <div class='li1'> <span><a (click)="goDetail(item.key)">{{item.key}}</a></span>
-        <span>{{item.value}}</span>
+    <li *ngFor="let item of tableDataList" class="item">
+
+      <div class='li1'> <span><a (click)="goDetail(item.key)">{{item[0].key}}</a></span>
+        <span *ngFor="let item1 of item">{{item1.value}}</span>
       </div>
     </li>
     <li class="item">
       <div class='li1 li-header'>
         <span>总计</span>
-        <span>{{sum}}</span>
+        <span *ngFor="let item of sumDataList">{{item}}</span>
       </div>
     </li>
   </ul>
