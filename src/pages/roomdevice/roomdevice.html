@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>{{roomName}}<span *ngIf="!auto">{{"("+sumNumOpen+"/"+deviceDataListShow.length+")"}}</span><span
-        *ngIf="auto" style="color:red;">(手动模式-不可控)</span></ion-title>
+        *ngIf="auto" style="color:red;">({{'手动'|translate}})</span></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -25,13 +25,15 @@
         <ion-label>
           <div class="label">
             <div>
-              {{item.F_Name}}
-              <p *ngIf="isType">{{item.F_FloorName+'/'+item.F_RoomName}}</p>
+              {{config.chinese?item.F_Name:item.F_Name_En}}
+              <p *ngIf="isType">{{config.chinese?item.F_FloorName:item.F_FloorName_En}}
+              /
+              {{config.chinese?item.F_RoomName:item.F_RoomName_En}}</p>
             </div>
 
             <div class="label-right">
               <button ion-button clear small float-right *ngIf="item.F_ShowSetting"
-                >{{item.F_SettingName}}</button>
+                >{{config.chinese?item.F_SettingName:item.F_SettingName_En}}</button>
             </div>
           </div>
 

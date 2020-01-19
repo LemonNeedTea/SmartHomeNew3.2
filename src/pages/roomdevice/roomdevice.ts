@@ -10,14 +10,7 @@ import { Variable } from '../../providers/model/variable';
 // import { PumpNorthcourtSettingPage } from '../device-setting/pump-northcourt-setting/pump-northcourt-setting';
 // import { ValveEastcourtSettingPage } from '../device-setting/valve-eastcourt-setting/valve-eastcourt-setting';
 // import { ValveEastnorthpoolSettingPage } from '../device-setting/valve-eastnorthpool-setting/valve-eastnorthpool-setting';
-/**
-
-/**
- * Generated class for the RoomdevicePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ConfigProvider } from '../../providers/config/config';
 
 @IonicPage()
 @Component({
@@ -39,7 +32,8 @@ export class RoomdevicePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private device: DeviceRequestsProvider,
-    private events: Events) {
+    private events: Events,
+    public config: ConfigProvider) {
     this.roomID = this.navParams.get('id');
     this.roomName = this.navParams.get('name');
     this.isType = this.navParams.get('isType');
@@ -133,7 +127,7 @@ export class RoomdevicePage {
       if (page) {
         let params = {
           id: data["F_ID"],
-          name: data["F_Name"],
+          name: this.config.chinese ? data["F_Name"] : data["F_Name_En"],
           data: data
         };
         this.navCtrl.push(page, params);
