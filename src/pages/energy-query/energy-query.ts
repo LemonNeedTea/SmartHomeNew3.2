@@ -4,6 +4,8 @@ import { ToolsProvider } from '../../providers/tools/tools';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 // import { BarchartPage } from '../barchart/barchart';
 import { EnumDateType } from '../../providers/model/enumdata';
+import { ConfigProvider } from '../../providers/config/config';
+
 
 /**
  * Generated class for the EnergyQueryPage page.
@@ -34,7 +36,8 @@ export class EnergyQueryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private tools: ToolsProvider,
-    private device: DeviceRequestsProvider) {
+    private device: DeviceRequestsProvider,
+    private config: ConfigProvider) {
     // this.name = this.navParams.get('name');
     // this.type = this.navParams.get('type');
     let params = this.navParams.get("Data");
@@ -44,16 +47,16 @@ export class EnergyQueryPage {
     if (this.child.type == 'power') {
       this.showTimeRange = false;
       this.dateTypeList = [
-        { key: 'day', value: '按天' },
+        { key: 'day', value: '按天', value_en: 'day' },
       ];
       this.dateType = EnumDateType.Day;
 
     } else {
       this.showTimeRange = true;
       this.dateTypeList = [
-        { key: 'year', value: '按年' },
-        { key: 'month', value: '按月' },
-        { key: 'day', value: '按天' }
+        { key: 'year', value: '按年',value_en:'year' },
+        { key: 'month', value: '按月', value_en: 'month'},
+        { key: 'day', value: '按天', value_en: 'day'}
       ];
       this.dateType = EnumDateType.Day;
       
@@ -67,7 +70,8 @@ export class EnergyQueryPage {
       });
     }
 
-    this.name = params.F_MenuName;
+    
+    this.name = this.config.chinese? params.F_MenuName:params.F_MenuName_En;
 
     
     this.dateTypeChange();

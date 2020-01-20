@@ -17,44 +17,44 @@
     <my-title [name]="name"></my-title>
 
       <ion-item *ngIf="showTimeRange">
-          <ion-label>时间段</ion-label>
+          <ion-label>{{'时间段'|translate}}</ion-label>
           <!-- <ion-grid item-end>  -->
             <ion-row item-end>
               <ion-col >
-              <button ion-button outline  (click)="timeRange('yearall')">历 年</button>
+              <button ion-button outline  (click)="timeRange('yearall')">{{'历年'|translate}}</button>
               </ion-col>
               <ion-col >
-                  <button ion-button outline (click)="timeRange('year')" >本 年</button>
+                  <button ion-button outline (click)="timeRange('year')" >{{'本年'|translate}}</button>
                   </ion-col>
                   <ion-col >
-                      <button ion-button outline (click)="timeRange('month')" >本 月</button>
+                      <button ion-button outline (click)="timeRange('month')" >{{'本月'|translate}}</button>
                       </ion-col>
             </ion-row>
           <!-- </ion-grid> -->
           
       </ion-item>
       <ion-item >
-        <ion-label>查询对象</ion-label>
+        <ion-label>{{'查询对象'|translate}}</ion-label>
         <ion-select [(ngModel)]="objType" (ionChange)="objTypeChange()" cancelText="{{'取消' | translate}}" okText="{{'确定' | translate}}" multiple='false'>
-            <ion-option [value]="item.F_SortIndex" *ngFor="let item of objList">{{item.F_Name}}</ion-option>
+            <ion-option [value]="item.F_SortIndex" *ngFor="let item of objList">{{config.chinese?item.F_Name:item.F_Name_En}}</ion-option>
           </ion-select>
     </ion-item>
       <ion-item >
-          <ion-label>数据类型</ion-label>
+          <ion-label>{{'数据类型'|translate}}</ion-label>
           <ion-select [(ngModel)]="dateType" (ionChange)="dateTypeChange()" cancelText="{{'取消' | translate}}" okText="{{'确定' | translate}}">
-              <ion-option [value]="item.key" *ngFor="let item of dateTypeList">{{item.value}}</ion-option>
+              <ion-option [value]="item.key" *ngFor="let item of dateTypeList">{{config.chinese?item.value:item.value_en}}</ion-option>
             </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>开始日期</ion-label>
+        <ion-label>{{'开始日期'|translate}}</ion-label>
         <ion-datetime displayFormat="{{displayFormat}}"  [(ngModel)]="startDate" cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label>结束日期</ion-label>
+        <ion-label>{{'结束日期'|translate}}</ion-label>
         <ion-datetime displayFormat="{{displayFormat}}"   [(ngModel)]="stopDate"  cancelText="{{'取消' | translate}}" doneText="{{'确定' | translate}}"></ion-datetime>
       </ion-item>
       <div padding>
-          <button ion-button round block (click)="goBarChartPage()" >查询</button>
+          <button ion-button round block (click)="goBarChartPage()" >{{'查询'|translate}}</button>
       </div>
         
       

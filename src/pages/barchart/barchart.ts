@@ -4,6 +4,8 @@ import { chartToolsProvider } from '../../providers/tools/chart';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
 import { EnumDateType } from '../../providers/model/enumdata';
+import { TranslateService } from "@ngx-translate/core";
+
 
 /**
  * Generated class for the BarchartPage page.
@@ -28,7 +30,8 @@ export class BarchartPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private device: DeviceRequestsProvider,
     private chart: chartToolsProvider,
-    private tools: ToolsProvider) {
+    private tools: ToolsProvider,
+    private translate: TranslateService) {
     this.parentParams = this.navParams.get("params");
     // this.name = "日期(" + this.parentParams.StartTime + "-" + this.parentParams.StopTime + ")";
   }
@@ -36,8 +39,10 @@ export class BarchartPage {
   ionViewDidLoad() {
     this.loadChart(this.parentParams);
   }
-  loadChart(data: any) {
-    this.name = "日期(" + data.StartTime + "-" + data.StopTime + ")";
+  async loadChart(data: any) {
+    let date;
+    await this.translate.get("日期").subscribe(res=>date=res);
+    this.name = date+"(" + data.StartTime + "-" + data.StopTime + ")";
     let params = data;
     params.StartTime = this.tools.getFullDateStr(params.StartTime, params.DateType);
     params.StopTime = this.tools.getAddDate(params.StopTime, params.DateType);

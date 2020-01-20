@@ -31,7 +31,7 @@
 
       </ion-item-divider>
 
-      <ion-item-sliding *ngFor="let room of rooms" (click)="goRoomDevice(room.F_ID,floor.F_Name+room.F_Name)">
+      <ion-item-sliding *ngFor="let room of rooms" (click)="goRoomDevice(room.F_ID,config.chinese? floor.F_Name+room.F_Name:floor.F_Name_En+room.F_Name_En)">
         <button ion-item *ngIf="room.F_FloorID==floor.F_ID" class="animated bounceInUp">
           <div item-start class="start" [ngClass]="floor.F_Color">
             <img src="../../assets/room/{{room.F_Img}}">

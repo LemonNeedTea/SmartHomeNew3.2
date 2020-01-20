@@ -7,6 +7,7 @@ import { DeviceRequestsProvider } from '../../providers/tools/requests'
 import { ToolsProvider } from '../../providers/tools/tools';
 import { SpeechHelperProvider } from '../../providers/tools/speechHelper';
 import{ ConfigProvider } from '../../providers/config/config'
+import { TranslateService } from "@ngx-translate/core";
 
 
 
@@ -45,7 +46,8 @@ export class HomePage {
     private tools: ToolsProvider,
     private speech: SpeechHelperProvider,
     public el: ElementRef,
-    public config: ConfigProvider
+    public config: ConfigProvider,
+    public translate: TranslateService
   ) {
     this.deviceRequest.getWeatherInfo().then(res => {
       this.weatherinfo = res;
@@ -160,27 +162,36 @@ export class HomePage {
       //   message:'手动模式，不可控！',
       //   buttons: ['OK']
       // }).present();
+      if (this.config.chinese){
       this.tools.presentAlarmAlert("手动模式，不可控", "提示");
+      }else{
+        this.tools.presentAlarmAlert("Manual mode, uncontrollable", "tip");
+
+      }
       return;
     }
-    this.presentConfirm(mode.F_Name).then(res => {
+   
+    this.presentConfirm(this.config.chinese?mode.F_Name:mode.F_Name_En).then(res => {
       Variable.socketObject.setMode(mode);
     });
   }
-  presentConfirm(name: string) {
+  async presentConfirm(name: string) {
+    let okText,cancelText;
+    await this.translate.get("ok").subscribe(res => okText = res);
+    await this.translate.get("cancel").subscribe(res => cancelText = res);
     return new Promise(resolve => {
       let alert = this.alertCtrl.create({
-        title: '确认',
-        message: `设为 ${name}?`,
+        title: okText,
+        message: `${name}?`,
         buttons: [
           {
-            text: '取消',
+            text: cancelText,
             role: 'cancel',
             handler: () => {
             }
           },
           {
-            text: '确认',
+            text: okText,
             handler: () => {
               resolve(true);
             }

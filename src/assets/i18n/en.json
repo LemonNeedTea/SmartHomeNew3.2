@@ -58,7 +58,18 @@
     "设备选择":"Device Selection",
     "确定": "Confirm",
     "取消":"Cancel",
-    "提示":"Tip"
+    "提示":"Tip",
+    "时间段":"period",
+    "查询对象":"Query object",
+    "数据类型":"Data Type",
+    "开始日期":"Start Date",
+    "结束日期":"Stop Date",
+    "查询":"Query",
+    "历年":"years",
+    "本年":"year",
+    "本月": "month",
+    "日期":"Date",
+    "总计":"Sum"
 
     
 

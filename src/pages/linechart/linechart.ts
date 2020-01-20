@@ -4,6 +4,8 @@ import { chartToolsProvider } from '../../providers/tools/chart';
 import { DeviceRequestsProvider } from '../../providers/tools/requests';
 import { ToolsProvider } from '../../providers/tools/tools';
 import { EnumDateType, EnumChartType } from '../../providers/model/enumdata';
+import { TranslateService } from "@ngx-translate/core";
+
 /**
  * Generated class for the LinechartPage page.
  *
@@ -22,10 +24,14 @@ export class LinechartPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private device: DeviceRequestsProvider,
     private chart: chartToolsProvider,
-    private tools: ToolsProvider) {
+    private tools: ToolsProvider,
+    private translate: TranslateService) {
       this.parentParams = this.navParams.get("params");
+      let date;
+     this.translate.get("日期").subscribe(res => {
+       this.name = res + "(" + this.parentParams.StartTime + "-" + this.parentParams.StopTime + ")";
 
-    this.name = "日期(" + this.parentParams.StartTime + "-" + this.parentParams.StopTime + ")";
+     });
 
     let start = this.tools.getFullDateStr(this.parentParams.StartTime, EnumDateType.Day);
     let stop = this.tools.getAddDate(this.parentParams.StopTime, EnumDateType.Day);
