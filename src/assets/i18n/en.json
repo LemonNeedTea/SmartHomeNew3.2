@@ -69,7 +69,12 @@
     "本年":"year",
     "本月": "month",
     "日期":"Date",
-    "总计":"Sum"
+    "总计":"Sum",
+    "状态":"Status",
+    "开度调节":"Opening adjustment",
+    "打开":"Open",
+    "停止":"Stop",
+    "关闭": "Close"
 
     
 

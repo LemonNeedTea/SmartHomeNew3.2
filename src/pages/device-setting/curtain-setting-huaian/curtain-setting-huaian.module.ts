@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { CurtainSettingHuaianPage } from './curtain-setting-huaian';
 import { ComponentsModule } from '../../../components/components.module';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateModule } from "@ngx-translate/core";
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import { TranslateService } from "@ngx-translate/core";
   imports: [
     IonicPageModule.forChild(CurtainSettingHuaianPage),
     ComponentsModule,
-    TranslateService
+    TranslateModule
   ],
 })
 export class CurtainSettingHuaianPageModule { }

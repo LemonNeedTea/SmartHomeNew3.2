@@ -19,22 +19,22 @@
 
 
 <ion-content>
-    <my-title name="状态"></my-title>
+    <my-title [name]="'状态'|translate"></my-title>
     <div class="curtain-img" padding>
-        <div *ngIf="id!=76&&id!=71">
+        <div *ngIf="id!=76&&id!=71&&id!=83&&id!=78">
             <img src="../../../assets/img/home/icon-devicesetting/curtain-pic.png" float-left>
             <img src="../../../assets/img/home/icon-devicesetting/curtain-pic.png" float-right>
         </div>
-        <div *ngIf="id==76" class="light">
+        <div *ngIf="id==76||id==83" class="light">
             <img src="../assets/img/home/icon-devicesetting1/light.png">
         </div>
-        <div *ngIf="id==71" class="light">
+        <div *ngIf="id==71||id==78" class="light">
             <img src="../assets/img/home/icon-devicesetting1/zheyang.png">
         </div>
     </div>
-    <ion-list *ngIf="id!=76&&id!=71">
+    <ion-list *ngIf="id!=76&&id!=71&&id!=83&&id!=78">
         <ion-list-header>
-            开度调节
+            {{'开度调节'|translate}}
             <ion-badge item-end>{{saturation||0}}</ion-badge>
         </ion-list-header>
         <ion-item no-padding>
@@ -50,13 +50,13 @@
     <ion-grid margin-top>
         <ion-row>
             <ion-col text-center>
-                <button ion-button outline [ngClass]="{'selected': state==1}" (click)="setDeviceState(1)" [disabled]="auto">打开</button>
+                <button ion-button outline [ngClass]="{'selected': state==1}" (click)="setDeviceState(1)" [disabled]="auto">{{'打开'|translate}}</button>
             </ion-col>
-            <ion-col text-center *ngIf="id!=76">
-                <button ion-button outline [ngClass]="{'selected': state==3}" (click)="setDeviceState(3)" [disabled]="auto">停止</button>
+            <ion-col text-center *ngIf="id!=76&&id!=83">
+                <button ion-button outline [ngClass]="{'selected': state==3}" (click)="setDeviceState(3)" [disabled]="auto">{{'停止'|translate}}</button>
             </ion-col>
             <ion-col text-center>
-                <button ion-button outline [ngClass]="{'selected': state==2}" (click)="setDeviceState(2)" [disabled]="auto">关闭</button>
+                <button ion-button outline [ngClass]="{'selected': state==2}" (click)="setDeviceState(2)" [disabled]="auto">{{'关闭'|translate}}</button>
 
             </ion-col>
         </ion-row>

@@ -43,7 +43,7 @@ export class CurtainSettingHuaianPage {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
     this.monitorID = this.navParams.get("monitorID");
-    if(this.id==77){
+    if(this.id==77||this.id==84){
       this.isNotQunKong=false;
     }
     this.getCurtainInfo();
