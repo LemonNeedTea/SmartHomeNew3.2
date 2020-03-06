@@ -21,18 +21,18 @@
 <ion-content>
     <my-title [name]="'状态'|translate"></my-title>
     <div class="curtain-img" padding>
-        <div *ngIf="id!=76&&id!=71&&id!=83&&id!=78">
+        <div *ngIf=" nameEn !== 'Sun canopy' && nameEn !== 'illuminate'">
             <img src="../../../assets/img/home/icon-devicesetting/curtain-pic.png" float-left>
             <img src="../../../assets/img/home/icon-devicesetting/curtain-pic.png" float-right>
         </div>
-        <div *ngIf="id==76||id==83" class="light">
+        <div *ngIf="nameEn == 'illuminate' " class="light">
             <img src="../assets/img/home/icon-devicesetting1/light.png">
         </div>
-        <div *ngIf="id==71||id==78" class="light">
+        <div *ngIf="nameEn == 'Sun canopy'" class="light">
             <img src="../assets/img/home/icon-devicesetting1/zheyang.png">
         </div>
     </div>
-    <ion-list *ngIf="id!=76&&id!=71&&id!=83&&id!=78">
+    <ion-list *ngIf=" nameEn !== 'Sun canopy' && nameEn !== 'illuminate'">
         <ion-list-header>
             {{'开度调节'|translate}}
             <ion-badge item-end>{{saturation||0}}</ion-badge>
@@ -52,7 +52,7 @@
             <ion-col text-center>
                 <button ion-button outline [ngClass]="{'selected': state==1}" (click)="setDeviceState(1)" [disabled]="auto">{{'打开'|translate}}</button>
             </ion-col>
-            <ion-col text-center *ngIf="id!=76&&id!=83">
+            <ion-col text-center *ngIf="nameEn !== 'illuminate'">
                 <button ion-button outline [ngClass]="{'selected': state==3}" (click)="setDeviceState(3)" [disabled]="auto">{{'停止'|translate}}</button>
             </ion-col>
             <ion-col text-center>

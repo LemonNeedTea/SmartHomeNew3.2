@@ -19,6 +19,7 @@ import { ToolsProvider } from '../../../providers/tools/tools'
 export class CurtainSettingHuaianPage {
 
   name: string;
+  nameEn: string;
   id: number;
   state: number;
   auto: boolean;
@@ -42,8 +43,9 @@ export class CurtainSettingHuaianPage {
   ) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
+    this.nameEn = this.navParams.get("nameEn");
     this.monitorID = this.navParams.get("monitorID");
-    if(this.id==77||this.id==84){
+    if(this.nameEn === 'Group control'){
       this.isNotQunKong=false;
     }
     this.getCurtainInfo();
@@ -66,6 +68,7 @@ export class CurtainSettingHuaianPage {
   getDeviceState1(data: any) {
     if (data) {
       // this.state = data[this.id][0];
+      if(!data[this.id]){ return ;}
       let type1Data = Number(data[this.id][0]);
 
       if (this.setInfo) {
@@ -95,8 +98,8 @@ export class CurtainSettingHuaianPage {
   }
   //获取窗帘设置和获取信息
   getCurtainInfo() {
-    switch (this.id) {
-      case 71:case 78: {//遮阳顶棚
+    switch (this.nameEn) {
+      case 'Sun canopy': {//遮阳顶棚
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 16,
@@ -106,7 +109,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 72: case 79: {//东帘
+      case 'East curtain': {//东帘
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 1,
@@ -116,7 +119,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 73: case 80:  {//南帘
+      case 'South curtain':  {//南帘
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 2,
@@ -126,7 +129,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 74: case 81: {//西帘
+      case 'Western curtain': {//西帘
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 4,
@@ -136,7 +139,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 75: case 82: {//北
+      case 'North curtain': {//北
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 8,
@@ -146,7 +149,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 76: case 83: {//照明
+      case 'illuminate': {//照明
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 32,
@@ -156,7 +159,7 @@ export class CurtainSettingHuaianPage {
         };
         break;
       }
-      case 77: case 84:  {//群控
+      case 'Group control':  {//群控
         this.curtainInfo = {
           openFnID: 37,
           openSetPipe: 0,

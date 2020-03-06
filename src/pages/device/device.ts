@@ -193,6 +193,7 @@ export class DevicePage {
         let params = {
           id: data["F_ID"],
           name: this.config.chinese ? data["F_Name"] : data["F_Name_En"],
+          nameEn: data["F_Name_En"],
           monitorID: data["F_MonitorID"],
           data: data
         };
