@@ -31,6 +31,15 @@
       <ion-label fixed>超限阀值</ion-label>
       <ion-input text-right type="number" [(ngModel)]="value" placeholder='请输入阀值'></ion-input>
     </ion-item>
+    <ion-item >
+      <ion-label>超限动作累计次数</ion-label>
+      <ion-input text-right type="number" [(ngModel)]="num" placeholder='' disabled></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label>最近一次动作时间</ion-label>
+    <p item-content>{{lastDate}}</p>
+      
+    </ion-item>
   </ion-list>
   
 </ion-content>

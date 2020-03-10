@@ -20,6 +20,8 @@ export class ResidualCurrentPage {
   open: boolean;
   value: number;
   fnData: any = {};
+  num: number;
+  lastDate: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private viewCtrl: ViewController,
@@ -27,9 +29,13 @@ export class ResidualCurrentPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ResidualCurrentPage');
-    this.open = Variable.GetFnData('55','F5596')=='1' ? true : false;
-    this.value = Variable.GetFnData('55','F5597');
+    const fnData = Variable.GetFnData('55');
+    this.open = fnData['F5596']=='1' ? true : false;
+    this.value = fnData['F5597'];
+
+    const fn51Data = Variable.GetFnData('51');
+    this.num = parseInt(fn51Data['F5119']);
+    this.lastDate = fn51Data['F5120'];
   }
   dismiss() {
     this.viewCtrl.dismiss();
