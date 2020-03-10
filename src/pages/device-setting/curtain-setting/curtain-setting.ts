@@ -21,19 +21,20 @@ export class CurtainSettingPage {
   state: number;
   auto: boolean;
   fnID: string;
+  monitorID: number;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private events: Events,
     private device: DeviceRequestsProvider
   ) {
     this.id = this.navParams.get("id");
     this.name = this.navParams.get("name");
-
+    this.monitorID = this.navParams.get('monitorID');
     // this.device.getDeviceGetInfoDataByID(this.id).then(res => {
     // this.fnID = res["F_FnID"];
-    this.fnID = 'state';
-    let fnData = Variable.GetFnData(this.fnID);
-    this.getDeviceState(fnData);
-    this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    // this.fnID = 'state';
+    // let fnData = Variable.GetFnData(this.fnID);
+    // this.getDeviceState(fnData);
+    // this.events.subscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     // });
 
 
@@ -60,10 +61,10 @@ export class CurtainSettingPage {
   }
   setDeviceState(state: any) {
     this.state = state;
-    Variable.socketObject.setDeviceState(this.id, this.name, state);
+    Variable.socketObject.setDeviceStateAndMonitorID(this.id, this.name, state,this.monitorID);
   }
   ionViewDidLeave() {
-    this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
+    // this.events.unsubscribe(`FnData:${this.fnID}`, this.eventsFn51Handler);
     this.events.unsubscribe("FnData:isAuto", this.eventsFnAutoHandler);
 
   }

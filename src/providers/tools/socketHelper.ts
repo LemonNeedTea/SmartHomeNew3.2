@@ -255,7 +255,7 @@ export class SocketHelpProvider {
     socketMessageHandle(data: any) {
 
         // if (data.Type == 'state')
-            // console.log(data);
+            console.log(data);
         switch (data.Type) {
             case 'state': {
                 let dealData = data.Data;

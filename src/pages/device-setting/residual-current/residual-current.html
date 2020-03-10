@@ -1,0 +1,36 @@
+<!--
+  Generated template for the ResidualCurrentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>剩余电流设置</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon ios="md-close" md="md-close"></ion-icon>
+      </button>
+
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="complate()">
+        <ion-icon ios="md-checkmark" md="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+    <ion-item>
+      <ion-label>启用</ion-label>
+      <ion-toggle [(ngModel)]="open"></ion-toggle>
+    </ion-item>
+    <ion-item >
+      <ion-label fixed>超限阀值</ion-label>
+      <ion-input text-right type="number" [(ngModel)]="value" placeholder='请输入阀值'></ion-input>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

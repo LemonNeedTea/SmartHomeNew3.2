@@ -225,4 +225,5 @@ export class HomePage {
     }, 10000);
   }
 
+
 }
