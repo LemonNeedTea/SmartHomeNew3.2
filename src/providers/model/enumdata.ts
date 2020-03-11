@@ -7,7 +7,8 @@ export enum EnumDateType {
     Year = 'year',
     Month = 'month',
     Day = 'day',
-    Hour = 'hour'
+    Hour = 'hour',
+    ALL = 'all'
 };
 
 export enum EnumChartType {

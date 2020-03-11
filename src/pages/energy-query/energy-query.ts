@@ -48,6 +48,7 @@ export class EnergyQueryPage {
       this.showTimeRange = false;
       this.dateTypeList = [
         { key: 'day', value: '按天', value_en: 'day' },
+        { key: 'all', value: '所有', value_en: 'all'},
       ];
       this.dateType = EnumDateType.Day;
 
@@ -56,7 +57,8 @@ export class EnergyQueryPage {
       this.dateTypeList = [
         { key: 'year', value: '按年',value_en:'year' },
         { key: 'month', value: '按月', value_en: 'month'},
-        { key: 'day', value: '按天', value_en: 'day'}
+        { key: 'day', value: '按天', value_en: 'day'},
+        { key: 'hour', value: '按时', value_en: 'hour'},
       ];
       this.dateType = EnumDateType.Day;
       
@@ -90,6 +92,12 @@ export class EnergyQueryPage {
         this.displayFormat = 'YYYY-MM'; break;
       }
       case EnumDateType.Day: {
+        this.displayFormat = 'YYYY-MM-DD'; break;
+      }
+      case EnumDateType.Hour: case EnumDateType.ALL:{
+        this.displayFormat = 'YYYY-MM-DD'; break;
+      }
+      default:{
         this.displayFormat = 'YYYY-MM-DD'; break;
       }
     }

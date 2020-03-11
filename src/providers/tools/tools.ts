@@ -69,8 +69,8 @@ export class ToolsProvider {
       case EnumDateType.Day: {
         result = now.format('YYYY-MM-DD'); break;
       }
-      case EnumDateType.Hour: {
-        result = now.format('YYYY-MM-DD HH:mm'); break;
+      case EnumDateType.Hour: case EnumDateType.ALL: {
+        result = now.format('YYYY-MM-DD'); break;
       }
     }
     return result;
