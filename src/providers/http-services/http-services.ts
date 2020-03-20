@@ -52,6 +52,55 @@ export class HttpServicesProvider {
     }
 
     //post请求
+    postOrigin(url: string, params: any, isLoading: boolean = true) {
+        //参数转换
+        let urlParams = new URLSearchParams();
+        for (const key in params) {
+            urlParams.set(key, params[key]);
+        }
+        if (isLoading === true) {
+            this.loading.show();
+        }
+
+        return new Promise((resolve: any, reject) => {
+            this.http.post(url, urlParams, {
+                headers: new Headers({
+                    "Accept": "application/json",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                })
+            })
+                .subscribe(res => {
+                    // if (isLoading) {
+                    //     loader.dismiss();
+                    // }
+                    if (isLoading === true) {
+                        this.loading.hide();
+                    }
+                    try {
+                        resolve(res.json());
+                    } catch (error) {
+
+                    }
+
+                }, err => {
+                    let toast = this.toastCtrl.create({
+                        message: "请求失败！",
+                        duration: 3000,
+                        position: 'top'
+                    });
+                    toast.present();
+                    if (isLoading) {
+                        // loader.dismiss();
+                        if (isLoading === true) {
+                            this.loading.hide();
+                        }
+                    }
+                    reject('');
+                });
+        });
+
+    }
+
     post(url: string, params: any, isLoading: boolean = true) {
         //参数转换
         let urlParams = new URLSearchParams();

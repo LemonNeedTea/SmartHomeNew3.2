@@ -376,6 +376,9 @@ export class DeviceRequestsProvider {
   getEleStepPrice(year: number) {
     return this.http.postMain("/EnergyAppData/GetEleStepPrice", { Year: year });
   }
+  getYingShiCaremaToken() {
+    return this.http.postOrigin('https://open.ys7.com/api/lapp/token/get',{appKey:'95ca6fb1ab8c4f16938967c7299d8195',appSecret:'ec03d0c93a81163bd27e4cefbc301c72'});
+  }
 
 
 
